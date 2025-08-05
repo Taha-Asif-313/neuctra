@@ -20,14 +20,18 @@ interface DropdownProps {
     dropdownWidth?: string;
     dropdownHeight?: string;
     borderRadius?: string;
-    shadow?: string;
-    className?: string;
-    iconPrefix?: React.ReactNode;
-    iconSuffix?: React.ReactNode;
+    boxShadow?: string;
     optionPadding?: string;
     optionGap?: string;
+    transitionDuration?: string;
+    className?: string;
+    dropdownStyle?: React.CSSProperties;
+    dropdownClassName?: string;
+    optionStyle?: React.CSSProperties;
+    optionClassName?: string;
+    iconPrefix?: React.ReactNode;
+    iconSuffix?: React.ReactNode;
     openAnimation?: string;
-    closeAnimation?: string;
 }
 export declare const Dropdown: React.FC<DropdownProps>;
 export {};

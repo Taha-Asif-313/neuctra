@@ -13,14 +13,12 @@ export { default as Container } from "./components/basic/Container";
 export { Accordion } from "./components/basic/Accordation"; // Finalled
 export { CheckRadio } from "./components/basic/CheckRadioInput";
 export { Drawer, DrawerButton } from "./components/basic/Drawer"; // Finalled
-export { Dropdown } from "./components/basic/DropDown";
+export { Dropdown } from "./components/basic/DropDown"; /// Finalled
 export { Table } from "./components/basic/Table";
 export { default as GridView } from "./components/basic/GridView";
 export { default as Flexbox } from "./components/basic/Flexbox";
 export { Alert } from "./components/basic/Alert"; // Finalled
-
-// Badges
-export { Badge } from "./components/basic/Badge";
+export { Badge } from "./components/basic/Badge"; // Finalled
 
 // Cards
 export { Card } from "./components/card/Card";

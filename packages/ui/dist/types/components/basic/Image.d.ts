@@ -11,7 +11,6 @@ interface ImageProps {
     shadow?: boolean;
     boxShadow?: string;
     opacity?: number;
-    className?: string;
     objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
     overlayText?: string;
     overlayColor?: string;
@@ -25,6 +24,9 @@ interface ImageProps {
     hoverScale?: number;
     hoverRotate?: number;
     transitionDuration?: string;
+    overflow?: "hidden" | "scroll" | "auto" | "visible" | "x" | "y";
+    className?: string;
+    style?: React.CSSProperties;
     onClick?: () => void;
 }
 export declare const Image: React.FC<ImageProps>;

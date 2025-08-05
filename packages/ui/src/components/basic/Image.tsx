@@ -12,12 +12,11 @@ interface ImageProps {
   shadow?: boolean;
   boxShadow?: string;
   opacity?: number;
-  className?: string;
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
   overlayText?: string;
   overlayColor?: string;
-  svgIcon?: React.ReactNode; // Render SVG instead of an image
-  responsive?: boolean; // Enable responsive scaling
+  svgIcon?: React.ReactNode;
+  responsive?: boolean;
   padding?: string;
   margin?: string;
   lazyLoad?: boolean;
@@ -26,6 +25,9 @@ interface ImageProps {
   hoverScale?: number;
   hoverRotate?: number;
   transitionDuration?: string;
+  overflow?: "hidden" | "scroll" | "auto" | "visible" | "x" | "y";
+  className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
 }
 
@@ -33,7 +35,7 @@ export const Image: React.FC<ImageProps> = ({
   src,
   alt = "Image",
   width = "100%",
-  height = "100%",
+  height = "auto",
   borderRadius = "8px",
   borderColor = "transparent",
   borderStyle = "solid",
@@ -41,7 +43,6 @@ export const Image: React.FC<ImageProps> = ({
   shadow = false,
   boxShadow,
   opacity = 1,
-  className = "",
   objectFit = "cover",
   overlayText,
   overlayColor = "rgba(0, 0, 0, 0.5)",
@@ -55,23 +56,82 @@ export const Image: React.FC<ImageProps> = ({
   hoverScale,
   hoverRotate,
   transitionDuration = "0.3s",
+  overflow = "hidden",
+  className,
+  style,
   onClick,
 }) => {
+  const baseImageStyle: React.CSSProperties = {
+    width: responsive ? "100%" : width,
+    height: responsive ? "100%" : height,
+    borderRadius,
+    border: `${borderWidth} ${borderStyle} ${borderColor}`,
+    objectFit,
+    opacity,
+    boxShadow: shadow
+      ? boxShadow || "0 4px 12px rgba(0,0,0,0.15)"
+      : "none",
+    transition: `all ${transitionDuration} ease`,
+    display: "block",
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.currentTarget.style.opacity =
+      hoverOpacity !== undefined
+        ? hoverOpacity.toString()
+        : baseImageStyle.opacity?.toString() || "1";
+    e.currentTarget.style.boxShadow = hoverShadow
+      ? "0 8px 20px rgba(0,0,0,0.3)"
+      : baseImageStyle.boxShadow?.toString() || "none";
+    e.currentTarget.style.transform = `scale(${hoverScale || 1}) rotate(${hoverRotate || 0}deg)`;
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.currentTarget.style.opacity = baseImageStyle.opacity?.toString() || "1";
+    e.currentTarget.style.boxShadow = baseImageStyle.boxShadow?.toString() || "none";
+    e.currentTarget.style.transform = "scale(1) rotate(0deg)";
+  };
+
+  const overflowStyles: React.CSSProperties = (() => {
+    switch (overflow) {
+      case "x":
+        return { overflowX: "hidden" };
+      case "y":
+        return { overflowY: "hidden" };
+      default:
+        return { overflow };
+    }
+  })();
+
   return (
     <div
-      className={`relative ${className} ${responsive ? "w-full" : ""}`}
+      role="img"
+      aria-label={alt}
+      onClick={onClick}
+      className={className}
       style={{
-        width,
-        height,
+        width: responsive ? "100%" : width,
+        height: responsive ? "auto" : height,
         padding,
         margin,
+        position: "relative",
         cursor: onClick ? "pointer" : "default",
+        display: "inline-block",
+        transition: `all ${transitionDuration} ease`,
+        ...overflowStyles,
+        ...style, // Allow external override
       }}
-      onClick={onClick}
     >
-      {/* Render SVG instead of image if provided */}
       {svgIcon ? (
-        <div className="flex justify-center items-center w-full h-full">
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {svgIcon}
         </div>
       ) : (
@@ -79,46 +139,31 @@ export const Image: React.FC<ImageProps> = ({
           src={src}
           alt={alt}
           loading={lazyLoad ? "lazy" : "eager"}
-          style={{
-            width: responsive ? "100%" : width,
-            height: responsive ? "100%" : height,
-            borderRadius,
-            border: `${borderWidth} ${borderStyle} ${borderColor}`,
-            objectFit,
-            opacity,
-            boxShadow: shadow
-              ? boxShadow || "0 4px 8px rgba(0, 0, 0, 0.2)"
-              : "none",
-            transition: `all ${transitionDuration} ease-in-out`,
-          }}
-          className="w-full h-full"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.opacity =
-              hoverOpacity !== undefined
-                ? hoverOpacity.toString()
-                : opacity.toString();
-            e.currentTarget.style.boxShadow = hoverShadow
-              ? "0 8px 16px rgba(0, 0, 0, 0.3)"
-              : boxShadow || "none";
-            e.currentTarget.style.transform = `scale(${
-              hoverScale || 1
-            }) rotate(${hoverRotate || 0}deg)`;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.opacity = opacity.toString();
-            e.currentTarget.style.boxShadow = shadow
-              ? boxShadow || "0 4px 8px rgba(0, 0, 0, 0.2)"
-              : "none";
-            e.currentTarget.style.transform = "scale(1) rotate(0deg)";
-          }}
+          style={baseImageStyle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         />
       )}
 
-      {/* Overlay with text (optional) */}
       {overlayText && (
         <div
-          className="absolute inset-0 flex justify-center items-center text-white text-lg font-bold"
-          style={{ backgroundColor: overlayColor }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: overlayColor,
+            color: "#fff",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontWeight: "bold",
+            fontSize: "1.25rem",
+            textAlign: "center",
+            padding: "1rem",
+            boxSizing: "border-box",
+          }}
         >
           {overlayText}
         </div>

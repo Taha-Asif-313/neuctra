@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface Option {
   label: string;
@@ -13,6 +13,8 @@ interface DropdownProps {
   onChange?: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
+
+  // Custom styling props
   borderColor?: string;
   backgroundColor?: string;
   textColor?: string;
@@ -22,14 +24,22 @@ interface DropdownProps {
   dropdownWidth?: string;
   dropdownHeight?: string;
   borderRadius?: string;
-  shadow?: string;
-  className?: string;
-  iconPrefix?: React.ReactNode;
-  iconSuffix?: React.ReactNode;
+  boxShadow?: string;
   optionPadding?: string;
   optionGap?: string;
+  transitionDuration?: string;
+
+  // Custom class/style
+  className?: string;
+  dropdownStyle?: React.CSSProperties;
+  dropdownClassName?: string;
+  optionStyle?: React.CSSProperties;
+  optionClassName?: string;
+
+  // Icons and animations
+  iconPrefix?: React.ReactNode;
+  iconSuffix?: React.ReactNode;
   openAnimation?: string;
-  closeAnimation?: string;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -39,32 +49,37 @@ export const Dropdown: React.FC<DropdownProps> = ({
   onChange,
   placeholder = "Select an option",
   disabled = false,
-  borderColor = "border border-gray-300",
-  backgroundColor = "bg-white",
-  textColor = "text-gray-800",
-  hoverColor = "hover:bg-gray-100",
-  padding = "p-3",
-  margin = "mb-4",
-  dropdownWidth = "w-full",
-  dropdownHeight = "max-h-60",
-  borderRadius = "rounded-lg",
-  shadow = "shadow-md",
+
+  borderColor = "#ccc",
+  backgroundColor = "#fff",
+  textColor = "#333",
+  hoverColor = "#f0f0f0",
+  padding = "12px 16px",
+  margin = "0 0 1rem 0",
+  dropdownWidth = "100%",
+  dropdownHeight = "200px",
+  borderRadius = "8px",
+  boxShadow = "0 4px 8px rgba(0,0,0,0.1)",
+  optionPadding = "10px 12px",
+  optionGap = "8px",
+  transitionDuration = "0.25s",
+
   className = "",
+  dropdownStyle,
+  dropdownClassName = "",
+  optionStyle,
+  optionClassName = "",
+
   iconPrefix,
   iconSuffix,
-  optionPadding = "px-4 py-2",
-  optionGap = "gap-2",
-  openAnimation = "animate-fadeIn",
-  closeAnimation = "animate-fadeOut",
 }) => {
   const [selected, setSelected] = useState<string | undefined>(defaultValue);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
@@ -78,39 +93,96 @@ export const Dropdown: React.FC<DropdownProps> = ({
     if (onChange) onChange(val);
   };
 
+  const baseText = value ?? selected;
+  const selectedOption = options.find((o) => o.value === baseText);
+
   return (
-    <div ref={dropdownRef} className={`relative ${dropdownWidth} ${margin} ${className}`}>
+    <div
+      ref={dropdownRef}
+      className={className}
+      style={{
+        position: "relative",
+        width: dropdownWidth,
+        margin,
+        fontFamily: "sans-serif",
+        userSelect: "none",
+      }}
+    >
       <button
-        type="button"
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen((prev) => !prev)}
         disabled={disabled}
-        className={`flex items-center justify-between ${padding} ${borderColor} ${backgroundColor} ${textColor} ${borderRadius} ${shadow} focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-          disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-        }`}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        style={{
+          width: "100%",
+          padding,
+          backgroundColor,
+          color: textColor,
+          border: `1px solid ${borderColor}`,
+          borderRadius,
+          boxShadow: disabled ? "none" : boxShadow,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          cursor: disabled ? "not-allowed" : "pointer",
+          opacity: disabled ? 0.6 : 1,
+          transition: `all ${transitionDuration} ease-in-out`,
+        }}
       >
-        <div className={`flex items-center ${optionGap}`}>
-          {iconPrefix && <span className="text-gray-500">{iconPrefix}</span>}
-          <span>
-            {value ?? selected ? options.find((o) => o.value === (value ?? selected))?.label : placeholder}
-          </span>
+        <div style={{ display: "flex", alignItems: "center", gap: optionGap }}>
+          {iconPrefix && <span>{iconPrefix}</span>}
+          <span>{selectedOption?.label || placeholder}</span>
         </div>
-        {iconSuffix || <span className="ml-2 text-gray-500">▼</span>}
+        {iconSuffix || <span style={{ marginLeft: "8px" }}>▼</span>}
       </button>
 
-      {/* Dropdown List */}
       {open && (
         <ul
-          className={`absolute z-10 ${dropdownWidth} ${backgroundColor} ${borderColor} ${borderRadius} ${shadow} mt-1 overflow-auto ${dropdownHeight} ${
-            open ? openAnimation : closeAnimation
-          }`}
+          role="listbox"
+          className={dropdownClassName}
+          style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            zIndex: 1000,
+            width: "100%",
+            maxHeight: dropdownHeight,
+            overflowY: "auto",
+            backgroundColor,
+            border: `1px solid ${borderColor}`,
+            borderRadius,
+            boxShadow,
+            marginTop: "4px",
+            transition: `all ${transitionDuration} ease`,
+            ...dropdownStyle,
+          }}
         >
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleSelect(option.value)}
-              className={`flex items-center ${optionPadding} cursor-pointer ${hoverColor}`}
+              role="option"
+              className={optionClassName}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: optionGap,
+                padding: optionPadding,
+                cursor: "pointer",
+                backgroundColor:
+                  selected === option.value ? hoverColor : backgroundColor,
+                transition: `background ${transitionDuration}`,
+                ...optionStyle,
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = hoverColor)
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor =
+                  selected === option.value ? hoverColor : backgroundColor)
+              }
             >
-              {option.icon && <span className="mr-2">{option.icon}</span>}
+              {option.icon && <span>{option.icon}</span>}
               {option.label}
             </li>
           ))}
