@@ -1,0 +1,31 @@
+import { default as React } from 'react';
+interface ImageProps {
+    src?: string;
+    alt?: string;
+    width?: string;
+    height?: string;
+    borderRadius?: string;
+    borderColor?: string;
+    borderStyle?: "solid" | "dashed" | "dotted" | "double" | "none";
+    borderWidth?: string;
+    shadow?: boolean;
+    boxShadow?: string;
+    opacity?: number;
+    className?: string;
+    objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+    overlayText?: string;
+    overlayColor?: string;
+    svgIcon?: React.ReactNode;
+    responsive?: boolean;
+    padding?: string;
+    margin?: string;
+    lazyLoad?: boolean;
+    hoverOpacity?: number;
+    hoverShadow?: boolean;
+    hoverScale?: number;
+    hoverRotate?: number;
+    transitionDuration?: string;
+    onClick?: () => void;
+}
+export declare const Image: React.FC<ImageProps>;
+export {};

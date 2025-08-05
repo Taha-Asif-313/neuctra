@@ -1,0 +1,38 @@
+import { default as React, CSSProperties } from 'react';
+interface InputProps {
+    type?: "text" | "password" | "email" | "number" | "search" | "tel" | "url" | "textarea";
+    placeholder?: string;
+    label?: string;
+    name?: string;
+    value?: string;
+    defaultValue?: string;
+    onChange?: (name: string, value: string) => void;
+    disabled?: boolean;
+    readOnly?: boolean;
+    required?: boolean;
+    error?: string;
+    success?: boolean;
+    autoFocus?: boolean;
+    iconLeft?: React.ReactNode;
+    iconRight?: React.ReactNode;
+    borderColor?: string;
+    focusBorderColor?: string;
+    hoverBorderColor?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    errorColor?: string;
+    successColor?: string;
+    labelColor?: string;
+    size?: "sm" | "md" | "lg";
+    radius?: string;
+    fontSize?: string;
+    rows?: number;
+    cols?: number;
+    maxLength?: number;
+    resize?: boolean;
+    showCharacterCount?: boolean;
+    className?: string;
+    style?: CSSProperties;
+}
+export declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement | HTMLTextAreaElement>>;
+export {};
