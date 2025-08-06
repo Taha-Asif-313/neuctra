@@ -1,10 +1,4 @@
-Here’s a professional `README.md` for your `@neuctra/ui` component library, covering **installation**, **usage**, **customization**, and **contribution**.
 
----
-
-### ✅ `README.md`
-
-````md
 # @neuctra/ui
 
 A modern, customizable, and fully responsive React UI component library built with Tailwind CSS, TypeScript, and Vite.
@@ -27,7 +21,6 @@ npm install @neuctra/ui
 yarn add @neuctra/ui
 ```
 
----
 
 ## 🚀 Getting Started
 
