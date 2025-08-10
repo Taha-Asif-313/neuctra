@@ -1,32 +1,30 @@
-import React from "react";
-interface ResponsiveProps<T> {
-    sm?: T;
-    md?: T;
-    lg?: T;
-}
+import React, { CSSProperties } from "react";
+type ScreenSize = "sm" | "md" | "lg";
+type ResponsiveProp<T> = T | Partial<Record<ScreenSize, T>>;
 interface ContainerProps {
-    display?: ResponsiveProps<"block" | "flex" | "grid" | "inline-block">;
-    flexDirection?: ResponsiveProps<"row" | "column" | "row-reverse" | "column-reverse">;
-    justifyContent?: ResponsiveProps<"flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly">;
-    alignItems?: ResponsiveProps<"flex-start" | "center" | "flex-end" | "stretch" | "baseline">;
-    gridTemplateColumns?: ResponsiveProps<string>;
-    gridTemplateRows?: ResponsiveProps<string>;
-    gap?: ResponsiveProps<string>;
-    rowGap?: ResponsiveProps<string>;
-    columnGap?: ResponsiveProps<string>;
-    width?: ResponsiveProps<string>;
-    maxWidth?: ResponsiveProps<string>;
-    height?: ResponsiveProps<string>;
-    padding?: ResponsiveProps<string>;
-    margin?: ResponsiveProps<string>;
-    textAlign?: ResponsiveProps<"left" | "center" | "right">;
+    display?: ResponsiveProp<"block" | "flex" | "grid" | "inline-block">;
+    flexDirection?: ResponsiveProp<"row" | "column" | "row-reverse" | "column-reverse">;
+    justifyContent?: ResponsiveProp<"flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly">;
+    alignItems?: ResponsiveProp<"flex-start" | "center" | "flex-end" | "stretch" | "baseline">;
+    gridTemplateColumns?: ResponsiveProp<string>;
+    gridTemplateRows?: ResponsiveProp<string>;
+    gap?: ResponsiveProp<string>;
+    rowGap?: ResponsiveProp<string>;
+    columnGap?: ResponsiveProp<string>;
+    width?: ResponsiveProp<string>;
+    maxWidth?: ResponsiveProp<string>;
+    height?: ResponsiveProp<string>;
+    padding?: ResponsiveProp<string>;
+    margin?: ResponsiveProp<string>;
+    textAlign?: ResponsiveProp<"left" | "center" | "right">;
     backgroundColor?: string;
-    border?: ResponsiveProps<string>;
-    borderRadius?: ResponsiveProps<string>;
-    boxShadow?: ResponsiveProps<string>;
-    overflow?: ResponsiveProps<"visible" | "hidden" | "scroll" | "auto">;
+    border?: ResponsiveProp<string>;
+    borderRadius?: ResponsiveProp<string>;
+    boxShadow?: ResponsiveProp<string>;
+    overflow?: ResponsiveProp<"visible" | "hidden" | "scroll" | "auto">;
     children: React.ReactNode;
     className?: string;
+    style?: CSSProperties;
 }
-declare const Container: React.FC<ContainerProps>;
-export default Container;
+export declare const Container: React.FC<ContainerProps>;
+export {};

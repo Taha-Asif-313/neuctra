@@ -15,6 +15,13 @@ interface CheckRadioProps {
     error?: string;
     className?: string;
     customIcon?: (checked: boolean) => React.ReactNode;
+    style?: React.CSSProperties;
+    labelStyle?: React.CSSProperties;
+    iconSize?: number;
+    iconCheckedBgColor?: string;
+    iconUncheckedBorderColor?: string;
+    textColor?: string;
+    errorStyle?: React.CSSProperties;
 }
 export declare const CheckRadio: React.FC<CheckRadioProps>;
 export {};

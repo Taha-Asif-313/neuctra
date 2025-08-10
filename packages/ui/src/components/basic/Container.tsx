@@ -1,39 +1,63 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, CSSProperties } from "react";
 
 type ScreenSize = "sm" | "md" | "lg";
 
-interface ResponsiveProps<T> {
-  sm?: T;
-  md?: T;
-  lg?: T;
-}
+type ResponsiveProp<T> = T | Partial<Record<ScreenSize, T>>;
 
 interface ContainerProps {
-  display?: ResponsiveProps<"block" | "flex" | "grid" | "inline-block">;
-  flexDirection?: ResponsiveProps<"row" | "column" | "row-reverse" | "column-reverse">;
-  justifyContent?: ResponsiveProps<"flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly">;
-  alignItems?: ResponsiveProps<"flex-start" | "center" | "flex-end" | "stretch" | "baseline">;
-  gridTemplateColumns?: ResponsiveProps<string>;
-  gridTemplateRows?: ResponsiveProps<string>;
-  gap?: ResponsiveProps<string>;
-  rowGap?: ResponsiveProps<string>;
-  columnGap?: ResponsiveProps<string>;
-  width?: ResponsiveProps<string>;
-  maxWidth?: ResponsiveProps<string>;
-  height?: ResponsiveProps<string>;
-  padding?: ResponsiveProps<string>;
-  margin?: ResponsiveProps<string>;
-  textAlign?: ResponsiveProps<"left" | "center" | "right">;
+  display?: ResponsiveProp<"block" | "flex" | "grid" | "inline-block">;
+  flexDirection?: ResponsiveProp<
+    "row" | "column" | "row-reverse" | "column-reverse"
+  >;
+  justifyContent?: ResponsiveProp<
+    | "flex-start"
+    | "center"
+    | "flex-end"
+    | "space-between"
+    | "space-around"
+    | "space-evenly"
+  >;
+  alignItems?: ResponsiveProp<
+    "flex-start" | "center" | "flex-end" | "stretch" | "baseline"
+  >;
+  gridTemplateColumns?: ResponsiveProp<string>;
+  gridTemplateRows?: ResponsiveProp<string>;
+  gap?: ResponsiveProp<string>;
+  rowGap?: ResponsiveProp<string>;
+  columnGap?: ResponsiveProp<string>;
+  width?: ResponsiveProp<string>;
+  maxWidth?: ResponsiveProp<string>;
+  height?: ResponsiveProp<string>;
+  padding?: ResponsiveProp<string>;
+  margin?: ResponsiveProp<string>;
+  textAlign?: ResponsiveProp<"left" | "center" | "right">;
   backgroundColor?: string;
-  border?: ResponsiveProps<string>;
-  borderRadius?: ResponsiveProps<string>;
-  boxShadow?: ResponsiveProps<string>;
-  overflow?: ResponsiveProps<"visible" | "hidden" | "scroll" | "auto">;
+  border?: ResponsiveProp<string>;
+  borderRadius?: ResponsiveProp<string>;
+  boxShadow?: ResponsiveProp<string>;
+  overflow?: ResponsiveProp<"visible" | "hidden" | "scroll" | "auto">;
   children: React.ReactNode;
   className?: string;
+  style?: CSSProperties;
 }
 
-const Container: React.FC<ContainerProps> = ({
+function resolveResponsive<T>(
+  prop: ResponsiveProp<T> | undefined,
+  screenSize: ScreenSize,
+  defaultValue?: T
+): T | undefined {
+  if (prop == null) return defaultValue;
+  if (typeof prop !== "object") return prop as T;
+  return (prop as Partial<Record<ScreenSize, T>>)[screenSize] ?? defaultValue;
+}
+
+const getScreenSize = (width: number): ScreenSize => {
+  if (width < 768) return "sm";
+  if (width < 1024) return "md";
+  return "lg";
+};
+
+export const Container: React.FC<ContainerProps> = ({
   display = { sm: "block", md: "flex", lg: "grid" },
   flexDirection = { sm: "column", md: "row", lg: "row" },
   justifyContent = { sm: "flex-start", md: "center", lg: "space-between" },
@@ -41,70 +65,150 @@ const Container: React.FC<ContainerProps> = ({
   gridTemplateColumns = { sm: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" },
   gridTemplateRows = { sm: "auto", md: "auto", lg: "auto" },
   gap = { sm: "10px", md: "20px", lg: "30px" },
-  rowGap = { sm: "10px", md: "15px", lg: "20px" },
-  columnGap = { sm: "10px", md: "15px", lg: "20px" },
+  rowGap,
+  columnGap,
   width = { sm: "100%", md: "90%", lg: "80%" },
   maxWidth = { sm: "100%", md: "800px", lg: "1200px" },
   height = { sm: "auto", md: "auto", lg: "auto" },
   padding = { sm: "10px", md: "20px", lg: "40px" },
   margin = { sm: "0 auto", md: "0 auto", lg: "0 auto" },
   textAlign = { sm: "left", md: "center", lg: "center" },
-  backgroundColor = "#ffffff",
+  backgroundColor = "#fff",
   border = { sm: "none", md: "1px solid #ddd", lg: "2px solid #ccc" },
-  borderRadius = { sm: "0px", md: "8px", lg: "12px" },
-  boxShadow = { sm: "none", md: "0px 4px 6px rgba(0,0,0,0.1)", lg: "0px 6px 10px rgba(0,0,0,0.15)" },
+  borderRadius = { sm: "0", md: "8px", lg: "12px" },
+  boxShadow = {
+    sm: "none",
+    md: "0 4px 6px rgba(0,0,0,0.1)",
+    lg: "0 6px 10px rgba(0,0,0,0.15)",
+  },
   overflow = { sm: "visible", md: "hidden", lg: "auto" },
   children,
-  className = "",
+  className,
+  style,
 }) => {
-  const [screenSize, setScreenSize] = useState<ScreenSize>("lg");
-
-  useEffect(() => {
-    const updateScreenSize = () => {
-      const width = window.innerWidth;
-      if (width <= 767) {
-        setScreenSize("sm");
-      } else if (width >= 768 && width <= 1023) {
-        setScreenSize("md");
-      } else {
-        setScreenSize("lg");
-      }
-    };
-
-    updateScreenSize();
-    window.addEventListener("resize", updateScreenSize);
-
-    return () => window.removeEventListener("resize", updateScreenSize);
-  }, []);
-
-  const styles = useMemo(
-    () => ({
-      display: display[screenSize],
-      flexDirection: flexDirection[screenSize],
-      justifyContent: justifyContent[screenSize],
-      alignItems: alignItems[screenSize],
-      gridTemplateColumns: gridTemplateColumns[screenSize],
-      gridTemplateRows: gridTemplateRows[screenSize],
-      gap: gap[screenSize],
-      rowGap: rowGap[screenSize],
-      columnGap: columnGap[screenSize],
-      width: width[screenSize],
-      maxWidth: maxWidth[screenSize],
-      height: height[screenSize],
-      padding: padding[screenSize],
-      margin: margin[screenSize],
-      textAlign: textAlign[screenSize],
-      backgroundColor,
-      border: border[screenSize],
-      borderRadius: borderRadius[screenSize],
-      boxShadow: boxShadow[screenSize],
-      overflow: overflow[screenSize],
-      boxSizing: "border-box" as const,
-    }),
-    [screenSize, display, flexDirection, justifyContent, alignItems, gridTemplateColumns, gridTemplateRows, gap, rowGap, columnGap, width, maxWidth, height, padding, margin, textAlign, backgroundColor, border, borderRadius, boxShadow, overflow]
+  const [screenSize, setScreenSize] = useState<ScreenSize>(() =>
+    getScreenSize(window.innerWidth)
   );
 
-  return <div className={className} style={styles}>{children}</div>;
-};
+  useEffect(() => {
+    const onResize = () => setScreenSize(getScreenSize(window.innerWidth));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
-export default Container;
+  const resolvedStyles = useMemo<CSSProperties>(() => {
+    const resolvedDisplay = resolveResponsive(display, screenSize, "block");
+    const resolvedFlexDirection = resolveResponsive(
+      flexDirection,
+      screenSize,
+      undefined
+    );
+    const resolvedJustifyContent = resolveResponsive(
+      justifyContent,
+      screenSize,
+      undefined
+    );
+    const resolvedAlignItems = resolveResponsive(
+      alignItems,
+      screenSize,
+      undefined
+    );
+    const resolvedGridTemplateColumns = resolveResponsive(
+      gridTemplateColumns,
+      screenSize,
+      undefined
+    );
+    const resolvedGridTemplateRows = resolveResponsive(
+      gridTemplateRows,
+      screenSize,
+      undefined
+    );
+    const resolvedGap = resolveResponsive(gap, screenSize, undefined);
+    const resolvedRowGap = resolveResponsive(rowGap, screenSize, undefined);
+    const resolvedColumnGap = resolveResponsive(
+      columnGap,
+      screenSize,
+      undefined
+    );
+    const resolvedWidth = resolveResponsive(width, screenSize, "100%");
+    const resolvedMaxWidth = resolveResponsive(maxWidth, screenSize, undefined);
+    const resolvedHeight = resolveResponsive(height, screenSize, undefined);
+    const resolvedPadding = resolveResponsive(padding, screenSize, undefined);
+    const resolvedMargin = resolveResponsive(margin, screenSize, undefined);
+    const resolvedTextAlign = resolveResponsive(
+      textAlign,
+      screenSize,
+      undefined
+    );
+    const resolvedBorder = resolveResponsive(border, screenSize, undefined);
+    const resolvedBorderRadius = resolveResponsive(
+      borderRadius,
+      screenSize,
+      undefined
+    );
+    const resolvedBoxShadow = resolveResponsive(
+      boxShadow,
+      screenSize,
+      undefined
+    );
+    const resolvedOverflow = resolveResponsive(overflow, screenSize, undefined);
+
+    return {
+      display: resolvedDisplay,
+      ...(resolvedFlexDirection && { flexDirection: resolvedFlexDirection }),
+      ...(resolvedJustifyContent && { justifyContent: resolvedJustifyContent }),
+      ...(resolvedAlignItems && { alignItems: resolvedAlignItems }),
+      ...(resolvedGridTemplateColumns && {
+        gridTemplateColumns: resolvedGridTemplateColumns,
+      }),
+      ...(resolvedGridTemplateRows && {
+        gridTemplateRows: resolvedGridTemplateRows,
+      }),
+      ...(resolvedGap && { gap: resolvedGap }),
+      ...(resolvedRowGap && { rowGap: resolvedRowGap }),
+      ...(resolvedColumnGap && { columnGap: resolvedColumnGap }),
+      width: resolvedWidth,
+      ...(resolvedMaxWidth && { maxWidth: resolvedMaxWidth }),
+      ...(resolvedHeight && { height: resolvedHeight }),
+      ...(resolvedPadding && { padding: resolvedPadding }),
+      ...(resolvedMargin && { margin: resolvedMargin }),
+      ...(resolvedTextAlign && { textAlign: resolvedTextAlign }),
+      backgroundColor,
+      ...(resolvedBorder && { border: resolvedBorder }),
+      ...(resolvedBorderRadius && { borderRadius: resolvedBorderRadius }),
+      ...(resolvedBoxShadow && { boxShadow: resolvedBoxShadow }),
+      ...(resolvedOverflow && { overflow: resolvedOverflow }),
+      boxSizing: "border-box",
+      ...style,
+    };
+  }, [
+    screenSize,
+    display,
+    flexDirection,
+    justifyContent,
+    alignItems,
+    gridTemplateColumns,
+    gridTemplateRows,
+    gap,
+    rowGap,
+    columnGap,
+    width,
+    maxWidth,
+    height,
+    padding,
+    margin,
+    textAlign,
+    backgroundColor,
+    border,
+    borderRadius,
+    boxShadow,
+    overflow,
+    style,
+  ]);
+
+  return (
+    <div className={className} style={resolvedStyles}>
+      {children}
+    </div>
+  );
+};

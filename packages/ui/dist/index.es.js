@@ -1,5 +1,5 @@
-import ce, { useMemo as K, forwardRef as ne, createElement as re, useRef as J, useState as P, useImperativeHandle as ke, useEffect as q } from "react";
-var ee = { exports: {} }, Z = {};
+import Pe, { useMemo as ee, forwardRef as ve, createElement as je, useRef as J, useState as R, useImperativeHandle as Ge, useEffect as G } from "react";
+var ue = { exports: {} }, re = {};
 /**
  * @license React
  * react-jsx-runtime.production.js
@@ -9,29 +9,29 @@ var ee = { exports: {} }, Z = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var oe;
-function Se() {
-  if (oe) return Z;
-  oe = 1;
+var ze;
+function Xe() {
+  if (ze) return re;
+  ze = 1;
   var t = Symbol.for("react.transitional.element"), n = Symbol.for("react.fragment");
-  function l(o, a, s) {
-    var i = null;
-    if (s !== void 0 && (i = "" + s), a.key !== void 0 && (i = "" + a.key), "key" in a) {
+  function o(i, l, s) {
+    var a = null;
+    if (s !== void 0 && (a = "" + s), l.key !== void 0 && (a = "" + l.key), "key" in l) {
       s = {};
-      for (var p in a)
-        p !== "key" && (s[p] = a[p]);
-    } else s = a;
-    return a = s.ref, {
+      for (var p in l)
+        p !== "key" && (s[p] = l[p]);
+    } else s = l;
+    return l = s.ref, {
       $$typeof: t,
-      type: o,
-      key: i,
-      ref: a !== void 0 ? a : null,
+      type: i,
+      key: a,
+      ref: l !== void 0 ? l : null,
       props: s
     };
   }
-  return Z.Fragment = n, Z.jsx = l, Z.jsxs = l, Z;
+  return re.Fragment = n, re.jsx = o, re.jsxs = o, re;
 }
-var Q = {};
+var ne = {};
 /**
  * @license React
  * react-jsx-runtime.development.js
@@ -41,47 +41,47 @@ var Q = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var le;
-function Te() {
-  return le || (le = 1, process.env.NODE_ENV !== "production" && function() {
+var Re;
+function Je() {
+  return Re || (Re = 1, process.env.NODE_ENV !== "production" && function() {
     function t(r) {
       if (r == null) return null;
       if (typeof r == "function")
-        return r.$$typeof === z ? null : r.displayName || r.name || null;
+        return r.$$typeof === I ? null : r.displayName || r.name || null;
       if (typeof r == "string") return r;
       switch (r) {
-        case u:
+        case y:
           return "Fragment";
-        case b:
+        case z:
           return "Profiler";
-        case k:
+        case T:
           return "StrictMode";
-        case O:
+        case S:
           return "Suspense";
-        case v:
+        case k:
           return "SuspenseList";
-        case B:
+        case Y:
           return "Activity";
       }
       if (typeof r == "object")
         switch (typeof r.tag == "number" && console.error(
           "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
         ), r.$$typeof) {
-          case d:
+          case v:
             return "Portal";
-          case A:
+          case E:
             return (r.displayName || "Context") + ".Provider";
-          case S:
+          case C:
             return (r._context.displayName || "Context") + ".Consumer";
-          case I:
-            var j = r.render;
-            return r = r.displayName, r || (r = j.displayName || j.name || "", r = r !== "" ? "ForwardRef(" + r + ")" : "ForwardRef"), r;
-          case T:
-            return j = r.displayName || null, j !== null ? j : t(r.type) || "Memo";
-          case M:
-            j = r._payload, r = r._init;
+          case g:
+            var w = r.render;
+            return r = r.displayName, r || (r = w.displayName || w.name || "", r = r !== "" ? "ForwardRef(" + r + ")" : "ForwardRef"), r;
+          case b:
+            return w = r.displayName || null, w !== null ? w : t(r.type) || "Memo";
+          case F:
+            w = r._payload, r = r._init;
             try {
-              return t(r(j));
+              return t(r(w));
             } catch {
             }
         }
@@ -90,76 +90,76 @@ function Te() {
     function n(r) {
       return "" + r;
     }
-    function l(r) {
+    function o(r) {
       try {
         n(r);
-        var j = !1;
+        var w = !1;
       } catch {
-        j = !0;
+        w = !0;
       }
-      if (j) {
-        j = console;
-        var W = j.error, D = typeof Symbol == "function" && Symbol.toStringTag && r[Symbol.toStringTag] || r.constructor.name || "Object";
-        return W.call(
-          j,
+      if (w) {
+        w = console;
+        var P = w.error, U = typeof Symbol == "function" && Symbol.toStringTag && r[Symbol.toStringTag] || r.constructor.name || "Object";
+        return P.call(
+          w,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
-          D
+          U
         ), n(r);
       }
     }
-    function o(r) {
-      if (r === u) return "<>";
-      if (typeof r == "object" && r !== null && r.$$typeof === M)
+    function i(r) {
+      if (r === y) return "<>";
+      if (typeof r == "object" && r !== null && r.$$typeof === F)
         return "<...>";
       try {
-        var j = t(r);
-        return j ? "<" + j + ">" : "<...>";
+        var w = t(r);
+        return w ? "<" + w + ">" : "<...>";
       } catch {
         return "<...>";
       }
     }
-    function a() {
-      var r = _.A;
+    function l() {
+      var r = M.A;
       return r === null ? null : r.getOwner();
     }
     function s() {
       return Error("react-stack-top-frame");
     }
-    function i(r) {
-      if (R.call(r, "key")) {
-        var j = Object.getOwnPropertyDescriptor(r, "key").get;
-        if (j && j.isReactWarning) return !1;
+    function a(r) {
+      if (L.call(r, "key")) {
+        var w = Object.getOwnPropertyDescriptor(r, "key").get;
+        if (w && w.isReactWarning) return !1;
       }
       return r.key !== void 0;
     }
-    function p(r, j) {
-      function W() {
-        y || (y = !0, console.error(
+    function p(r, w) {
+      function P() {
+        h || (h = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
-          j
+          w
         ));
       }
-      W.isReactWarning = !0, Object.defineProperty(r, "key", {
-        get: W,
+      P.isReactWarning = !0, Object.defineProperty(r, "key", {
+        get: P,
         configurable: !0
       });
     }
-    function h() {
+    function x() {
       var r = t(this.type);
-      return w[r] || (w[r] = !0, console.error(
+      return m[r] || (m[r] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
       )), r = this.props.ref, r !== void 0 ? r : null;
     }
-    function g(r, j, W, D, F, C, L, X) {
-      return W = C.ref, r = {
-        $$typeof: f,
+    function j(r, w, P, U, D, A, W, X) {
+      return P = A.ref, r = {
+        $$typeof: u,
         type: r,
-        key: j,
-        props: C,
-        _owner: F
-      }, (W !== void 0 ? W : null) !== null ? Object.defineProperty(r, "ref", {
+        key: w,
+        props: A,
+        _owner: D
+      }, (P !== void 0 ? P : null) !== null ? Object.defineProperty(r, "ref", {
         enumerable: !1,
-        get: h
+        get: x
       }) : Object.defineProperty(r, "ref", { enumerable: !1, value: null }), r._store = {}, Object.defineProperty(r._store, "validated", {
         configurable: !1,
         enumerable: !1,
@@ -174,7 +174,7 @@ function Te() {
         configurable: !1,
         enumerable: !1,
         writable: !0,
-        value: L
+        value: W
       }), Object.defineProperty(r, "_debugTask", {
         configurable: !1,
         enumerable: !1,
@@ -182,252 +182,252 @@ function Te() {
         value: X
       }), Object.freeze && (Object.freeze(r.props), Object.freeze(r)), r;
     }
-    function m(r, j, W, D, F, C, L, X) {
-      var E = j.children;
-      if (E !== void 0)
-        if (D)
-          if (H(E)) {
-            for (D = 0; D < E.length; D++)
-              c(E[D]);
-            Object.freeze && Object.freeze(E);
+    function c(r, w, P, U, D, A, W, X) {
+      var _ = w.children;
+      if (_ !== void 0)
+        if (U)
+          if (V(_)) {
+            for (U = 0; U < _.length; U++)
+              d(_[U]);
+            Object.freeze && Object.freeze(_);
           } else
             console.error(
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
-        else c(E);
-      if (R.call(j, "key")) {
-        E = t(r);
-        var G = Object.keys(j).filter(function(ve) {
-          return ve !== "key";
+        else d(_);
+      if (L.call(w, "key")) {
+        _ = t(r);
+        var Z = Object.keys(w).filter(function(ie) {
+          return ie !== "key";
         });
-        D = 0 < G.length ? "{key: someKey, " + G.join(": ..., ") + ": ...}" : "{key: someKey}", U[E + D] || (G = 0 < G.length ? "{" + G.join(": ..., ") + ": ...}" : "{}", console.error(
+        U = 0 < Z.length ? "{key: someKey, " + Z.join(": ..., ") + ": ...}" : "{key: someKey}", B[_ + U] || (Z = 0 < Z.length ? "{" + Z.join(": ..., ") + ": ...}" : "{}", console.error(
           `A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
   <%s key={someKey} {...props} />`,
-          D,
-          E,
-          G,
-          E
-        ), U[E + D] = !0);
+          U,
+          _,
+          Z,
+          _
+        ), B[_ + U] = !0);
       }
-      if (E = null, W !== void 0 && (l(W), E = "" + W), i(j) && (l(j.key), E = "" + j.key), "key" in j) {
-        W = {};
-        for (var te in j)
-          te !== "key" && (W[te] = j[te]);
-      } else W = j;
-      return E && p(
-        W,
+      if (_ = null, P !== void 0 && (o(P), _ = "" + P), a(w) && (o(w.key), _ = "" + w.key), "key" in w) {
+        P = {};
+        for (var K in w)
+          K !== "key" && (P[K] = w[K]);
+      } else P = w;
+      return _ && p(
+        P,
         typeof r == "function" ? r.displayName || r.name || "Unknown" : r
-      ), g(
+      ), j(
         r,
-        E,
-        C,
-        F,
-        a(),
+        _,
+        A,
+        D,
+        l(),
+        P,
         W,
-        L,
         X
       );
     }
-    function c(r) {
-      typeof r == "object" && r !== null && r.$$typeof === f && r._store && (r._store.validated = 1);
+    function d(r) {
+      typeof r == "object" && r !== null && r.$$typeof === u && r._store && (r._store.validated = 1);
     }
-    var x = ce, f = Symbol.for("react.transitional.element"), d = Symbol.for("react.portal"), u = Symbol.for("react.fragment"), k = Symbol.for("react.strict_mode"), b = Symbol.for("react.profiler"), S = Symbol.for("react.consumer"), A = Symbol.for("react.context"), I = Symbol.for("react.forward_ref"), O = Symbol.for("react.suspense"), v = Symbol.for("react.suspense_list"), T = Symbol.for("react.memo"), M = Symbol.for("react.lazy"), B = Symbol.for("react.activity"), z = Symbol.for("react.client.reference"), _ = x.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, R = Object.prototype.hasOwnProperty, H = Array.isArray, Y = console.createTask ? console.createTask : function() {
+    var f = Pe, u = Symbol.for("react.transitional.element"), v = Symbol.for("react.portal"), y = Symbol.for("react.fragment"), T = Symbol.for("react.strict_mode"), z = Symbol.for("react.profiler"), C = Symbol.for("react.consumer"), E = Symbol.for("react.context"), g = Symbol.for("react.forward_ref"), S = Symbol.for("react.suspense"), k = Symbol.for("react.suspense_list"), b = Symbol.for("react.memo"), F = Symbol.for("react.lazy"), Y = Symbol.for("react.activity"), I = Symbol.for("react.client.reference"), M = f.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, L = Object.prototype.hasOwnProperty, V = Array.isArray, O = console.createTask ? console.createTask : function() {
       return null;
     };
-    x = {
+    f = {
       react_stack_bottom_frame: function(r) {
         return r();
       }
     };
-    var y, w = {}, N = x.react_stack_bottom_frame.bind(
-      x,
+    var h, m = {}, N = f.react_stack_bottom_frame.bind(
+      f,
       s
-    )(), $ = Y(o(s)), U = {};
-    Q.Fragment = u, Q.jsx = function(r, j, W, D, F) {
-      var C = 1e4 > _.recentlyCreatedOwnerStacks++;
-      return m(
+    )(), $ = O(i(s)), B = {};
+    ne.Fragment = y, ne.jsx = function(r, w, P, U, D) {
+      var A = 1e4 > M.recentlyCreatedOwnerStacks++;
+      return c(
         r,
-        j,
-        W,
+        w,
+        P,
         !1,
+        U,
         D,
-        F,
-        C ? Error("react-stack-top-frame") : N,
-        C ? Y(o(r)) : $
+        A ? Error("react-stack-top-frame") : N,
+        A ? O(i(r)) : $
       );
-    }, Q.jsxs = function(r, j, W, D, F) {
-      var C = 1e4 > _.recentlyCreatedOwnerStacks++;
-      return m(
+    }, ne.jsxs = function(r, w, P, U, D) {
+      var A = 1e4 > M.recentlyCreatedOwnerStacks++;
+      return c(
         r,
-        j,
-        W,
+        w,
+        P,
         !0,
+        U,
         D,
-        F,
-        C ? Error("react-stack-top-frame") : N,
-        C ? Y(o(r)) : $
+        A ? Error("react-stack-top-frame") : N,
+        A ? O(i(r)) : $
       );
     };
-  }()), Q;
+  }()), ne;
 }
-var ae;
-function ze() {
-  return ae || (ae = 1, process.env.NODE_ENV === "production" ? ee.exports = Se() : ee.exports = Te()), ee.exports;
+var Me;
+function Ze() {
+  return Me || (Me = 1, process.env.NODE_ENV === "production" ? ue.exports = Xe() : ue.exports = Je()), ue.exports;
 }
-var e = ze();
-const nt = ({
+var e = Ze();
+const Et = ({
   as: t = "p",
   children: n,
-  className: l = "",
-  href: o,
-  target: a,
+  className: o = "",
+  href: i,
+  target: l,
   rel: s,
   // Style
-  color: i = "#333",
+  color: a = "#333",
   bgColor: p,
-  fontSize: h = "16px",
-  fontWeight: g = "normal",
-  textAlign: m = "left",
-  textTransform: c = "none",
-  lineHeight: x = "normal",
-  letterSpacing: f = "normal",
-  maxWidth: d,
-  padding: u,
-  margin: k,
-  borderRadius: b,
-  boxShadow: S,
-  shadowColor: A = "rgba(0,0,0,0.1)",
-  wordBreak: I = "normal",
+  fontSize: x = "16px",
+  fontWeight: j = "normal",
+  textAlign: c = "left",
+  textTransform: d = "none",
+  lineHeight: f = "normal",
+  letterSpacing: u = "normal",
+  maxWidth: v,
+  padding: y,
+  margin: T,
+  borderRadius: z,
+  boxShadow: C,
+  shadowColor: E = "rgba(0,0,0,0.1)",
+  wordBreak: g = "normal",
   // Text styles
-  italic: O = !1,
-  bold: v = !1,
-  underline: T = !1,
-  strikethrough: M = !1,
-  selectable: B = !0,
-  truncate: z = !1,
+  italic: S = !1,
+  bold: k = !1,
+  underline: b = !1,
+  strikethrough: F = !1,
+  selectable: Y = !0,
+  truncate: I = !1,
   // Hover & Active
-  hoverColor: _,
-  hoverBgColor: R,
-  hoverTextDecoration: H,
-  activeColor: Y,
-  activeBgColor: y,
-  transitionDuration: w = "0.25s",
+  hoverColor: M,
+  hoverBgColor: L,
+  hoverTextDecoration: V,
+  activeColor: O,
+  activeBgColor: h,
+  transitionDuration: m = "0.25s",
   // Event
   onClick: N
 }) => {
-  const $ = K(() => {
-    const C = [];
-    return T && C.push("underline"), M && C.push("line-through"), C.join(" ") || "none";
-  }, [T, M]), U = {
-    color: i,
+  const $ = ee(() => {
+    const A = [];
+    return b && A.push("underline"), F && A.push("line-through"), A.join(" ") || "none";
+  }, [b, F]), B = {
+    color: a,
     backgroundColor: p || "transparent",
-    fontSize: h,
-    fontWeight: v ? "bold" : g,
-    textAlign: m,
-    textTransform: c,
-    lineHeight: x,
-    letterSpacing: f,
-    maxWidth: d,
-    padding: u,
-    margin: k,
-    borderRadius: b,
+    fontSize: x,
+    fontWeight: k ? "bold" : j,
+    textAlign: c,
+    textTransform: d,
+    lineHeight: f,
+    letterSpacing: u,
+    maxWidth: v,
+    padding: y,
+    margin: T,
+    borderRadius: z,
     textDecoration: $,
-    fontStyle: O ? "italic" : "normal",
-    wordBreak: I,
-    boxShadow: S || (A ? `0 1px 4px ${A}` : void 0),
-    cursor: N || o ? "pointer" : "default",
-    userSelect: B ? "text" : "none",
-    transition: `all ${w} ease-in-out`,
-    overflow: z ? "hidden" : void 0,
-    whiteSpace: z ? "nowrap" : void 0,
-    textOverflow: z ? "ellipsis" : void 0
-  }, F = {
-    className: l,
-    style: U,
+    fontStyle: S ? "italic" : "normal",
+    wordBreak: g,
+    boxShadow: C || (E ? `0 1px 4px ${E}` : void 0),
+    cursor: N || i ? "pointer" : "default",
+    userSelect: Y ? "text" : "none",
+    transition: `all ${m} ease-in-out`,
+    overflow: I ? "hidden" : void 0,
+    whiteSpace: I ? "nowrap" : void 0,
+    textOverflow: I ? "ellipsis" : void 0
+  }, D = {
+    className: o,
+    style: B,
     onClick: N,
-    onMouseEnter: (C) => {
-      const L = C.currentTarget;
-      _ && (L.style.color = _), R && (L.style.backgroundColor = R), H && (L.style.textDecoration = H);
+    onMouseEnter: (A) => {
+      const W = A.currentTarget;
+      M && (W.style.color = M), L && (W.style.backgroundColor = L), V && (W.style.textDecoration = V);
     },
-    onMouseLeave: (C) => {
-      const L = C.currentTarget;
-      L.style.color = i, L.style.backgroundColor = p || "transparent", L.style.textDecoration = $;
+    onMouseLeave: (A) => {
+      const W = A.currentTarget;
+      W.style.color = a, W.style.backgroundColor = p || "transparent", W.style.textDecoration = $;
     },
-    onMouseDown: (C) => {
-      const L = C.currentTarget;
-      Y && (L.style.color = Y), y && (L.style.backgroundColor = y);
+    onMouseDown: (A) => {
+      const W = A.currentTarget;
+      O && (W.style.color = O), h && (W.style.backgroundColor = h);
     },
-    onMouseUp: (C) => {
-      const L = C.currentTarget;
-      L.style.color = _ || i, L.style.backgroundColor = R || p || "transparent";
+    onMouseUp: (A) => {
+      const W = A.currentTarget;
+      W.style.color = M || a, W.style.backgroundColor = L || p || "transparent";
     }
   };
-  return t === "a" || o ? /* @__PURE__ */ e.jsx(
+  return t === "a" || i ? /* @__PURE__ */ e.jsx(
     "a",
     {
-      ...F,
-      href: o,
-      target: a,
-      rel: s || (a === "_blank" ? "noopener noreferrer" : void 0),
+      ...D,
+      href: i,
+      target: l,
+      rel: s || (l === "_blank" ? "noopener noreferrer" : void 0),
       children: n
     }
-  ) : /* @__PURE__ */ e.jsx(t, { ...F, children: n });
-}, st = ({
+  ) : /* @__PURE__ */ e.jsx(t, { ...D, children: n });
+}, $e = ({
   src: t,
   alt: n = "Image",
-  width: l = "100%",
-  height: o = "auto",
-  borderRadius: a = "8px",
+  width: o = "100%",
+  height: i = "auto",
+  borderRadius: l = "8px",
   borderColor: s = "transparent",
-  borderStyle: i = "solid",
+  borderStyle: a = "solid",
   borderWidth: p = "0px",
-  shadow: h = !1,
-  boxShadow: g,
-  opacity: m = 1,
-  objectFit: c = "cover",
-  overlayText: x,
-  overlayColor: f = "rgba(0, 0, 0, 0.5)",
-  svgIcon: d,
-  responsive: u = !1,
-  padding: k,
-  margin: b,
-  lazyLoad: S = !1,
-  hoverOpacity: A,
-  hoverShadow: I = !1,
-  hoverScale: O,
-  hoverRotate: v,
-  transitionDuration: T = "0.3s",
-  overflow: M = "hidden",
-  className: B,
-  style: z,
-  onClick: _
+  shadow: x = !1,
+  boxShadow: j,
+  opacity: c = 1,
+  objectFit: d = "cover",
+  overlayText: f,
+  overlayColor: u = "rgba(0, 0, 0, 0.5)",
+  svgIcon: v,
+  responsive: y = !1,
+  padding: T,
+  margin: z,
+  lazyLoad: C = !1,
+  hoverOpacity: E,
+  hoverShadow: g = !1,
+  hoverScale: S,
+  hoverRotate: k,
+  transitionDuration: b = "0.3s",
+  overflow: F = "hidden",
+  className: Y,
+  style: I,
+  onClick: M
 }) => {
-  const R = {
-    width: u ? "100%" : l,
-    height: u ? "100%" : o,
-    borderRadius: a,
-    border: `${p} ${i} ${s}`,
-    objectFit: c,
-    opacity: m,
-    boxShadow: h ? g || "0 4px 12px rgba(0,0,0,0.15)" : "none",
-    transition: `all ${T} ease`,
+  const L = {
+    width: y ? "100%" : o,
+    height: y ? "100%" : i,
+    borderRadius: l,
+    border: `${p} ${a} ${s}`,
+    objectFit: d,
+    opacity: c,
+    boxShadow: x ? j || "0 4px 12px rgba(0,0,0,0.15)" : "none",
+    transition: `all ${b} ease`,
     display: "block"
-  }, H = (w) => {
-    w.currentTarget.style.opacity = A !== void 0 ? A.toString() : R.opacity?.toString() || "1", w.currentTarget.style.boxShadow = I ? "0 8px 20px rgba(0,0,0,0.3)" : R.boxShadow?.toString() || "none", w.currentTarget.style.transform = `scale(${O || 1}) rotate(${v || 0}deg)`;
-  }, Y = (w) => {
-    w.currentTarget.style.opacity = R.opacity?.toString() || "1", w.currentTarget.style.boxShadow = R.boxShadow?.toString() || "none", w.currentTarget.style.transform = "scale(1) rotate(0deg)";
-  }, y = (() => {
-    switch (M) {
+  }, V = (m) => {
+    m.currentTarget.style.opacity = E !== void 0 ? E.toString() : L.opacity?.toString() || "1", m.currentTarget.style.boxShadow = g ? "0 8px 20px rgba(0,0,0,0.3)" : L.boxShadow?.toString() || "none", m.currentTarget.style.transform = `scale(${S || 1}) rotate(${k || 0}deg)`;
+  }, O = (m) => {
+    m.currentTarget.style.opacity = L.opacity?.toString() || "1", m.currentTarget.style.boxShadow = L.boxShadow?.toString() || "none", m.currentTarget.style.transform = "scale(1) rotate(0deg)";
+  }, h = (() => {
+    switch (F) {
       case "x":
         return { overflowX: "hidden" };
       case "y":
         return { overflowY: "hidden" };
       default:
-        return { overflow: M };
+        return { overflow: F };
     }
   })();
   return /* @__PURE__ */ e.jsxs(
@@ -435,23 +435,23 @@ const nt = ({
     {
       role: "img",
       "aria-label": n,
-      onClick: _,
-      className: B,
+      onClick: M,
+      className: Y,
       style: {
-        width: u ? "100%" : l,
-        height: u ? "auto" : o,
-        padding: k,
-        margin: b,
+        width: y ? "100%" : o,
+        height: y ? "auto" : i,
+        padding: T,
+        margin: z,
         position: "relative",
-        cursor: _ ? "pointer" : "default",
+        cursor: M ? "pointer" : "default",
         display: "inline-block",
-        transition: `all ${T} ease`,
-        ...y,
-        ...z
+        transition: `all ${b} ease`,
+        ...h,
+        ...I
         // Allow external override
       },
       children: [
-        d ? /* @__PURE__ */ e.jsx(
+        v ? /* @__PURE__ */ e.jsx(
           "div",
           {
             style: {
@@ -461,20 +461,20 @@ const nt = ({
               alignItems: "center",
               justifyContent: "center"
             },
-            children: d
+            children: v
           }
         ) : /* @__PURE__ */ e.jsx(
           "img",
           {
             src: t,
             alt: n,
-            loading: S ? "lazy" : "eager",
-            style: R,
-            onMouseEnter: H,
-            onMouseLeave: Y
+            loading: C ? "lazy" : "eager",
+            style: L,
+            onMouseEnter: V,
+            onMouseLeave: O
           }
         ),
-        x && /* @__PURE__ */ e.jsx(
+        f && /* @__PURE__ */ e.jsx(
           "div",
           {
             style: {
@@ -483,7 +483,7 @@ const nt = ({
               left: 0,
               width: "100%",
               height: "100%",
-              backgroundColor: f,
+              backgroundColor: u,
               color: "#fff",
               display: "flex",
               alignItems: "center",
@@ -494,56 +494,56 @@ const nt = ({
               padding: "1rem",
               boxSizing: "border-box"
             },
-            children: x
+            children: f
           }
         )
       ]
     }
   );
-}, ot = ({
+}, It = ({
   children: t,
   type: n = "button",
-  onClick: l,
-  iconBefore: o,
-  iconAfter: a,
+  onClick: o,
+  iconBefore: i,
+  iconAfter: l,
   className: s = "",
-  style: i,
+  style: a,
   // ✅ NEW
   fullWidth: p = !1,
-  disabled: h = !1,
-  loading: g = !1,
-  loadingText: m = "Loading...",
-  paddingHorizontal: c = 10,
-  paddingVertical: x = 8,
-  fontSize: f = "1rem",
-  fontWeight: d = 400,
-  borderRadius: u = 12,
-  backgroundColor: k = "rgba(0, 255, 0, 0.15)",
-  textColor: b = "green",
-  borderColor: S = "transparent",
-  hoverBgColor: A = "#2563EB",
-  hoverTextColor: I = "#2563EB",
-  hoverBorderColor: O,
-  boxShadow: v = "0 1px 2px rgba(0, 0, 0, 0.05)"
+  disabled: x = !1,
+  loading: j = !1,
+  loadingText: c = "Loading...",
+  paddingHorizontal: d = 30,
+  paddingVertical: f = 8,
+  fontSize: u = "16px",
+  fontWeight: v = 400,
+  borderRadius: y = 6,
+  backgroundColor: T = "#02b314",
+  textColor: z = "white",
+  borderColor: C = "transparent",
+  hoverBgColor: E = "transparent",
+  hoverTextColor: g = "black",
+  hoverBorderColor: S,
+  boxShadow: k = "0 1px 2px rgba(0, 0, 0, 0.05)"
 }) => {
-  const [T, M] = ce.useState(!1), B = T && !h && I || b, z = T && !h && O || S, _ = T && !h ? A : k, R = {
+  const [b, F] = Pe.useState(!1), Y = b && !x && g || z, I = b && !x && S || C, M = b && !x ? E : T, L = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: `${x}px ${c}px`,
-    fontSize: f,
-    fontWeight: d,
-    borderRadius: `${u}px`,
+    padding: `${f}px ${d}px`,
+    fontSize: u,
+    fontWeight: v,
+    borderRadius: `${y}px`,
     width: p ? "100%" : "auto",
-    color: B,
-    border: `1px solid ${z}`,
-    backgroundColor: _,
-    boxShadow: v,
-    cursor: h ? "not-allowed" : "pointer",
-    opacity: h ? 0.6 : 1,
+    color: Y,
+    border: `1px solid ${I}`,
+    backgroundColor: M,
+    boxShadow: k,
+    cursor: x ? "not-allowed" : "pointer",
+    opacity: x ? 0.6 : 1,
     transition: "all 0.2s ease-in-out",
     gap: "8px",
-    ...i
+    ...a
     // ✅ Apply user-supplied inline styles last
   };
   return /* @__PURE__ */ e.jsxs(
@@ -551,13 +551,13 @@ const nt = ({
     {
       type: n,
       className: s,
-      style: R,
-      onClick: !h && !g ? l : void 0,
-      disabled: h,
-      onMouseEnter: () => M(!0),
-      onMouseLeave: () => M(!1),
+      style: L,
+      onClick: !x && !j ? o : void 0,
+      disabled: x,
+      onMouseEnter: () => F(!0),
+      onMouseLeave: () => F(!1),
       children: [
-        g ? /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
+        j ? /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
           /* @__PURE__ */ e.jsx(
             "span",
             {
@@ -571,11 +571,11 @@ const nt = ({
               }
             }
           ),
-          /* @__PURE__ */ e.jsx("span", { children: m })
+          /* @__PURE__ */ e.jsx("span", { children: c })
         ] }) : /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
-          o && /* @__PURE__ */ e.jsx("span", { children: o }),
+          i && /* @__PURE__ */ e.jsx("span", { children: i }),
           /* @__PURE__ */ e.jsx("span", { children: t }),
-          a && /* @__PURE__ */ e.jsx("span", { children: a })
+          l && /* @__PURE__ */ e.jsx("span", { children: l })
         ] }),
         /* @__PURE__ */ e.jsx("style", { children: `
           @keyframes spin {
@@ -592,13 +592,13 @@ const nt = ({
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const $e = (t) => t.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Ce = (t) => t.replace(
+const Ke = (t) => t.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Qe = (t) => t.replace(
   /^([A-Z])|[\s-_]+(\w)/g,
-  (n, l, o) => o ? o.toUpperCase() : l.toLowerCase()
-), ie = (t) => {
-  const n = Ce(t);
+  (n, o, i) => i ? i.toUpperCase() : o.toLowerCase()
+), Ee = (t) => {
+  const n = Qe(t);
   return n.charAt(0).toUpperCase() + n.slice(1);
-}, de = (...t) => t.filter((n, l, o) => !!n && n.trim() !== "" && o.indexOf(n) === l).join(" ").trim(), Ee = (t) => {
+}, Ne = (...t) => t.filter((n, o, i) => !!n && n.trim() !== "" && i.indexOf(n) === o).join(" ").trim(), et = (t) => {
   for (const n in t)
     if (n.startsWith("aria-") || n === "role" || n === "title")
       return !0;
@@ -609,7 +609,7 @@ const $e = (t) => t.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), Ce = (
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-var _e = {
+var tt = {
   xmlns: "http://www.w3.org/2000/svg",
   width: 24,
   height: 24,
@@ -626,31 +626,31 @@ var _e = {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Re = ne(
+const rt = ve(
   ({
     color: t = "currentColor",
     size: n = 24,
-    strokeWidth: l = 2,
-    absoluteStrokeWidth: o,
-    className: a = "",
+    strokeWidth: o = 2,
+    absoluteStrokeWidth: i,
+    className: l = "",
     children: s,
-    iconNode: i,
+    iconNode: a,
     ...p
-  }, h) => re(
+  }, x) => je(
     "svg",
     {
-      ref: h,
-      ..._e,
+      ref: x,
+      ...tt,
       width: n,
       height: n,
       stroke: t,
-      strokeWidth: o ? Number(l) * 24 / Number(n) : l,
-      className: de("lucide", a),
-      ...!s && !Ee(p) && { "aria-hidden": "true" },
+      strokeWidth: i ? Number(o) * 24 / Number(n) : o,
+      className: Ne("lucide", l),
+      ...!s && !et(p) && { "aria-hidden": "true" },
       ...p
     },
     [
-      ...i.map(([g, m]) => re(g, m)),
+      ...a.map(([j, c]) => je(j, c)),
       ...Array.isArray(s) ? s : [s]
     ]
   )
@@ -661,20 +661,20 @@ const Re = ne(
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const V = (t, n) => {
-  const l = ne(
-    ({ className: o, ...a }, s) => re(Re, {
+const q = (t, n) => {
+  const o = ve(
+    ({ className: i, ...l }, s) => je(rt, {
       ref: s,
       iconNode: n,
-      className: de(
-        `lucide-${$e(ie(t))}`,
+      className: Ne(
+        `lucide-${Ke(Ee(t))}`,
         `lucide-${t}`,
-        o
+        i
       ),
-      ...a
+      ...l
     })
   );
-  return l.displayName = ie(t), l;
+  return o.displayName = Ee(t), o;
 };
 /**
  * @license lucide-react v0.536.0 - ISC
@@ -682,28 +682,42 @@ const V = (t, n) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Me = [
+const nt = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]], We = q("chevron-left", nt);
+/**
+ * @license lucide-react v0.536.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const st = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]], Fe = q("chevron-right", st);
+/**
+ * @license lucide-react v0.536.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const ot = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["line", { x1: "12", x2: "12", y1: "8", y2: "12", key: "1pkeuh" }],
   ["line", { x1: "12", x2: "12.01", y1: "16", y2: "16", key: "4dfq90" }]
-], Ne = V("circle-alert", Me);
+], lt = q("circle-alert", ot);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ae = [
+const it = [
   ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
   ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
-], Ie = V("circle-check-big", Ae);
+], at = q("circle-check-big", it);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Le = [
+const ct = [
   [
     "path",
     {
@@ -720,14 +734,14 @@ const Le = [
     }
   ],
   ["path", { d: "m2 2 20 20", key: "1ooewy" }]
-], Pe = V("eye-off", Le);
+], dt = q("eye-off", ct);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Oe = [
+const ut = [
   [
     "path",
     {
@@ -736,59 +750,59 @@ const Oe = [
     }
   ],
   ["circle", { cx: "12", cy: "12", r: "3", key: "1v7zrd" }]
-], We = V("eye", Oe);
+], pt = q("eye", ut);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Fe = [
+const xt = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
   ["path", { d: "M12 16v-4", key: "1dtifu" }],
   ["path", { d: "M12 8h.01", key: "e9boi3" }]
-], Be = V("info", Fe);
+], ft = q("info", xt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ye = [
+const ht = [
   ["path", { d: "M8 3H5a2 2 0 0 0-2 2v3", key: "1dcmit" }],
   ["path", { d: "M21 8V5a2 2 0 0 0-2-2h-3", key: "1e4gt3" }],
   ["path", { d: "M3 16v3a2 2 0 0 0 2 2h3", key: "wsl5sc" }],
   ["path", { d: "M16 21h3a2 2 0 0 0 2-2v-3", key: "18trek" }]
-], ue = V("maximize", Ye);
+], pe = q("maximize", ht);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const De = [
+const gt = [
   ["path", { d: "M8 3v3a2 2 0 0 1-2 2H3", key: "hohbtr" }],
   ["path", { d: "M21 8h-3a2 2 0 0 1-2-2V3", key: "5jw1f3" }],
   ["path", { d: "M3 16h3a2 2 0 0 1 2 2v3", key: "198tvr" }],
   ["path", { d: "M16 21v-3a2 2 0 0 1 2-2h3", key: "ph8mxp" }]
-], pe = V("minimize", De);
+], xe = q("minimize", gt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const He = [
+const bt = [
   ["rect", { x: "14", y: "3", width: "5", height: "18", rx: "1", key: "kaeet6" }],
   ["rect", { x: "5", y: "3", width: "5", height: "18", rx: "1", key: "1wsw3u" }]
-], xe = V("pause", He);
+], se = q("pause", bt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ue = [
+const yt = [
   [
     "path",
     {
@@ -796,24 +810,24 @@ const Ue = [
       key: "10ikf1"
     }
   ]
-], fe = V("play", Ue);
+], oe = q("play", yt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ve = [
+const mt = [
   ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
   ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
-], he = V("rotate-ccw", Ve);
+], fe = q("rotate-ccw", mt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const qe = [
+const jt = [
   [
     "path",
     {
@@ -822,14 +836,14 @@ const qe = [
     }
   ],
   ["path", { d: "M3 20V4", key: "1ptbpl" }]
-], me = V("skip-back", qe);
+], he = q("skip-back", jt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Xe = [
+const vt = [
   ["path", { d: "M21 4v16", key: "7j8fe9" }],
   [
     "path",
@@ -838,14 +852,14 @@ const Xe = [
       key: "zs4d6"
     }
   ]
-], ge = V("skip-forward", Xe);
+], ge = q("skip-forward", vt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Je = [
+const wt = [
   [
     "path",
     {
@@ -855,14 +869,14 @@ const Je = [
   ],
   ["path", { d: "M12 9v4", key: "juzpu7" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
-], Ge = V("triangle-alert", Je);
+], kt = q("triangle-alert", wt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ze = [
+const St = [
   [
     "path",
     {
@@ -872,14 +886,14 @@ const Ze = [
   ],
   ["path", { d: "M16 9a5 5 0 0 1 0 6", key: "1q6k2b" }],
   ["path", { d: "M19.364 18.364a9 9 0 0 0 0-12.728", key: "ijwkga" }]
-], be = V("volume-2", Ze);
+], be = q("volume-2", St);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Qe = [
+const Tt = [
   [
     "path",
     {
@@ -889,58 +903,58 @@ const Qe = [
   ],
   ["line", { x1: "22", x2: "16", y1: "9", y2: "15", key: "1ewh16" }],
   ["line", { x1: "16", x2: "22", y1: "9", y2: "15", key: "5ykzw1" }]
-], ye = V("volume-x", Qe);
+], ye = q("volume-x", Tt);
 /**
  * @license lucide-react v0.536.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Ke = [
+const Ct = [
   ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
   ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
-], je = V("x", Ke), lt = ne(
+], le = q("x", Ct), _t = ve(
   ({
     type: t = "text",
     placeholder: n = "",
-    label: l,
-    value: o,
-    defaultValue: a,
+    label: o,
+    value: i,
+    defaultValue: l,
     onChange: s,
-    name: i = "",
+    name: a = "",
     disabled: p = !1,
-    readOnly: h = !1,
-    required: g = !1,
-    error: m,
-    success: c = !1,
-    autoFocus: x = !1,
-    iconLeft: f,
-    iconRight: d,
-    borderColor: u = "#ccc",
-    focusBorderColor: k = "#2563eb",
-    hoverBorderColor: b = "#4b5563",
-    backgroundColor: S = "#ffffff",
-    textColor: A = "#111827",
-    errorColor: I = "#dc2626",
-    successColor: O = "#16a34a",
-    labelColor: v = "#374151",
-    size: T = "md",
-    radius: M = "6px",
-    fontSize: B = "14px",
-    rows: z = 4,
-    cols: _,
-    maxLength: R,
-    resize: H = !0,
-    showCharacterCount: Y = !0,
-    className: y,
-    style: w
+    readOnly: x = !1,
+    required: j = !1,
+    error: c,
+    success: d = !1,
+    autoFocus: f = !1,
+    iconLeft: u,
+    iconRight: v,
+    borderColor: y = "#ccc",
+    focusBorderColor: T = "#2563eb",
+    hoverBorderColor: z = "#4b5563",
+    backgroundColor: C = "#ffffff",
+    textColor: E = "#111827",
+    errorColor: g = "#dc2626",
+    successColor: S = "#16a34a",
+    labelColor: k = "#374151",
+    size: b = "md",
+    radius: F = "6px",
+    fontSize: Y = "14px",
+    rows: I = 4,
+    cols: M,
+    maxLength: L,
+    resize: V = !0,
+    showCharacterCount: O = !0,
+    className: h,
+    style: m
   }, N) => {
-    const $ = J(null), [U, r] = P(a || ""), [j, W] = P(!1);
-    ke(N, () => $.current);
-    const D = (E) => {
-      R && E.target.value.length > R || (r(E.target.value), s && s(i, E.target.value));
-    }, F = () => {
-      switch (T) {
+    const $ = J(null), [B, r] = R(l || ""), [w, P] = R(!1);
+    Ge(N, () => $.current);
+    const U = (_) => {
+      L && _.target.value.length > L || (r(_.target.value), s && s(a, _.target.value));
+    }, D = () => {
+      switch (b) {
         case "sm":
           return "6px 12px";
         case "lg":
@@ -948,55 +962,55 @@ const Ke = [
         default:
           return "10px 16px";
       }
-    }, C = () => {
-      switch (T) {
+    }, A = () => {
+      switch (b) {
         case "sm":
           return "13px";
         case "lg":
           return "16px";
         default:
-          return B;
+          return Y;
       }
-    }, L = m ? I : c ? O : u, X = {
+    }, W = c ? g : d ? S : y, X = {
       width: "100%",
-      padding: F(),
-      paddingLeft: f ? "40px" : F().split(" ")[1],
-      paddingRight: d || t === "password" ? "40px" : F().split(" ")[1],
-      border: `1px solid ${L}`,
-      borderRadius: M,
-      backgroundColor: S,
-      color: A,
-      fontSize: C(),
+      padding: D(),
+      paddingLeft: u ? "40px" : D().split(" ")[1],
+      paddingRight: v || t === "password" ? "40px" : D().split(" ")[1],
+      border: `1px solid ${W}`,
+      borderRadius: F,
+      backgroundColor: C,
+      color: E,
+      fontSize: A(),
       outline: "none",
-      resize: t === "textarea" && !H ? "none" : void 0,
-      ...w
+      resize: t === "textarea" && !V ? "none" : void 0,
+      ...m
     };
     return /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: { width: "100%", fontFamily: "sans-serif" },
-        className: y,
+        className: h,
         children: [
-          l && /* @__PURE__ */ e.jsxs(
+          o && /* @__PURE__ */ e.jsxs(
             "label",
             {
-              htmlFor: i,
+              htmlFor: a,
               style: {
                 display: "block",
                 marginBottom: "6px",
                 fontSize: "14px",
                 fontWeight: 500,
-                color: v
+                color: k
               },
               children: [
-                l,
+                o,
                 " ",
-                g && /* @__PURE__ */ e.jsx("span", { style: { color: I }, children: "*" })
+                j && /* @__PURE__ */ e.jsx("span", { style: { color: g }, children: "*" })
               ]
             }
           ),
           /* @__PURE__ */ e.jsxs("div", { style: { position: "relative", width: "100%" }, children: [
-            f && /* @__PURE__ */ e.jsx(
+            u && /* @__PURE__ */ e.jsx(
               "span",
               {
                 style: {
@@ -1007,62 +1021,62 @@ const Ke = [
                   pointerEvents: "none",
                   color: "#6b7280"
                 },
-                children: f
+                children: u
               }
             ),
             t === "textarea" ? /* @__PURE__ */ e.jsx(
               "textarea",
               {
                 ref: $,
-                name: i,
-                value: o ?? U,
-                onChange: D,
+                name: a,
+                value: i ?? B,
+                onChange: U,
                 placeholder: n,
-                rows: z,
-                cols: _,
-                maxLength: R,
+                rows: I,
+                cols: M,
+                maxLength: L,
                 disabled: p,
-                readOnly: h,
-                autoFocus: x,
+                readOnly: x,
+                autoFocus: f,
                 style: X,
-                onFocus: (E) => {
-                  E.currentTarget.style.borderColor = k;
+                onFocus: (_) => {
+                  _.currentTarget.style.borderColor = T;
                 },
-                onBlur: (E) => {
-                  E.currentTarget.style.borderColor = L;
+                onBlur: (_) => {
+                  _.currentTarget.style.borderColor = W;
                 },
-                onMouseEnter: (E) => {
-                  E.currentTarget.style.borderColor = b;
+                onMouseEnter: (_) => {
+                  _.currentTarget.style.borderColor = z;
                 },
-                onMouseLeave: (E) => {
-                  E.currentTarget.style.borderColor = L;
+                onMouseLeave: (_) => {
+                  _.currentTarget.style.borderColor = W;
                 }
               }
             ) : /* @__PURE__ */ e.jsx(
               "input",
               {
                 ref: $,
-                id: i,
-                name: i,
-                type: t === "password" ? j ? "text" : "password" : t,
-                value: o ?? U,
-                onChange: D,
+                id: a,
+                name: a,
+                type: t === "password" ? w ? "text" : "password" : t,
+                value: i ?? B,
+                onChange: U,
                 placeholder: n,
                 disabled: p,
-                readOnly: h,
-                autoFocus: x,
+                readOnly: x,
+                autoFocus: f,
                 style: X,
-                onFocus: (E) => {
-                  E.currentTarget.style.borderColor = k;
+                onFocus: (_) => {
+                  _.currentTarget.style.borderColor = T;
                 },
-                onBlur: (E) => {
-                  E.currentTarget.style.borderColor = L;
+                onBlur: (_) => {
+                  _.currentTarget.style.borderColor = W;
                 },
-                onMouseEnter: (E) => {
-                  E.currentTarget.style.borderColor = b;
+                onMouseEnter: (_) => {
+                  _.currentTarget.style.borderColor = z;
                 },
-                onMouseLeave: (E) => {
-                  E.currentTarget.style.borderColor = L;
+                onMouseLeave: (_) => {
+                  _.currentTarget.style.borderColor = W;
                 }
               }
             ),
@@ -1070,7 +1084,7 @@ const Ke = [
               "button",
               {
                 type: "button",
-                onClick: () => W(!j),
+                onClick: () => P(!w),
                 style: {
                   position: "absolute",
                   right: "10px",
@@ -1082,10 +1096,10 @@ const Ke = [
                   cursor: "pointer",
                   padding: 0
                 },
-                children: j ? /* @__PURE__ */ e.jsx(Pe, { size: 18 }) : /* @__PURE__ */ e.jsx(We, { size: 18 })
+                children: w ? /* @__PURE__ */ e.jsx(dt, { size: 18 }) : /* @__PURE__ */ e.jsx(pt, { size: 18 })
               }
             ),
-            d && t !== "password" && /* @__PURE__ */ e.jsx(
+            v && t !== "password" && /* @__PURE__ */ e.jsx(
               "span",
               {
                 style: {
@@ -1096,11 +1110,11 @@ const Ke = [
                   pointerEvents: "none",
                   color: "#6b7280"
                 },
-                children: d
+                children: v
               }
             )
           ] }),
-          t === "textarea" && Y && R && /* @__PURE__ */ e.jsxs(
+          t === "textarea" && O && L && /* @__PURE__ */ e.jsxs(
             "div",
             {
               style: {
@@ -1110,66 +1124,66 @@ const Ke = [
                 marginTop: "4px"
               },
               children: [
-                (o ?? U).length,
+                (i ?? B).length,
                 "/",
-                R
+                L
               ]
             }
           ),
-          m && /* @__PURE__ */ e.jsx(
+          c && /* @__PURE__ */ e.jsx(
             "p",
             {
               style: {
-                color: I,
+                color: g,
                 fontSize: "12px",
                 marginTop: "4px",
                 lineHeight: "1.3"
               },
-              children: m
+              children: c
             }
           )
         ]
       }
     );
   }
-), at = ({
+), At = ({
   title: t,
   titleIcon: n,
-  items: l,
-  type: o = "unordered",
-  bulletColor: a = "#2563eb",
+  items: o,
+  type: i = "unordered",
+  bulletColor: l = "#2563eb",
   textColor: s = "#111827",
-  backgroundColor: i = "#fff",
+  backgroundColor: a = "#fff",
   borderColor: p = "#e5e7eb",
-  fontSize: h = "15px",
-  fontWeight: g = 500,
-  borderRadius: m = "12px",
-  padding: c = "16px",
-  spacing: x = "12px",
-  className: f,
-  style: d
+  fontSize: x = "15px",
+  fontWeight: j = 500,
+  borderRadius: c = "12px",
+  padding: d = "16px",
+  spacing: f = "12px",
+  className: u,
+  style: v
 }) => {
-  const u = o === "ordered", k = o === "inline", b = {
-    backgroundColor: i,
+  const y = i === "ordered", T = i === "inline", z = {
+    backgroundColor: a,
     borderColor: p,
     color: s,
     borderWidth: p ? "1px" : "0px",
     borderStyle: "solid",
-    borderRadius: m,
-    padding: c,
-    ...d
-  }, S = k ? {
+    borderRadius: c,
+    padding: d,
+    ...v
+  }, C = T ? {
     display: "flex",
-    gap: x,
+    gap: f,
     paddingLeft: 0,
     listStyleType: "none",
     margin: 0
   } : {
-    listStyleType: u ? "decimal" : "none",
-    paddingLeft: u ? "20px" : "0",
+    listStyleType: y ? "decimal" : "none",
+    paddingLeft: y ? "20px" : "0",
     margin: 0
-  }, A = u ? "ol" : "ul";
-  return /* @__PURE__ */ e.jsxs("div", { className: f, style: b, children: [
+  }, E = y ? "ol" : "ul";
+  return /* @__PURE__ */ e.jsxs("div", { className: u, style: z, children: [
     t && /* @__PURE__ */ e.jsxs(
       "div",
       {
@@ -1187,164 +1201,164 @@ const Ke = [
         ]
       }
     ),
-    /* @__PURE__ */ e.jsx(A, { style: S, children: l.map((I, O) => /* @__PURE__ */ e.jsx(
-      we,
+    /* @__PURE__ */ e.jsx(E, { style: C, children: o.map((g, S) => /* @__PURE__ */ e.jsx(
+      Oe,
       {
-        ...I,
-        bulletColor: a,
+        ...g,
+        bulletColor: l,
         textColor: s,
-        fontSize: h,
-        fontWeight: g,
-        spacing: x,
-        isInline: k
+        fontSize: x,
+        fontWeight: j,
+        spacing: f,
+        isInline: T
       },
-      O
+      S
     )) })
   ] });
-}, we = ({
+}, Oe = ({
   text: t,
   icon: n,
-  onClick: l,
-  subItems: o,
-  bulletColor: a,
+  onClick: o,
+  subItems: i,
+  bulletColor: l,
   textColor: s,
-  fontSize: i,
+  fontSize: a,
   fontWeight: p,
-  spacing: h,
-  isInline: g
+  spacing: x,
+  isInline: j
 }) => {
-  const m = {
+  const c = {
     display: "flex",
     flexDirection: "column",
     gap: "6px",
-    marginBottom: g ? "0" : h
-  }, c = {
+    marginBottom: j ? "0" : x
+  }, d = {
     display: "flex",
     alignItems: "center",
     gap: "8px",
-    fontSize: i,
+    fontSize: a,
     fontWeight: p,
     color: s,
-    cursor: l ? "pointer" : "default"
-  }, x = {
+    cursor: o ? "pointer" : "default"
+  }, f = {
     width: "8px",
     height: "8px",
-    backgroundColor: a,
+    backgroundColor: l,
     borderRadius: "50%",
     flexShrink: 0
-  }, f = {
+  }, u = {
     listStyleType: "disc",
     paddingLeft: "20px",
     margin: 0
   };
-  return /* @__PURE__ */ e.jsxs("li", { style: m, children: [
-    /* @__PURE__ */ e.jsxs("div", { style: c, onClick: l, children: [
-      n ? /* @__PURE__ */ e.jsx("span", { style: { fontSize: "16px", color: s }, children: n }) : !g && /* @__PURE__ */ e.jsx("span", { style: x }),
+  return /* @__PURE__ */ e.jsxs("li", { style: c, children: [
+    /* @__PURE__ */ e.jsxs("div", { style: d, onClick: o, children: [
+      n ? /* @__PURE__ */ e.jsx("span", { style: { fontSize: "16px", color: s }, children: n }) : !j && /* @__PURE__ */ e.jsx("span", { style: f }),
       /* @__PURE__ */ e.jsx("span", { children: t })
     ] }),
-    o && o.length > 0 && /* @__PURE__ */ e.jsx("ul", { style: f, children: o.map((d, u) => /* @__PURE__ */ e.jsx(
-      we,
+    i && i.length > 0 && /* @__PURE__ */ e.jsx("ul", { style: u, children: i.map((v, y) => /* @__PURE__ */ e.jsx(
+      Oe,
       {
-        ...d,
-        bulletColor: a,
+        ...v,
+        bulletColor: l,
         textColor: s,
-        fontSize: i,
+        fontSize: a,
         fontWeight: p,
-        spacing: h,
+        spacing: x,
         isInline: !1
       },
-      u
+      y
     )) })
   ] });
-}, se = ({
+}, we = ({
   tabs: t,
   defaultActive: n = 0,
-  tabPosition: l,
-  activeTabClassName: o = "",
-  inactiveTabClassName: a = "",
+  tabPosition: o,
+  activeTabClassName: i = "",
+  inactiveTabClassName: l = "",
   tabContainerClassName: s = "",
-  contentContainerClassName: i = "",
+  contentContainerClassName: a = "",
   className: p = "",
-  activeTabStyle: h,
-  inactiveTabStyle: g,
-  tabContainerStyle: m,
-  contentContainerStyle: c,
-  style: x,
-  tabsWidth: f = "240px",
-  tabGap: d = 8,
-  tabPadding: u = "12px 16px",
-  tabBorderRadius: k = 12,
-  primaryColor: b = "#2563eb",
-  textColor: S = "#374151",
-  backgroundColor: A = "#ffffff",
-  hoverTextColor: I = "#1e40af",
-  responsiveBreakpoint: O = 768,
-  showDrawerLabel: v = "Select Tab"
+  activeTabStyle: x,
+  inactiveTabStyle: j,
+  tabContainerStyle: c,
+  contentContainerStyle: d,
+  style: f,
+  tabsWidth: u = "240px",
+  tabGap: v = 8,
+  tabPadding: y = "12px 16px",
+  tabBorderRadius: T = 12,
+  primaryColor: z = "#2563eb",
+  textColor: C = "#374151",
+  backgroundColor: E = "#ffffff",
+  hoverTextColor: g = "#1e40af",
+  responsiveBreakpoint: S = 768,
+  showDrawerLabel: k = "Select Tab"
 }) => {
-  const [T, M] = P(n), [B, z] = P(null), [_, R] = P(!1), [H, Y] = P(!1);
-  q(() => {
-    const F = () => {
-      R(window.innerWidth <= O);
+  const [b, F] = R(n), [Y, I] = R(null), [M, L] = R(!1), [V, O] = R(!1);
+  G(() => {
+    const D = () => {
+      L(window.innerWidth <= S);
     };
-    return F(), window.addEventListener("resize", F), () => window.removeEventListener("resize", F);
-  }, [O]);
-  const y = l === "left" || l === "right", N = {
+    return D(), window.addEventListener("resize", D), () => window.removeEventListener("resize", D);
+  }, [S]);
+  const h = o === "left" || o === "right", N = {
     display: "flex",
-    flexDirection: y ? _ ? "column" : l === "left" ? "row" : "row-reverse" : "column",
+    flexDirection: h ? M ? "column" : o === "left" ? "row" : "row-reverse" : "column",
     width: "100%",
     height: "100%",
-    backgroundColor: A,
-    ...y && !_ ? {} : { flexWrap: "wrap" },
-    ...x
+    backgroundColor: E,
+    ...h && !M ? {} : { flexWrap: "wrap" },
+    ...f
   }, $ = {
-    width: y && !_ ? f : "100%",
+    width: h && !M ? u : "100%",
     display: "flex",
-    flexDirection: y && !_ ? "column" : "row",
-    justifyContent: !y && l === "top" ? "center" : void 0,
-    gap: d,
+    flexDirection: h && !M ? "column" : "row",
+    justifyContent: !h && o === "top" ? "center" : void 0,
+    gap: v,
     padding: 8,
     boxSizing: "border-box",
-    ...m
-  }, U = {
+    ...c
+  }, B = {
     flexGrow: 1,
     padding: 24,
     background: "#f9fafb",
     boxSizing: "border-box",
     minWidth: 0,
-    ...y && !_ ? { width: "calc(100% - " + f + ")" } : { width: "100%" },
-    ...c
+    ...h && !M ? { width: "calc(100% - " + u + ")" } : { width: "100%" },
+    ...d
   }, r = {
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
     gap: 8,
-    padding: u,
-    borderRadius: k,
+    padding: y,
+    borderRadius: T,
     border: "none",
     backgroundColor: "transparent",
     fontWeight: 500,
     transition: "all 0.2s ease",
-    width: y && !_ ? "100%" : "auto",
-    marginBottom: y && !_ ? d : 0,
-    marginRight: !y || _ ? d : 0,
+    width: h && !M ? "100%" : "auto",
+    marginBottom: h && !M ? v : 0,
+    marginRight: !h || M ? v : 0,
     justifyContent: "flex-start"
-  }, j = {
-    backgroundColor: b,
+  }, w = {
+    backgroundColor: z,
     color: "#fff",
     fontWeight: 700,
-    boxShadow: `0 2px 10px ${b}55`,
-    ...h
-  }, W = {
+    boxShadow: `0 2px 10px ${z}55`,
+    ...x
+  }, P = {
     backgroundColor: "transparent",
-    color: S,
-    ...g
-  }, D = {
-    backgroundColor: `${b}22`,
-    color: I
+    color: C,
+    ...j
+  }, U = {
+    backgroundColor: `${z}22`,
+    color: g
   };
   return /* @__PURE__ */ e.jsxs("div", { className: p, style: N, children: [
     /* @__PURE__ */ e.jsx("style", { children: `
-        @media (max-width: ${O}px) {
+        @media (max-width: ${S}px) {
           .custom-tab-drawer-button {
             width: 100%;
             display: flex;
@@ -1366,46 +1380,46 @@ const Ke = [
           }
         }
         ` }),
-    _ && y ? /* @__PURE__ */ e.jsxs("div", { style: { width: "100%", marginBottom: 12 }, children: [
+    M && h ? /* @__PURE__ */ e.jsxs("div", { style: { width: "100%", marginBottom: 12 }, children: [
       /* @__PURE__ */ e.jsxs(
         "button",
         {
-          onClick: () => Y(!H),
+          onClick: () => O(!V),
           style: {
             ...r,
-            ...j,
+            ...w,
             justifyContent: "space-between",
             width: "100%"
           },
           className: "custom-tab-drawer-button",
           children: [
-            /* @__PURE__ */ e.jsx("span", { children: v }),
+            /* @__PURE__ */ e.jsx("span", { children: k }),
             /* @__PURE__ */ e.jsx("span", { style: { fontSize: 18 }, children: "☰" })
           ]
         }
       ),
-      H && /* @__PURE__ */ e.jsx("div", { className: "custom-tab-mobile-drawer", children: t.map((F, C) => {
-        const L = C === T, X = B === C;
+      V && /* @__PURE__ */ e.jsx("div", { className: "custom-tab-mobile-drawer", children: t.map((D, A) => {
+        const W = A === b, X = Y === A;
         return /* @__PURE__ */ e.jsxs(
           "button",
           {
             onClick: () => {
-              M(C), Y(!1);
+              F(A), O(!1);
             },
-            onMouseEnter: () => z(C),
-            onMouseLeave: () => z(null),
-            className: L ? o : a,
+            onMouseEnter: () => I(A),
+            onMouseLeave: () => I(null),
+            className: W ? i : l,
             style: {
               ...r,
-              ...L ? j : W,
-              ...X && !L ? D : {}
+              ...W ? w : P,
+              ...X && !W ? U : {}
             },
             children: [
-              F.icon && /* @__PURE__ */ e.jsx("span", { children: F.icon }),
-              /* @__PURE__ */ e.jsx("span", { children: F.label })
+              D.icon && /* @__PURE__ */ e.jsx("span", { children: D.icon }),
+              /* @__PURE__ */ e.jsx("span", { children: D.label })
             ]
           },
-          C
+          A
         );
       }) })
     ] }) : /* @__PURE__ */ e.jsx(
@@ -1414,26 +1428,26 @@ const Ke = [
         className: s,
         style: $,
         "aria-label": "Tabs Navigation",
-        children: t.map((F, C) => {
-          const L = C === T, X = B === C;
+        children: t.map((D, A) => {
+          const W = A === b, X = Y === A;
           return /* @__PURE__ */ e.jsxs(
             "button",
             {
-              onClick: () => M(C),
-              onMouseEnter: () => z(C),
-              onMouseLeave: () => z(null),
-              className: L ? o : a,
+              onClick: () => F(A),
+              onMouseEnter: () => I(A),
+              onMouseLeave: () => I(null),
+              className: W ? i : l,
               style: {
                 ...r,
-                ...L ? j : W,
-                ...X && !L ? D : {}
+                ...W ? w : P,
+                ...X && !W ? U : {}
               },
               children: [
-                F.icon && /* @__PURE__ */ e.jsx("span", { children: F.icon }),
-                /* @__PURE__ */ e.jsx("span", { children: F.label })
+                D.icon && /* @__PURE__ */ e.jsx("span", { children: D.icon }),
+                /* @__PURE__ */ e.jsx("span", { children: D.label })
               ]
             },
-            C
+            A
           );
         })
       }
@@ -1441,60 +1455,64 @@ const Ke = [
     /* @__PURE__ */ e.jsx(
       "section",
       {
-        className: i,
-        style: U,
+        className: a,
+        style: B,
         role: "tabpanel",
-        children: t[T]?.content
+        children: t[b]?.content
       }
     )
   ] });
-}, it = (t) => /* @__PURE__ */ e.jsx(se, { ...t, tabPosition: "left" }), ct = (t) => /* @__PURE__ */ e.jsx(se, { ...t, tabPosition: "top" }), dt = (t) => /* @__PURE__ */ e.jsx(se, { ...t, tabPosition: "right" }), ut = ({
+}, Lt = (t) => /* @__PURE__ */ e.jsx(we, { ...t, tabPosition: "left" }), Pt = (t) => /* @__PURE__ */ e.jsx(we, { ...t, tabPosition: "top" }), Nt = (t) => /* @__PURE__ */ e.jsx(we, { ...t, tabPosition: "right" }), Wt = ({
   src: t,
   poster: n,
-  autoPlay: l = !1,
-  loop: o = !1,
-  controls: a = !1,
-  width: s = "100%",
-  height: i = "150px",
-  borderRadius: p = "12px",
-  backgroundColor: h = "#1e1e1e",
-  primaryColor: g = "#ff4081",
-  padding: m = "16px",
-  className: c
+  autoPlay: o = !1,
+  loop: i = !1,
+  controls: l = !1,
+  muted: s = !1,
+  // default false
+  width: a = "100%",
+  height: p = "150px",
+  borderRadius: x = "12px",
+  backgroundColor: j = "#1e1e1e",
+  primaryColor: c = "#ff4081",
+  padding: d = "16px",
+  className: f
 }) => {
-  const x = J(null), f = J(null), [d, u] = P(l), [k, b] = P(0), [S, A] = P(0), [I, O] = P(0.5), [v, T] = P(!1), [M, B] = P(o);
-  q(() => {
-    x.current && (x.current.volume = I, x.current.loop = M);
-  }, [I, M]);
-  const z = () => {
-    x.current && (d ? x.current.pause() : x.current.play(), u(!d));
-  }, _ = () => {
-    x.current && (b(x.current.currentTime), A(x.current.duration));
-  }, R = (w) => {
-    if (!x.current || !w.currentTarget) return;
-    const N = w.currentTarget.getBoundingClientRect(), U = (w.clientX - N.left) / N.width * S;
-    x.current.currentTime = U, b(U);
-  }, H = (w) => {
-    x.current && (x.current.currentTime += w);
-  }, Y = () => {
-    f.current && (v ? document.exitFullscreen?.() : f.current.requestFullscreen?.(), T(!v));
-  }, y = (w) => {
-    const N = Math.floor(w / 60), $ = Math.floor(w % 60);
-    return `${N}:${$ < 10 ? "0" : ""}${$}`;
+  const u = J(null), v = J(null), [y, T] = R(o), [z, C] = R(0), [E, g] = R(0), [S, k] = R(0.5), [b, F] = R(s), [Y, I] = R(!1), [M, L] = R(i);
+  G(() => {
+    u.current && (u.current.volume = S, u.current.loop = M, u.current.muted = b);
+  }, [S, M, b]);
+  const V = () => {
+    u.current && (y ? u.current.pause() : u.current.play(), T(!y));
+  }, O = () => {
+    u.current && (C(u.current.currentTime), g(u.current.duration));
+  }, h = (r) => {
+    if (!u.current || !r.currentTarget) return;
+    const w = r.currentTarget.getBoundingClientRect(), U = (r.clientX - w.left) / w.width * E;
+    u.current.currentTime = U, C(U);
+  }, m = (r) => {
+    u.current && (u.current.currentTime += r);
+  }, N = () => {
+    v.current && (Y ? document.exitFullscreen?.() : v.current.requestFullscreen?.(), I(!Y));
+  }, $ = () => {
+    F(!b), b && S === 0 && k(0.5);
+  }, B = (r) => {
+    const w = Math.floor(r / 60), P = Math.floor(r % 60);
+    return `${w}:${P < 10 ? "0" : ""}${P}`;
   };
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
-      ref: f,
-      className: c,
+      ref: v,
+      className: f,
       style: {
         position: "relative",
-        width: s,
-        backgroundColor: h,
-        borderRadius: p,
+        width: a,
+        backgroundColor: j,
+        borderRadius: x,
         color: "#fff",
         overflow: "hidden",
-        padding: m,
+        padding: d,
         boxSizing: "border-box",
         maxWidth: "100%",
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)"
@@ -1503,18 +1521,19 @@ const Ke = [
         /* @__PURE__ */ e.jsx(
           "video",
           {
-            ref: x,
+            ref: u,
             src: t,
             poster: n,
-            autoPlay: l,
-            loop: o,
-            controls: a,
-            onTimeUpdate: _,
-            onLoadedMetadata: _,
+            autoPlay: o,
+            loop: i,
+            controls: l,
+            muted: s,
+            onTimeUpdate: O,
+            onLoadedMetadata: O,
             style: {
               width: "100%",
-              height: i,
-              borderRadius: p,
+              height: p,
+              borderRadius: x,
               objectFit: "cover",
               backgroundColor: "#000"
             }
@@ -1532,24 +1551,24 @@ const Ke = [
               flexWrap: "wrap"
             },
             children: [
-              /* @__PURE__ */ e.jsx("button", { onClick: () => H(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(me, { size: 20 }) }),
+              /* @__PURE__ */ e.jsx("button", { onClick: () => m(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(he, { size: 20 }) }),
               /* @__PURE__ */ e.jsx(
                 "button",
                 {
-                  onClick: z,
+                  onClick: V,
                   style: {
-                    background: g,
+                    background: c,
                     borderRadius: "9999px",
                     padding: "10px",
                     color: "#fff",
                     border: "none",
                     cursor: "pointer"
                   },
-                  "aria-label": d ? "Pause" : "Play",
-                  children: d ? /* @__PURE__ */ e.jsx(xe, { size: 20 }) : /* @__PURE__ */ e.jsx(fe, { size: 20 })
+                  "aria-label": y ? "Pause" : "Play",
+                  children: y ? /* @__PURE__ */ e.jsx(se, { size: 20 }) : /* @__PURE__ */ e.jsx(oe, { size: 20 })
                 }
               ),
-              /* @__PURE__ */ e.jsx("button", { onClick: () => H(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
+              /* @__PURE__ */ e.jsx("button", { onClick: () => m(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
             ]
           }
         ),
@@ -1566,17 +1585,17 @@ const Ke = [
             },
             children: [
               /* @__PURE__ */ e.jsxs("div", { style: { flexShrink: 0, minWidth: "60px", textAlign: "center" }, children: [
-                /* @__PURE__ */ e.jsx("span", { style: { fontSize: "14px" }, children: y(k) }),
+                /* @__PURE__ */ e.jsx("span", { style: { fontSize: "14px" }, children: B(z) }),
                 /* @__PURE__ */ e.jsxs("span", { style: { fontSize: "14px", color: "#aaa" }, children: [
                   " ",
                   "/ ",
-                  y(S)
+                  B(E)
                 ] })
               ] }),
               /* @__PURE__ */ e.jsx(
                 "div",
                 {
-                  onClick: R,
+                  onClick: h,
                   style: {
                     flex: 1,
                     height: "8px",
@@ -1590,9 +1609,9 @@ const Ke = [
                     "div",
                     {
                       style: {
-                        width: `${k / S * 100 || 0}%`,
+                        width: `${z / E * 100 || 0}%`,
                         height: "100%",
-                        background: g,
+                        background: c,
                         borderRadius: "4px"
                       }
                     }
@@ -1603,20 +1622,13 @@ const Ke = [
                 /* @__PURE__ */ e.jsx(
                   "button",
                   {
-                    onClick: () => B(!M),
+                    onClick: () => L(!M),
                     "aria-label": "Toggle Loop",
-                    children: /* @__PURE__ */ e.jsx(he, { size: 18, color: M ? g : void 0 })
+                    children: /* @__PURE__ */ e.jsx(fe, { size: 18, color: M ? c : void 0 })
                   }
                 ),
-                /* @__PURE__ */ e.jsx(
-                  "button",
-                  {
-                    onClick: () => O(I > 0 ? 0 : 0.5),
-                    "aria-label": "Toggle Mute",
-                    children: I > 0 ? /* @__PURE__ */ e.jsx(be, { size: 18 }) : /* @__PURE__ */ e.jsx(ye, { size: 18 })
-                  }
-                ),
-                /* @__PURE__ */ e.jsx("button", { onClick: Y, "aria-label": "Toggle Fullscreen", children: v ? /* @__PURE__ */ e.jsx(pe, { size: 18 }) : /* @__PURE__ */ e.jsx(ue, { size: 18 }) })
+                /* @__PURE__ */ e.jsx("button", { onClick: $, "aria-label": "Toggle Mute", children: b ? /* @__PURE__ */ e.jsx(ye, { size: 18 }) : /* @__PURE__ */ e.jsx(be, { size: 18 }) }),
+                /* @__PURE__ */ e.jsx("button", { onClick: N, "aria-label": "Toggle Fullscreen", children: Y ? /* @__PURE__ */ e.jsx(xe, { size: 18 }) : /* @__PURE__ */ e.jsx(pe, { size: 18 }) })
               ] })
             ]
           }
@@ -1624,55 +1636,55 @@ const Ke = [
       ]
     }
   );
-}, pt = ({
+}, Ft = ({
   src: t,
   thumbnail: n,
-  autoPlay: l = !1,
-  loop: o = !1,
-  backgroundColor: a = "#000000",
+  autoPlay: o = !1,
+  loop: i = !1,
+  backgroundColor: l = "#000000",
   primaryColor: s = "#10b981",
-  secondaryColor: i = "#ffffff",
+  secondaryColor: a = "#ffffff",
   borderRadius: p = "12px",
-  padding: h = "16px",
-  width: g = "100%",
-  className: m
+  padding: x = "16px",
+  width: j = "100%",
+  className: c
 }) => {
-  const c = J(null), x = J(null), [f, d] = P(l), [u, k] = P(0), [b, S] = P(0), [A, I] = P(0.5), [O, v] = P(!1), [T, M] = P(o);
-  q(() => {
-    c.current && (c.current.volume = A);
-  }, [A]), q(() => {
-    c.current && (c.current.loop = T);
-  }, [T]);
-  const B = () => {
-    c.current && (f ? c.current.pause() : c.current.play(), d(!f));
-  }, z = () => {
-    c.current && (k(c.current.currentTime), S(c.current.duration));
-  }, _ = (y) => {
-    if (!c.current || !y.currentTarget) return;
-    const w = y.currentTarget.getBoundingClientRect(), $ = (y.clientX - w.left) / w.width * b;
-    c.current.currentTime = $, k($);
-  }, R = (y) => {
-    c.current && (c.current.currentTime += y);
-  }, H = () => {
-    x.current && (O ? document.exitFullscreen?.() : x.current.requestFullscreen?.(), v(!O));
-  }, Y = (y) => {
-    const w = Math.floor(y / 60), N = Math.floor(y % 60);
-    return `${w}:${N < 10 ? "0" : ""}${N}`;
+  const d = J(null), f = J(null), [u, v] = R(o), [y, T] = R(0), [z, C] = R(0), [E, g] = R(0.5), [S, k] = R(!1), [b, F] = R(i);
+  G(() => {
+    d.current && (d.current.volume = E);
+  }, [E]), G(() => {
+    d.current && (d.current.loop = b);
+  }, [b]);
+  const Y = () => {
+    d.current && (u ? d.current.pause() : d.current.play(), v(!u));
+  }, I = () => {
+    d.current && (T(d.current.currentTime), C(d.current.duration));
+  }, M = (h) => {
+    if (!d.current || !h.currentTarget) return;
+    const m = h.currentTarget.getBoundingClientRect(), $ = (h.clientX - m.left) / m.width * z;
+    d.current.currentTime = $, T($);
+  }, L = (h) => {
+    d.current && (d.current.currentTime += h);
+  }, V = () => {
+    f.current && (S ? document.exitFullscreen?.() : f.current.requestFullscreen?.(), k(!S));
+  }, O = (h) => {
+    const m = Math.floor(h / 60), N = Math.floor(h % 60);
+    return `${m}:${N < 10 ? "0" : ""}${N}`;
   };
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
-      ref: x,
-      className: m,
+      ref: f,
+      className: c,
       style: {
         position: "relative",
-        width: g,
-        backgroundColor: a,
+        width: j,
+        backgroundColor: l,
         borderRadius: p,
-        color: i,
+        color: a,
         boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
         overflow: "hidden",
-        padding: h,
+        padding: x,
         boxSizing: "border-box",
         maxWidth: "100%"
       },
@@ -1680,12 +1692,12 @@ const Ke = [
         /* @__PURE__ */ e.jsx(
           "audio",
           {
-            ref: c,
+            ref: d,
             src: t,
-            autoPlay: l,
-            loop: o,
-            onTimeUpdate: z,
-            onLoadedMetadata: z
+            autoPlay: o,
+            loop: i,
+            onTimeUpdate: I,
+            onLoadedMetadata: I
           }
         ),
         n && /* @__PURE__ */ e.jsx(
@@ -1714,11 +1726,11 @@ const Ke = [
               marginTop: "10px"
             },
             children: [
-              /* @__PURE__ */ e.jsx("button", { onClick: () => R(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(me, { size: 20 }) }),
+              /* @__PURE__ */ e.jsx("button", { onClick: () => L(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(he, { size: 20 }) }),
               /* @__PURE__ */ e.jsx(
                 "button",
                 {
-                  onClick: B,
+                  onClick: Y,
                   style: {
                     background: s,
                     borderRadius: "9999px",
@@ -1727,11 +1739,11 @@ const Ke = [
                     border: "none",
                     cursor: "pointer"
                   },
-                  "aria-label": f ? "Pause" : "Play",
-                  children: f ? /* @__PURE__ */ e.jsx(xe, { size: 20 }) : /* @__PURE__ */ e.jsx(fe, { size: 20 })
+                  "aria-label": u ? "Pause" : "Play",
+                  children: u ? /* @__PURE__ */ e.jsx(se, { size: 20 }) : /* @__PURE__ */ e.jsx(oe, { size: 20 })
                 }
               ),
-              /* @__PURE__ */ e.jsx("button", { onClick: () => R(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
+              /* @__PURE__ */ e.jsx("button", { onClick: () => L(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
             ]
           }
         ),
@@ -1748,16 +1760,16 @@ const Ke = [
             },
             children: [
               /* @__PURE__ */ e.jsxs("div", { style: { flexShrink: 0, minWidth: "60px", textAlign: "center" }, children: [
-                /* @__PURE__ */ e.jsx("span", { style: { fontSize: "14px", marginRight: "4px" }, children: Y(u) }),
+                /* @__PURE__ */ e.jsx("span", { style: { fontSize: "14px", marginRight: "4px" }, children: O(y) }),
                 /* @__PURE__ */ e.jsxs("span", { style: { fontSize: "14px", color: "#aaa" }, children: [
                   "/ ",
-                  Y(b)
+                  O(z)
                 ] })
               ] }),
               /* @__PURE__ */ e.jsx(
                 "div",
                 {
-                  onClick: _,
+                  onClick: M,
                   style: {
                     flex: 1,
                     height: "8px",
@@ -1771,7 +1783,7 @@ const Ke = [
                     "div",
                     {
                       style: {
-                        width: `${u / b * 100 || 0}%`,
+                        width: `${y / z * 100 || 0}%`,
                         height: "100%",
                         background: s,
                         borderRadius: "4px"
@@ -1793,20 +1805,20 @@ const Ke = [
                     /* @__PURE__ */ e.jsx(
                       "button",
                       {
-                        onClick: () => M(!T),
+                        onClick: () => F(!b),
                         "aria-label": "Toggle Loop",
-                        children: /* @__PURE__ */ e.jsx(he, { size: 18, color: T ? s : void 0 })
+                        children: /* @__PURE__ */ e.jsx(fe, { size: 18, color: b ? s : void 0 })
                       }
                     ),
                     /* @__PURE__ */ e.jsx(
                       "button",
                       {
-                        onClick: () => I(A > 0 ? 0 : 0.5),
+                        onClick: () => g(E > 0 ? 0 : 0.5),
                         "aria-label": "Toggle Mute",
-                        children: A > 0 ? /* @__PURE__ */ e.jsx(be, { size: 18 }) : /* @__PURE__ */ e.jsx(ye, { size: 18 })
+                        children: E > 0 ? /* @__PURE__ */ e.jsx(be, { size: 18 }) : /* @__PURE__ */ e.jsx(ye, { size: 18 })
                       }
                     ),
-                    /* @__PURE__ */ e.jsx("button", { onClick: H, "aria-label": "Toggle Fullscreen", children: O ? /* @__PURE__ */ e.jsx(pe, { size: 18 }) : /* @__PURE__ */ e.jsx(ue, { size: 18 }) })
+                    /* @__PURE__ */ e.jsx("button", { onClick: V, "aria-label": "Toggle Fullscreen", children: S ? /* @__PURE__ */ e.jsx(xe, { size: 18 }) : /* @__PURE__ */ e.jsx(pe, { size: 18 }) })
                   ]
                 }
               )
@@ -1816,147 +1828,219 @@ const Ke = [
       ]
     }
   );
-}, xt = ({
+};
+function H(t, n, o) {
+  return t == null ? o : typeof t != "object" ? t : t[n] ?? o;
+}
+const Ie = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Ot = ({
   display: t = { sm: "block", md: "flex", lg: "grid" },
   flexDirection: n = { sm: "column", md: "row", lg: "row" },
-  justifyContent: l = { sm: "flex-start", md: "center", lg: "space-between" },
-  alignItems: o = { sm: "stretch", md: "center", lg: "center" },
-  gridTemplateColumns: a = { sm: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" },
+  justifyContent: o = { sm: "flex-start", md: "center", lg: "space-between" },
+  alignItems: i = { sm: "stretch", md: "center", lg: "center" },
+  gridTemplateColumns: l = { sm: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" },
   gridTemplateRows: s = { sm: "auto", md: "auto", lg: "auto" },
-  gap: i = { sm: "10px", md: "20px", lg: "30px" },
-  rowGap: p = { sm: "10px", md: "15px", lg: "20px" },
-  columnGap: h = { sm: "10px", md: "15px", lg: "20px" },
-  width: g = { sm: "100%", md: "90%", lg: "80%" },
-  maxWidth: m = { sm: "100%", md: "800px", lg: "1200px" },
-  height: c = { sm: "auto", md: "auto", lg: "auto" },
-  padding: x = { sm: "10px", md: "20px", lg: "40px" },
-  margin: f = { sm: "0 auto", md: "0 auto", lg: "0 auto" },
-  textAlign: d = { sm: "left", md: "center", lg: "center" },
-  backgroundColor: u = "#ffffff",
-  border: k = { sm: "none", md: "1px solid #ddd", lg: "2px solid #ccc" },
-  borderRadius: b = { sm: "0px", md: "8px", lg: "12px" },
-  boxShadow: S = { sm: "none", md: "0px 4px 6px rgba(0,0,0,0.1)", lg: "0px 6px 10px rgba(0,0,0,0.15)" },
-  overflow: A = { sm: "visible", md: "hidden", lg: "auto" },
-  children: I,
-  className: O = ""
+  gap: a = { sm: "10px", md: "20px", lg: "30px" },
+  rowGap: p,
+  columnGap: x,
+  width: j = { sm: "100%", md: "90%", lg: "80%" },
+  maxWidth: c = { sm: "100%", md: "800px", lg: "1200px" },
+  height: d = { sm: "auto", md: "auto", lg: "auto" },
+  padding: f = { sm: "10px", md: "20px", lg: "40px" },
+  margin: u = { sm: "0 auto", md: "0 auto", lg: "0 auto" },
+  textAlign: v = { sm: "left", md: "center", lg: "center" },
+  backgroundColor: y = "#fff",
+  border: T = { sm: "none", md: "1px solid #ddd", lg: "2px solid #ccc" },
+  borderRadius: z = { sm: "0", md: "8px", lg: "12px" },
+  boxShadow: C = {
+    sm: "none",
+    md: "0 4px 6px rgba(0,0,0,0.1)",
+    lg: "0 6px 10px rgba(0,0,0,0.15)"
+  },
+  overflow: E = { sm: "visible", md: "hidden", lg: "auto" },
+  children: g,
+  className: S,
+  style: k
 }) => {
-  const [v, T] = P("lg");
-  q(() => {
-    const B = () => {
-      const z = window.innerWidth;
-      z <= 767 ? T("sm") : z >= 768 && z <= 1023 ? T("md") : T("lg");
-    };
-    return B(), window.addEventListener("resize", B), () => window.removeEventListener("resize", B);
-  }, []);
-  const M = K(
-    () => ({
-      display: t[v],
-      flexDirection: n[v],
-      justifyContent: l[v],
-      alignItems: o[v],
-      gridTemplateColumns: a[v],
-      gridTemplateRows: s[v],
-      gap: i[v],
-      rowGap: p[v],
-      columnGap: h[v],
-      width: g[v],
-      maxWidth: m[v],
-      height: c[v],
-      padding: x[v],
-      margin: f[v],
-      textAlign: d[v],
-      backgroundColor: u,
-      border: k[v],
-      borderRadius: b[v],
-      boxShadow: S[v],
-      overflow: A[v],
-      boxSizing: "border-box"
-    }),
-    [v, t, n, l, o, a, s, i, p, h, g, m, c, x, f, d, u, k, b, S, A]
+  const [b, F] = R(
+    () => Ie(window.innerWidth)
   );
-  return /* @__PURE__ */ e.jsx("div", { className: O, style: M, children: I });
-}, ft = ({
+  G(() => {
+    const I = () => F(Ie(window.innerWidth));
+    return window.addEventListener("resize", I), () => window.removeEventListener("resize", I);
+  }, []);
+  const Y = ee(() => {
+    const I = H(t, b, "block"), M = H(
+      n,
+      b,
+      void 0
+    ), L = H(
+      o,
+      b,
+      void 0
+    ), V = H(
+      i,
+      b,
+      void 0
+    ), O = H(
+      l,
+      b,
+      void 0
+    ), h = H(
+      s,
+      b,
+      void 0
+    ), m = H(a, b, void 0), N = H(p, b, void 0), $ = H(
+      x,
+      b,
+      void 0
+    ), B = H(j, b, "100%"), r = H(c, b, void 0), w = H(d, b, void 0), P = H(f, b, void 0), U = H(u, b, void 0), D = H(
+      v,
+      b,
+      void 0
+    ), A = H(T, b, void 0), W = H(
+      z,
+      b,
+      void 0
+    ), X = H(
+      C,
+      b,
+      void 0
+    ), _ = H(E, b, void 0);
+    return {
+      display: I,
+      ...M && { flexDirection: M },
+      ...L && { justifyContent: L },
+      ...V && { alignItems: V },
+      ...O && {
+        gridTemplateColumns: O
+      },
+      ...h && {
+        gridTemplateRows: h
+      },
+      ...m && { gap: m },
+      ...N && { rowGap: N },
+      ...$ && { columnGap: $ },
+      width: B,
+      ...r && { maxWidth: r },
+      ...w && { height: w },
+      ...P && { padding: P },
+      ...U && { margin: U },
+      ...D && { textAlign: D },
+      backgroundColor: y,
+      ...A && { border: A },
+      ...W && { borderRadius: W },
+      ...X && { boxShadow: X },
+      ..._ && { overflow: _ },
+      boxSizing: "border-box",
+      ...k
+    };
+  }, [
+    b,
+    t,
+    n,
+    o,
+    i,
+    l,
+    s,
+    a,
+    p,
+    x,
+    j,
+    c,
+    d,
+    f,
+    u,
+    v,
+    y,
+    T,
+    z,
+    C,
+    E,
+    k
+  ]);
+  return /* @__PURE__ */ e.jsx("div", { className: S, style: Y, children: g });
+}, Bt = ({
   items: t,
   allowMultiple: n = !1,
-  defaultOpenIndex: l = [],
-  borderColor: o = "#d1d5db",
-  backgroundColor: a = "#ffffff",
+  defaultOpenIndex: o = [],
+  borderColor: i = "#d1d5db",
+  backgroundColor: l = "#ffffff",
   textColor: s = "#111827",
-  hoverBgColor: i = "#f3f4f6",
+  hoverBgColor: a = "#f3f4f6",
   hoverTextColor: p = "#111827",
-  paddingVertical: h = "16px",
-  paddingHorizontal: g = "16px",
-  margin: m = "12px 0",
-  iconOpen: c = "−",
-  iconClose: x = "+",
-  transitionDuration: f = "300ms",
-  borderRadius: d = "8px",
-  shadow: u = "0 2px 8px rgba(0, 0, 0, 0.05)",
-  contentPadding: k = "16px",
-  fontSize: b = "16px",
-  fontWeight: S = "600",
-  iconSize: A = "18px",
-  contentFontSize: I = "14px",
-  contentFontWeight: O = "400",
-  contentBackgroundColor: v = "#ffffff",
-  contentTextColor: T = "#111827",
-  className: M,
-  style: B
+  paddingVertical: x = "16px",
+  paddingHorizontal: j = "16px",
+  margin: c = "12px 0",
+  iconOpen: d = "−",
+  iconClose: f = "+",
+  transitionDuration: u = "300ms",
+  borderRadius: v = "8px",
+  shadow: y = "0 2px 8px rgba(0, 0, 0, 0.05)",
+  contentPadding: T = "16px",
+  fontSize: z = "16px",
+  fontWeight: C = "600",
+  iconSize: E = "18px",
+  contentFontSize: g = "14px",
+  contentFontWeight: S = "400",
+  contentBackgroundColor: k = "#ffffff",
+  contentTextColor: b = "#111827",
+  className: F,
+  style: Y
 }) => {
-  const [z, _] = P(l), R = J([]), H = J([]);
-  q(() => {
-    R.current.forEach((y, w) => {
-      y && (y.style.maxHeight = z.includes(w) ? `${y.scrollHeight}px` : "0px");
+  const [I, M] = R(o), L = J([]), V = J([]);
+  G(() => {
+    L.current.forEach((h, m) => {
+      h && (h.style.maxHeight = I.includes(m) ? `${h.scrollHeight}px` : "0px");
     });
-  }, [z]);
-  const Y = (y) => {
-    _(
-      (w) => n ? w.includes(y) ? w.filter((N) => N !== y) : [...w, y] : w.includes(y) ? [] : [y]
+  }, [I]);
+  const O = (h) => {
+    M(
+      (m) => n ? m.includes(h) ? m.filter((N) => N !== h) : [...m, h] : m.includes(h) ? [] : [h]
     );
   };
-  return /* @__PURE__ */ e.jsx("div", { className: M, style: { width: "100%", ...B }, children: t.map((y, w) => /* @__PURE__ */ e.jsxs(
+  return /* @__PURE__ */ e.jsx("div", { className: F, style: { width: "100%", ...Y }, children: t.map((h, m) => /* @__PURE__ */ e.jsxs(
     "div",
     {
       style: {
-        border: `1px solid ${o}`,
-        borderRadius: d,
-        margin: m,
-        boxShadow: u,
+        border: `1px solid ${i}`,
+        borderRadius: v,
+        margin: c,
+        boxShadow: y,
         overflow: "hidden",
-        transition: `all ${f} ease`
+        transition: `all ${u} ease`
       },
       children: [
         /* @__PURE__ */ e.jsxs(
           "button",
           {
             ref: (N) => {
-              H.current[w] = N;
+              V.current[m] = N;
             },
-            onClick: () => Y(w),
+            onClick: () => O(m),
             style: {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              backgroundColor: a,
+              backgroundColor: l,
               color: s,
-              padding: `${h} ${g}`,
-              fontWeight: S,
-              fontSize: b,
+              padding: `${x} ${j}`,
+              fontWeight: C,
+              fontSize: z,
               cursor: "pointer",
               outline: "none",
               border: "none",
-              transition: `all ${f}`
+              transition: `all ${u}`
             },
             onMouseEnter: (N) => {
-              N.currentTarget.style.backgroundColor = i, N.currentTarget.style.color = p;
+              N.currentTarget.style.backgroundColor = a, N.currentTarget.style.color = p;
             },
             onMouseLeave: (N) => {
-              N.currentTarget.style.backgroundColor = a, N.currentTarget.style.color = s;
+              N.currentTarget.style.backgroundColor = l, N.currentTarget.style.color = s;
             },
             children: [
-              /* @__PURE__ */ e.jsx("span", { children: y.title }),
-              /* @__PURE__ */ e.jsx("span", { style: { fontSize: A }, children: z.includes(w) ? c : x })
+              /* @__PURE__ */ e.jsx("span", { children: h.title }),
+              /* @__PURE__ */ e.jsx("span", { style: { fontSize: E }, children: I.includes(m) ? d : f })
             ]
           }
         ),
@@ -1964,100 +2048,176 @@ const Ke = [
           "div",
           {
             ref: (N) => {
-              R.current[w] = N;
+              L.current[m] = N;
             },
             style: {
               overflow: "hidden",
-              maxHeight: z.includes(w) ? `${R.current[w]?.scrollHeight}px` : "0px",
-              transition: `max-height ${f} ease-in-out`
+              maxHeight: I.includes(m) ? `${L.current[m]?.scrollHeight}px` : "0px",
+              transition: `max-height ${u} ease-in-out`
             },
             children: /* @__PURE__ */ e.jsx(
               "div",
               {
                 style: {
-                  borderTop: `1px solid ${o}`,
-                  backgroundColor: v,
-                  color: T,
-                  padding: k,
-                  fontSize: I,
-                  fontWeight: O
+                  borderTop: `1px solid ${i}`,
+                  backgroundColor: k,
+                  color: b,
+                  padding: T,
+                  fontSize: g,
+                  fontWeight: S
                 },
-                children: y.content
+                children: h.content
               }
             )
           }
         )
       ]
     },
-    w
+    m
   )) });
-}, ht = ({
+}, Dt = ({
   type: t,
   name: n,
-  options: l,
-  selectedValues: o,
-  onChange: a,
+  options: o,
+  selectedValues: i,
+  onChange: l,
   disabled: s = !1,
-  readOnly: i = !1,
+  readOnly: a = !1,
   required: p = !1,
-  error: h,
-  className: g = "",
-  customIcon: m
+  error: x,
+  className: j = "",
+  customIcon: c,
+  style: d,
+  labelStyle: f,
+  iconSize: u = 20,
+  iconCheckedBgColor: v = "#2563eb",
+  // blue-600
+  iconUncheckedBorderColor: y = "#9ca3af",
+  // gray-400
+  textColor: T = "#374151",
+  // gray-700
+  errorStyle: z
 }) => {
-  const c = t === "checkbox", x = (f) => {
-    if (a)
-      if (c) {
-        const d = Array.isArray(o) ? o.includes(f) ? o.filter((u) => u !== f) : [...o, f] : [f];
-        a(d);
+  const C = t === "checkbox", E = (g) => {
+    if (l)
+      if (C) {
+        const S = Array.isArray(i) ? i.includes(g) ? i.filter((k) => k !== g) : [...i, g] : [g];
+        l(S);
       } else
-        a(f);
+        l(g);
   };
-  return /* @__PURE__ */ e.jsxs("div", { className: `w-full ${g}`, children: [
-    l.map((f) => {
-      const d = c ? Array.isArray(o) && o.includes(f.value) : o === f.value;
-      return /* @__PURE__ */ e.jsxs(
-        "label",
-        {
-          className: `flex items-center space-x-2 cursor-pointer p-2 ${s ? "opacity-50 cursor-not-allowed" : ""}`,
-          children: [
-            m ? m(d) : /* @__PURE__ */ e.jsx(
-              "span",
-              {
-                className: `flex justify-center items-center w-5 h-5 border ${d ? "bg-blue-500 border-blue-500" : "border-gray-400"} rounded-${c ? "md" : "full"}`,
-                children: d && /* @__PURE__ */ e.jsx("span", { className: "w-3 h-3 bg-white rounded-full" })
-              }
-            ),
-            /* @__PURE__ */ e.jsx(
-              "input",
-              {
-                type: t,
-                name: n,
-                value: f.value,
-                checked: d,
-                disabled: s || i,
-                required: p,
-                onChange: () => x(f.value),
-                className: "hidden"
-              }
-            ),
-            /* @__PURE__ */ e.jsx("span", { className: "text-gray-700", children: f.label })
-          ]
-        },
-        f.value
-      );
-    }),
-    h && /* @__PURE__ */ e.jsx("p", { className: "text-sm text-red-500 mt-1", children: h })
-  ] });
-}, mt = ({
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      className: j,
+      style: { display: "flex", flexDirection: "column", gap: 8, ...d },
+      role: t,
+      "aria-disabled": s,
+      children: [
+        o.map((g) => {
+          const S = C ? Array.isArray(i) && i.includes(g.value) : i === g.value;
+          return /* @__PURE__ */ e.jsxs(
+            "label",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                cursor: s ? "not-allowed" : "pointer",
+                opacity: s ? 0.6 : 1,
+                gap: 8,
+                userSelect: "none",
+                ...f
+              },
+              children: [
+                /* @__PURE__ */ e.jsx(
+                  "input",
+                  {
+                    type: t,
+                    name: n,
+                    value: g.value,
+                    checked: S,
+                    disabled: s || a,
+                    required: p,
+                    onChange: () => E(g.value),
+                    style: { display: "none" }
+                  }
+                ),
+                c ? c(S) : /* @__PURE__ */ e.jsxs(
+                  "span",
+                  {
+                    style: {
+                      display: "inline-flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: u,
+                      height: u,
+                      borderRadius: C ? 4 : "50%",
+                      border: `2px solid ${S ? v : y}`,
+                      backgroundColor: S ? v : "transparent",
+                      transition: "all 0.2s ease",
+                      flexShrink: 0
+                    },
+                    children: [
+                      S && !C && /* @__PURE__ */ e.jsx(
+                        "span",
+                        {
+                          style: {
+                            width: u / 2,
+                            height: u / 2,
+                            borderRadius: "50%",
+                            backgroundColor: "white"
+                          }
+                        }
+                      ),
+                      S && C && /* @__PURE__ */ e.jsx(
+                        "svg",
+                        {
+                          viewBox: "0 0 24 24",
+                          fill: "none",
+                          stroke: "white",
+                          strokeWidth: 3,
+                          strokeLinecap: "round",
+                          strokeLinejoin: "round",
+                          style: { width: u * 0.6, height: u * 0.6 },
+                          children: /* @__PURE__ */ e.jsx("polyline", { points: "20 6 9 17 4 12" })
+                        }
+                      )
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ e.jsx("span", { style: { color: T, fontSize: 14 }, children: g.label })
+              ]
+            },
+            g.value
+          );
+        }),
+        x && /* @__PURE__ */ e.jsx(
+          "p",
+          {
+            role: "alert",
+            style: {
+              color: "#dc2626",
+              // red-600
+              fontSize: 12,
+              marginTop: 4,
+              ...z
+            },
+            children: x
+          }
+        )
+      ]
+    }
+  );
+}, Yt = ({
   label: t = "Open Drawer",
   icon: n,
-  iconPosition: l = "left",
-  onClick: o,
-  style: a = {}
+  iconPosition: o = "left",
+  onClick: i,
+  style: l = {}
 }) => /* @__PURE__ */ e.jsxs(
   "button",
   {
-    onClick: o,
+    onClick: i,
     style: {
       padding: "10px 16px",
       backgroundColor: "#2563eb",
@@ -2069,34 +2229,34 @@ const Ke = [
       alignItems: "center",
       fontSize: "14px",
       gap: "8px",
-      ...a
+      ...l
     },
     children: [
-      n && l === "left" && n,
+      n && o === "left" && n,
       t,
-      n && l === "right" && n
+      n && o === "right" && n
     ]
   }
-), gt = ({
+), Ut = ({
   open: t,
   onClose: n,
-  position: l = "right",
-  width: o = "300px",
-  height: a = "300px",
+  position: o = "right",
+  width: i = "300px",
+  height: l = "300px",
   backgroundColor: s = "#fff",
-  transitionDuration: i = 300,
+  transitionDuration: a = 300,
   style: p = {},
-  children: h,
-  showCloseButton: g = !0,
-  closeButtonStyle: m = {}
+  children: x,
+  showCloseButton: j = !0,
+  closeButtonStyle: c = {}
 }) => {
-  const [c, x] = P(t);
-  q(() => {
-    t ? x(!0) : setTimeout(() => x(!1), i);
-  }, [t, i]);
-  const f = K(() => {
+  const [d, f] = R(t);
+  G(() => {
+    t ? f(!0) : setTimeout(() => f(!1), a);
+  }, [t, a]);
+  const u = ee(() => {
     if (t) return "translate(0, 0)";
-    switch (l) {
+    switch (o) {
       case "left":
         return "translateX(-100%)";
       case "right":
@@ -2108,28 +2268,28 @@ const Ke = [
       default:
         return "translate(0, 0)";
     }
-  }, [t, l]), d = {
+  }, [t, o]), v = {
     position: "fixed",
     zIndex: 1e3,
     backgroundColor: s,
-    transition: `transform ${i}ms ease, opacity ${i}ms ease`,
-    transform: f,
+    transition: `transform ${a}ms ease, opacity ${a}ms ease`,
+    transform: u,
     opacity: t ? 1 : 0,
     ...p,
-    ...l === "left" || l === "right" ? { top: 0, [l]: 0, width: o, height: "100%" } : { left: 0, [l]: 0, height: a, width: "100%" }
-  }, u = {
+    ...o === "left" || o === "right" ? { top: 0, [o]: 0, width: i, height: "100%" } : { left: 0, [o]: 0, height: l, width: "100%" }
+  }, y = {
     position: "fixed",
-    display: c ? "block" : "none",
+    display: d ? "block" : "none",
     top: 0,
     left: 0,
     width: "100%",
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     zIndex: 999,
-    transition: `opacity ${i}ms ease`,
+    transition: `opacity ${a}ms ease`,
     opacity: t ? 1 : 0,
     pointerEvents: t ? "auto" : "none"
-  }, k = {
+  }, T = {
     position: "absolute",
     top: "10px",
     right: "10px",
@@ -2140,77 +2300,77 @@ const Ke = [
     color: "#000"
   };
   return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
-    /* @__PURE__ */ e.jsx("div", { style: u, onClick: n }),
+    /* @__PURE__ */ e.jsx("div", { style: y, onClick: n }),
     /* @__PURE__ */ e.jsxs(
       "div",
       {
         style: {
-          ...d,
+          ...v,
           display: "block",
-          visibility: c ? "visible" : "hidden",
+          visibility: d ? "visible" : "hidden",
           pointerEvents: t ? "auto" : "none"
         },
         children: [
-          g && /* @__PURE__ */ e.jsx(
+          j && /* @__PURE__ */ e.jsx(
             "button",
             {
               onClick: n,
-              style: { ...k, ...m },
-              children: /* @__PURE__ */ e.jsx(je, { size: 20, color: "rgba(255, 0, 0, 1)" })
+              style: { ...T, ...c },
+              children: /* @__PURE__ */ e.jsx(le, { size: 20, color: "rgba(255, 0, 0, 1)" })
             }
           ),
-          h
+          x
         ]
       }
     )
   ] });
-}, bt = ({
+}, Vt = ({
   options: t,
   value: n,
-  defaultValue: l,
-  onChange: o,
-  placeholder: a = "Select an option",
+  defaultValue: o,
+  onChange: i,
+  placeholder: l = "Select an option",
   disabled: s = !1,
-  borderColor: i = "#ccc",
+  borderColor: a = "#ccc",
   backgroundColor: p = "#fff",
-  textColor: h = "#333",
-  hoverColor: g = "#f0f0f0",
-  padding: m = "12px 16px",
-  margin: c = "0 0 1rem 0",
-  dropdownWidth: x = "100%",
-  dropdownHeight: f = "200px",
-  borderRadius: d = "8px",
-  boxShadow: u = "0 4px 8px rgba(0,0,0,0.1)",
-  optionPadding: k = "10px 12px",
-  optionGap: b = "8px",
-  transitionDuration: S = "0.25s",
-  className: A = "",
-  dropdownStyle: I,
-  dropdownClassName: O = "",
-  optionStyle: v,
-  optionClassName: T = "",
-  iconPrefix: M,
-  iconSuffix: B
+  textColor: x = "#333",
+  hoverColor: j = "#f0f0f0",
+  padding: c = "12px 16px",
+  margin: d = "0 0 1rem 0",
+  dropdownWidth: f = "100%",
+  dropdownHeight: u = "200px",
+  borderRadius: v = "8px",
+  boxShadow: y = "0 4px 8px rgba(0,0,0,0.1)",
+  optionPadding: T = "10px 12px",
+  optionGap: z = "8px",
+  transitionDuration: C = "0.25s",
+  className: E = "",
+  dropdownStyle: g,
+  dropdownClassName: S = "",
+  optionStyle: k,
+  optionClassName: b = "",
+  iconPrefix: F,
+  iconSuffix: Y
 }) => {
-  const [z, _] = P(l), [R, H] = P(!1), Y = J(null);
-  q(() => {
-    const $ = (U) => {
-      Y.current && !Y.current.contains(U.target) && H(!1);
+  const [I, M] = R(o), [L, V] = R(!1), O = J(null);
+  G(() => {
+    const $ = (B) => {
+      O.current && !O.current.contains(B.target) && V(!1);
     };
     return document.addEventListener("mousedown", $), () => document.removeEventListener("mousedown", $);
   }, []);
-  const y = ($) => {
-    _($), H(!1), o && o($);
-  }, w = n ?? z, N = t.find(($) => $.value === w);
+  const h = ($) => {
+    M($), V(!1), i && i($);
+  }, m = n ?? I, N = t.find(($) => $.value === m);
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
-      ref: Y,
-      className: A,
+      ref: O,
+      className: E,
       style: {
         position: "relative",
-        width: x,
-        margin: c,
+        width: f,
+        margin: d,
         fontFamily: "sans-serif",
         userSelect: "none"
       },
@@ -2218,73 +2378,73 @@ const Ke = [
         /* @__PURE__ */ e.jsxs(
           "button",
           {
-            onClick: () => H(($) => !$),
+            onClick: () => V(($) => !$),
             disabled: s,
             "aria-haspopup": "listbox",
-            "aria-expanded": R,
+            "aria-expanded": L,
             style: {
               width: "100%",
-              padding: m,
+              padding: c,
               backgroundColor: p,
-              color: h,
-              border: `1px solid ${i}`,
-              borderRadius: d,
-              boxShadow: s ? "none" : u,
+              color: x,
+              border: `1px solid ${a}`,
+              borderRadius: v,
+              boxShadow: s ? "none" : y,
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
               cursor: s ? "not-allowed" : "pointer",
               opacity: s ? 0.6 : 1,
-              transition: `all ${S} ease-in-out`
+              transition: `all ${C} ease-in-out`
             },
             children: [
-              /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: b }, children: [
-                M && /* @__PURE__ */ e.jsx("span", { children: M }),
-                /* @__PURE__ */ e.jsx("span", { children: N?.label || a })
+              /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: z }, children: [
+                F && /* @__PURE__ */ e.jsx("span", { children: F }),
+                /* @__PURE__ */ e.jsx("span", { children: N?.label || l })
               ] }),
-              B || /* @__PURE__ */ e.jsx("span", { style: { marginLeft: "8px" }, children: "▼" })
+              Y || /* @__PURE__ */ e.jsx("span", { style: { marginLeft: "8px" }, children: "▼" })
             ]
           }
         ),
-        R && /* @__PURE__ */ e.jsx(
+        L && /* @__PURE__ */ e.jsx(
           "ul",
           {
             role: "listbox",
-            className: O,
+            className: S,
             style: {
               position: "absolute",
               top: "100%",
               left: 0,
               zIndex: 1e3,
               width: "100%",
-              maxHeight: f,
+              maxHeight: u,
               overflowY: "auto",
               backgroundColor: p,
-              border: `1px solid ${i}`,
-              borderRadius: d,
-              boxShadow: u,
+              border: `1px solid ${a}`,
+              borderRadius: v,
+              boxShadow: y,
               marginTop: "4px",
-              transition: `all ${S} ease`,
-              ...I
+              transition: `all ${C} ease`,
+              ...g
             },
             children: t.map(($) => /* @__PURE__ */ e.jsxs(
               "li",
               {
-                onClick: () => y($.value),
+                onClick: () => h($.value),
                 role: "option",
-                className: T,
+                className: b,
                 style: {
                   display: "flex",
                   alignItems: "center",
-                  gap: b,
-                  padding: k,
+                  gap: z,
+                  padding: T,
                   cursor: "pointer",
-                  backgroundColor: z === $.value ? g : p,
-                  transition: `background ${S}`,
-                  ...v
+                  backgroundColor: I === $.value ? j : p,
+                  transition: `background ${C}`,
+                  ...k
                 },
-                onMouseEnter: (U) => U.currentTarget.style.backgroundColor = g,
-                onMouseLeave: (U) => U.currentTarget.style.backgroundColor = z === $.value ? g : p,
+                onMouseEnter: (B) => B.currentTarget.style.backgroundColor = j,
+                onMouseLeave: (B) => B.currentTarget.style.backgroundColor = I === $.value ? j : p,
                 children: [
                   $.icon && /* @__PURE__ */ e.jsx("span", { children: $.icon }),
                   $.label
@@ -2297,220 +2457,365 @@ const Ke = [
       ]
     }
   );
-}, yt = ({
+}, Ht = ({
   columns: t,
   data: n,
-  className: l = "",
-  pagination: o = !0,
-  rowsPerPage: a = 5,
+  className: o = "",
+  pagination: i = !0,
+  rowsPerPage: l = 5,
   colors: s = {
-    headerBg: "bg-blue-500",
-    headerText: "text-white",
-    rowBg: "bg-white",
-    rowText: "text-black",
-    borderColor: "border-gray-300",
-    hoverBg: "bg-gray-200",
-    paginationBg: "bg-gray-300",
-    paginationText: "text-black"
+    headerBg: "#3b82f6",
+    headerText: "#ffffff",
+    rowBg: "#ffffff",
+    rowText: "#000000",
+    borderColor: "#d1d5db",
+    hoverBg: "#e5e7eb",
+    paginationBg: "#d1d5db",
+    paginationText: "#000000"
   }
 }) => {
-  const [i, p] = P(null), [h, g] = P("asc"), [m, c] = P(1), x = (u) => {
-    i === u ? g(h === "asc" ? "desc" : "asc") : (p(u), g("asc"));
-  }, f = [...n].sort((u, k) => i ? h === "asc" ? u[i] > k[i] ? 1 : -1 : u[i] < k[i] ? 1 : -1 : 0), d = o ? f.slice(
-    (m - 1) * a,
-    m * a
-  ) : f;
-  return /* @__PURE__ */ e.jsxs("div", { className: `overflow-x-auto w-full ${l}`, children: [
-    /* @__PURE__ */ e.jsxs("table", { className: `w-full border-collapse border ${s.borderColor}`, children: [
-      /* @__PURE__ */ e.jsx("thead", { children: /* @__PURE__ */ e.jsx("tr", { className: `${s.headerBg} ${s.headerText} text-left`, children: t.map(({ key: u, label: k, sortable: b }) => /* @__PURE__ */ e.jsx(
-        "th",
-        {
-          onClick: () => b && x(u),
-          className: `p-3 border ${s.borderColor} ${b ? "cursor-pointer hover:opacity-80" : ""}`,
-          children: /* @__PURE__ */ e.jsxs("div", { className: "flex items-center gap-2", children: [
-            k,
-            " ",
-            b && (i === u ? h === "asc" ? /* @__PURE__ */ e.jsx(
-              "svg",
-              {
-                stroke: "currentColor",
-                fill: "currentColor",
-                strokeWidth: "0",
-                viewBox: "0 0 576 512",
-                height: "15px",
-                width: "15px",
-                xmlns: "http://www.w3.org/2000/svg",
-                children: /* @__PURE__ */ e.jsx("path", { d: "M151.6 42.4C145.5 35.8 137 32 128 32s-17.5 3.8-23.6 10.4l-88 96c-11.9 13-11.1 33.3 2 45.2s33.3 11.1 45.2-2L96 146.3 96 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-301.7 32.4 35.4c11.9 13 32.2 13.9 45.2 2s13.9-32.2 2-45.2l-88-96zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-32 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l224 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-224 0z" })
-              }
-            ) : /* @__PURE__ */ e.jsx(
-              "svg",
-              {
-                stroke: "currentColor",
-                fill: "currentColor",
-                strokeWidth: "0",
-                viewBox: "0 0 576 512",
-                height: "15px",
-                width: "15px",
-                xmlns: "http://www.w3.org/2000/svg",
-                children: /* @__PURE__ */ e.jsx("path", { d: "M151.6 42.4C145.5 35.8 137 32 128 32s-17.5 3.8-23.6 10.4l-88 96c-11.9 13-11.1 33.3 2 45.2s33.3 11.1 45.2-2L96 146.3 96 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-301.7 32.4 35.4c11.9 13 32.2 13.9 45.2 2s13.9-32.2 2-45.2l-88-96zM320 480l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l224 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32z" })
-              }
-            ) : /* @__PURE__ */ e.jsx(
-              "svg",
-              {
-                stroke: "currentColor",
-                fill: "currentColor",
-                strokeWidth: "0",
-                viewBox: "0 0 320 512",
-                height: "15px",
-                width: "15px",
-                xmlns: "http://www.w3.org/2000/svg",
-                children: /* @__PURE__ */ e.jsx("path", { d: "M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3l0 293.5L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7l0-293.5 41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z" })
-              }
-            ))
-          ] })
-        },
-        u
-      )) }) }),
-      /* @__PURE__ */ e.jsx("tbody", { children: d.map((u, k) => /* @__PURE__ */ e.jsx(
-        "tr",
-        {
-          className: `${s.rowBg} ${s.rowText} hover:${s.hoverBg}`,
-          children: t.map(({ key: b }) => /* @__PURE__ */ e.jsx("td", { className: `p-3 border ${s.borderColor}`, children: u[b] }, b))
-        },
-        k
-      )) })
-    ] }),
-    o && /* @__PURE__ */ e.jsxs("div", { className: "flex justify-between items-center mt-3 p-2", children: [
-      /* @__PURE__ */ e.jsx(
-        "button",
-        {
-          className: `px-3 py-1 ${s.paginationBg} ${s.paginationText} rounded-md disabled:opacity-50`,
-          disabled: m === 1,
-          onClick: () => c((u) => Math.max(u - 1, 1)),
-          children: "Prev"
-        }
-      ),
-      /* @__PURE__ */ e.jsxs("span", { className: `${s.paginationText}`, children: [
-        "Page ",
-        m
-      ] }),
-      /* @__PURE__ */ e.jsx(
-        "button",
-        {
-          className: `px-3 py-1 ${s.paginationBg} ${s.paginationText} rounded-md disabled:opacity-50`,
-          disabled: m * a >= n.length,
-          onClick: () => c((u) => u + 1),
-          children: "Next"
-        }
-      )
-    ] })
-  ] });
-}, jt = ({
-  columns: t = { sm: 1, md: 2, lg: 3 },
-  rows: n = { sm: "auto", md: "auto", lg: "auto" },
-  gap: l = { sm: "10px", md: "20px", lg: "30px" },
-  rowGap: o = { sm: "10px", md: "15px", lg: "20px" },
-  columnGap: a = { sm: "10px", md: "15px", lg: "20px" },
-  padding: s = { sm: "10px", md: "20px", lg: "40px" },
-  alignItems: i = { sm: "stretch", md: "center", lg: "center" },
-  justifyItems: p = { sm: "stretch", md: "center", lg: "center" },
-  backgroundColor: h = "#f4f4f4",
-  width: g = { sm: "100%", md: "100%", lg: "100%" },
-  maxWidth: m = { sm: "100%", md: "100%", lg: "100%" },
-  height: c = { sm: "auto", md: "auto", lg: "auto" },
-  children: x,
-  className: f = ""
+  const [a, p] = R(null), [x, j] = R("asc"), [c, d] = R(1), [f, u] = R(null), v = (g) => {
+    a === g ? j(x === "asc" ? "desc" : "asc") : (p(g), j("asc"));
+  }, y = [...n].sort((g, S) => !a || g[a] === S[a] ? 0 : x === "asc" ? g[a] > S[a] ? 1 : -1 : g[a] < S[a] ? 1 : -1), T = i ? y.slice(
+    (c - 1) * l,
+    c * l
+  ) : y, z = /* @__PURE__ */ e.jsx(
+    "svg",
+    {
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0",
+      viewBox: "0 0 576 512",
+      height: "15px",
+      width: "15px",
+      xmlns: "http://www.w3.org/2000/svg",
+      children: /* @__PURE__ */ e.jsx("path", { d: "M151.6 42.4C145.5 35.8 137 32 128 32s-17.5 3.8-23.6 10.4l-88 96c-11.9 13-11.1 33.3 2 45.2s33.3 11.1 45.2-2L96 146.3 96 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-301.7 32.4 35.4c11.9 13 32.2 13.9 45.2 2s13.9-32.2 2-45.2l-88-96zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-32 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0zm0 128c-17.7 0-32 14.3-32 32s14.3 32 32 32l224 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-224 0z" })
+    }
+  ), C = /* @__PURE__ */ e.jsx(
+    "svg",
+    {
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0",
+      viewBox: "0 0 576 512",
+      height: "15px",
+      width: "15px",
+      xmlns: "http://www.w3.org/2000/svg",
+      children: /* @__PURE__ */ e.jsx("path", { d: "M151.6 42.4C145.5 35.8 137 32 128 32s-17.5 3.8-23.6 10.4l-88 96c-11.9 13-11.1 33.3 2 45.2s33.3 11.1 45.2-2L96 146.3 96 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-301.7 32.4 35.4c11.9 13 32.2 13.9 45.2 2s13.9-32.2 2-45.2l-88-96zM320 480l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0c-17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-160 0c17.7 0-32 14.3-32 32s14.3 32 32 32zm0-128l224 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32z" })
+    }
+  ), E = /* @__PURE__ */ e.jsx(
+    "svg",
+    {
+      stroke: "currentColor",
+      fill: "currentColor",
+      strokeWidth: "0",
+      viewBox: "0 0 320 512",
+      height: "15px",
+      width: "15px",
+      xmlns: "http://www.w3.org/2000/svg",
+      children: /* @__PURE__ */ e.jsx("path", { d: "M182.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L128 109.3l0 293.5L86.6 361.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 402.7l0-293.5 41.4 41.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-96-96z" })
+    }
+  );
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: { overflowX: "auto", width: "100%" },
+      className: o,
+      children: [
+        /* @__PURE__ */ e.jsxs(
+          "table",
+          {
+            style: {
+              width: "100%",
+              borderCollapse: "collapse",
+              border: `1px solid ${s.borderColor}`
+            },
+            children: [
+              /* @__PURE__ */ e.jsx("thead", { children: /* @__PURE__ */ e.jsx(
+                "tr",
+                {
+                  style: {
+                    backgroundColor: s.headerBg,
+                    color: s.headerText,
+                    textAlign: "left",
+                    userSelect: "none"
+                  },
+                  children: t.map(({ key: g, label: S, sortable: k }) => /* @__PURE__ */ e.jsxs(
+                    "th",
+                    {
+                      onClick: () => k && v(g),
+                      style: {
+                        padding: "12px",
+                        border: `1px solid ${s.borderColor}`,
+                        cursor: k ? "pointer" : "default",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px"
+                      },
+                      children: [
+                        /* @__PURE__ */ e.jsx("span", { children: S }),
+                        k && (a === g ? x === "asc" ? z : C : E)
+                      ]
+                    },
+                    g
+                  ))
+                }
+              ) }),
+              /* @__PURE__ */ e.jsx("tbody", { children: T.map((g, S) => /* @__PURE__ */ e.jsx(
+                "tr",
+                {
+                  style: {
+                    backgroundColor: f === S ? s.hoverBg : s.rowBg,
+                    color: s.rowText,
+                    transition: "background-color 0.2s ease-in-out"
+                  },
+                  onMouseEnter: () => u(S),
+                  onMouseLeave: () => u(null),
+                  children: t.map(({ key: k }) => /* @__PURE__ */ e.jsx(
+                    "td",
+                    {
+                      style: {
+                        padding: "12px",
+                        border: `1px solid ${s.borderColor}`
+                      },
+                      children: g[k]
+                    },
+                    k
+                  ))
+                },
+                S
+              )) })
+            ]
+          }
+        ),
+        i && /* @__PURE__ */ e.jsxs(
+          "div",
+          {
+            style: {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginTop: "12px",
+              padding: "8px"
+            },
+            children: [
+              /* @__PURE__ */ e.jsx(
+                "button",
+                {
+                  style: {
+                    padding: "6px 12px",
+                    backgroundColor: s.paginationBg,
+                    color: s.paginationText,
+                    borderRadius: "6px",
+                    border: "none",
+                    opacity: c === 1 ? 0.5 : 1,
+                    cursor: c === 1 ? "not-allowed" : "pointer",
+                    userSelect: "none"
+                  },
+                  disabled: c === 1,
+                  onClick: () => d((g) => Math.max(g - 1, 1)),
+                  children: "Prev"
+                }
+              ),
+              /* @__PURE__ */ e.jsxs("span", { style: { color: s.paginationText }, children: [
+                "Page ",
+                c
+              ] }),
+              /* @__PURE__ */ e.jsx(
+                "button",
+                {
+                  style: {
+                    padding: "6px 12px",
+                    backgroundColor: s.paginationBg,
+                    color: s.paginationText,
+                    borderRadius: "6px",
+                    border: "none",
+                    opacity: c * l >= n.length ? 0.5 : 1,
+                    cursor: c * l >= n.length ? "not-allowed" : "pointer",
+                    userSelect: "none"
+                  },
+                  disabled: c * l >= n.length,
+                  onClick: () => d((g) => g + 1),
+                  children: "Next"
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+}, qt = ({
+  children: t,
+  className: n = "",
+  style: o = {},
+  background: i = "#fff",
+  backgroundImage: l,
+  backgroundSize: s = "cover",
+  backgroundPosition: a = "center",
+  backgroundRepeat: p = "no-repeat",
+  textColor: x = "#000",
+  borderRadius: j = 12,
+  padding: c = 24,
+  margin: d = 0,
+  maxWidth: f = "100%",
+  boxShadow: u = "0 4px 12px rgba(0,0,0,0.1)",
+  border: v = "none",
+  display: y = "flex",
+  flexDirection: T = "column",
+  justifyContent: z = "flex-start",
+  alignItems: C = "stretch",
+  gap: E = 16
 }) => {
-  const [d, u] = P("lg");
-  q(() => {
-    const b = () => {
-      const S = window.innerWidth;
-      S <= 767 ? u("sm") : S >= 768 && S <= 1023 ? u("md") : u("lg");
-    };
-    return b(), window.addEventListener("resize", b), () => window.removeEventListener("resize", b);
+  const g = {
+    background: i,
+    color: x,
+    borderRadius: j,
+    padding: c,
+    margin: d,
+    maxWidth: f,
+    boxShadow: u,
+    border: v,
+    display: y,
+    flexDirection: T,
+    justifyContent: z,
+    alignItems: C,
+    gap: E,
+    boxSizing: "border-box",
+    // Background image styles if provided
+    ...l ? {
+      backgroundImage: `url(${l})`,
+      backgroundSize: s,
+      backgroundPosition: a,
+      backgroundRepeat: p
+    } : {},
+    ...o
+  };
+  return /* @__PURE__ */ e.jsx("div", { className: n, style: g, children: t });
+}, _e = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Gt = ({
+  columns: t = { sm: 1, md: 2, lg: 3 },
+  gap: n = "16px",
+  padding: o = "20px",
+  alignItems: i = "stretch",
+  justifyItems: l = "stretch",
+  backgroundColor: s = "transparent",
+  width: a = "100%",
+  maxWidth: p = "100%",
+  height: x = "auto",
+  children: j,
+  style: c
+}) => {
+  const [d, f] = R(
+    _e(window.innerWidth)
+  );
+  G(() => {
+    const y = () => f(_e(window.innerWidth));
+    return window.addEventListener("resize", y), () => window.removeEventListener("resize", y);
   }, []);
-  const k = K(
+  const u = ee(() => typeof t == "number" ? t : t[d] ?? 1, [t, d]), v = ee(
     () => ({
       display: "grid",
-      gridTemplateColumns: `repeat(${t[d]}, 1fr)`,
-      gridTemplateRows: n[d] !== "auto" ? `repeat(${n[d]}, 1fr)` : "auto",
-      gap: l[d],
-      rowGap: o[d],
-      columnGap: a[d],
-      padding: s[d],
-      alignItems: i[d],
-      justifyItems: p[d],
-      backgroundColor: h,
-      width: g[d],
-      maxWidth: m[d],
-      height: c[d]
+      gridTemplateColumns: `repeat(${u}, 1fr)`,
+      gap: n,
+      padding: o,
+      alignItems: i,
+      justifyItems: l,
+      backgroundColor: s,
+      width: a,
+      maxWidth: p,
+      height: x,
+      boxSizing: "border-box",
+      ...c
     }),
-    [d, t, n, l, o, a, s, i, p, g, m, c, h]
+    [
+      u,
+      n,
+      o,
+      i,
+      l,
+      s,
+      a,
+      p,
+      x,
+      c
+    ]
   );
-  return /* @__PURE__ */ e.jsx("div", { className: f, style: k, children: x });
-}, wt = ({
-  direction: t = { sm: "column", md: "row", lg: "row" },
-  align: n = { sm: "center", md: "center", lg: "center" },
-  justify: l = { sm: "center", md: "space-between", lg: "space-around" },
-  gap: o = { sm: "10px", md: "20px", lg: "30px" },
-  padding: a = { sm: "10px", md: "20px", lg: "40px" },
-  backgroundColor: s = "#f4f4f4",
-  width: i = { sm: "100%", md: "100%", lg: "100%" },
-  height: p = { sm: "auto", md: "auto", lg: "auto" },
-  maxWidth: h = { sm: "100%", md: "100%", lg: "100%" },
-  children: g,
-  className: m = ""
+  return /* @__PURE__ */ e.jsx("div", { style: v, children: j });
+}, Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Xt = ({
+  direction: t = "row",
+  align: n = "center",
+  justify: o = "space-between",
+  gap: i = 16,
+  padding: l = 20,
+  backgroundColor: s = "transparent",
+  width: a = "100%",
+  maxWidth: p = "100%",
+  height: x = "auto",
+  style: j,
+  children: c
 }) => {
-  const [c, x] = P("lg");
-  q(() => {
-    const d = () => {
-      const u = window.innerWidth;
-      u <= 767 ? x("sm") : u >= 768 && u <= 1023 ? x("md") : x("lg");
-    };
-    return d(), window.addEventListener("resize", d), () => window.removeEventListener("resize", d);
+  const [d, f] = R(
+    Ae(window.innerWidth)
+  );
+  G(() => {
+    const y = () => f(Ae(window.innerWidth));
+    return window.addEventListener("resize", y), () => window.removeEventListener("resize", y);
   }, []);
-  const f = K(
+  const u = ee(() => typeof t == "string" ? t : t[d] ?? "row", [t, d]), v = ee(
     () => ({
       display: "flex",
-      flexDirection: t[c],
-      alignItems: n[c],
-      justifyContent: l[c],
-      gap: o[c],
-      padding: a[c],
+      flexDirection: u,
+      alignItems: n,
+      justifyContent: o,
+      gap: typeof i == "number" ? `${i}px` : i,
+      padding: typeof l == "number" ? `${l}px` : l,
       backgroundColor: s,
-      width: i[c],
-      maxWidth: h[c],
-      height: p[c]
+      width: a,
+      maxWidth: p,
+      height: x,
+      boxSizing: "border-box",
+      ...j
     }),
-    [c, t, n, l, o, a, i, h, p, s]
+    [
+      u,
+      n,
+      o,
+      i,
+      l,
+      s,
+      a,
+      p,
+      x,
+      j
+    ]
   );
-  return /* @__PURE__ */ e.jsx("div", { className: m, style: f, children: g });
-}, et = {
+  return /* @__PURE__ */ e.jsx("div", { style: v, children: c });
+}, zt = {
   success: {
     bg: "#ecfdf5",
     border: "#34d399",
     iconColor: "#059669",
-    Icon: /* @__PURE__ */ e.jsx(Ie, { size: 20 })
+    Icon: /* @__PURE__ */ e.jsx(at, { size: 20 })
   },
   error: {
     bg: "#fef2f2",
     border: "#f87171",
     iconColor: "#dc2626",
-    Icon: /* @__PURE__ */ e.jsx(Ne, { size: 20 })
+    Icon: /* @__PURE__ */ e.jsx(lt, { size: 20 })
   },
   warning: {
     bg: "#fffbeb",
     border: "#facc15",
     iconColor: "#d97706",
-    Icon: /* @__PURE__ */ e.jsx(Ge, { size: 20 })
+    Icon: /* @__PURE__ */ e.jsx(kt, { size: 20 })
   },
   info: {
     bg: "#eff6ff",
     border: "#3b82f6",
     iconColor: "#2563eb",
-    Icon: /* @__PURE__ */ e.jsx(Be, { size: 20 })
+    Icon: /* @__PURE__ */ e.jsx(ft, { size: 20 })
   }
-}, tt = (t) => {
+}, Rt = (t) => {
   const n = {
     position: "fixed",
     zIndex: 9999
@@ -2530,40 +2835,40 @@ const Ke = [
     default:
       return { ...n, bottom: "20px", right: "20px" };
   }
-}, vt = ({
+}, Jt = ({
   title: t = "",
   description: n = "",
-  type: l = "info",
-  dismissible: o = !0,
-  onClose: a,
+  type: o = "info",
+  dismissible: i = !0,
+  onClose: l,
   duration: s,
-  icon: i,
+  icon: a,
   actionButton: p,
-  position: h = "top-right",
-  className: g,
-  style: m
+  position: x = "top-right",
+  className: j,
+  style: c
 }) => {
-  const [c, x] = P(!0);
-  if (q(() => {
+  const [d, f] = R(!0);
+  if (G(() => {
     if (s) {
-      const S = setTimeout(() => {
-        x(!1), a?.();
+      const C = setTimeout(() => {
+        f(!1), l?.();
       }, s);
-      return () => clearTimeout(S);
+      return () => clearTimeout(C);
     }
-  }, [s, a]), !c) return null;
-  const { bg: f, border: d, iconColor: u, Icon: k } = et[l], b = tt(h);
+  }, [s, l]), !d) return null;
+  const { bg: u, border: v, iconColor: y, Icon: T } = zt[o], z = Rt(x);
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
-      className: g,
+      className: j,
       style: {
-        ...b,
+        ...z,
         display: "flex",
         gap: "12px",
         padding: "16px",
-        backgroundColor: f,
-        borderLeft: `4px solid ${d}`,
+        backgroundColor: u,
+        borderLeft: `4px solid ${v}`,
         borderRadius: "8px",
         color: "#111827",
         alignItems: "flex-start",
@@ -2572,21 +2877,21 @@ const Ke = [
         animation: "slideIn 0.3s ease",
         maxWidth: "600px",
         width: "calc(100% - 40px)",
-        ...m
+        ...c
         // ✅ User custom styles merged last
       },
       children: [
-        /* @__PURE__ */ e.jsx("div", { style: { color: u, marginTop: "3px" }, children: i || k }),
+        /* @__PURE__ */ e.jsx("div", { style: { color: y, marginTop: "3px" }, children: a || T }),
         /* @__PURE__ */ e.jsxs("div", { style: { flex: 1 }, children: [
           t && /* @__PURE__ */ e.jsx("div", { style: { fontWeight: "600", marginBottom: "4px" }, children: t }),
           n && /* @__PURE__ */ e.jsx("div", { style: { fontSize: "14px", color: "#374151" }, children: n }),
           p && /* @__PURE__ */ e.jsx("div", { style: { marginTop: "10px" }, children: p })
         ] }),
-        o && /* @__PURE__ */ e.jsx(
+        i && /* @__PURE__ */ e.jsx(
           "button",
           {
             onClick: () => {
-              x(!1), a?.();
+              f(!1), l?.();
             },
             style: {
               background: "transparent",
@@ -2595,7 +2900,7 @@ const Ke = [
               cursor: "pointer",
               marginLeft: "8px"
             },
-            children: /* @__PURE__ */ e.jsx(je, { size: 16 })
+            children: /* @__PURE__ */ e.jsx(le, { size: 16 })
           }
         ),
         /* @__PURE__ */ e.jsx("style", { children: `
@@ -2607,58 +2912,58 @@ const Ke = [
       ]
     }
   );
-}, kt = ({
+}, Zt = ({
   text: t,
   color: n = "#2563eb",
-  textColor: l = "#fff",
-  borderColor: o = "#2563eb",
-  icon: a,
+  textColor: o = "#fff",
+  borderColor: i = "#2563eb",
+  icon: l,
   iconPosition: s = "left",
-  rounded: i = !1,
+  rounded: a = !1,
   borderRadius: p,
-  borderWidth: h = "0",
-  fontSize: g = "14px",
-  fontWeight: m = 500,
-  horizontalPadding: c = "10px",
-  verticalPadding: x = "6px",
-  margin: f = "0",
-  shadow: d = "0 1px 4px rgba(0, 0, 0, 0.1)",
-  notificationDot: u = !1,
-  dotColor: k = "#ef4444",
-  count: b,
-  pulse: S = !1,
-  style: A,
-  onClick: I
+  borderWidth: x = "0",
+  fontSize: j = "14px",
+  fontWeight: c = 500,
+  horizontalPadding: d = "10px",
+  verticalPadding: f = "6px",
+  margin: u = "0",
+  shadow: v = "0 1px 4px rgba(0, 0, 0, 0.1)",
+  notificationDot: y = !1,
+  dotColor: T = "#ef4444",
+  count: z,
+  pulse: C = !1,
+  style: E,
+  onClick: g
 }) => {
-  const O = {
+  const S = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: n,
-    border: `${h} solid ${o}`,
-    borderRadius: p || (i ? "9999px" : "6px"),
-    padding: `${x} ${c}`,
-    fontSize: g,
-    fontWeight: m,
-    margin: f,
-    boxShadow: d,
+    border: `${x} solid ${i}`,
+    borderRadius: p || (a ? "9999px" : "6px"),
+    padding: `${f} ${d}`,
+    fontSize: j,
+    fontWeight: c,
+    margin: u,
+    boxShadow: v,
     position: "relative",
-    cursor: I ? "pointer" : "default",
-    ...A
-  }, v = {
-    color: l,
+    cursor: g ? "pointer" : "default",
+    ...E
+  }, k = {
+    color: o,
     display: "inline"
-  }, T = {
+  }, b = {
     display: "flex",
     alignItems: "center",
-    color: l
-  }, M = {
-    ...T,
+    color: o
+  }, F = {
+    ...b,
     marginRight: t ? "6px" : "0px"
-  }, B = {
-    ...T,
+  }, Y = {
+    ...b,
     marginLeft: t ? "6px" : "0px"
-  }, z = {
+  }, I = {
     position: "absolute",
     top: "-6px",
     right: "-6px",
@@ -2674,23 +2979,23 @@ const Ke = [
     justifyContent: "center",
     lineHeight: 1,
     zIndex: 1
-  }, _ = {
+  }, M = {
     position: "absolute",
     top: "-4px",
     right: "-4px",
     height: "8px",
     width: "8px",
-    backgroundColor: k,
+    backgroundColor: T,
     borderRadius: "50%",
     zIndex: 1,
-    animation: S ? "pulseAnim 1.2s infinite" : void 0
+    animation: C ? "pulseAnim 1.2s infinite" : void 0
   };
-  return /* @__PURE__ */ e.jsxs("span", { style: O, onClick: I, children: [
-    u && /* @__PURE__ */ e.jsx("span", { style: _ }),
-    typeof b < "u" && /* @__PURE__ */ e.jsx("span", { style: z, children: b }),
-    a && s === "left" && /* @__PURE__ */ e.jsx("span", { style: M, children: a }),
-    t && /* @__PURE__ */ e.jsx("span", { style: v, children: t }),
-    a && s === "right" && /* @__PURE__ */ e.jsx("span", { style: B, children: a }),
+  return /* @__PURE__ */ e.jsxs("span", { style: S, onClick: g, children: [
+    y && /* @__PURE__ */ e.jsx("span", { style: M }),
+    typeof z < "u" && /* @__PURE__ */ e.jsx("span", { style: I, children: z }),
+    l && s === "left" && /* @__PURE__ */ e.jsx("span", { style: F, children: l }),
+    t && /* @__PURE__ */ e.jsx("span", { style: k, children: t }),
+    l && s === "right" && /* @__PURE__ */ e.jsx("span", { style: Y, children: l }),
     /* @__PURE__ */ e.jsx("style", { children: `
           @keyframes pulseAnim {
             0% { transform: scale(1); opacity: 1; }
@@ -2699,126 +3004,1104 @@ const Ke = [
           }
         ` })
   ] });
-}, St = ({
-  src: t,
-  alt: n = "User Avatar",
-  size: l = "medium",
-  className: o = ""
-}) => {
-  const a = {
-    small: "w-8 h-8",
-    medium: "w-12 h-12",
-    large: "w-16 h-16"
-  };
-  return /* @__PURE__ */ e.jsx(
-    "img",
-    {
-      src: t,
-      alt: n,
-      className: `rounded-full object-cover ${a[l]} ${o}`
-    }
-  );
-}, Tt = ({
-  avatars: t,
-  size: n = "medium",
-  maxVisible: l = 3,
-  className: o = ""
-}) => {
-  const a = {
-    small: "w-8 h-8",
-    medium: "w-12 h-12",
-    large: "w-16 h-16"
-  };
-  return /* @__PURE__ */ e.jsxs("div", { className: "flex -space-x-2", children: [
-    t.slice(0, l).map((s, i) => /* @__PURE__ */ e.jsx(
-      "img",
+}, Kt = ({
+  isOpen: t,
+  onClose: n,
+  children: o,
+  overlayStyle: i,
+  modalStyle: l,
+  closeButtonStyle: s
+}) => t ? /* @__PURE__ */ e.jsx(
+  "div",
+  {
+    style: {
+      position: "fixed",
+      inset: 0,
+      backgroundColor: "rgba(0,0,0,0.6)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 1e3,
+      ...i
+    },
+    onClick: n,
+    children: /* @__PURE__ */ e.jsxs(
+      "div",
       {
-        src: s,
-        className: `rounded-full border-2 border-white object-cover ${a[n]} ${o}`
-      },
-      i
-    )),
-    t.length > l && /* @__PURE__ */ e.jsxs("span", { className: `rounded-full border-2 border-white bg-gray-500 text-white flex items-center justify-center ${a[n]}`, children: [
-      "+",
-      t.length - l
-    ] })
-  ] });
-}, zt = ({
-  src: t,
-  alt: n = "User Avatar",
-  status: l = "online",
-  size: o = "medium",
-  className: a = ""
-}) => {
-  const [s, i] = P(!1), p = {
-    small: { size: "w-8 h-8", statusSize: "w-2 h-2" },
-    medium: { size: "w-12 h-12", statusSize: "w-3 h-3" },
-    large: { size: "w-16 h-16", statusSize: "w-4 h-4" }
-  }, h = {
-    online: "bg-green-500",
-    offline: "bg-gray-400",
-    away: "bg-yellow-500",
-    busy: "bg-red-500"
-  };
-  return /* @__PURE__ */ e.jsxs("div", { className: `relative inline-block ${p[o].size}`, children: [
-    t && !s ? /* @__PURE__ */ e.jsx(
-      "img",
-      {
-        src: t,
-        alt: n,
-        "aria-label": n,
-        className: `rounded-full object-cover ${p[o].size} ${a}`,
-        onError: () => i(!0)
+        style: {
+          position: "relative",
+          backgroundColor: "#fff",
+          borderRadius: 12,
+          width: "90vw",
+          maxWidth: 700,
+          maxHeight: "90vh",
+          overflowY: "auto",
+          padding: 24,
+          boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
+          ...l
+        },
+        onClick: (a) => a.stopPropagation(),
+        children: [
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: n,
+              "aria-label": "Close modal",
+              style: {
+                position: "absolute",
+                top: 16,
+                right: 16,
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 4,
+                color: "#444",
+                transition: "color 0.2s ease",
+                ...s
+              },
+              onMouseEnter: (a) => a.currentTarget.style.color = "#000",
+              onMouseLeave: (a) => a.currentTarget.style.color = "#444",
+              children: /* @__PURE__ */ e.jsx(le, { size: 24 })
+            }
+          ),
+          o
+        ]
       }
-    ) : /* @__PURE__ */ e.jsx(
-      "svg",
-      {
-        "aria-label": "Placeholder for user avatar",
-        className: `rounded-full bg-gray-300 text-gray-500 dark:bg-gray-600 dark:text-gray-400 ${p[o].size}`,
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 24 24",
-        fill: "currentColor",
-        children: /* @__PURE__ */ e.jsx(
-          "path",
+    )
+  }
+) : null, Be = {
+  small: 32,
+  medium: 48,
+  large: 64
+}, Le = {
+  online: "#4ade80",
+  // green-400
+  offline: "#f87171"
+  // red-400
+}, Mt = ({
+  src: t,
+  alt: n = "User Avatar",
+  size: o = "medium",
+  isOnline: i = !1,
+  isOffline: l = !1,
+  className: s = "",
+  style: a
+}) => {
+  const p = Be[o];
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        position: "relative",
+        width: p,
+        height: p,
+        borderRadius: "50%",
+        overflow: "hidden",
+        display: "inline-block",
+        flexShrink: 0,
+        ...a
+      },
+      className: s,
+      "aria-label": n,
+      role: "img",
+      children: [
+        /* @__PURE__ */ e.jsx(
+          "img",
           {
-            fillRule: "evenodd",
-            d: "M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9c0-3 3-5 7-5s7 2 7 5v1H5v-1z",
-            clipRule: "evenodd"
+            src: t,
+            alt: n,
+            width: p,
+            height: p,
+            loading: "lazy",
+            style: {
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              borderRadius: "50%"
+            }
+          }
+        ),
+        (i || l) && /* @__PURE__ */ e.jsx(
+          "span",
+          {
+            "aria-label": i ? "Online" : "Offline",
+            title: i ? "Online" : "Offline",
+            style: {
+              position: "absolute",
+              bottom: 2,
+              right: 2,
+              width: p / 4,
+              height: p / 4,
+              borderRadius: "50%",
+              border: "2px solid white",
+              backgroundColor: i ? Le.online : Le.offline,
+              boxShadow: "0 0 2px rgba(0,0,0,0.3)"
+            }
           }
         )
+      ]
+    }
+  );
+}, Qt = ({
+  avatars: t,
+  max: n = 5,
+  size: o = "medium",
+  className: i = "",
+  style: l
+}) => {
+  const s = Be[o], a = t.slice(0, n), p = t.length - n;
+  return /* @__PURE__ */ e.jsxs(
+    "div",
+    {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: s / 6,
+        ...l
+      },
+      className: i,
+      "aria-label": `Group avatars, ${t.length} members`,
+      role: "group",
+      children: [
+        a.map(({ src: x, alt: j, isOnline: c, isOffline: d }, f) => /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            style: {
+              marginLeft: f === 0 ? 0 : -(s / 3),
+              boxShadow: "0 0 0 2px white",
+              borderRadius: "50%",
+              flexShrink: 0,
+              cursor: "pointer"
+            },
+            title: j,
+            children: /* @__PURE__ */ e.jsx(
+              Mt,
+              {
+                src: x,
+                alt: j,
+                size: o,
+                isOnline: c,
+                isOffline: d
+              }
+            )
+          },
+          f
+        )),
+        p > 0 && /* @__PURE__ */ e.jsxs(
+          "div",
+          {
+            style: {
+              marginLeft: -(s / 3),
+              width: s,
+              height: s,
+              borderRadius: "50%",
+              backgroundColor: "#ccc",
+              color: "#444",
+              fontSize: s / 2.5,
+              fontWeight: "600",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              boxShadow: "0 0 0 2px white",
+              userSelect: "none"
+            },
+            "aria-label": `${p} more members`,
+            title: `${p} more members`,
+            children: [
+              "+",
+              p
+            ]
+          }
+        )
+      ]
+    }
+  );
+}, er = ({
+  tracks: t,
+  className: n = "",
+  primaryColor: o = "#3b82f6",
+  // default blue
+  backgroundColor: i = "#fff",
+  textColor: l = "#222",
+  secondaryColor: s = "#e5e7eb",
+  autoplay: a = !1,
+  loop: p = !1
+}) => {
+  const [x, j] = R(null), c = J(null), d = J(null), [f, u] = R(!1), [v, y] = R(0), [T, z] = R(0), [C, E] = R(0.5), [g, S] = R(!1), [k, b] = R(p);
+  G(() => {
+    c.current && (c.current.volume = C);
+  }, [C]), G(() => {
+    c.current && (c.current.loop = k);
+  }, [k]), G(() => {
+    x === null && c.current && (c.current.pause(), u(!1), y(0), z(0));
+  }, [x]);
+  const F = (h) => {
+    if (x === h) {
+      if (!c.current) return;
+      c.current.paused ? (c.current.play(), u(!0)) : (c.current.pause(), u(!1));
+    } else
+      j(h), setTimeout(() => {
+        c.current?.play(), u(!0);
+      }, 100);
+  }, Y = () => {
+    c.current && (y(c.current.currentTime), z(c.current.duration));
+  }, I = (h) => {
+    if (!c.current) return;
+    const m = h.currentTarget.getBoundingClientRect(), B = (h.clientX - m.left) / m.width * T;
+    c.current.currentTime = B, y(B);
+  }, M = (h) => {
+    if (c.current) {
+      let m = c.current.currentTime + h;
+      m = Math.min(Math.max(m, 0), T), c.current.currentTime = m, y(m);
+    }
+  }, L = () => {
+    d.current && (g ? document.exitFullscreen?.() : d.current.requestFullscreen?.(), S(!g));
+  }, V = () => {
+    E((h) => h > 0 ? 0 : 0.5);
+  }, O = (h) => {
+    if (isNaN(h)) return "0:00";
+    const m = Math.floor(h / 60), N = Math.floor(h % 60);
+    return `${m}:${N < 10 ? "0" : ""}${N}`;
+  };
+  return /* @__PURE__ */ e.jsxs(
+    "section",
+    {
+      className: n,
+      style: {
+        maxWidth: "480px",
+        margin: "auto",
+        backgroundColor: i,
+        color: l,
+        padding: "16px",
+        borderRadius: "12px",
+        boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        userSelect: "none"
+      },
+      "aria-label": "Audio gallery",
+      children: [
+        /* @__PURE__ */ e.jsx(
+          "h2",
+          {
+            style: {
+              marginBottom: "16px",
+              fontSize: "1.25rem",
+              fontWeight: "700"
+            },
+            children: "🎵 Audio Gallery"
+          }
+        ),
+        /* @__PURE__ */ e.jsx(
+          "ul",
+          {
+            style: {
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px"
+            },
+            children: t.map(({ src: h, title: m, thumbnail: N }, $) => {
+              const B = x === $ && f;
+              return /* @__PURE__ */ e.jsxs(
+                "li",
+                {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "12px",
+                    borderRadius: "10px",
+                    backgroundColor: B ? o : s,
+                    color: B ? "#fff" : l,
+                    cursor: "pointer",
+                    transition: "background-color 0.3s"
+                  },
+                  onClick: () => F($),
+                  tabIndex: 0,
+                  role: "button",
+                  "aria-pressed": B,
+                  onKeyDown: (r) => {
+                    (r.key === "Enter" || r.key === " ") && F($);
+                  },
+                  "aria-label": `${B ? "Pause" : "Play"} ${m}`,
+                  children: [
+                    /* @__PURE__ */ e.jsx(
+                      "span",
+                      {
+                        style: {
+                          fontWeight: "600",
+                          fontSize: "1rem"
+                        },
+                        children: m
+                      }
+                    ),
+                    B ? /* @__PURE__ */ e.jsx(se, { size: 24, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(oe, { size: 24, "aria-hidden": "true" })
+                  ]
+                },
+                $
+              );
+            })
+          }
+        ),
+        x !== null && /* @__PURE__ */ e.jsxs(
+          "article",
+          {
+            ref: d,
+            style: {
+              marginTop: "24px",
+              padding: "12px",
+              borderRadius: "12px",
+              backgroundColor: s,
+              color: l,
+              boxSizing: "border-box"
+            },
+            "aria-label": `Audio player for ${t[x].title}`,
+            children: [
+              t[x].thumbnail && /* @__PURE__ */ e.jsx(
+                "img",
+                {
+                  src: t[x].thumbnail,
+                  alt: `${t[x].title} thumbnail`,
+                  loading: "lazy",
+                  width: "100%",
+                  style: {
+                    borderRadius: "12px",
+                    marginBottom: "12px",
+                    objectFit: "cover",
+                    maxHeight: "180px"
+                  }
+                }
+              ),
+              /* @__PURE__ */ e.jsx(
+                "h3",
+                {
+                  style: {
+                    fontWeight: "700",
+                    fontSize: "1.1rem",
+                    marginBottom: "8px"
+                  },
+                  children: t[x].title
+                }
+              ),
+              /* @__PURE__ */ e.jsx(
+                "audio",
+                {
+                  ref: c,
+                  src: t[x].src,
+                  autoPlay: a,
+                  loop: k,
+                  onTimeUpdate: Y,
+                  onEnded: () => u(!1),
+                  onLoadedMetadata: Y,
+                  style: { display: "none" },
+                  preload: "metadata"
+                }
+              ),
+              /* @__PURE__ */ e.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "16px",
+                    flexWrap: "wrap"
+                  },
+                  children: [
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: () => M(-10),
+                        "aria-label": "Skip back 10 seconds",
+                        style: te(l, o),
+                        children: /* @__PURE__ */ e.jsx(he, { size: 20 })
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: () => {
+                          c.current && (f ? c.current.pause() : c.current.play(), u(!f));
+                        },
+                        "aria-label": f ? "Pause" : "Play",
+                        style: {
+                          ...te("#fff", o),
+                          borderRadius: "9999px",
+                          padding: "12px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        },
+                        children: f ? /* @__PURE__ */ e.jsx(se, { size: 24, color: "#fff" }) : /* @__PURE__ */ e.jsx(oe, { size: 24, color: "#fff" })
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: () => M(10),
+                        "aria-label": "Skip forward 10 seconds",
+                        style: te(l, o),
+                        children: /* @__PURE__ */ e.jsx(ge, { size: 20 })
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ e.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    marginTop: "16px",
+                    flexWrap: "wrap",
+                    userSelect: "none"
+                  },
+                  children: [
+                    /* @__PURE__ */ e.jsx(
+                      "time",
+                      {
+                        dateTime: `PT${Math.floor(v / 60)}M${Math.floor(
+                          v % 60
+                        )}S`,
+                        style: { minWidth: "40px", fontSize: "0.9rem" },
+                        "aria-label": "Current playback time",
+                        children: O(v)
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "div",
+                      {
+                        onClick: I,
+                        role: "slider",
+                        "aria-valuemin": 0,
+                        "aria-valuemax": T,
+                        "aria-valuenow": v,
+                        tabIndex: 0,
+                        onKeyDown: (h) => {
+                          c.current && (h.key === "ArrowRight" ? M(5) : h.key === "ArrowLeft" && M(-5));
+                        },
+                        style: {
+                          flex: 1,
+                          height: "8px",
+                          borderRadius: "8px",
+                          backgroundColor: "#ccc",
+                          cursor: "pointer",
+                          position: "relative",
+                          minWidth: "120px"
+                        },
+                        "aria-label": "Seek playback position",
+                        children: /* @__PURE__ */ e.jsx(
+                          "div",
+                          {
+                            style: {
+                              width: `${v / T * 100 || 0}%`,
+                              height: "100%",
+                              backgroundColor: o,
+                              borderRadius: "8px"
+                            }
+                          }
+                        )
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsxs(
+                      "time",
+                      {
+                        dateTime: `PT${Math.floor(T / 60)}M${Math.floor(
+                          T % 60
+                        )}S`,
+                        style: { minWidth: "40px", fontSize: "0.9rem", color: "#666" },
+                        "aria-label": "Total duration",
+                        children: [
+                          "/ ",
+                          O(T)
+                        ]
+                      }
+                    )
+                  ]
+                }
+              ),
+              /* @__PURE__ */ e.jsxs(
+                "div",
+                {
+                  style: {
+                    marginTop: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: "16px",
+                    flexWrap: "wrap"
+                  },
+                  children: [
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: () => b(!k),
+                        "aria-label": "Toggle Loop",
+                        style: te(
+                          k ? o : l,
+                          k ? "#e0f2fe" : "transparent"
+                        ),
+                        children: /* @__PURE__ */ e.jsx(
+                          fe,
+                          {
+                            size: 20,
+                            color: k ? o : l,
+                            "aria-hidden": "true"
+                          }
+                        )
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: V,
+                        "aria-label": C > 0 ? "Mute" : "Unmute",
+                        style: te(l, "transparent"),
+                        children: C > 0 ? /* @__PURE__ */ e.jsx(be, { size: 20, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(ye, { size: 20, "aria-hidden": "true" })
+                      }
+                    ),
+                    /* @__PURE__ */ e.jsx(
+                      "button",
+                      {
+                        onClick: L,
+                        "aria-label": g ? "Exit Fullscreen" : "Enter Fullscreen",
+                        style: te(l, "transparent"),
+                        children: g ? /* @__PURE__ */ e.jsx(xe, { size: 20, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(pe, { size: 20, "aria-hidden": "true" })
+                      }
+                    )
+                  ]
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
+};
+function te(t, n) {
+  return {
+    border: "none",
+    backgroundColor: n,
+    color: t,
+    cursor: "pointer",
+    padding: "6px 10px",
+    borderRadius: "8px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    transition: "background-color 0.3s ease"
+  };
+}
+const tr = ({
+  videos: t,
+  columns: n = 3,
+  responsiveColumns: o,
+  gap: i = "10px",
+  layout: l = "grid",
+  lightbox: s = !0,
+  autoPlay: a = !1,
+  loop: p = !1,
+  muted: x = !1,
+  controls: j = !0,
+  className: c = ""
+}) => {
+  const [d, f] = R(null), [u, v] = R(
+    typeof window < "u" ? window.innerWidth : 1024
+  ), [y, T] = R(n);
+  G(() => {
+    function k() {
+      const b = window.innerWidth;
+      if (v(b), !o) {
+        T(n);
+        return;
+      }
+      b < 640 ? T(o.mobile ?? n) : b < 1024 ? T(o.tablet ?? n) : T(o.desktop ?? n);
+    }
+    if (typeof window < "u")
+      return k(), window.addEventListener("resize", k), () => window.removeEventListener("resize", k);
+  }, [n, o]);
+  const z = () => f(null), C = (k) => {
+    k.stopPropagation(), d !== null && f((d - 1 + t.length) % t.length);
+  }, E = (k) => {
+    k.stopPropagation(), d !== null && f((d + 1) % t.length);
+  }, g = ({
+    src: k,
+    poster: b,
+    autoPlay: F = !1,
+    loop: Y = !1,
+    muted: I = !1,
+    controls: M = !1,
+    width: L = "100%",
+    height: V = "150px",
+    borderRadius: O = "12px",
+    backgroundColor: h = "#1e1e1e",
+    primaryColor: m = "#ff4081",
+    padding: N = "16px",
+    className: $,
+    onClick: B
+  }) => {
+    const r = J(null), w = J(null), [P, U] = R(F), [D, A] = R(0), [W, X] = R(0), [_, Z] = R(I ? 0 : 0.5), [K, ie] = R(I), [ae, De] = R(!1), [ce, Ye] = R(Y);
+    G(() => {
+      r.current && (r.current.volume = _, r.current.loop = ce, r.current.muted = K);
+    }, [_, ce, K]);
+    const Ue = () => {
+      r.current && (P ? r.current.pause() : r.current.play(), U(!P));
+    }, ke = () => {
+      r.current && (A(r.current.currentTime), X(r.current.duration));
+    }, Ve = (Q) => {
+      if (!r.current || !Q.currentTarget) return;
+      const de = Q.currentTarget.getBoundingClientRect(), Ce = (Q.clientX - de.left) / de.width * W;
+      r.current.currentTime = Ce, A(Ce);
+    }, Se = (Q) => {
+      r.current && (r.current.currentTime += Q);
+    }, He = () => {
+      w.current && (ae ? document.exitFullscreen?.() : w.current.requestFullscreen?.(), De(!ae));
+    }, qe = () => {
+      K ? (ie(!1), _ === 0 && Z(0.5)) : (ie(!0), Z(0));
+    }, Te = (Q) => {
+      if (isNaN(Q)) return "0:00";
+      const de = Math.floor(Q / 60), me = Math.floor(Q % 60);
+      return `${de}:${me < 10 ? "0" : ""}${me}`;
+    };
+    return /* @__PURE__ */ e.jsxs(
+      "div",
+      {
+        ref: w,
+        onClick: B,
+        className: $,
+        style: {
+          position: "relative",
+          width: L,
+          backgroundColor: h,
+          borderRadius: O,
+          color: "#fff",
+          overflow: "hidden",
+          padding: N,
+          boxSizing: "border-box",
+          maxWidth: "100%",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+          cursor: B ? "pointer" : "default",
+          userSelect: "none"
+        },
+        children: [
+          /* @__PURE__ */ e.jsx(
+            "video",
+            {
+              ref: r,
+              src: k,
+              poster: b,
+              autoPlay: F,
+              loop: Y,
+              muted: I,
+              controls: M,
+              onTimeUpdate: ke,
+              onLoadedMetadata: ke,
+              style: {
+                width: "100%",
+                height: V,
+                borderRadius: O,
+                objectFit: "cover",
+                backgroundColor: "#000"
+              }
+            }
+          ),
+          /* @__PURE__ */ e.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                marginTop: "10px",
+                flexWrap: "wrap"
+              },
+              children: [
+                /* @__PURE__ */ e.jsx("button", { onClick: () => Se(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(he, { size: 20 }) }),
+                /* @__PURE__ */ e.jsx(
+                  "button",
+                  {
+                    onClick: Ue,
+                    style: {
+                      background: m,
+                      borderRadius: "9999px",
+                      padding: "10px",
+                      color: "#fff",
+                      border: "none",
+                      cursor: "pointer"
+                    },
+                    "aria-label": P ? "Pause" : "Play",
+                    children: P ? /* @__PURE__ */ e.jsx(se, { size: 20 }) : /* @__PURE__ */ e.jsx(oe, { size: 20 })
+                  }
+                ),
+                /* @__PURE__ */ e.jsx("button", { onClick: () => Se(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
+              ]
+            }
+          ),
+          /* @__PURE__ */ e.jsxs(
+            "div",
+            {
+              style: {
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                marginTop: "8px",
+                gap: "12px",
+                flexWrap: "wrap"
+              },
+              children: [
+                /* @__PURE__ */ e.jsxs(
+                  "div",
+                  {
+                    style: { flexShrink: 0, minWidth: "60px", textAlign: "center" },
+                    children: [
+                      /* @__PURE__ */ e.jsx("span", { style: { fontSize: "14px" }, children: Te(D) }),
+                      /* @__PURE__ */ e.jsxs("span", { style: { fontSize: "14px", color: "#aaa" }, children: [
+                        " ",
+                        "/ ",
+                        Te(W)
+                      ] })
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ e.jsx(
+                  "div",
+                  {
+                    onClick: Ve,
+                    style: {
+                      flex: 1,
+                      height: "8px",
+                      background: "#444",
+                      borderRadius: "4px",
+                      cursor: "pointer",
+                      position: "relative",
+                      minWidth: "100px"
+                    },
+                    children: /* @__PURE__ */ e.jsx(
+                      "div",
+                      {
+                        style: {
+                          width: `${D / W * 100 || 0}%`,
+                          height: "100%",
+                          background: m,
+                          borderRadius: "4px"
+                        }
+                      }
+                    )
+                  }
+                ),
+                /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "10px" }, children: [
+                  /* @__PURE__ */ e.jsx(
+                    "button",
+                    {
+                      onClick: () => Ye(!ce),
+                      "aria-label": "Toggle Loop",
+                      type: "button",
+                      children: /* @__PURE__ */ e.jsx(
+                        fe,
+                        {
+                          size: 18,
+                          color: ce ? m : void 0
+                        }
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ e.jsx(
+                    "button",
+                    {
+                      onClick: qe,
+                      "aria-label": K ? "Unmute" : "Mute",
+                      type: "button",
+                      children: K ? /* @__PURE__ */ e.jsx(ye, { size: 18 }) : /* @__PURE__ */ e.jsx(be, { size: 18 })
+                    }
+                  ),
+                  /* @__PURE__ */ e.jsx(
+                    "button",
+                    {
+                      onClick: He,
+                      "aria-label": ae ? "Exit Fullscreen" : "Fullscreen",
+                      type: "button",
+                      children: ae ? /* @__PURE__ */ e.jsx(xe, { size: 18 }) : /* @__PURE__ */ e.jsx(pe, { size: 18 })
+                    }
+                  )
+                ] })
+              ]
+            }
+          )
+        ]
+      }
+    );
+  }, S = () => u < 640 ? "120px" : u < 1024 ? "150px" : "180px";
+  return /* @__PURE__ */ e.jsxs("div", { className: `w-full ${c}`, children: [
+    /* @__PURE__ */ e.jsx(
+      "div",
+      {
+        className: `grid ${l === "masonry" ? "grid-flow-dense" : ""}`,
+        style: {
+          gridTemplateColumns: `repeat(${y}, 1fr)`,
+          gap: i
+        },
+        children: t.map((k, b) => /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            style: {
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: 12,
+              cursor: s ? "pointer" : "default"
+            },
+            onClick: () => s && f(b),
+            children: /* @__PURE__ */ e.jsx(
+              g,
+              {
+                src: k.src,
+                poster: k.poster,
+                autoPlay: a,
+                loop: p,
+                muted: x,
+                controls: j,
+                height: S(),
+                borderRadius: "12px",
+                padding: "8px",
+                primaryColor: "#ff4081",
+                onClick: (F) => F.stopPropagation()
+              }
+            )
+          },
+          b
+        ))
       }
     ),
-    /* @__PURE__ */ e.jsx(
-      "span",
+    s && d !== null && /* @__PURE__ */ e.jsxs(
+      "div",
       {
-        className: `z-[1000] w-full h-full absolute bottom-0 right-0 border-2 border-white rounded-full ${h[l]} ${p[o].statusSize}`
+        onClick: z,
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": "Video preview",
+        style: {
+          position: "fixed",
+          inset: 0,
+          backgroundColor: "rgba(0,0,0,0.8)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 9999
+        },
+        children: [
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: C,
+              "aria-label": "Previous video",
+              style: {
+                position: "absolute",
+                left: 20,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "white",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                borderRadius: "50%",
+                userSelect: "none"
+              },
+              type: "button",
+              children: /* @__PURE__ */ e.jsx(We, { size: 32 })
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            g,
+            {
+              src: t[d].src,
+              poster: t[d].poster,
+              autoPlay: !0,
+              controls: !0,
+              muted: x,
+              width: "80vw",
+              height: "45vw",
+              borderRadius: "16px",
+              padding: "16px",
+              primaryColor: "#ff4081",
+              onClick: (k) => k.stopPropagation()
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: E,
+              "aria-label": "Next video",
+              style: {
+                position: "absolute",
+                right: 20,
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "white",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                borderRadius: "50%",
+                userSelect: "none"
+              },
+              type: "button",
+              children: /* @__PURE__ */ e.jsx(Fe, { size: 32 })
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: z,
+              "aria-label": "Close preview",
+              style: {
+                position: "absolute",
+                top: 20,
+                right: 20,
+                color: "white",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                borderRadius: "50%",
+                userSelect: "none"
+              },
+              type: "button",
+              children: /* @__PURE__ */ e.jsx(le, { size: 28 })
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}, rr = ({
+  images: t,
+  columns: n = 3,
+  gap: o = "10px",
+  layout: i = "grid",
+  lightbox: l = !0,
+  className: s = ""
+}) => {
+  const [a, p] = R(null), x = () => p(null), j = (d) => {
+    d.stopPropagation(), a !== null && p((a - 1 + t.length) % t.length);
+  }, c = (d) => {
+    d.stopPropagation(), a !== null && p((a + 1) % t.length);
+  };
+  return /* @__PURE__ */ e.jsxs("div", { className: `w-full ${s}`, children: [
+    /* @__PURE__ */ e.jsx(
+      "div",
+      {
+        className: `grid ${i === "masonry" ? "grid-flow-dense" : ""}`,
+        style: {
+          gridTemplateColumns: `repeat(${n}, 1fr)`,
+          gap: o
+        },
+        children: t.map((d, f) => /* @__PURE__ */ e.jsx(
+          "div",
+          {
+            className: "relative overflow-hidden rounded-lg cursor-pointer",
+            onClick: () => l && p(f),
+            children: /* @__PURE__ */ e.jsx(
+              $e,
+              {
+                src: d.src,
+                alt: d.alt || "Gallery Image",
+                lazyLoad: !0,
+                className: "w-full h-auto object-cover transition-transform duration-300 hover:scale-105",
+                style: { display: "block", width: "100%", height: "auto" },
+                hoverScale: 1.05,
+                transitionDuration: "0.3s"
+              }
+            )
+          },
+          f
+        ))
+      }
+    ),
+    l && a !== null && /* @__PURE__ */ e.jsxs(
+      "div",
+      {
+        className: "fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50",
+        onClick: x,
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": "Image preview",
+        children: [
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: j,
+              "aria-label": "Previous image",
+              className: "absolute left-4 top-1/2 -translate-y-1/2 text-white p-2 rounded-full hover:bg-black/50",
+              children: /* @__PURE__ */ e.jsx(We, { size: 32 })
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            $e,
+            {
+              src: t[a].src,
+              alt: t[a].alt || "Preview",
+              className: "max-w-full max-h-full",
+              lazyLoad: !0,
+              onClick: (d) => d.stopPropagation()
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              onClick: c,
+              "aria-label": "Next image",
+              className: "absolute right-4 top-1/2 -translate-y-1/2 text-white p-2 rounded-full hover:bg-black/50",
+              children: /* @__PURE__ */ e.jsx(Fe, { size: 32 })
+            }
+          ),
+          /* @__PURE__ */ e.jsx(
+            "button",
+            {
+              className: "absolute top-4 right-4 text-white p-2 rounded-full hover:bg-black/50",
+              onClick: x,
+              "aria-label": "Close preview",
+              children: /* @__PURE__ */ e.jsx(le, { size: 28 })
+            }
+          )
+        ]
       }
     )
   ] });
 };
 export {
-  ft as Accordion,
-  vt as Alert,
-  pt as AudioPlayer,
-  St as Avatar,
-  Tt as AvatarGroup,
-  zt as AvatarWithStatus,
-  kt as Badge,
-  ot as Button,
-  ht as CheckRadio,
-  xt as Container,
-  gt as Drawer,
-  mt as DrawerButton,
-  bt as Dropdown,
-  wt as Flexbox,
-  jt as GridView,
-  st as Image,
-  lt as Input,
-  it as LeftTabs,
-  at as List,
-  dt as RightTabs,
-  yt as Table,
-  nt as Text,
-  ct as TopTabs,
-  ut as VideoPlayer
+  Bt as Accordion,
+  Jt as Alert,
+  er as AudioGallery,
+  Ft as AudioPlayer,
+  Mt as Avatar,
+  Qt as AvatarGroup,
+  Zt as Badge,
+  It as Button,
+  qt as Card,
+  Dt as CheckRadio,
+  Ot as Container,
+  Ut as Drawer,
+  Yt as DrawerButton,
+  Vt as Dropdown,
+  Xt as Flexbox,
+  Gt as GridView,
+  $e as Image,
+  rr as ImageGallery,
+  _t as Input,
+  Lt as LeftTabs,
+  At as List,
+  Kt as Modal,
+  Nt as RightTabs,
+  Ht as Table,
+  Et as Text,
+  Pt as TopTabs,
+  tr as VideoGallery,
+  Wt as VideoPlayer
 };

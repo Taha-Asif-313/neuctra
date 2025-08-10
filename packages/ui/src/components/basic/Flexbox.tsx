@@ -1,101 +1,95 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 type ScreenSize = "sm" | "md" | "lg";
 
-interface ResponsiveProps<T> {
-  sm?: T;
-  md?: T;
-  lg?: T;
-}
-
 interface FlexboxProps {
-  direction?: ResponsiveProps<"row" | "column">;
-  align?: ResponsiveProps<
-    "flex-start" | "flex-end" | "center" | "stretch" | "baseline"
-  >;
-  justify?: ResponsiveProps<
+  // direction can be a single value or responsive object with 3 breakpoints
+  direction?: "row" | "column" | Partial<Record<ScreenSize, "row" | "column">>;
+
+  // simple flexbox alignment
+  align?: "flex-start" | "flex-end" | "center" | "stretch" | "baseline";
+  justify?:
     | "flex-start"
     | "flex-end"
     | "center"
     | "space-between"
     | "space-around"
-    | "space-evenly"
-  >;
-  gap?: ResponsiveProps<string>;
-  padding?: ResponsiveProps<string>;
+    | "space-evenly";
+
+  gap?: number | string; // px or any CSS length unit
+  padding?: number | string;
   backgroundColor?: string;
+  width?: string;
+  maxWidth?: string;
+  height?: string;
+
+  style?: React.CSSProperties;
   children: React.ReactNode;
-  width?: ResponsiveProps<string>;
-  maxWidth?: ResponsiveProps<string>;
-  height?: ResponsiveProps<string>;
-  className?: string;
 }
 
-const Flexbox: React.FC<FlexboxProps> = ({
-  direction = { sm: "column", md: "row", lg: "row" },
-  align = { sm: "center", md: "center", lg: "center" },
-  justify = { sm: "center", md: "space-between", lg: "space-around" },
-  gap = { sm: "10px", md: "20px", lg: "30px" },
-  padding = { sm: "10px", md: "20px", lg: "40px" },
-  backgroundColor = "#f4f4f4",
-  width = { sm: "100%", md: "100%", lg: "100%" },
-  height = { sm: "auto", md: "auto", lg: "auto" },
-  maxWidth = { sm: "100%", md: "100%", lg: "100%" },
-  children,
-  className = "",
-}) => {
-  const [screenSize, setScreenSize] = useState<ScreenSize>("lg");
-
-  useEffect(() => {
-    const updateScreenSize = () => {
-      const width = window.innerWidth;
-      if (width <= 767) {
-        setScreenSize("sm");
-      } else if (width >= 768 && width <= 1023) {
-        setScreenSize("md");
-      } else {
-        setScreenSize("lg");
-      }
-    };
-
-    updateScreenSize();
-    window.addEventListener("resize", updateScreenSize);
-
-    return () => window.removeEventListener("resize", updateScreenSize);
-  }, []);
-
-  const styles = useMemo(
-    () => ({
-      display: "flex",
-      flexDirection: direction[screenSize] as "row" | "column",
-      alignItems: align[screenSize] as
-        | "flex-start"
-        | "flex-end"
-        | "center"
-        | "stretch"
-        | "baseline",
-      justifyContent: justify[screenSize] as
-        | "flex-start"
-        | "flex-end"
-        | "center"
-        | "space-between"
-        | "space-around"
-        | "space-evenly",
-      gap: gap[screenSize],
-      padding: padding[screenSize],
-      backgroundColor,
-      width: width[screenSize],
-      maxWidth: maxWidth[screenSize],
-      height: height[screenSize],
-    }),
-    [screenSize, direction, align, justify, gap, padding, width, maxWidth, height, backgroundColor]
-  );
-
-  return (
-    <div className={className} style={styles}>
-      {children}
-    </div>
-  );
+const getScreenSize = (width: number): ScreenSize => {
+  if (width < 768) return "sm";
+  if (width < 1024) return "md";
+  return "lg";
 };
 
-export default Flexbox;
+export const Flexbox: React.FC<FlexboxProps> = ({
+  direction = "row",
+  align = "center",
+  justify = "space-between",
+  gap = 16,
+  padding = 20,
+  backgroundColor = "transparent",
+  width = "100%",
+  maxWidth = "100%",
+  height = "auto",
+  style,
+  children,
+}) => {
+  const [screenSize, setScreenSize] = useState<ScreenSize>(
+    getScreenSize(window.innerWidth)
+  );
+
+  useEffect(() => {
+    const onResize = () => setScreenSize(getScreenSize(window.innerWidth));
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Resolve direction based on screen size if responsive, else use fixed
+  const resolvedDirection = useMemo(() => {
+    if (typeof direction === "string") return direction;
+    return direction[screenSize] ?? "row";
+  }, [direction, screenSize]);
+
+  const styles: React.CSSProperties = useMemo(
+    () => ({
+      display: "flex",
+      flexDirection: resolvedDirection,
+      alignItems: align,
+      justifyContent: justify,
+      gap: typeof gap === "number" ? `${gap}px` : gap,
+      padding: typeof padding === "number" ? `${padding}px` : padding,
+      backgroundColor,
+      width,
+      maxWidth,
+      height,
+      boxSizing: "border-box",
+      ...style,
+    }),
+    [
+      resolvedDirection,
+      align,
+      justify,
+      gap,
+      padding,
+      backgroundColor,
+      width,
+      maxWidth,
+      height,
+      style,
+    ]
+  );
+
+  return <div style={styles}>{children}</div>;
+};

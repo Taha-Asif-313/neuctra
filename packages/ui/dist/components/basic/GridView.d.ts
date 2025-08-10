@@ -1,24 +1,17 @@
 import { default as React } from 'react';
-interface ResponsiveProps<T> {
-    sm?: T;
-    md?: T;
-    lg?: T;
-}
+type ScreenSize = "sm" | "md" | "lg";
 interface GridViewProps {
-    columns?: ResponsiveProps<number>;
-    rows?: ResponsiveProps<number>;
-    gap?: ResponsiveProps<string>;
-    rowGap?: ResponsiveProps<string>;
-    columnGap?: ResponsiveProps<string>;
-    padding?: ResponsiveProps<string>;
-    alignItems?: ResponsiveProps<"start" | "center" | "end" | "stretch">;
-    justifyItems?: ResponsiveProps<"start" | "center" | "end" | "stretch">;
+    columns?: number | Partial<Record<ScreenSize, number>>;
+    gap?: string;
+    padding?: string;
+    alignItems?: "start" | "center" | "end" | "stretch";
+    justifyItems?: "start" | "center" | "end" | "stretch";
     backgroundColor?: string;
+    width?: string;
+    maxWidth?: string;
+    height?: string;
     children: React.ReactNode;
-    className?: string;
-    width?: ResponsiveProps<string>;
-    maxWidth?: ResponsiveProps<string>;
-    height?: ResponsiveProps<string>;
+    style?: React.CSSProperties;
 }
-declare const GridView: React.FC<GridViewProps>;
-export default GridView;
+export declare const GridView: React.FC<GridViewProps>;
+export {};

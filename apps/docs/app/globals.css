@@ -1,15 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --primary: #02d81b;
+  --primary: #00c214;
   --font-primary: var(--font-poppins);
 }
 
-
+/* ✅ Tailwind 4 design token registration */
 /* ✅ Tailwind 4 design token registration */
 @theme {
   --color-primary: var(--primary);
   --font-primary: var(--font-primary);
+
+  /* Animation token */
+  --animate-rotateShadow: rotateShadow 3s ease-in-out infinite;
+
+  /* Keyframes */
+  @keyframes rotateShadow {
+    0% {
+      box-shadow: 0 0 15px 2px var(--primary);
+    }
+    50% {
+      box-shadow: 0 0 25px 2px var(--primary);
+    }
+    100% {
+      box-shadow: 0 0 15px 2px var(--primary);
+    }
+  }
 }
-
-

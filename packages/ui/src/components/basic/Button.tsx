@@ -1,3 +1,4 @@
+"use client";
 import React, { CSSProperties } from "react";
 
 interface ButtonProps {
@@ -41,16 +42,16 @@ export const Button: React.FC<ButtonProps> = ({
   loading = false,
   loadingText = "Loading...",
 
-  paddingHorizontal = 10,
+  paddingHorizontal = 30,
   paddingVertical = 8,
-  fontSize = "1rem",
+  fontSize = "16px",
   fontWeight = 400,
-  borderRadius = 12,
-  backgroundColor = "rgba(0, 255, 0, 0.15)",
-  textColor = "green",
+  borderRadius = 6,
+  backgroundColor = "#02b314",
+  textColor = "white",
   borderColor = "transparent",
-  hoverBgColor = "#2563EB",
-  hoverTextColor = "#2563EB",
+  hoverBgColor = "transparent",
+  hoverTextColor = "black",
   hoverBorderColor,
   boxShadow = "0 1px 2px rgba(0, 0, 0, 0.05)",
 }) => {

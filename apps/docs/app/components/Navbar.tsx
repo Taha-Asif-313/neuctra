@@ -3,7 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, ExternalLink, MoveLeft, MoveRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  ExternalLink,
+  MoveLeft,
+  MoveRight,
+  ArrowRight,
+} from "lucide-react";
 import React from "react";
 
 const Navbar: React.FC = () => {
@@ -19,11 +26,11 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 ${
+      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl z-50 ${
         isOpen ? "bg-black" : "bg-transparent"
-      }  text-white`}
+      } text-white`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between lg:px-6 px-4 py-1 lg:py-2.5">
+      <div className="max-w-7xl mx-auto flex items-center justify-between lg:px-0 px-4 py-1 lg:py-2.5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-0.5">
           <img src="/logo.png" alt="Logo" className="w-10 object-cover" />
@@ -46,9 +53,9 @@ const Navbar: React.FC = () => {
 
           <button
             onClick={() => router.push("/docs")}
-            className="flex items-center gap-2 border border-primary px-4 py-1.5 rounded text-sm hover:bg-primary hover:text-black transition"
+            className="flex items-center gap-2 border border-white px-4 py-1.5 rounded text-sm hover:bg-primary hover:border-primary font-semibold transition duration-300"
           >
-            Get started <MoveRight size={18} />
+            Get started <ArrowRight size={18} />
           </button>
         </div>
 

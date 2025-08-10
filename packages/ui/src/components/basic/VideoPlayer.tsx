@@ -17,6 +17,7 @@ interface VideoPlayerProps {
   autoPlay?: boolean;
   loop?: boolean;
   controls?: boolean;
+  muted?: boolean; // Added muted prop
   width?: string;
   height?: string;
   borderRadius?: string;
@@ -32,6 +33,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   autoPlay = false,
   loop = false,
   controls = false,
+  muted = false, // default false
   width = "100%",
   height = "150px",
   borderRadius = "12px",
@@ -46,6 +48,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.5);
+  const [isMuted, setIsMuted] = useState(muted); // mute state from prop
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isLooping, setIsLooping] = useState(loop);
 
@@ -53,8 +56,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (videoRef.current) {
       videoRef.current.volume = volume;
       videoRef.current.loop = isLooping;
+      videoRef.current.muted = isMuted;
     }
-  }, [volume, isLooping]);
+  }, [volume, isLooping, isMuted]);
 
   const togglePlayPause = () => {
     if (!videoRef.current) return;
@@ -89,6 +93,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     setIsFullscreen(!isFullscreen);
   };
 
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    // Optional: if unmuting, restore volume to default 0.5 if volume is 0
+    if (isMuted && volume === 0) setVolume(0.5);
+  };
+
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
@@ -119,6 +129,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         autoPlay={autoPlay}
         loop={loop}
         controls={controls}
+        muted={muted} // add muted attribute here too for initial HTML
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleTimeUpdate}
         style={{
@@ -211,11 +222,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           >
             <RotateCcw size={18} color={isLooping ? primaryColor : undefined} />
           </button>
-          <button
-            onClick={() => setVolume(volume > 0 ? 0 : 0.5)}
-            aria-label="Toggle Mute"
-          >
-            {volume > 0 ? <Volume2 size={18} /> : <VolumeX size={18} />}
+          <button onClick={toggleMute} aria-label="Toggle Mute">
+            {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
           </button>
           <button onClick={toggleFullscreen} aria-label="Toggle Fullscreen">
             {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}

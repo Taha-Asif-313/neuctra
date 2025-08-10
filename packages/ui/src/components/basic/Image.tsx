@@ -28,7 +28,7 @@ interface ImageProps {
   overflow?: "hidden" | "scroll" | "auto" | "visible" | "x" | "y";
   className?: string;
   style?: React.CSSProperties;
-  onClick?: () => void;
+ onClick?: (event: React.MouseEvent<HTMLDivElement | HTMLImageElement>) => void;
 }
 
 export const Image: React.FC<ImageProps> = ({
