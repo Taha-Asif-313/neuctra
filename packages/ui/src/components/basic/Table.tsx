@@ -25,6 +25,9 @@ interface TableProps {
     paginationText?: string;
   };
   headerBorderRadius?: string; // border-radius for header row corners
+  tableBorderRadius?: string; // border-radius for entire table (all corners)
+  sortable?: boolean; // Global toggle to enable/disable sorting for all columns
+  bodyAlign?: "left" | "center" | "right"; // alignment for tbody cells
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -44,14 +47,17 @@ export const Table: React.FC<TableProps> = ({
     paginationText: "#000000",
   },
   headerBorderRadius = "8px",
+  tableBorderRadius = "8px",
+  sortable = true,
+  bodyAlign = "left",
 }) => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [hoverRowIndex, setHoverRowIndex] = useState<number | null>(null);
 
-  const handleSort = (key: string, sortable?: boolean) => {
-    if (!sortable) return;
+  const handleSort = (key: string, colSortable?: boolean) => {
+    if (!sortable || !colSortable) return;
     if (sortColumn === key) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
     } else {
@@ -105,7 +111,7 @@ export const Table: React.FC<TableProps> = ({
 
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
-  // Icons for sorting (using inline SVGs for simplicity)
+  // Sorting icons same as before
   const arrowUpIcon = (
     <svg
       stroke="currentColor"
@@ -163,18 +169,23 @@ export const Table: React.FC<TableProps> = ({
           border: `1px solid ${colors.borderColor}`,
           tableLayout: "auto",
           minWidth: "400px",
+          borderRadius: tableBorderRadius,
+          // Important: for border-radius to show on table, set borderSpacing and borderCollapse accordingly
+          borderSpacing: 0,
+          overflow: "hidden"
         }}
       >
         <thead>
           <tr>
-            {columns.map(({ key, label, sortable, icon }, i) => (
+            {columns.map(({ key, label, sortable: colSortable, icon }, i) => (
               <th
                 key={key}
-                onClick={() => handleSort(key, sortable)}
+                onClick={() => handleSort(key, colSortable)}
                 style={{
                   padding: "12px",
+                  fontSize:"14px",
                   border: `1px solid ${colors.borderColor}`,
-                  cursor: sortable ? "pointer" : "default",
+                  cursor: sortable && colSortable ? "pointer" : "default",
                   backgroundColor: colors.headerBg,
                   color: colors.headerText,
                   userSelect: "none",
@@ -183,7 +194,6 @@ export const Table: React.FC<TableProps> = ({
                     i === columns.length - 1 ? headerBorderRadius : undefined,
                   textAlign: "center",
                   whiteSpace: "nowrap",
-                  // Remove display here! Let <th> keep default 'table-cell'
                 }}
                 aria-sort={
                   sortColumn === key
@@ -192,16 +202,15 @@ export const Table: React.FC<TableProps> = ({
                       : "descending"
                     : undefined
                 }
-                role={sortable ? "button" : undefined}
-                tabIndex={sortable ? 0 : undefined}
+                role={sortable && colSortable ? "button" : undefined}
+                tabIndex={sortable && colSortable ? 0 : undefined}
                 onKeyDown={(e) => {
-                  if (sortable && (e.key === "Enter" || e.key === " ")) {
+                  if (sortable && colSortable && (e.key === "Enter" || e.key === " ")) {
                     e.preventDefault();
-                    handleSort(key, sortable);
+                    handleSort(key, colSortable);
                   }
                 }}
               >
-                {/* Flex container inside <th> */}
                 <div
                   style={{
                     display: "inline-flex",
@@ -212,7 +221,7 @@ export const Table: React.FC<TableProps> = ({
                 >
                   {icon && <span>{icon}</span>}
                   <span>{label}</span>
-                  {sortable &&
+                  {sortable && colSortable &&
                     (sortColumn === key
                       ? sortOrder === "asc"
                         ? arrowUpIcon
@@ -244,6 +253,7 @@ export const Table: React.FC<TableProps> = ({
                     padding: "12px",
                     border: `1px solid ${colors.borderColor}`,
                     whiteSpace: "nowrap",
+                    textAlign: bodyAlign,
                   }}
                 >
                   {row[key]}
@@ -277,7 +287,7 @@ export const Table: React.FC<TableProps> = ({
               border: "none",
               opacity: currentPage === 1 ? 0.5 : 1,
               cursor: currentPage === 1 ? "not-allowed" : "pointer",
-              fontSize: "0.875rem", // sm size ~14px
+              fontSize: "0.875rem",
             }}
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

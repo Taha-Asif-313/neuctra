@@ -17,9 +17,9 @@ const Home = () => {
       </div>
 
       {/* Main Hero Content */}
-      <div className="z-20 max-w-7xl mx-auto px-2 grid h-full items-center lg:grid-cols-2 ">
+      <div className="z-20 max-w-6xl mx-auto px-2 grid h-full items-center lg:grid-cols-2 ">
         <div className="">
-          <h1 className="text-5xl font-primary md:text-6xl font-bold tracking-tight pb-2">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight pb-2">
             Craft <span className="text-primary">Stunning</span> Interfaces with
             Ease
           </h1>

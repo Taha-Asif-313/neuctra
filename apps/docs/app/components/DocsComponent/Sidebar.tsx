@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed z-50 top-0 left-0 h-full bg-black text-white rounded-r-3xl w-64 transform transition-transform duration-300
+        className={`fixed z-50 top-0 left-0 h-full bg-[#011627] border border-gray-800 text-white rounded-r-3xl w-64 transform transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         <div className="p-4 flex items-center justify-between ">

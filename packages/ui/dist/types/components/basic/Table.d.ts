@@ -22,6 +22,9 @@ interface TableProps {
         paginationText?: string;
     };
     headerBorderRadius?: string;
+    tableBorderRadius?: string;
+    sortable?: boolean;
+    bodyAlign?: "left" | "center" | "right";
 }
 export declare const Table: React.FC<TableProps>;
 export {};

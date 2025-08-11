@@ -1,24 +1,60 @@
 "use client";
 import React from "react";
 import { Button, Table } from "@neuctra/ui"; // adjust import path as needed
-import { ArrowRight, Calendar, Search, User } from "lucide-react";
+import { ArrowRight, Calendar, Mail, Search, User } from "lucide-react";
+import CodePreviewBlock from "@/app/components/DocsComponent/CodePreviewBlock";
 import CodeBlock from "@/app/components/DocsComponent/CodeBlock";
 
 const ButtonDocs = () => {
- const columns = [
+  const columns = [
     { key: "id", label: "ID", sortable: true },
     { key: "name", label: "Name", sortable: true, icon: <User size={16} /> },
-    { key: "dob", label: "Date of Birth", sortable: true, icon: <Calendar size={16} /> },
-    { key: "email", label: "Email" },
+    {
+      key: "dob",
+      label: "Date of Birth",
+      sortable: true,
+      icon: <Calendar size={16} />,
+    },
+    { key: "email", label: "Email", icon: <Mail size={16} /> },
   ];
 
   const data = [
-    { id: 1, name: "Alice", dob: new Date(1990, 5, 24), email: "alice@example.com" },
-    { id: 2, name: "Bob", dob: new Date(1985, 10, 11), email: "bob@example.com" },
-    { id: 3, name: "Charlie", dob: new Date(2000, 0, 5), email: "charlie@example.com" },
-    { id: 4, name: "Diana", dob: new Date(1995, 3, 30), email: "diana@example.com" },
-    { id: 5, name: "Ethan", dob: new Date(1988, 8, 17), email: "ethan@example.com" },
-    { id: 6, name: "Fiona", dob: new Date(1992, 2, 14), email: "fiona@example.com" },
+    {
+      id: 1,
+      name: "Alice",
+      dob: new Date(1990, 5, 24),
+      email: "alice@example.com",
+    },
+    {
+      id: 2,
+      name: "Bob",
+      dob: new Date(1985, 10, 11),
+      email: "bob@example.com",
+    },
+    {
+      id: 3,
+      name: "Charlie",
+      dob: new Date(2000, 0, 5),
+      email: "charlie@example.com",
+    },
+    {
+      id: 4,
+      name: "Diana",
+      dob: new Date(1995, 3, 30),
+      email: "diana@example.com",
+    },
+    {
+      id: 5,
+      name: "Ethan",
+      dob: new Date(1988, 8, 17),
+      email: "ethan@example.com",
+    },
+    {
+      id: 6,
+      name: "Fiona",
+      dob: new Date(1992, 2, 14),
+      email: "fiona@example.com",
+    },
   ];
 
   // Format date before rendering in table cells
@@ -27,7 +63,7 @@ const ButtonDocs = () => {
     dob: row.dob.toLocaleDateString(),
   }));
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif", lineHeight: 1.6 }}>
+    <div className=" px-5">
       <h1
         style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem" }}
       >
@@ -35,6 +71,12 @@ const ButtonDocs = () => {
       </h1>
 
       <CodeBlock
+      className="mb-20"
+        language="javascript"
+        code={`Import { Button } from "@neuctra/ui"`}
+      />
+
+      <CodePreviewBlock
         previewContent={
           <Button
             backgroundColor="var(--primary)"
@@ -75,7 +117,7 @@ const ButtonDocs = () => {
         language="javascript"
       />
 
-      <p style={{ marginBottom: "2rem" }}>
+      <p  style={{ marginBottom: "2rem" }}>
         The <code>Button</code> component is a fully customizable, reusable
         React button designed for flexibility and ease of use. It supports
         inline styling, hover effects, loading states, icons before and after
@@ -83,26 +125,28 @@ const ButtonDocs = () => {
       </p>
 
       <h2>Props</h2>
-      
-        <h1>Users Table</h1>
-     <Table
+
+      <h1>Users Table</h1>
+      <Table
         columns={columns}
         data={formattedData}
-        rowsPerPage={3}
+        rowsPerPage={10}
         pagination={true}
+        tableBorderRadius="12px"
+        headerBorderRadius="12px"
+        bodyAlign="center"
+        sortable={false}
         colors={{
-          headerBg: "#2563eb", // blue-600
+          headerBg: "rgba(0, 255, 0, 0.60)", // blue-600
           headerText: "#fff",
-          rowBg: "#f9fafb", // gray-50
-          rowText: "#111827", // gray-900
-          borderColor: "#e5e7eb", // gray-200
-          hoverBg: "#dbeafe", // blue-100
-          paginationBg: "#3b82f6", // blue-500
+          rowBg: "#011627",
+          rowText: "white",
+          borderColor: "transparent",
+          hoverBg: "none",
+          paginationBg: "rgba(0, 255, 0, 0.30)",
           paginationText: "#fff",
         }}
-      
       />
-    
 
       <h2>Usage Examples</h2>
 

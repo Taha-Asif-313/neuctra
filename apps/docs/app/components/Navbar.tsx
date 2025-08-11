@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
         isOpen ? "bg-black" : "bg-transparent"
       } text-white`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between lg:px-0 px-4 py-1 lg:py-2.5">
+      <div className="max-w-6xl mx-auto flex items-center justify-between lg:px-0 px-4 py-1 lg:py-2.5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-0.5">
           <img src="/logo.png" alt="Logo" className="w-10 object-cover" />
