@@ -13,14 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-zinc-950 min-h-screen text-white justify-end flex">
-        {/* Sidebar */}
+      <body className="bg-zinc-950 min-h-screen text-white flex">
         <Sidebar />
-
-        {/* Main content */}
-        <main className="max-sm:pt-18 w-[80%]">
-          {children}
-        </main>
+        <main className="flex-1 max-sm:pt-18 p-4 ml-60">{children}</main>
       </body>
     </html>
   );

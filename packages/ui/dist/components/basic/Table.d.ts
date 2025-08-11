@@ -1,8 +1,9 @@
-import { default as React } from 'react';
+import { default as React, ReactNode } from 'react';
 interface Column {
     key: string;
     label: string;
     sortable?: boolean;
+    icon?: ReactNode;
 }
 interface TableProps {
     columns: Column[];
@@ -20,6 +21,7 @@ interface TableProps {
         paginationBg?: string;
         paginationText?: string;
     };
+    headerBorderRadius?: string;
 }
 export declare const Table: React.FC<TableProps>;
 export {};
