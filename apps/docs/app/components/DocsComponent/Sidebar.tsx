@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp, TerminalSquare } from "lucide-react";
+import Image from "next/image";
 
 interface NavItem {
   label: string;
@@ -13,6 +15,7 @@ interface NavItem {
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>("Basic");
+  const pathname = usePathname();
 
   const navLinks: NavItem[] = [
     { label: "Home", href: "/" },
@@ -31,89 +34,110 @@ const Sidebar: React.FC = () => {
     setActiveDropdown((prev) => (prev === label ? null : label));
   };
 
+  const isActive = (href?: string) => href && pathname === href;
+
   return (
     <>
-      {/* Mobile Toggle Button */}
-      <nav className="fixed w-full flex items-center justify-between z-50 lg:hidden py-4 px-4 rounded-md bg-black text-white">
-        <div className=" flex items-center justify-between ">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" className="w-8" />
-            <h2 className="text-lg font-semibold">
-              Neuctra<span className="text-primary">Ui</span>
-            </h2>
-          </Link>
-        </div>
-        <button onClick={() => setIsOpen(!isOpen)} className=" lg:hidden ">
+      {/* Mobile Nav Toggle */}
+      <nav className="fixed w-full flex items-center justify-between z-50 lg:hidden py-4 px-4 bg-[#0a0a0a] text-white shadow-md border-b border-[#1a1a1a]">
+        <Link href="/" className="flex items-center gap-2">
+          <TerminalSquare className="text-[#00c214]" size={24} />
+          <h2 className="text-lg font-semibold tracking-tight">
+            Neuctra<span className="text-[#00c214]">UI</span>
+          </h2>
+        </Link>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-2 rounded-md hover:bg-[#1a1a1a] transition"
+        >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
       {/* Sidebar */}
       <aside
-        className={`fixed z-50 top-0 left-0 h-full bg-[#011627] border border-gray-800 text-white rounded-r-3xl w-64 transform transition-transform duration-300
+        className={`fixed z-50 top-0 left-0 h-full w-64 bg-gradient-to-b from-[#0a0a0a] to-[#111] border-r border-[#1a1a1a] text-gray-200 shadow-xl transform transition-transform duration-300 ease-in-out rounded-r-2xl
         ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
-        <div className="p-4 flex items-center justify-between ">
-          <Link href="/" className="flex items-center gap-2">
-            <img src="/logo.png" alt="Logo" className="w-8" />
-            <h2 className="text-lg font-semibold">
-              Neuctra<span className="text-primary">Ui</span>
+        {/* Logo */}
+        <div className="p-5 flex items-center justify-between border-b border-[#1a1a1a]">
+          <Link href="/" className="flex items-center gap-1">
+            <Image
+              className="object-cover"
+              alt="Logo"
+              src={"/logo.png"}
+              width={55}
+              height={55}
+            />
+            <h2 className="text-lg font-semibold tracking-tight">
+              Neuctra<span className="text-[#00c214]">UI</span>
             </h2>
-            <span className="text-sm">- Docs</span>
+            <span className="ml-1 text-sm text-gray-500">Docs</span>
           </Link>
           <button
             onClick={() => setIsOpen(false)}
-            className="lg:hidden text-white"
+            className="lg:hidden p-2 rounded-md hover:bg-[#1a1a1a] transition"
           >
-            <X size={22} />
+            <X size={20} />
           </button>
         </div>
 
-        {/* Links */}
-        <nav className="p-4 space-y-2">
-          {navLinks.map((link) =>
-            link.subLinks ? (
-              <div key={link.label}>
-                <button
-                  onClick={() => toggleDropdown(link.label)}
-                  className="flex items-center justify-between w-full text-left hover:text-primary transition"
-                >
-                  {link.label}
-                  {activeDropdown === link.label ? (
-                    <ChevronUp size={18} />
-                  ) : (
-                    <ChevronDown size={18} />
-                  )}
-                </button>
-                {activeDropdown === link.label && (
-                  <div className="ml-2 mt-2">
-                    {link.subLinks.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block text-sm py-1.5 hover:text-primary transition"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
+        {/* Navigation */}
+      {/* Navigation */}
+<nav className="p-4 space-y-3">
+  {navLinks.map((link) =>
+    link.subLinks ? (
+      <div key={link.label} className="space-y-1">
+        <button
+          onClick={() => toggleDropdown(link.label)}
+          className={`flex items-center justify-between border-l-2 w-full px-3 py-2 text-sm font-medium rounded-lg transition
+            ${
+              activeDropdown === link.label
+                ? "bg-[var(--primary)] border-[#00c214]"
+                : "border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)]"
+            }`}
+        >
+          {link.label}
+          {activeDropdown === link.label ? (
+            <ChevronUp size={16} />
+          ) : (
+            <ChevronDown size={16} />
+          )}
+        </button>
+
+        {activeDropdown === link.label && (
+          <div className="ml-3 mt-1 space-y-1 border-l border-[#1a1a1a] pl-3">
+            {link.subLinks.map((sub) => (
               <Link
-                key={link.href}
-                href={link.href || "#"}
-                className="block hover:text-primary transition"
+                key={sub.href}
+                href={sub.href}
+                className={`block px-2 py-1.5 text-sm rounded-md transition 
+                  ${
+                    pathname === sub.href
+                      ? "text-primary"
+                      : "text-gray-400 hover:text-primary"
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
-                {link.label}
+                {sub.label}
               </Link>
-            )
-          )}
+            ))}
+          </div>
+        )}
+      </div>
+    ) : (
+      <Link
+        key={link.href}
+        href={link.href || "#"}
+        className="block px-3 py-2 text-sm font-medium rounded-lg border-l-2 border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)] transition"
+        onClick={() => setIsOpen(false)}
+      >
+        {link.label}
+      </Link>
+    )
+  )}
+</nav>
 
-      
-        </nav>
       </aside>
     </>
   );
