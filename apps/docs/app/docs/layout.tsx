@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Sidebar from "../components/DocsComponent/Sidebar";
+import Sidebar from "../components/docs/Sidebar";
 
 export const metadata: Metadata = {
   title: "Neuctra UI - A modern UI library with modern designs",
@@ -12,11 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-zinc-950 min-h-screen text-white flex">
-        <Sidebar />
-        <main className="flex-1 max-sm:pt-18 p-4 ml-64">{children}</main>
-      </body>
-    </html>
+    <div className="bg-zinc-950 min-h-screen text-white">
+      {/* Sidebar is fixed, so no flex container needed */}
+      <Sidebar />
+
+      {/* Main content with left margin = sidebar width */}
+      <main className="ml-64 max-sm:ml-0 max-sm:pt-16 px-4">{children}</main>
+    </div>
   );
 }

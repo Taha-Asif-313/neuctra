@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import CopyButton from "../components/CopyButton";
+import CopyButton from "../components/docs/CopyButton";
 import { Button } from "@neuctra/ui";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { useRouter } from "next/navigation";

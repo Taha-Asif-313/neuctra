@@ -14,15 +14,15 @@ interface NavItem {
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>("Basic");
+  const [activeDropdown, setActiveDropdown] = useState<string | null>("Basic Components");
   const pathname = usePathname();
 
   const navLinks: NavItem[] = [
-    { label: "Home", href: "/" },
+    { label: "Getting Started", href: "/docs" },
     {
-      label: "Basic",
+      label: "Basic Components",
       subLinks: [
-        { label: "Landing Pages", href: "/templates/landing" },
+        { label: "Button", href: "/docs/button" },
         { label: "Dashboards", href: "/templates/dashboard" },
         { label: "E-commerce", href: "/templates/ecommerce" },
       ],
@@ -83,61 +83,60 @@ const Sidebar: React.FC = () => {
         </div>
 
         {/* Navigation */}
-      {/* Navigation */}
-<nav className="p-4 space-y-3">
-  {navLinks.map((link) =>
-    link.subLinks ? (
-      <div key={link.label} className="space-y-1">
-        <button
-          onClick={() => toggleDropdown(link.label)}
-          className={`flex items-center justify-between border-l-2 w-full px-3 py-2 text-sm font-medium rounded-lg transition
+        {/* Navigation */}
+        <nav className="p-4 space-y-3">
+          {navLinks.map((link) =>
+            link.subLinks ? (
+              <div key={link.label} className="space-y-1">
+                <button
+                  onClick={() => toggleDropdown(link.label)}
+                  className={`flex items-center justify-between border-l-2 w-full px-3 py-2 text-sm font-medium rounded-lg transition
             ${
               activeDropdown === link.label
                 ? "bg-[var(--primary)] border-[#00c214]"
                 : "border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)]"
             }`}
-        >
-          {link.label}
-          {activeDropdown === link.label ? (
-            <ChevronUp size={16} />
-          ) : (
-            <ChevronDown size={16} />
-          )}
-        </button>
+                >
+                  {link.label}
+                  {activeDropdown === link.label ? (
+                    <ChevronUp size={16} />
+                  ) : (
+                    <ChevronDown size={16} />
+                  )}
+                </button>
 
-        {activeDropdown === link.label && (
-          <div className="ml-3 mt-1 space-y-1 border-l border-[#1a1a1a] pl-3">
-            {link.subLinks.map((sub) => (
-              <Link
-                key={sub.href}
-                href={sub.href}
-                className={`block px-2 py-1.5 text-sm rounded-md transition 
+                {activeDropdown === link.label && (
+                  <div className="ml-3 mt-1 space-y-1 border-l border-[#1a1a1a] pl-3">
+                    {link.subLinks.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        href={sub.href}
+                        className={`block px-2 py-1.5 text-sm rounded-md transition 
                   ${
                     pathname === sub.href
-                      ? "text-primary"
+                      ? "text-primary font-bold"
                       : "text-gray-400 hover:text-primary"
                   }`}
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                key={link.href}
+                href={link.href || "#"}
+                className="block px-3 py-2 text-sm font-medium rounded-lg border-l-2 border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)] transition"
                 onClick={() => setIsOpen(false)}
               >
-                {sub.label}
+                {link.label}
               </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    ) : (
-      <Link
-        key={link.href}
-        href={link.href || "#"}
-        className="block px-3 py-2 text-sm font-medium rounded-lg border-l-2 border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)] transition"
-        onClick={() => setIsOpen(false)}
-      >
-        {link.label}
-      </Link>
-    )
-  )}
-</nav>
-
+            )
+          )}
+        </nav>
       </aside>
     </>
   );

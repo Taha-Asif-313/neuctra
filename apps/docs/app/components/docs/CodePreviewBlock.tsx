@@ -17,6 +17,7 @@ interface CodeBlockProps {
   language: string;
   theme?: string;
   previewContent: React.ReactNode;
+    className?: string;
 }
 
 type Breakpoint = "mobile" | "sm" | "md" | "lg" | "full";
@@ -25,6 +26,7 @@ interface BreakpointOption {
   id: Breakpoint;
   label: string;
   icon: React.ReactNode;
+
 }
 
 export default function CodePreviewBlock({
@@ -32,6 +34,7 @@ export default function CodePreviewBlock({
   language,
   theme = "night-owl",
   previewContent,
+  className
 }: CodeBlockProps) {
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [view, setView] = useState<"preview" | "code">("preview");
@@ -68,7 +71,7 @@ export default function CodePreviewBlock({
   };
 
   return (
-    <div className="w-full border border-gray-900 rounded-md overflow-hidden shadow-sm bg-gray-950 text-white">
+    <div className={`${className} w-full border border-gray-900 rounded-md overflow-hidden shadow-sm bg-gray-950 text-white`}>
       {/* Toolbar */}
       <div className="flex justify-between items-center px-3 text-sm py-4 bg-[#011627]">
         {/* Switch */}
@@ -141,7 +144,7 @@ export default function CodePreviewBlock({
           )}
           {view === "code" && highlightedCode && (
             <div
-              className="rounded-md overflow-auto font-mono text-sm bg-gray-900 text-white border border-gray-700"
+              className="rounded-md p-5 overflow-auto font-mono text-sm bg-[#011627] text-white border border-gray-700"
               dangerouslySetInnerHTML={{ __html: highlightedCode }}
             />
           )}
