@@ -17,7 +17,7 @@ export default function RootLayout({
       <Sidebar />
 
       {/* Main content with left margin = sidebar width */}
-      <main className="ml-64 max-sm:ml-0 max-sm:pt-14 px-4">{children}</main>
+      <main className="ml-64 max-sm:ml-0 max-sm:pt-14 max-lg:px-5 px-4">{children}</main>
     </div>
   );
 }
