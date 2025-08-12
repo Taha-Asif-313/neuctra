@@ -25,6 +25,7 @@ interface TableProps {
     tableBorderRadius?: string;
     sortable?: boolean;
     bodyAlign?: "left" | "center" | "right";
+    headerAlign?: "left" | "center" | "right";
 }
 export declare const Table: React.FC<TableProps>;
 export {};

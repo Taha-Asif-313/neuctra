@@ -121,12 +121,13 @@ const TextDocs: React.FC = () => {
         <Table
           columns={columns}
           data={data}
-          className="text-sm"
+          className="text-xs"
           rowsPerPage={10}
           pagination={false}
           tableBorderRadius="12px"
           headerBorderRadius="12px"
-          bodyAlign="center"
+          headerAlign = "left"
+          bodyAlign="left"
           sortable={false}
           colors={{
             headerBg: "rgba(2, 179, 20, 0.8)",

@@ -28,6 +28,7 @@ interface TableProps {
   tableBorderRadius?: string; // border-radius for entire table (all corners)
   sortable?: boolean; // Global toggle to enable/disable sorting for all columns
   bodyAlign?: "left" | "center" | "right"; // alignment for tbody cells
+  headerAlign?: "left" | "center" | "right"; // alignment for thead cells
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -50,6 +51,7 @@ export const Table: React.FC<TableProps> = ({
   tableBorderRadius = "8px",
   sortable = true,
   bodyAlign = "left",
+  headerAlign = "left"
 }) => {
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
@@ -192,7 +194,7 @@ export const Table: React.FC<TableProps> = ({
                   borderTopLeftRadius: i === 0 ? headerBorderRadius : undefined,
                   borderTopRightRadius:
                     i === columns.length - 1 ? headerBorderRadius : undefined,
-                  textAlign: "center",
+                  textAlign: headerAlign,
                   whiteSpace: "nowrap",
                 }}
                 aria-sort={

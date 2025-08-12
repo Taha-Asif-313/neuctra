@@ -144,7 +144,7 @@ export default function CodePreviewBlock({
           )}
           {view === "code" && highlightedCode && (
             <div
-              className="rounded-md p-5 overflow-auto font-mono text-sm bg-[#011627] text-white border border-gray-700"
+              className="rounded-md p-5 custom-scrollbar overflow-auto font-mono text-sm bg-[#011627] text-white border border-gray-700"
               dangerouslySetInnerHTML={{ __html: highlightedCode }}
             />
           )}
