@@ -38,7 +38,6 @@ const Sidebar: React.FC = () => {
         { label: "Accordation", href: "/docs/accordation" },
         { label: "CheckRadio", href: "/docs/checkradio" },
         { label: "Drawer", href: "/docs/drawer" },
-        { label: "DrawerButton", href: "/docs/drawerbutton" },
         { label: "Dropdown", href: "/docs/dropdown" },
         { label: "Table", href: "/docs/table" },
         { label: "Card", href: "/docs/card" },
