@@ -103,7 +103,26 @@ const InputDocs: React.FC = () => {
       {/* Props Table */}
       <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-6">Props</h2>
-        <Table
+          <table className="w-full text-left text-xs text-gray-200 border-collapse">
+          <thead>
+            <tr className="bg-primary text-white">
+              {columns.map(({ label, key }) => (
+                <th key={key} className="px-3 py-2 border border-primary">{label}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(({ prop, type, default: def, description }) => (
+              <tr key={prop} className="even:bg-zinc-800 odd:bg-zinc-900">
+                <td className="border border-primary px-3 py-2 font-mono">{prop}</td>
+                <td className="border border-primary px-3 py-2 font-mono">{type}</td>
+                <td className="border border-primary px-3 py-2 font-mono">{def}</td>
+                <td className="border border-primary px-3 py-2">{description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* <Table
           columns={columns}
           data={data}
           className="text-xs"
@@ -124,7 +143,7 @@ const InputDocs: React.FC = () => {
             paginationBg: "rgba(2, 179, 20, 0.3)",
             paginationText: "#fff",
           }}
-        />
+        /> */}
       </section>
 
       {/* Behavior and Features */}
