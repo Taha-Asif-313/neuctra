@@ -29,6 +29,9 @@ interface DropdownProps {
   optionGap?: string;
   transitionDuration?: string;
 
+  // Custom hover style for options
+  optionHoverStyle?: React.CSSProperties;
+
   // Custom class/style
   className?: string;
   dropdownStyle?: React.CSSProperties;
@@ -39,7 +42,6 @@ interface DropdownProps {
   // Icons and animations
   iconPrefix?: React.ReactNode;
   iconSuffix?: React.ReactNode;
-  openAnimation?: string;
 }
 
 export const Dropdown: React.FC<DropdownProps> = ({
@@ -64,6 +66,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
   optionGap = "8px",
   transitionDuration = "0.25s",
 
+  optionHoverStyle,
+
   className = "",
   dropdownStyle,
   dropdownClassName = "",
@@ -75,6 +79,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [selected, setSelected] = useState<string | undefined>(defaultValue);
   const [open, setOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -157,35 +162,48 @@ export const Dropdown: React.FC<DropdownProps> = ({
             ...dropdownStyle,
           }}
         >
-          {options.map((option) => (
-            <li
-              key={option.value}
-              onClick={() => handleSelect(option.value)}
-              role="option"
-              className={optionClassName}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: optionGap,
-                padding: optionPadding,
-                cursor: "pointer",
-                backgroundColor:
-                  selected === option.value ? hoverColor : backgroundColor,
-                transition: `background ${transitionDuration}`,
-                ...optionStyle,
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = hoverColor)
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor =
-                  selected === option.value ? hoverColor : backgroundColor)
-              }
-            >
-              {option.icon && <span>{option.icon}</span>}
-              {option.label}
-            </li>
-          ))}
+          {options.map((option, idx) => {
+            // Determine if this option is selected or hovered
+            const isSelected = selected === option.value;
+            const isHovered = hoveredIndex === idx;
+
+            // Compose background color for this option
+            const backgroundColorOption =
+              isHovered
+                ? optionHoverStyle?.backgroundColor || hoverColor
+                : isSelected
+                ? hoverColor
+                : backgroundColor;
+
+            // Compose combined styles for option
+            const combinedOptionStyle: React.CSSProperties = {
+              display: "flex",
+              alignItems: "center",
+              gap: optionGap,
+              padding: optionPadding,
+              cursor: "pointer",
+              backgroundColor: backgroundColorOption,
+              transition: `background ${transitionDuration}`,
+              ...optionStyle,
+              ...(isHovered && optionHoverStyle),
+            };
+
+            return (
+              <li
+                key={option.value}
+                onClick={() => handleSelect(option.value)}
+                role="option"
+                className={optionClassName}
+                style={combinedOptionStyle}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                aria-selected={isSelected}
+              >
+                {option.icon && <span>{option.icon}</span>}
+                {option.label}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>

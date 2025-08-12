@@ -1,10 +1,10 @@
 import React from "react";
-interface AccordionItem {
+interface AccordationItem {
     title: string;
     content: React.ReactNode;
 }
-interface AccordionProps {
-    items: AccordionItem[];
+interface AccordationProps {
+    items: AccordationItem[];
     allowMultiple?: boolean;
     defaultOpenIndex?: number[];
     borderColor?: string;
@@ -31,5 +31,5 @@ interface AccordionProps {
     className?: string;
     style?: React.CSSProperties;
 }
-export declare const Accordion: React.FC<AccordionProps>;
+export declare const Accordation: React.FC<AccordationProps>;
 export {};

@@ -7,7 +7,7 @@ export { LeftTabs, RightTabs, TopTabs } from './components/basic/Tabs';
 export { VideoPlayer } from './components/basic/VideoPlayer';
 export { AudioPlayer } from './components/basic/AudioPlayer';
 export { Container } from './components/basic/Container';
-export { Accordion } from './components/basic/Accordation';
+export { Accordation } from './components/basic/Accordation';
 export { CheckRadio } from './components/basic/CheckRadioInput';
 export { Drawer, DrawerButton } from './components/basic/Drawer';
 export { Dropdown } from './components/basic/DropDown';

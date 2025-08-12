@@ -24,6 +24,7 @@ interface DropdownProps {
     optionPadding?: string;
     optionGap?: string;
     transitionDuration?: string;
+    optionHoverStyle?: React.CSSProperties;
     className?: string;
     dropdownStyle?: React.CSSProperties;
     dropdownClassName?: string;
@@ -31,7 +32,6 @@ interface DropdownProps {
     optionClassName?: string;
     iconPrefix?: React.ReactNode;
     iconSuffix?: React.ReactNode;
-    openAnimation?: string;
 }
 export declare const Dropdown: React.FC<DropdownProps>;
 export {};
