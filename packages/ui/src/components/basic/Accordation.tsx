@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 
-interface AccordionItem {
+interface AccordationItem {
   title: string;
   content: React.ReactNode;
 }
 
-interface AccordionProps {
-  items: AccordionItem[];
+interface AccordationProps {
+  items: AccordationItem[];
   allowMultiple?: boolean;
   defaultOpenIndex?: number[];
   borderColor?: string;
@@ -34,7 +34,7 @@ interface AccordionProps {
   style?: React.CSSProperties; // ✅ NEW
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordation: React.FC<AccordationProps> = ({
   items,
   allowMultiple = false,
   defaultOpenIndex = [],

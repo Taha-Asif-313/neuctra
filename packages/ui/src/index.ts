@@ -10,7 +10,7 @@ export { LeftTabs, RightTabs, TopTabs } from "./components/basic/Tabs"; // Final
 export { VideoPlayer } from "./components/basic/VideoPlayer"; // Finalled
 export { AudioPlayer } from "./components/basic/AudioPlayer"; // Finalled
 export { Container } from "./components/basic/Container"; // Finalled
-export { Accordion } from "./components/basic/Accordation"; // Finalled
+export { Accordation } from "./components/basic/Accordation"; // Finalled
 export { CheckRadio } from "./components/basic/CheckRadioInput"; // Finalled
 export { Drawer, DrawerButton } from "./components/basic/Drawer"; // Finalled
 export { Dropdown } from "./components/basic/DropDown"; /// Finalled
