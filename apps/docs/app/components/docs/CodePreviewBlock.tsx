@@ -138,7 +138,7 @@ export default function CodePreviewBlock({
           }`}
         >
           {view === "preview" && (
-            <div className="border border-gray-700 bg-gray-950 rounded-lg shadow p-4">
+            <div className="border border-gray-700 overflow-y-auto bg-gray-950 rounded-lg shadow p-4">
               {previewContent}
             </div>
           )}

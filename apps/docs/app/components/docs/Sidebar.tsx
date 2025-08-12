@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
         { label: "VideoPlayer", href: "/docs/videoplayer" },
         { label: "AudioPlayer", href: "/docs/audioplayer" },
         { label: "Container", href: "/docs/container" },
-        { label: "Accordion", href: "/docs/accordion" },
+        { label: "Accordation", href: "/docs/accordation" },
         { label: "CheckRadio", href: "/docs/checkradio" },
         { label: "Drawer", href: "/docs/drawer" },
         { label: "DrawerButton", href: "/docs/drawerbutton" },
