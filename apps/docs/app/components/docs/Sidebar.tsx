@@ -14,7 +14,9 @@ interface NavItem {
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>("Basic Components");
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(
+    "Basic Components"
+  );
   const pathname = usePathname();
 
   const navLinks: NavItem[] = [
@@ -22,9 +24,34 @@ const Sidebar: React.FC = () => {
     {
       label: "Basic Components",
       subLinks: [
+        { label: "Text", href: "/docs/text" },
+        { label: "Image", href: "/docs/image" },
         { label: "Button", href: "/docs/button" },
-        { label: "Dashboards", href: "/templates/dashboard" },
-        { label: "E-commerce", href: "/templates/ecommerce" },
+        { label: "Input", href: "/docs/input" },
+        { label: "List", href: "/docs/list" },
+        { label: "LeftTabs", href: "/docs/lefttabs" },
+        { label: "RightTabs", href: "/docs/righttabs" },
+        { label: "TopTabs", href: "/docs/toptabs" },
+        { label: "VideoPlayer", href: "/docs/videoplayer" },
+        { label: "AudioPlayer", href: "/docs/audioplayer" },
+        { label: "Container", href: "/docs/container" },
+        { label: "Accordion", href: "/docs/accordion" },
+        { label: "CheckRadio", href: "/docs/checkradio" },
+        { label: "Drawer", href: "/docs/drawer" },
+        { label: "DrawerButton", href: "/docs/drawerbutton" },
+        { label: "Dropdown", href: "/docs/dropdown" },
+        { label: "Table", href: "/docs/table" },
+        { label: "Card", href: "/docs/card" },
+        { label: "GridView", href: "/docs/gridview" },
+        { label: "Flexbox", href: "/docs/flexbox" },
+        { label: "Alert", href: "/docs/alert" },
+        { label: "Badge", href: "/docs/badge" },
+        { label: "Modal", href: "/docs/modal" },
+        { label: "Avatar", href: "/docs/avatar" },
+        { label: "AvatarGroup", href: "/docs/avatargroup" },
+        { label: "AudioGallery", href: "/docs/audiogallery" },
+        { label: "VideoGallery", href: "/docs/videogallery" },
+        { label: "ImageGallery", href: "/docs/imagegallery" },
       ],
     },
     { label: "About", href: "/about" },
@@ -56,7 +83,7 @@ const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside
-        className={`fixed z-50 top-0 left-0 h-full w-64 bg-gradient-to-b from-[#0a0a0a] to-[#111] border-r border-[#1a1a1a] text-gray-200 shadow-xl transform transition-transform duration-300 ease-in-out rounded-r-2xl
+        className={`fixed z-50 custom-scrollbar overflow-y-scroll top-0 left-0 h-full w-64 bg-gradient-to-b from-[#0a0a0a] to-[#111] border-r border-[#1a1a1a] text-gray-200 shadow-xl transform transition-transform duration-300 ease-in-out rounded-r-2xl
         ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
       >
         {/* Logo */}
@@ -83,7 +110,6 @@ const Sidebar: React.FC = () => {
         </div>
 
         {/* Navigation */}
-        {/* Navigation */}
         <nav className="p-4 space-y-3">
           {navLinks.map((link) =>
             link.subLinks ? (
@@ -93,7 +119,7 @@ const Sidebar: React.FC = () => {
                   className={`flex items-center justify-between border-l-2 w-full px-3 py-2 text-sm font-medium rounded-lg transition
             ${
               activeDropdown === link.label
-                ? "bg-[var(--primary)] border-[#00c214]"
+                ? "bg-[var(--primary)] !font-bold border-[#00c214]"
                 : "border-[#1a1a1a] hover:border-primary hover:bg-[var(--primary)]"
             }`}
                 >

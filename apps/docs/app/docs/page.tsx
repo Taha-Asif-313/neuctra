@@ -8,7 +8,7 @@ import CodePreviewBlock from "../components/docs/CodePreviewBlock";
 
 const GetStartedPage: React.FC = () => {
   return (
-    <div className="bg-zinc-950 font-primary text-gray-200 min-h-screen px-6 py-10">
+    <div className="bg-zinc-950 font-primary text-gray-200 min-h-screen py-10">
       <div className="space-y-10 max-w-5xl mx-auto">
         {/* Header */}
         <header>

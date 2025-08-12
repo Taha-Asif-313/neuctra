@@ -158,7 +158,7 @@ const ButtonDocs: React.FC = () => {
   ];
 
   return (
-    <div className="py-10 font-primary mx-auto bg-zinc-950">
+    <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950">
       {/* Page Title */}
       <h1 className="text-4xl font-bold mb-8">
         <span className="text-primary">Button</span> Component Documentation
