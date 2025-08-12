@@ -47,7 +47,6 @@ const Sidebar: React.FC = () => {
         { label: "Badge", href: "/docs/badge" },
         { label: "Modal", href: "/docs/modal" },
         { label: "Avatar", href: "/docs/avatar" },
-        { label: "AvatarGroup", href: "/docs/avatargroup" },
         { label: "AudioGallery", href: "/docs/audiogallery" },
         { label: "VideoGallery", href: "/docs/videogallery" },
         { label: "ImageGallery", href: "/docs/imagegallery" },
