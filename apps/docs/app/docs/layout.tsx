@@ -12,12 +12,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="bg-zinc-950 min-h-screen text-white">
+    <div className="bg-zinc-950 w-full min-h-screen text-white">
       {/* Sidebar is fixed, so no flex container needed */}
       <Sidebar />
 
       {/* Main content with left margin = sidebar width */}
-      <main className="ml-64 max-sm:ml-0 max-sm:pt-16 px-4">{children}</main>
+      <main className="ml-64 max-sm:ml-0 max-sm:pt-14 px-4">{children}</main>
     </div>
   );
 }

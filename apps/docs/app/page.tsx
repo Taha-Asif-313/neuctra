@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 
 const Page = () => {
   return (
-    <div className="bg-black text-white font-primary">
+    <div className="bg-black text-white font-primary w-full">
       <Navbar />
       <Home />
     </div>

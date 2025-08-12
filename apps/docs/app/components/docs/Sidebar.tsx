@@ -68,7 +68,13 @@ const Sidebar: React.FC = () => {
       {/* Mobile Nav Toggle */}
       <nav className="fixed w-full flex items-center justify-between z-50 lg:hidden py-4 px-4 bg-[#0a0a0a] text-white shadow-md border-b border-[#1a1a1a]">
         <Link href="/" className="flex items-center gap-2">
-          <TerminalSquare className="text-[#00c214]" size={24} />
+             <Image
+              className="object-cover"
+              alt="Logo"
+              src={"/logo.png"}
+              width={40}
+              height={40}
+            />
           <h2 className="text-lg font-semibold tracking-tight">
             Neuctra<span className="text-[#00c214]">UI</span>
           </h2>
@@ -93,20 +99,15 @@ const Sidebar: React.FC = () => {
               className="object-cover"
               alt="Logo"
               src={"/logo.png"}
-              width={55}
-              height={55}
+              width={40}
+              height={40}
             />
             <h2 className="text-lg font-semibold tracking-tight">
               Neuctra<span className="text-[#00c214]">UI</span>
             </h2>
             <span className="ml-1 text-sm text-gray-500">Docs</span>
           </Link>
-          <button
-            onClick={() => setIsOpen(false)}
-            className="lg:hidden p-2 rounded-md hover:bg-[#1a1a1a] transition"
-          >
-            <X size={20} />
-          </button>
+       
         </div>
 
         {/* Navigation */}
