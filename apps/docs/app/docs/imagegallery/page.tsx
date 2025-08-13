@@ -197,8 +197,9 @@ const ImageGalleryDocs: React.FC = () => {
                 { src: "https://static.vecteezy.com/system/resources/thumbnails/049/855/347/small_2x/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg" }
               ]}
               columns={5}
+              lightbox
               gap="16px"
-              layout="grid"
+              layout="masonry"
             />
           }
         />
