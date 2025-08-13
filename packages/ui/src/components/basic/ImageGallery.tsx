@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Image } from "./Image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
+interface BreakpointColumns {
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number;
+  default?: number;
+}
+
 interface ImageGalleryProps {
   images: { src: string; alt?: string }[];
-  columns?: number;
+  columns?: number | BreakpointColumns;
   gap?: string;
   layout?: "grid" | "masonry";
   lightbox?: boolean;
@@ -20,21 +28,27 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   className = "",
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [responsiveCols, setResponsiveCols] = useState(columns);
+  const [responsiveCols, setResponsiveCols] = useState(
+    typeof columns === "number" ? columns : columns.default || 3
+  );
   const [direction, setDirection] = useState<"next" | "prev" | null>(null);
-  const [animKey, setAnimKey] = useState(0); // force animation reset
+  const [animKey, setAnimKey] = useState(0);
 
-  // Handle responsive column count
+  // Responsive column logic
   useEffect(() => {
     const updateColumns = () => {
-      if (window.innerWidth < 640) {
-        setResponsiveCols(1);
-      } else if (window.innerWidth < 1024) {
-        setResponsiveCols(Math.min(2, columns));
-      } else {
+      if (typeof columns === "number") {
         setResponsiveCols(columns);
+      } else {
+        const width = window.innerWidth;
+        if (width < 640 && columns.sm) setResponsiveCols(columns.sm);
+        else if (width < 1024 && columns.md) setResponsiveCols(columns.md);
+        else if (width < 1280 && columns.lg) setResponsiveCols(columns.lg);
+        else if (width >= 1280 && columns.xl) setResponsiveCols(columns.xl);
+        else setResponsiveCols(columns.default || 3);
       }
     };
+
     updateColumns();
     window.addEventListener("resize", updateColumns);
     return () => window.removeEventListener("resize", updateColumns);
@@ -99,164 +113,137 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
         ))}
       </div>
 
-   {/* Lightbox */}
-{lightbox && selectedIndex !== null && (
-  <div
-    onClick={closeLightbox}
-    style={{
-      position: "fixed",
-      inset: "0",
-      background: "rgba(0,0,0,0.8)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 9999,
-    }}
-    role="dialog"
-    aria-modal="true"
-  >
-    {/* Container for image + nav buttons */}
-    <div
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        maxWidth: "90%",
-        maxHeight: "90%",
-      }}
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* Prev Button - over image */}
-      <button
-        onClick={prevImage}
-        aria-label="Previous image"
-        style={{
-          position: "absolute",
-          left: "-50px",
-          top: "50%",
-          transform: "translateY(-50%)",
-          color: "white",
-          background: "rgba(0,0,0,0.5)",
-          border: "none",
-          padding: "10px",
-          borderRadius: "50%",
-          cursor: "pointer",
-          zIndex: 2,
-        }}
-      >
-        <ChevronLeft size={32} />
-      </button>
-
-      {/* Animated Image */}
-      <div
-        key={animKey}
-        style={{
-          animation:
-            direction === "next"
-              ? "slideInFromRight 0.4s ease"
-              : direction === "prev"
-              ? "slideInFromLeft 0.4s ease"
-              : "fadeIn 0.3s ease",
-        }}
-      >
-        <Image
-          src={images[selectedIndex].src}
-          alt={images[selectedIndex].alt || "Preview"}
-          lazyLoad={true}
+      {/* Lightbox */}
+      {lightbox && selectedIndex !== null && (
+        <div
+          onClick={closeLightbox}
           style={{
-            maxWidth: "100%",
-            maxHeight: "100%",
-            objectFit: "contain",
+            position: "fixed",
+            inset: "0",
+            background: "rgba(0,0,0,0.8)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
           }}
-        />
-      </div>
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Container for image + nav buttons */}
+          <div
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              maxWidth: "90%",
+              maxHeight: "90%",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Prev Button */}
+            <button
+              onClick={prevImage}
+              aria-label="Previous image"
+              style={{
+                position: "absolute",
+                left: "5px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "white",
+                background: "rgba(0,0,0,0.5)",
+                border: "none",
+                padding: "10px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                zIndex: 2,
+              }}
+            >
+              <ChevronLeft size={24} />
+            </button>
 
-      {/* Next Button - over image */}
-      <button
-        onClick={nextImage}
-        aria-label="Next image"
-        style={{
-          position: "absolute",
-          right: "0px",
-          top: "50%",
-          transform: "translateY(-50%)",
-          color: "white",
-          background: "rgba(0,0,0,0.5)",
-          border: "none",
-          padding: "10px",
-          borderRadius: "50%",
-          cursor: "pointer",
-          zIndex: 2,
-        }}
-      >
-        <ChevronRight size={28} />
-      </button>
-    </div>
+            {/* Animated Image */}
+            <div
+              key={animKey}
+              style={{
+                animation:
+                  direction === "next"
+                    ? "slideInFromRight 0.4s ease"
+                    : direction === "prev"
+                    ? "slideInFromLeft 0.4s ease"
+                    : "fadeIn 0.3s ease",
+              }}
+            >
+              <Image
+                src={images[selectedIndex].src}
+                alt={images[selectedIndex].alt || "Preview"}
+                lazyLoad={true}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
 
-    {/* Close Button */}
-    <button
-      onClick={closeLightbox}
-      aria-label="Close preview"
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        color: "white",
-        background: "rgba(0,0,0,0.5)",
-        border: "none",
-        padding: "10px",
-        borderRadius: "50%",
-        cursor: "pointer",
-      }}
-    >
-      <X size={28} />
-    </button>
+            {/* Next Button */}
+            <button
+              onClick={nextImage}
+              aria-label="Next image"
+              style={{
+                position: "absolute",
+                right: "5px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                color: "white",
+                background: "rgba(0,0,0,0.5)",
+                border: "none",
+                padding: "10px",
+                borderRadius: "50%",
+                cursor: "pointer",
+                zIndex: 2,
+              }}
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
 
-    {/* Keyframes */}
-    <style>{`
-      @keyframes slideInFromRight {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes slideInFromLeft {
-        from { transform: translateX(-100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    `}</style>
-  </div>
-)}
+          {/* Close Button */}
+          <button
+            onClick={closeLightbox}
+            aria-label="Close preview"
+            style={{
+              position: "absolute",
+              top: "20px",
+              right: "20px",
+              color: "white",
+              background: "rgba(0,0,0,0.5)",
+              border: "none",
+              padding: "10px",
+              borderRadius: "50%",
+              cursor: "pointer",
+            }}
+          >
+            <X size={28} />
+          </button>
 
+          {/* Keyframes */}
+          <style>{`
+            @keyframes slideInFromRight {
+              from { transform: translateX(100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideInFromLeft {
+              from { transform: translateX(-100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+          `}</style>
+        </div>
+      )}
     </div>
   );
-};
-
-// Reusable styles
-const navButtonStyle = (side: "left" | "right"): React.CSSProperties => ({
-  position: "absolute",
-  [side]: "20px",
-  top: "50%",
-  transform: "translateY(-50%)",
-  color: "white",
-  background: "rgba(0,0,0,0.5)",
-  border: "none",
-  padding: "10px",
-  borderRadius: "50%",
-  cursor: "pointer",
-});
-
-const closeButtonStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "20px",
-  right: "20px",
-  color: "white",
-  background: "rgba(0,0,0,0.5)",
-  border: "none",
-  padding: "10px",
-  borderRadius: "50%",
-  cursor: "pointer",
 };

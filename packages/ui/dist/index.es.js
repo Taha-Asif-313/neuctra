@@ -13,7 +13,7 @@ var Me;
 function Je() {
   if (Me) return re;
   Me = 1;
-  var t = Symbol.for("react.transitional.element"), n = Symbol.for("react.fragment");
+  var t = Symbol.for("react.transitional.element"), r = Symbol.for("react.fragment");
   function o(a, l, i) {
     var c = null;
     if (i !== void 0 && (c = "" + i), l.key !== void 0 && (c = "" + l.key), "key" in l) {
@@ -29,7 +29,7 @@ function Je() {
       props: i
     };
   }
-  return re.Fragment = n, re.jsx = o, re.jsxs = o, re;
+  return re.Fragment = r, re.jsx = o, re.jsxs = o, re;
 }
 var ne = {};
 /**
@@ -44,12 +44,12 @@ var ne = {};
 var Ee;
 function Ke() {
   return Ee || (Ee = 1, process.env.NODE_ENV !== "production" && function() {
-    function t(r) {
-      if (r == null) return null;
-      if (typeof r == "function")
-        return r.$$typeof === z ? null : r.displayName || r.name || null;
-      if (typeof r == "string") return r;
-      switch (r) {
+    function t(n) {
+      if (n == null) return null;
+      if (typeof n == "function")
+        return n.$$typeof === z ? null : n.displayName || n.name || null;
+      if (typeof n == "string") return n;
+      switch (n) {
         case f:
           return "Fragment";
         case m:
@@ -63,126 +63,126 @@ function Ke() {
         case O:
           return "Activity";
       }
-      if (typeof r == "object")
-        switch (typeof r.tag == "number" && console.error(
+      if (typeof n == "object")
+        switch (typeof n.tag == "number" && console.error(
           "Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."
-        ), r.$$typeof) {
+        ), n.$$typeof) {
           case v:
             return "Portal";
           case E:
-            return (r.displayName || "Context") + ".Provider";
-          case w:
-            return (r._context.displayName || "Context") + ".Consumer";
+            return (n.displayName || "Context") + ".Provider";
+          case j:
+            return (n._context.displayName || "Context") + ".Consumer";
           case I:
-            var h = r.render;
-            return r = r.displayName, r || (r = h.displayName || h.name || "", r = r !== "" ? "ForwardRef(" + r + ")" : "ForwardRef"), r;
+            var h = n.render;
+            return n = n.displayName, n || (n = h.displayName || h.name || "", n = n !== "" ? "ForwardRef(" + n + ")" : "ForwardRef"), n;
           case y:
-            return h = r.displayName || null, h !== null ? h : t(r.type) || "Memo";
+            return h = n.displayName || null, h !== null ? h : t(n.type) || "Memo";
           case W:
-            h = r._payload, r = r._init;
+            h = n._payload, n = n._init;
             try {
-              return t(r(h));
+              return t(n(h));
             } catch {
             }
         }
       return null;
     }
-    function n(r) {
-      return "" + r;
+    function r(n) {
+      return "" + n;
     }
-    function o(r) {
+    function o(n) {
       try {
-        n(r);
+        r(n);
         var h = !1;
       } catch {
         h = !0;
       }
       if (h) {
         h = console;
-        var L = h.error, B = typeof Symbol == "function" && Symbol.toStringTag && r[Symbol.toStringTag] || r.constructor.name || "Object";
+        var L = h.error, B = typeof Symbol == "function" && Symbol.toStringTag && n[Symbol.toStringTag] || n.constructor.name || "Object";
         return L.call(
           h,
           "The provided key is an unsupported type %s. This value must be coerced to a string before using it here.",
           B
-        ), n(r);
+        ), r(n);
       }
     }
-    function a(r) {
-      if (r === f) return "<>";
-      if (typeof r == "object" && r !== null && r.$$typeof === W)
+    function a(n) {
+      if (n === f) return "<>";
+      if (typeof n == "object" && n !== null && n.$$typeof === W)
         return "<...>";
       try {
-        var h = t(r);
+        var h = t(n);
         return h ? "<" + h + ">" : "<...>";
       } catch {
         return "<...>";
       }
     }
     function l() {
-      var r = R.A;
-      return r === null ? null : r.getOwner();
+      var n = R.A;
+      return n === null ? null : n.getOwner();
     }
     function i() {
       return Error("react-stack-top-frame");
     }
-    function c(r) {
-      if (j.call(r, "key")) {
-        var h = Object.getOwnPropertyDescriptor(r, "key").get;
+    function c(n) {
+      if (w.call(n, "key")) {
+        var h = Object.getOwnPropertyDescriptor(n, "key").get;
         if (h && h.isReactWarning) return !1;
       }
-      return r.key !== void 0;
+      return n.key !== void 0;
     }
-    function g(r, h) {
+    function g(n, h) {
       function L() {
         x || (x = !0, console.error(
           "%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://react.dev/link/special-props)",
           h
         ));
       }
-      L.isReactWarning = !0, Object.defineProperty(r, "key", {
+      L.isReactWarning = !0, Object.defineProperty(n, "key", {
         get: L,
         configurable: !0
       });
     }
     function p() {
-      var r = t(this.type);
-      return T[r] || (T[r] = !0, console.error(
+      var n = t(this.type);
+      return T[n] || (T[n] = !0, console.error(
         "Accessing element.ref was removed in React 19. ref is now a regular prop. It will be removed from the JSX Element type in a future release."
-      )), r = this.props.ref, r !== void 0 ? r : null;
+      )), n = this.props.ref, n !== void 0 ? n : null;
     }
-    function k(r, h, L, B, Y, A, D, G) {
-      return L = A.ref, r = {
+    function k(n, h, L, B, Y, A, D, G) {
+      return L = A.ref, n = {
         $$typeof: s,
-        type: r,
+        type: n,
         key: h,
         props: A,
         _owner: Y
-      }, (L !== void 0 ? L : null) !== null ? Object.defineProperty(r, "ref", {
+      }, (L !== void 0 ? L : null) !== null ? Object.defineProperty(n, "ref", {
         enumerable: !1,
         get: p
-      }) : Object.defineProperty(r, "ref", { enumerable: !1, value: null }), r._store = {}, Object.defineProperty(r._store, "validated", {
+      }) : Object.defineProperty(n, "ref", { enumerable: !1, value: null }), n._store = {}, Object.defineProperty(n._store, "validated", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: 0
-      }), Object.defineProperty(r, "_debugInfo", {
+      }), Object.defineProperty(n, "_debugInfo", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: null
-      }), Object.defineProperty(r, "_debugStack", {
+      }), Object.defineProperty(n, "_debugStack", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: D
-      }), Object.defineProperty(r, "_debugTask", {
+      }), Object.defineProperty(n, "_debugTask", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: G
-      }), Object.freeze && (Object.freeze(r.props), Object.freeze(r)), r;
+      }), Object.freeze && (Object.freeze(n.props), Object.freeze(n)), n;
     }
-    function u(r, h, L, B, Y, A, D, G) {
+    function u(n, h, L, B, Y, A, D, G) {
       var P = h.children;
       if (P !== void 0)
         if (B)
@@ -195,8 +195,8 @@ function Ke() {
               "React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead."
             );
         else d(P);
-      if (j.call(h, "key")) {
-        P = t(r);
+      if (w.call(h, "key")) {
+        P = t(n);
         var K = Object.keys(h).filter(function(le) {
           return le !== "key";
         });
@@ -220,9 +220,9 @@ React keys must be passed directly to JSX without using spread:
       } else L = h;
       return P && g(
         L,
-        typeof r == "function" ? r.displayName || r.name || "Unknown" : r
+        typeof n == "function" ? n.displayName || n.name || "Unknown" : n
       ), k(
-        r,
+        n,
         P,
         A,
         Y,
@@ -232,44 +232,44 @@ React keys must be passed directly to JSX without using spread:
         G
       );
     }
-    function d(r) {
-      typeof r == "object" && r !== null && r.$$typeof === s && r._store && (r._store.validated = 1);
+    function d(n) {
+      typeof n == "object" && n !== null && n.$$typeof === s && n._store && (n._store.validated = 1);
     }
-    var b = je, s = Symbol.for("react.transitional.element"), v = Symbol.for("react.portal"), f = Symbol.for("react.fragment"), S = Symbol.for("react.strict_mode"), m = Symbol.for("react.profiler"), w = Symbol.for("react.consumer"), E = Symbol.for("react.context"), I = Symbol.for("react.forward_ref"), $ = Symbol.for("react.suspense"), C = Symbol.for("react.suspense_list"), y = Symbol.for("react.memo"), W = Symbol.for("react.lazy"), O = Symbol.for("react.activity"), z = Symbol.for("react.client.reference"), R = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, j = Object.prototype.hasOwnProperty, _ = Array.isArray, N = console.createTask ? console.createTask : function() {
+    var b = je, s = Symbol.for("react.transitional.element"), v = Symbol.for("react.portal"), f = Symbol.for("react.fragment"), S = Symbol.for("react.strict_mode"), m = Symbol.for("react.profiler"), j = Symbol.for("react.consumer"), E = Symbol.for("react.context"), I = Symbol.for("react.forward_ref"), $ = Symbol.for("react.suspense"), C = Symbol.for("react.suspense_list"), y = Symbol.for("react.memo"), W = Symbol.for("react.lazy"), O = Symbol.for("react.activity"), z = Symbol.for("react.client.reference"), R = b.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, w = Object.prototype.hasOwnProperty, _ = Array.isArray, N = console.createTask ? console.createTask : function() {
       return null;
     };
     b = {
-      react_stack_bottom_frame: function(r) {
-        return r();
+      react_stack_bottom_frame: function(n) {
+        return n();
       }
     };
     var x, T = {}, F = b.react_stack_bottom_frame.bind(
       b,
       i
     )(), H = N(a(i)), U = {};
-    ne.Fragment = f, ne.jsx = function(r, h, L, B, Y) {
+    ne.Fragment = f, ne.jsx = function(n, h, L, B, Y) {
       var A = 1e4 > R.recentlyCreatedOwnerStacks++;
       return u(
-        r,
+        n,
         h,
         L,
         !1,
         B,
         Y,
         A ? Error("react-stack-top-frame") : F,
-        A ? N(a(r)) : H
+        A ? N(a(n)) : H
       );
-    }, ne.jsxs = function(r, h, L, B, Y) {
+    }, ne.jsxs = function(n, h, L, B, Y) {
       var A = 1e4 > R.recentlyCreatedOwnerStacks++;
       return u(
-        r,
+        n,
         h,
         L,
         !0,
         B,
         Y,
         A ? Error("react-stack-top-frame") : F,
-        A ? N(a(r)) : H
+        A ? N(a(n)) : H
       );
     };
   }()), ne;
@@ -281,7 +281,7 @@ function Ze() {
 var e = Ze();
 const Wt = ({
   as: t = "p",
-  children: n,
+  children: r,
   className: o = "",
   href: a,
   target: l,
@@ -299,7 +299,7 @@ const Wt = ({
   padding: f,
   margin: S,
   borderRadius: m,
-  boxShadow: w,
+  boxShadow: j,
   shadowColor: E = "rgba(0,0,0,0.1)",
   wordBreak: I = "normal",
   // Text styles
@@ -311,7 +311,7 @@ const Wt = ({
   truncate: z = !1,
   // Hover & Active
   hoverColor: R,
-  hoverBgColor: j,
+  hoverBgColor: w,
   hoverTextDecoration: _,
   activeColor: N,
   activeBgColor: x,
@@ -338,7 +338,7 @@ const Wt = ({
     textDecoration: H,
     fontStyle: $ ? "italic" : "normal",
     wordBreak: I,
-    boxShadow: w || (E ? `0 1px 4px ${E}` : void 0),
+    boxShadow: j || (E ? `0 1px 4px ${E}` : void 0),
     cursor: F || a ? "pointer" : "default",
     userSelect: O ? "text" : "none",
     transition: `all ${T} ease-in-out`,
@@ -351,7 +351,7 @@ const Wt = ({
     onClick: F,
     onMouseEnter: (A) => {
       const D = A.currentTarget;
-      R && (D.style.color = R), j && (D.style.backgroundColor = j), _ && (D.style.textDecoration = _);
+      R && (D.style.color = R), w && (D.style.backgroundColor = w), _ && (D.style.textDecoration = _);
     },
     onMouseLeave: (A) => {
       const D = A.currentTarget;
@@ -363,7 +363,7 @@ const Wt = ({
     },
     onMouseUp: (A) => {
       const D = A.currentTarget;
-      D.style.color = R || c, D.style.backgroundColor = j || g || "transparent";
+      D.style.color = R || c, D.style.backgroundColor = w || g || "transparent";
     }
   };
   return t === "a" || a ? /* @__PURE__ */ e.jsx(
@@ -373,12 +373,12 @@ const Wt = ({
       href: a,
       target: l,
       rel: i || (l === "_blank" ? "noopener noreferrer" : void 0),
-      children: n
+      children: r
     }
-  ) : /* @__PURE__ */ e.jsx(t, { ...Y, children: n });
+  ) : /* @__PURE__ */ e.jsx(t, { ...Y, children: r });
 }, _e = ({
   src: t,
-  alt: n = "Image",
+  alt: r = "Image",
   width: o = "100%",
   height: a = "auto",
   borderRadius: l = "8px",
@@ -395,7 +395,7 @@ const Wt = ({
   responsive: f = !1,
   padding: S,
   margin: m,
-  lazyLoad: w = !1,
+  lazyLoad: j = !1,
   hoverOpacity: E,
   hoverShadow: I = !1,
   hoverScale: $,
@@ -406,7 +406,7 @@ const Wt = ({
   style: z,
   onClick: R
 }) => {
-  const j = {
+  const w = {
     width: f ? "100%" : o,
     height: f ? "100%" : a,
     borderRadius: l,
@@ -417,9 +417,9 @@ const Wt = ({
     transition: `all ${y} ease`,
     display: "block"
   }, _ = (T) => {
-    T.currentTarget.style.opacity = E !== void 0 ? E.toString() : j.opacity?.toString() || "1", T.currentTarget.style.boxShadow = I ? "0 8px 20px rgba(0,0,0,0.3)" : j.boxShadow?.toString() || "none", T.currentTarget.style.transform = `scale(${$ || 1}) rotate(${C || 0}deg)`;
+    T.currentTarget.style.opacity = E !== void 0 ? E.toString() : w.opacity?.toString() || "1", T.currentTarget.style.boxShadow = I ? "0 8px 20px rgba(0,0,0,0.3)" : w.boxShadow?.toString() || "none", T.currentTarget.style.transform = `scale(${$ || 1}) rotate(${C || 0}deg)`;
   }, N = (T) => {
-    T.currentTarget.style.opacity = j.opacity?.toString() || "1", T.currentTarget.style.boxShadow = j.boxShadow?.toString() || "none", T.currentTarget.style.transform = "scale(1) rotate(0deg)";
+    T.currentTarget.style.opacity = w.opacity?.toString() || "1", T.currentTarget.style.boxShadow = w.boxShadow?.toString() || "none", T.currentTarget.style.transform = "scale(1) rotate(0deg)";
   }, x = (() => {
     switch (W) {
       case "x":
@@ -434,7 +434,7 @@ const Wt = ({
     "div",
     {
       role: "img",
-      "aria-label": n,
+      "aria-label": r,
       onClick: R,
       className: O,
       style: {
@@ -467,9 +467,9 @@ const Wt = ({
           "img",
           {
             src: t,
-            alt: n,
-            loading: w ? "lazy" : "eager",
-            style: j,
+            alt: r,
+            loading: j ? "lazy" : "eager",
+            style: w,
             onMouseEnter: _,
             onMouseLeave: N
           }
@@ -502,7 +502,7 @@ const Wt = ({
   );
 }, Nt = ({
   children: t,
-  type: n = "button",
+  type: r = "button",
   onClick: o,
   iconBefore: a,
   iconAfter: l,
@@ -520,13 +520,13 @@ const Wt = ({
   borderRadius: f = 6,
   backgroundColor: S = "#02b314",
   textColor: m = "white",
-  borderColor: w = "transparent",
+  borderColor: j = "transparent",
   hoverBgColor: E = "transparent",
   hoverTextColor: I = "black",
   hoverBorderColor: $,
   boxShadow: C = "0 1px 2px rgba(0, 0, 0, 0.05)"
 }) => {
-  const [y, W] = je.useState(!1), O = y && !p && I || m, z = y && !p && $ || w, R = y && !p ? E : S, j = {
+  const [y, W] = je.useState(!1), O = y && !p && I || m, z = y && !p && $ || j, R = y && !p ? E : S, w = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -549,9 +549,9 @@ const Wt = ({
   return /* @__PURE__ */ e.jsxs(
     "button",
     {
-      type: n,
+      type: r,
       className: i,
-      style: j,
+      style: w,
       onClick: !p && !k ? o : void 0,
       disabled: p,
       onMouseEnter: () => W(!0),
@@ -594,13 +594,13 @@ const Wt = ({
  */
 const Qe = (t) => t.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase(), et = (t) => t.replace(
   /^([A-Z])|[\s-_]+(\w)/g,
-  (n, o, a) => a ? a.toUpperCase() : o.toLowerCase()
+  (r, o, a) => a ? a.toUpperCase() : o.toLowerCase()
 ), Le = (t) => {
-  const n = et(t);
-  return n.charAt(0).toUpperCase() + n.slice(1);
-}, Ne = (...t) => t.filter((n, o, a) => !!n && n.trim() !== "" && a.indexOf(n) === o).join(" ").trim(), tt = (t) => {
-  for (const n in t)
-    if (n.startsWith("aria-") || n === "role" || n === "title")
+  const r = et(t);
+  return r.charAt(0).toUpperCase() + r.slice(1);
+}, Ne = (...t) => t.filter((r, o, a) => !!r && r.trim() !== "" && a.indexOf(r) === o).join(" ").trim(), tt = (t) => {
+  for (const r in t)
+    if (r.startsWith("aria-") || r === "role" || r === "title")
       return !0;
 };
 /**
@@ -629,7 +629,7 @@ var rt = {
 const nt = we(
   ({
     color: t = "currentColor",
-    size: n = 24,
+    size: r = 24,
     strokeWidth: o = 2,
     absoluteStrokeWidth: a,
     className: l = "",
@@ -641,10 +641,10 @@ const nt = we(
     {
       ref: p,
       ...rt,
-      width: n,
-      height: n,
+      width: r,
+      height: r,
       stroke: t,
-      strokeWidth: a ? Number(o) * 24 / Number(n) : o,
+      strokeWidth: a ? Number(o) * 24 / Number(r) : o,
       className: Ne("lucide", l),
       ...!i && !tt(g) && { "aria-hidden": "true" },
       ...g
@@ -661,11 +661,11 @@ const nt = we(
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const X = (t, n) => {
+const X = (t, r) => {
   const o = we(
     ({ className: a, ...l }, i) => ve(nt, {
       ref: i,
-      iconNode: n,
+      iconNode: r,
       className: Ne(
         `lucide-${Qe(Le(t))}`,
         `lucide-${t}`,
@@ -926,7 +926,7 @@ const It = [
 ], ie = X("x", It), Ft = we(
   ({
     type: t = "text",
-    placeholder: n = "",
+    placeholder: r = "",
     label: o,
     value: a,
     defaultValue: l,
@@ -943,7 +943,7 @@ const It = [
     borderColor: f = "#ccc",
     focusBorderColor: S = "#2563eb",
     hoverBorderColor: m = "#4b5563",
-    backgroundColor: w = "#ffffff",
+    backgroundColor: j = "#ffffff",
     textColor: E = "#111827",
     errorColor: I = "#dc2626",
     successColor: $ = "#16a34a",
@@ -953,16 +953,16 @@ const It = [
     fontSize: O = "14px",
     rows: z = 4,
     cols: R,
-    maxLength: j,
+    maxLength: w,
     resize: _ = !0,
     showCharacterCount: N = !0,
     className: x,
     style: T
   }, F) => {
-    const H = J(null), [U, r] = M(l || ""), [h, L] = M(!1);
+    const H = J(null), [U, n] = M(l || ""), [h, L] = M(!1);
     Ge(F, () => H.current);
     const B = (P) => {
-      j && P.target.value.length > j || (r(P.target.value), i && i(c, P.target.value));
+      w && P.target.value.length > w || (n(P.target.value), i && i(c, P.target.value));
     }, Y = () => {
       switch (y) {
         case "sm":
@@ -988,7 +988,7 @@ const It = [
       paddingRight: v || t === "password" ? "40px" : Y().split(" ")[1],
       border: `1px solid ${D}`,
       borderRadius: W,
-      backgroundColor: w,
+      backgroundColor: j,
       color: E,
       fontSize: A(),
       outline: "none",
@@ -1041,10 +1041,10 @@ const It = [
                 name: c,
                 value: a ?? U,
                 onChange: B,
-                placeholder: n,
+                placeholder: r,
                 rows: z,
                 cols: R,
-                maxLength: j,
+                maxLength: w,
                 disabled: g,
                 readOnly: p,
                 autoFocus: b,
@@ -1071,7 +1071,7 @@ const It = [
                 type: t === "password" ? h ? "text" : "password" : t,
                 value: a ?? U,
                 onChange: B,
-                placeholder: n,
+                placeholder: r,
                 disabled: g,
                 readOnly: p,
                 autoFocus: b,
@@ -1124,7 +1124,7 @@ const It = [
               }
             )
           ] }),
-          t === "textarea" && N && j && /* @__PURE__ */ e.jsxs(
+          t === "textarea" && N && w && /* @__PURE__ */ e.jsxs(
             "div",
             {
               style: {
@@ -1136,7 +1136,7 @@ const It = [
               children: [
                 (a ?? U).length,
                 "/",
-                j
+                w
               ]
             }
           ),
@@ -1158,7 +1158,7 @@ const It = [
   }
 ), Ot = ({
   title: t,
-  titleIcon: n,
+  titleIcon: r,
   items: o,
   type: a = "unordered",
   bulletColor: l = "#2563eb",
@@ -1182,7 +1182,7 @@ const It = [
     borderRadius: u,
     padding: d,
     ...v
-  }, w = S ? {
+  }, j = S ? {
     display: "flex",
     gap: b,
     paddingLeft: 0,
@@ -1206,12 +1206,12 @@ const It = [
           gap: "8px"
         },
         children: [
-          n && /* @__PURE__ */ e.jsx("span", { style: { fontSize: "18px" }, children: n }),
+          r && /* @__PURE__ */ e.jsx("span", { style: { fontSize: "18px" }, children: r }),
           /* @__PURE__ */ e.jsx("span", { children: t })
         ]
       }
     ),
-    /* @__PURE__ */ e.jsx(E, { style: w, children: o.map((I, $) => /* @__PURE__ */ e.jsx(
+    /* @__PURE__ */ e.jsx(E, { style: j, children: o.map((I, $) => /* @__PURE__ */ e.jsx(
       Fe,
       {
         ...I,
@@ -1227,7 +1227,7 @@ const It = [
   ] });
 }, Fe = ({
   text: t,
-  icon: n,
+  icon: r,
   onClick: o,
   subItems: a,
   bulletColor: l,
@@ -1263,7 +1263,7 @@ const It = [
   };
   return /* @__PURE__ */ e.jsxs("li", { style: u, children: [
     /* @__PURE__ */ e.jsxs("div", { style: d, onClick: o, children: [
-      n ? /* @__PURE__ */ e.jsx("span", { style: { fontSize: "16px", color: i }, children: n }) : !k && /* @__PURE__ */ e.jsx("span", { style: b }),
+      r ? /* @__PURE__ */ e.jsx("span", { style: { fontSize: "16px", color: i }, children: r }) : !k && /* @__PURE__ */ e.jsx("span", { style: b }),
       /* @__PURE__ */ e.jsx("span", { children: t })
     ] }),
     a && a.length > 0 && /* @__PURE__ */ e.jsx("ul", { style: s, children: a.map((v, f) => /* @__PURE__ */ e.jsx(
@@ -1282,7 +1282,7 @@ const It = [
   ] });
 }, Te = ({
   tabs: t,
-  defaultActive: n = 0,
+  defaultActive: r = 0,
   tabPosition: o,
   activeTabClassName: a = "",
   inactiveTabClassName: l = "",
@@ -1299,16 +1299,16 @@ const It = [
   tabPadding: f = "12px 16px",
   tabBorderRadius: S = 12,
   primaryColor: m = "#2563eb",
-  textColor: w = "#374151",
+  textColor: j = "#374151",
   backgroundColor: E = "#ffffff",
   hoverTextColor: I = "#1e40af",
   responsiveBreakpoint: $ = 768,
   showDrawerLabel: C = "Select Tab"
 }) => {
-  const [y, W] = M(n), [O, z] = M(null), [R, j] = M(!1), [_, N] = M(!1);
+  const [y, W] = M(r), [O, z] = M(null), [R, w] = M(!1), [_, N] = M(!1);
   q(() => {
     const Y = () => {
-      j(window.innerWidth <= $);
+      w(window.innerWidth <= $);
     };
     return Y(), window.addEventListener("resize", Y), () => window.removeEventListener("resize", Y);
   }, [$]);
@@ -1337,7 +1337,7 @@ const It = [
     minWidth: 0,
     ...x && !R ? { width: "calc(100% - " + s + ")" } : { width: "100%" },
     ...d
-  }, r = {
+  }, n = {
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -1360,7 +1360,7 @@ const It = [
     ...p
   }, L = {
     backgroundColor: "transparent",
-    color: w,
+    color: j,
     ...k
   }, B = {
     backgroundColor: `${m}22`,
@@ -1396,7 +1396,7 @@ const It = [
         {
           onClick: () => N(!_),
           style: {
-            ...r,
+            ...n,
             ...h,
             justifyContent: "space-between",
             width: "100%"
@@ -1420,7 +1420,7 @@ const It = [
             onMouseLeave: () => z(null),
             className: D ? a : l,
             style: {
-              ...r,
+              ...n,
               ...D ? h : L,
               ...G && !D ? B : {}
             },
@@ -1448,7 +1448,7 @@ const It = [
               onMouseLeave: () => z(null),
               className: D ? a : l,
               style: {
-                ...r,
+                ...n,
                 ...D ? h : L,
                 ...G && !D ? B : {}
               },
@@ -1474,7 +1474,7 @@ const It = [
   ] });
 }, Dt = (t) => /* @__PURE__ */ e.jsx(Te, { ...t, tabPosition: "left" }), Yt = (t) => /* @__PURE__ */ e.jsx(Te, { ...t, tabPosition: "top" }), Bt = (t) => /* @__PURE__ */ e.jsx(Te, { ...t, tabPosition: "right" }), Ht = ({
   src: t,
-  poster: n,
+  poster: r,
   autoPlay: o = !1,
   loop: a = !1,
   controls: l = !1,
@@ -1488,26 +1488,26 @@ const It = [
   padding: d = "16px",
   className: b
 }) => {
-  const s = J(null), v = J(null), [f, S] = M(o), [m, w] = M(0), [E, I] = M(0), [$, C] = M(0.5), [y, W] = M(i), [O, z] = M(!1), [R, j] = M(a);
+  const s = J(null), v = J(null), [f, S] = M(o), [m, j] = M(0), [E, I] = M(0), [$, C] = M(0.5), [y, W] = M(i), [O, z] = M(!1), [R, w] = M(a);
   q(() => {
     s.current && (s.current.volume = $, s.current.loop = R, s.current.muted = y);
   }, [$, R, y]);
   const _ = () => {
     s.current && (f ? s.current.pause() : s.current.play(), S(!f));
   }, N = () => {
-    s.current && (w(s.current.currentTime), I(s.current.duration));
-  }, x = (r) => {
-    if (!s.current || !r.currentTarget) return;
-    const h = r.currentTarget.getBoundingClientRect(), B = (r.clientX - h.left) / h.width * E;
-    s.current.currentTime = B, w(B);
-  }, T = (r) => {
-    s.current && (s.current.currentTime += r);
+    s.current && (j(s.current.currentTime), I(s.current.duration));
+  }, x = (n) => {
+    if (!s.current || !n.currentTarget) return;
+    const h = n.currentTarget.getBoundingClientRect(), B = (n.clientX - h.left) / h.width * E;
+    s.current.currentTime = B, j(B);
+  }, T = (n) => {
+    s.current && (s.current.currentTime += n);
   }, F = () => {
     v.current && (O ? document.exitFullscreen?.() : v.current.requestFullscreen?.(), z(!O));
   }, H = () => {
     W(!y), y && $ === 0 && C(0.5);
-  }, U = (r) => {
-    const h = Math.floor(r / 60), L = Math.floor(r % 60);
+  }, U = (n) => {
+    const h = Math.floor(n / 60), L = Math.floor(n % 60);
     return `${h}:${L < 10 ? "0" : ""}${L}`;
   };
   return /* @__PURE__ */ e.jsxs(
@@ -1533,7 +1533,7 @@ const It = [
           {
             ref: s,
             src: t,
-            poster: n,
+            poster: r,
             autoPlay: o,
             loop: a,
             controls: l,
@@ -1632,7 +1632,7 @@ const It = [
                 /* @__PURE__ */ e.jsx(
                   "button",
                   {
-                    onClick: () => j(!R),
+                    onClick: () => w(!R),
                     "aria-label": "Toggle Loop",
                     children: /* @__PURE__ */ e.jsx(xe, { size: 18, color: R ? u : void 0 })
                   }
@@ -1648,7 +1648,7 @@ const It = [
   );
 }, Ut = ({
   src: t,
-  thumbnail: n,
+  thumbnail: r,
   autoPlay: o = !1,
   loop: a = !1,
   backgroundColor: l = "#000000",
@@ -1659,7 +1659,7 @@ const It = [
   width: k = "100%",
   className: u
 }) => {
-  const d = J(null), b = J(null), [s, v] = M(o), [f, S] = M(0), [m, w] = M(0), [E, I] = M(0.5), [$, C] = M(!1), [y, W] = M(a);
+  const d = J(null), b = J(null), [s, v] = M(o), [f, S] = M(0), [m, j] = M(0), [E, I] = M(0.5), [$, C] = M(!1), [y, W] = M(a);
   q(() => {
     d.current && (d.current.volume = E);
   }, [E]), q(() => {
@@ -1668,12 +1668,12 @@ const It = [
   const O = () => {
     d.current && (s ? d.current.pause() : d.current.play(), v(!s));
   }, z = () => {
-    d.current && (S(d.current.currentTime), w(d.current.duration));
+    d.current && (S(d.current.currentTime), j(d.current.duration));
   }, R = (x) => {
     if (!d.current || !x.currentTarget) return;
     const T = x.currentTarget.getBoundingClientRect(), H = (x.clientX - T.left) / T.width * m;
     d.current.currentTime = H, S(H);
-  }, j = (x) => {
+  }, w = (x) => {
     d.current && (d.current.currentTime += x);
   }, _ = () => {
     b.current && ($ ? document.exitFullscreen?.() : b.current.requestFullscreen?.(), C(!$));
@@ -1710,10 +1710,10 @@ const It = [
             onLoadedMetadata: z
           }
         ),
-        n && /* @__PURE__ */ e.jsx(
+        r && /* @__PURE__ */ e.jsx(
           "img",
           {
-            src: n,
+            src: r,
             alt: "Audio Thumbnail",
             style: {
               width: "100%",
@@ -1736,7 +1736,7 @@ const It = [
               marginTop: "10px"
             },
             children: [
-              /* @__PURE__ */ e.jsx("button", { onClick: () => j(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(he, { size: 20 }) }),
+              /* @__PURE__ */ e.jsx("button", { onClick: () => w(-10), "aria-label": "Skip Back 10s", children: /* @__PURE__ */ e.jsx(he, { size: 20 }) }),
               /* @__PURE__ */ e.jsx(
                 "button",
                 {
@@ -1753,7 +1753,7 @@ const It = [
                   children: s ? /* @__PURE__ */ e.jsx(se, { size: 20 }) : /* @__PURE__ */ e.jsx(oe, { size: 20 })
                 }
               ),
-              /* @__PURE__ */ e.jsx("button", { onClick: () => j(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
+              /* @__PURE__ */ e.jsx("button", { onClick: () => w(10), "aria-label": "Skip Forward 10s", children: /* @__PURE__ */ e.jsx(ge, { size: 20 }) })
             ]
           }
         ),
@@ -1839,12 +1839,12 @@ const It = [
     }
   );
 };
-function V(t, n, o) {
-  return t == null ? o : typeof t != "object" ? t : t[n] ?? o;
+function V(t, r, o) {
+  return t == null ? o : typeof t != "object" ? t : t[r] ?? o;
 }
 const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   display: t = { sm: "block", md: "flex", lg: "grid" },
-  flexDirection: n = { sm: "column", md: "row", lg: "row" },
+  flexDirection: r = { sm: "column", md: "row", lg: "row" },
   justifyContent: o = { sm: "flex-start", md: "center", lg: "space-between" },
   alignItems: a = { sm: "stretch", md: "center", lg: "center" },
   gridTemplateColumns: l = { sm: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" },
@@ -1861,7 +1861,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   backgroundColor: f = "#fff",
   border: S = { sm: "none", md: "1px solid #ddd", lg: "2px solid #ccc" },
   borderRadius: m = { sm: "0", md: "8px", lg: "12px" },
-  boxShadow: w = {
+  boxShadow: j = {
     sm: "none",
     md: "0 4px 6px rgba(0,0,0,0.1)",
     lg: "0 6px 10px rgba(0,0,0,0.15)"
@@ -1880,10 +1880,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   }, []);
   const O = ee(() => {
     const z = V(t, y, "block"), R = V(
-      n,
+      r,
       y,
       void 0
-    ), j = V(
+    ), w = V(
       o,
       y,
       void 0
@@ -1903,7 +1903,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       p,
       y,
       void 0
-    ), U = V(k, y, "100%"), r = V(u, y, void 0), h = V(d, y, void 0), L = V(b, y, void 0), B = V(s, y, void 0), Y = V(
+    ), U = V(k, y, "100%"), n = V(u, y, void 0), h = V(d, y, void 0), L = V(b, y, void 0), B = V(s, y, void 0), Y = V(
       v,
       y,
       void 0
@@ -1912,14 +1912,14 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       y,
       void 0
     ), G = V(
-      w,
+      j,
       y,
       void 0
     ), P = V(E, y, void 0);
     return {
       display: z,
       ...R && { flexDirection: R },
-      ...j && { justifyContent: j },
+      ...w && { justifyContent: w },
       ..._ && { alignItems: _ },
       ...N && {
         gridTemplateColumns: N
@@ -1931,7 +1931,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       ...F && { rowGap: F },
       ...H && { columnGap: H },
       width: U,
-      ...r && { maxWidth: r },
+      ...n && { maxWidth: n },
       ...h && { height: h },
       ...L && { padding: L },
       ...B && { margin: B },
@@ -1947,7 +1947,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   }, [
     y,
     t,
-    n,
+    r,
     o,
     a,
     l,
@@ -1964,14 +1964,14 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     f,
     S,
     m,
-    w,
+    j,
     E,
     C
   ]);
   return /* @__PURE__ */ e.jsx("div", { className: $, style: O, children: I });
 }, Xt = ({
   items: t,
-  allowMultiple: n = !1,
+  allowMultiple: r = !1,
   defaultOpenIndex: o = [],
   borderColor: a = "#d1d5db",
   backgroundColor: l = "#ffffff",
@@ -1988,7 +1988,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   shadow: f = "0 2px 8px rgba(0, 0, 0, 0.05)",
   contentPadding: S = "16px",
   fontSize: m = "16px",
-  fontWeight: w = "600",
+  fontWeight: j = "600",
   iconSize: E = "18px",
   contentFontSize: I = "14px",
   contentFontWeight: $ = "400",
@@ -1997,15 +1997,15 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   className: W,
   style: O
 }) => {
-  const [z, R] = M(o), j = J([]), _ = J([]);
+  const [z, R] = M(o), w = J([]), _ = J([]);
   q(() => {
-    j.current.forEach((x, T) => {
+    w.current.forEach((x, T) => {
       x && (x.style.maxHeight = z.includes(T) ? `${x.scrollHeight}px` : "0px");
     });
   }, [z]);
   const N = (x) => {
     R(
-      (T) => n ? T.includes(x) ? T.filter((F) => F !== x) : [...T, x] : T.includes(x) ? [] : [x]
+      (T) => r ? T.includes(x) ? T.filter((F) => F !== x) : [...T, x] : T.includes(x) ? [] : [x]
     );
   };
   return /* @__PURE__ */ e.jsx("div", { className: W, style: { width: "100%", ...O }, children: t.map((x, T) => /* @__PURE__ */ e.jsxs(
@@ -2035,7 +2035,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
               backgroundColor: l,
               color: i,
               padding: `${p} ${k}`,
-              fontWeight: w,
+              fontWeight: j,
               fontSize: m,
               cursor: "pointer",
               outline: "none",
@@ -2058,11 +2058,11 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
           "div",
           {
             ref: (F) => {
-              j.current[T] = F;
+              w.current[T] = F;
             },
             style: {
               overflow: "hidden",
-              maxHeight: z.includes(T) ? `${j.current[T]?.scrollHeight}px` : "0px",
+              maxHeight: z.includes(T) ? `${w.current[T]?.scrollHeight}px` : "0px",
               transition: `max-height ${s} ease-in-out`
             },
             children: /* @__PURE__ */ e.jsx(
@@ -2087,7 +2087,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   )) });
 }, qt = ({
   type: t,
-  name: n,
+  name: r,
   options: o,
   selectedValues: a,
   onChange: l,
@@ -2108,9 +2108,9 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   // gray-700
   errorStyle: m
 }) => {
-  const w = t === "checkbox", E = (I) => {
+  const j = t === "checkbox", E = (I) => {
     if (l)
-      if (w) {
+      if (j) {
         const $ = Array.isArray(a) ? a.includes(I) ? a.filter((C) => C !== I) : [...a, I] : [I];
         l($);
       } else
@@ -2125,7 +2125,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       "aria-disabled": i,
       children: [
         o.map((I) => {
-          const $ = w ? Array.isArray(a) && a.includes(I.value) : a === I.value;
+          const $ = j ? Array.isArray(a) && a.includes(I.value) : a === I.value;
           return /* @__PURE__ */ e.jsxs(
             "label",
             {
@@ -2143,7 +2143,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                   "input",
                   {
                     type: t,
-                    name: n,
+                    name: r,
                     value: I.value,
                     checked: $,
                     disabled: i || c,
@@ -2161,14 +2161,14 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                       alignItems: "center",
                       width: s,
                       height: s,
-                      borderRadius: w ? 4 : "50%",
+                      borderRadius: j ? 4 : "50%",
                       border: `2px solid ${$ ? v : f}`,
                       backgroundColor: $ ? v : "transparent",
                       transition: "all 0.2s ease",
                       flexShrink: 0
                     },
                     children: [
-                      $ && !w && /* @__PURE__ */ e.jsx(
+                      $ && !j && /* @__PURE__ */ e.jsx(
                         "span",
                         {
                           style: {
@@ -2179,7 +2179,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                           }
                         }
                       ),
-                      $ && w && /* @__PURE__ */ e.jsx(
+                      $ && j && /* @__PURE__ */ e.jsx(
                         "svg",
                         {
                           viewBox: "0 0 24 24",
@@ -2220,7 +2220,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   );
 }, Gt = ({
   label: t = "Open Drawer",
-  icon: n,
+  icon: r,
   iconPosition: o = "left",
   onClick: a,
   style: l = {}
@@ -2242,14 +2242,14 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       ...l
     },
     children: [
-      n && o === "left" && n,
+      r && o === "left" && r,
       t,
-      n && o === "right" && n
+      r && o === "right" && r
     ]
   }
 ), Jt = ({
   open: t,
-  onClose: n,
+  onClose: r,
   position: o = "right",
   width: a = "300px",
   height: l = "300px",
@@ -2310,7 +2310,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     color: "#000"
   };
   return /* @__PURE__ */ e.jsxs(e.Fragment, { children: [
-    /* @__PURE__ */ e.jsx("div", { style: f, onClick: n }),
+    /* @__PURE__ */ e.jsx("div", { style: f, onClick: r }),
     /* @__PURE__ */ e.jsxs(
       "div",
       {
@@ -2324,7 +2324,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
           k && /* @__PURE__ */ e.jsx(
             "button",
             {
-              onClick: n,
+              onClick: r,
               style: { ...S, ...u },
               children: /* @__PURE__ */ e.jsx(ie, { size: 20, color: "rgba(255, 0, 0, 1)" })
             }
@@ -2336,7 +2336,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   ] });
 }, Kt = ({
   options: t,
-  value: n,
+  value: r,
   defaultValue: o,
   onChange: a,
   placeholder: l = "Select an option",
@@ -2353,7 +2353,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   boxShadow: f = "0 4px 8px rgba(0,0,0,0.1)",
   optionPadding: S = "10px 12px",
   optionGap: m = "8px",
-  transitionDuration: w = "0.25s",
+  transitionDuration: j = "0.25s",
   optionHoverStyle: E,
   className: I = "",
   dropdownStyle: $,
@@ -2363,7 +2363,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   iconPrefix: O,
   iconSuffix: z
 }) => {
-  const [R, j] = M(o), [_, N] = M(!1), [x, T] = M(null), F = J(null);
+  const [R, w] = M(o), [_, N] = M(!1), [x, T] = M(null), F = J(null);
   q(() => {
     const h = (L) => {
       F.current && !F.current.contains(L.target) && N(!1);
@@ -2371,8 +2371,8 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     return document.addEventListener("mousedown", h), () => document.removeEventListener("mousedown", h);
   }, []);
   const H = (h) => {
-    j(h), N(!1), a && a(h);
-  }, U = n ?? R, r = t.find((h) => h.value === U);
+    w(h), N(!1), a && a(h);
+  }, U = r ?? R, n = t.find((h) => h.value === U);
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
@@ -2406,12 +2406,12 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
               justifyContent: "space-between",
               cursor: i ? "not-allowed" : "pointer",
               opacity: i ? 0.6 : 1,
-              transition: `all ${w} ease-in-out`
+              transition: `all ${j} ease-in-out`
             },
             children: [
               /* @__PURE__ */ e.jsxs("div", { style: { display: "flex", alignItems: "center", gap: m }, children: [
                 O && /* @__PURE__ */ e.jsx("span", { children: O }),
-                /* @__PURE__ */ e.jsx("span", { children: r?.label || l })
+                /* @__PURE__ */ e.jsx("span", { children: n?.label || l })
               ] }),
               z || /* @__PURE__ */ e.jsx("span", { style: { marginLeft: "8px" }, children: "▼" })
             ]
@@ -2435,7 +2435,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
               borderRadius: v,
               boxShadow: f,
               marginTop: "4px",
-              transition: `all ${w} ease`,
+              transition: `all ${j} ease`,
               ...$
             },
             children: t.map((h, L) => {
@@ -2446,7 +2446,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                 padding: S,
                 cursor: "pointer",
                 backgroundColor: A,
-                transition: `background ${w}`,
+                transition: `background ${j}`,
                 ...y,
                 ...Y && E
               };
@@ -2475,7 +2475,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   );
 }, Zt = ({
   columns: t,
-  data: n,
+  data: r,
   className: o = "",
   pagination: a = !0,
   rowsPerPage: l = 5,
@@ -2495,23 +2495,23 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   bodyAlign: k = "left",
   headerAlign: u = "left"
 }) => {
-  const [d, b] = M(null), [s, v] = M("asc"), [f, S] = M(1), [m, w] = M(null), E = (z, R) => {
+  const [d, b] = M(null), [s, v] = M("asc"), [f, S] = M(1), [m, j] = M(null), E = (z, R) => {
     !p || !R || (d === z ? v(s === "asc" ? "desc" : "asc") : (b(z), v("asc")), S(1));
-  }, I = je.useMemo(() => d ? [...n].sort((z, R) => {
-    const j = z[d], _ = R[d];
-    if (j == null && _ == null) return 0;
-    if (j == null) return s === "asc" ? -1 : 1;
+  }, I = je.useMemo(() => d ? [...r].sort((z, R) => {
+    const w = z[d], _ = R[d];
+    if (w == null && _ == null) return 0;
+    if (w == null) return s === "asc" ? -1 : 1;
     if (_ == null) return s === "asc" ? 1 : -1;
-    if (typeof j == "number" && typeof _ == "number")
-      return s === "asc" ? j - _ : _ - j;
-    if (j instanceof Date && _ instanceof Date)
-      return s === "asc" ? j.getTime() - _.getTime() : _.getTime() - j.getTime();
-    const N = String(j).toLowerCase(), x = String(_).toLowerCase();
+    if (typeof w == "number" && typeof _ == "number")
+      return s === "asc" ? w - _ : _ - w;
+    if (w instanceof Date && _ instanceof Date)
+      return s === "asc" ? w.getTime() - _.getTime() : _.getTime() - w.getTime();
+    const N = String(w).toLowerCase(), x = String(_).toLowerCase();
     return N === x ? 0 : s === "asc" ? N > x ? 1 : -1 : N < x ? 1 : -1;
-  }) : [...n], [n, d, s]), $ = a ? I.slice(
+  }) : [...r], [r, d, s]), $ = a ? I.slice(
     (f - 1) * l,
     f * l
-  ) : I, C = Math.ceil(n.length / l), y = /* @__PURE__ */ e.jsx(
+  ) : I, C = Math.ceil(r.length / l), y = /* @__PURE__ */ e.jsx(
     "svg",
     {
       stroke: "currentColor",
@@ -2570,15 +2570,15 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
           overflow: "hidden"
         },
         children: [
-          /* @__PURE__ */ e.jsx("thead", { children: /* @__PURE__ */ e.jsx("tr", { children: t.map(({ key: z, label: R, sortable: j, icon: _ }, N) => /* @__PURE__ */ e.jsx(
+          /* @__PURE__ */ e.jsx("thead", { children: /* @__PURE__ */ e.jsx("tr", { children: t.map(({ key: z, label: R, sortable: w, icon: _ }, N) => /* @__PURE__ */ e.jsx(
             "th",
             {
-              onClick: () => E(z, j),
+              onClick: () => E(z, w),
               style: {
                 padding: "12px",
                 fontSize: "14px",
                 border: `1px solid ${i.borderColor}`,
-                cursor: p && j ? "pointer" : "default",
+                cursor: p && w ? "pointer" : "default",
                 backgroundColor: i.headerBg,
                 color: i.headerText,
                 userSelect: "none",
@@ -2588,10 +2588,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                 whiteSpace: "nowrap"
               },
               "aria-sort": d === z ? s === "asc" ? "ascending" : "descending" : void 0,
-              role: p && j ? "button" : void 0,
-              tabIndex: p && j ? 0 : void 0,
+              role: p && w ? "button" : void 0,
+              tabIndex: p && w ? 0 : void 0,
               onKeyDown: (x) => {
-                p && j && (x.key === "Enter" || x.key === " ") && (x.preventDefault(), E(z, j));
+                p && w && (x.key === "Enter" || x.key === " ") && (x.preventDefault(), E(z, w));
               },
               children: /* @__PURE__ */ e.jsxs(
                 "div",
@@ -2605,7 +2605,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                   children: [
                     _ && /* @__PURE__ */ e.jsx("span", { children: _ }),
                     /* @__PURE__ */ e.jsx("span", { children: R }),
-                    p && j && (d === z ? s === "asc" ? y : W : O)
+                    p && w && (d === z ? s === "asc" ? y : W : O)
                   ]
                 }
               )
@@ -2620,9 +2620,9 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                 color: i.rowText,
                 transition: "background-color 0.2s ease-in-out"
               },
-              onMouseEnter: () => w(R),
-              onMouseLeave: () => w(null),
-              children: t.map(({ key: j }) => /* @__PURE__ */ e.jsx(
+              onMouseEnter: () => j(R),
+              onMouseLeave: () => j(null),
+              children: t.map(({ key: w }) => /* @__PURE__ */ e.jsx(
                 "td",
                 {
                   style: {
@@ -2631,9 +2631,9 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                     whiteSpace: "nowrap",
                     textAlign: k
                   },
-                  children: z[j]
+                  children: z[w]
                 },
-                j
+                w
               ))
             },
             R
@@ -2717,7 +2717,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   ] });
 }, Qt = ({
   children: t,
-  className: n = "",
+  className: r = "",
   style: o = {},
   background: a = "#fff",
   backgroundImage: l,
@@ -2734,7 +2734,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   display: f = "flex",
   flexDirection: S = "column",
   justifyContent: m = "flex-start",
-  alignItems: w = "stretch",
+  alignItems: j = "stretch",
   gap: E = 16
 }) => {
   const I = {
@@ -2749,7 +2749,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     display: f,
     flexDirection: S,
     justifyContent: m,
-    alignItems: w,
+    alignItems: j,
     gap: E,
     boxSizing: "border-box",
     // Background image styles if provided
@@ -2761,10 +2761,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     } : {},
     ...o
   };
-  return /* @__PURE__ */ e.jsx("div", { className: n, style: I, children: t });
+  return /* @__PURE__ */ e.jsx("div", { className: r, style: I, children: t });
 }, Pe = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", er = ({
   columns: t = { sm: 1, md: 2, lg: 3 },
-  gap: n = "16px",
+  gap: r = "16px",
   padding: o = "20px",
   alignItems: a = "stretch",
   justifyItems: l = "stretch",
@@ -2786,7 +2786,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     () => ({
       display: "grid",
       gridTemplateColumns: `repeat(${s}, 1fr)`,
-      gap: n,
+      gap: r,
       padding: o,
       alignItems: a,
       justifyItems: l,
@@ -2799,7 +2799,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     }),
     [
       s,
-      n,
+      r,
       o,
       a,
       l,
@@ -2813,7 +2813,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   return /* @__PURE__ */ e.jsx("div", { style: v, children: k });
 }, We = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", tr = ({
   direction: t = "row",
-  align: n = "center",
+  align: r = "center",
   justify: o = "space-between",
   gap: a = 16,
   padding: l = 20,
@@ -2835,7 +2835,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     () => ({
       display: "flex",
       flexDirection: s,
-      alignItems: n,
+      alignItems: r,
       justifyContent: o,
       gap: typeof a == "number" ? `${a}px` : a,
       padding: typeof l == "number" ? `${l}px` : l,
@@ -2848,7 +2848,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     }),
     [
       s,
-      n,
+      r,
       o,
       a,
       l,
@@ -2886,28 +2886,28 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     Icon: /* @__PURE__ */ e.jsx(ht, { size: 20 })
   }
 }, Et = (t) => {
-  const n = {
+  const r = {
     position: "fixed",
     zIndex: 9999
   };
   switch (t) {
     case "top-left":
-      return { ...n, top: "20px", left: "20px" };
+      return { ...r, top: "20px", left: "20px" };
     case "top-center":
-      return { ...n, top: "20px", left: "50%", transform: "translateX(-50%)" };
+      return { ...r, top: "20px", left: "50%", transform: "translateX(-50%)" };
     case "top-right":
-      return { ...n, top: "20px", right: "20px" };
+      return { ...r, top: "20px", right: "20px" };
     case "bottom-left":
-      return { ...n, bottom: "20px", left: "20px" };
+      return { ...r, bottom: "20px", left: "20px" };
     case "bottom-center":
-      return { ...n, bottom: "20px", left: "50%", transform: "translateX(-50%)" };
+      return { ...r, bottom: "20px", left: "50%", transform: "translateX(-50%)" };
     case "bottom-right":
     default:
-      return { ...n, bottom: "20px", right: "20px" };
+      return { ...r, bottom: "20px", right: "20px" };
   }
 }, rr = ({
   title: t = "",
-  description: n = "",
+  description: r = "",
   type: o = "info",
   dismissible: a = !0,
   onClose: l,
@@ -2921,10 +2921,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   const [d, b] = M(!0);
   if (q(() => {
     if (i) {
-      const w = setTimeout(() => {
+      const j = setTimeout(() => {
         b(!1), l?.();
       }, i);
-      return () => clearTimeout(w);
+      return () => clearTimeout(j);
     }
   }, [i, l]), !d) return null;
   const { bg: s, border: v, iconColor: f, Icon: S } = Mt[o], m = Et(p);
@@ -2954,7 +2954,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
         /* @__PURE__ */ e.jsx("div", { style: { color: f, marginTop: "3px" }, children: c || S }),
         /* @__PURE__ */ e.jsxs("div", { style: { flex: 1 }, children: [
           t && /* @__PURE__ */ e.jsx("div", { style: { fontWeight: "600", marginBottom: "4px" }, children: t }),
-          n && /* @__PURE__ */ e.jsx("div", { style: { fontSize: "14px", color: "#374151" }, children: n }),
+          r && /* @__PURE__ */ e.jsx("div", { style: { fontSize: "14px", color: "#374151" }, children: r }),
           g && /* @__PURE__ */ e.jsx("div", { style: { marginTop: "10px" }, children: g })
         ] }),
         a && /* @__PURE__ */ e.jsx(
@@ -2984,7 +2984,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   );
 }, nr = ({
   text: t,
-  color: n = "#2563eb",
+  color: r = "#2563eb",
   textColor: o = "#fff",
   borderColor: a = "#2563eb",
   icon: l,
@@ -3001,7 +3001,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   notificationDot: f = !1,
   dotColor: S = "#ef4444",
   count: m,
-  pulse: w = !1,
+  pulse: j = !1,
   style: E,
   onClick: I
 }) => {
@@ -3009,7 +3009,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: n,
+    backgroundColor: r,
     border: `${p} solid ${a}`,
     borderRadius: g || (c ? "9999px" : "6px"),
     padding: `${b} ${d}`,
@@ -3058,7 +3058,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     backgroundColor: S,
     borderRadius: "50%",
     zIndex: 1,
-    animation: w ? "pulseAnim 1.2s infinite" : void 0
+    animation: j ? "pulseAnim 1.2s infinite" : void 0
   };
   return /* @__PURE__ */ e.jsxs("span", { style: $, onClick: I, children: [
     f && /* @__PURE__ */ e.jsx("span", { style: R }),
@@ -3076,7 +3076,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   ] });
 }, sr = ({
   isOpen: t,
-  onClose: n,
+  onClose: r,
   children: o,
   overlayStyle: a,
   modalStyle: l,
@@ -3094,7 +3094,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       zIndex: 1e3,
       ...a
     },
-    onClick: n,
+    onClick: r,
     children: /* @__PURE__ */ e.jsxs(
       "div",
       {
@@ -3115,7 +3115,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
           /* @__PURE__ */ e.jsx(
             "button",
             {
-              onClick: n,
+              onClick: r,
               "aria-label": "Close modal",
               style: {
                 position: "absolute",
@@ -3170,7 +3170,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     default:
       return "50%";
   }
-}, _t = (t, n) => {
+}, _t = (t, r) => {
   switch (t) {
     case "top-left":
       return { top: 1, left: 1 };
@@ -3182,19 +3182,19 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     default:
       return { bottom: 1, right: 1 };
   }
-}, Lt = (t, n) => {
+}, Lt = (t, r) => {
   switch (t) {
     case "tight":
-      return -(n * 0.5);
+      return -(r * 0.5);
     case "loose":
-      return -(n * 0.15);
+      return -(r * 0.15);
     case "normal":
     default:
-      return -(n * 0.35);
+      return -(r * 0.35);
   }
 }, At = ({
   src: t,
-  alt: n = "User Avatar",
+  alt: r = "User Avatar",
   size: o = "md",
   variant: a = "circular",
   isOnline: l = !1,
@@ -3209,10 +3209,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   ringColor: s = "#3b82f6",
   onClick: v
 }) => {
-  const [f, S] = M(!1), [m, w] = M(!1), E = Oe[o], I = $t[o], $ = De[o], C = Ye(a), y = d || n.split(" ").map((_) => _[0]).join("").toUpperCase().slice(0, 2);
+  const [f, S] = M(!1), [m, j] = M(!1), E = Oe[o], I = $t[o], $ = De[o], C = Ye(a), y = d || r.split(" ").map((_) => _[0]).join("").toUpperCase().slice(0, 2);
   let W = "", O = "";
   l ? (W = "#10b981", O = "Online") : i && (W = "#6b7280", O = "Offline");
-  const z = l || i, R = t && !f, j = !!v;
+  const z = l || i, R = t && !f, w = !!v;
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
@@ -3225,28 +3225,28 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
         // Changed from "hidden" to show status dots outside
         display: "inline-block",
         flexShrink: 0,
-        cursor: j ? "pointer" : "default",
+        cursor: w ? "pointer" : "default",
         transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
-        transform: m && j ? "scale(1.05)" : "scale(1)",
-        boxShadow: b ? `0 0 0 3px ${s}20, 0 0 0 1px ${s}` : m && j ? "0 8px 25px -8px rgba(0, 0, 0, 0.3)" : "0 1px 3px rgba(0, 0, 0, 0.1)",
+        transform: m && w ? "scale(1.05)" : "scale(1)",
+        boxShadow: b ? `0 0 0 3px ${s}20, 0 0 0 1px ${s}` : m && w ? "0 8px 25px -8px rgba(0, 0, 0, 0.3)" : "0 1px 3px rgba(0, 0, 0, 0.1)",
         ...g
       },
       className: c,
-      "aria-label": n,
-      role: j ? "button" : "img",
-      tabIndex: j ? 0 : -1,
+      "aria-label": r,
+      role: w ? "button" : "img",
+      tabIndex: w ? 0 : -1,
       onClick: v,
-      onMouseEnter: () => w(!0),
-      onMouseLeave: () => w(!1),
+      onMouseEnter: () => j(!0),
+      onMouseLeave: () => j(!1),
       onKeyDown: (_) => {
-        j && (_.key === "Enter" || _.key === " ") && (_.preventDefault(), v?.());
+        w && (_.key === "Enter" || _.key === " ") && (_.preventDefault(), v?.());
       },
       children: [
         R ? /* @__PURE__ */ e.jsx("div", { style: { borderRadius: C, overflow: "hidden", width: "100%", height: "100%" }, children: /* @__PURE__ */ e.jsx(
           "img",
           {
             src: t,
-            alt: n,
+            alt: r,
             width: E,
             height: E,
             loading: "lazy",
@@ -3303,14 +3303,14 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   );
 }, or = ({
   avatars: t,
-  max: n = 4,
+  max: r = 4,
   size: o = "md",
   className: a = "",
   style: l,
   spacing: i = "normal",
   direction: c = "left"
 }) => {
-  const g = Oe[o], p = De[o], k = t.slice(0, n), u = t.length - n, d = Lt(i, g);
+  const g = Oe[o], p = De[o], k = t.slice(0, r), u = t.length - r, d = Lt(i, g);
   return /* @__PURE__ */ e.jsxs(
     "div",
     {
@@ -3415,7 +3415,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   );
 }, ir = ({
   tracks: t,
-  className: n = "",
+  className: r = "",
   primaryColor: o = "#3b82f6",
   // default blue
   backgroundColor: a = "#fff",
@@ -3424,10 +3424,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   autoplay: c = !1,
   loop: g = !1
 }) => {
-  const [p, k] = M(null), u = J(null), d = J(null), [b, s] = M(!1), [v, f] = M(0), [S, m] = M(0), [w, E] = M(0.5), [I, $] = M(!1), [C, y] = M(g);
+  const [p, k] = M(null), u = J(null), d = J(null), [b, s] = M(!1), [v, f] = M(0), [S, m] = M(0), [j, E] = M(0.5), [I, $] = M(!1), [C, y] = M(g);
   q(() => {
-    u.current && (u.current.volume = w);
-  }, [w]), q(() => {
+    u.current && (u.current.volume = j);
+  }, [j]), q(() => {
     u.current && (u.current.loop = C);
   }, [C]), q(() => {
     p === null && u.current && (u.current.pause(), s(!1), f(0), m(0));
@@ -3451,7 +3451,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
       let T = u.current.currentTime + x;
       T = Math.min(Math.max(T, 0), S), u.current.currentTime = T, f(T);
     }
-  }, j = () => {
+  }, w = () => {
     d.current && (I ? document.exitFullscreen?.() : d.current.requestFullscreen?.(), $(!I));
   }, _ = () => {
     E((x) => x > 0 ? 0 : 0.5);
@@ -3463,7 +3463,7 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
   return /* @__PURE__ */ e.jsxs(
     "section",
     {
-      className: n,
+      className: r,
       style: {
         maxWidth: "480px",
         margin: "auto",
@@ -3519,8 +3519,8 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                   tabIndex: 0,
                   role: "button",
                   "aria-pressed": U,
-                  onKeyDown: (r) => {
-                    (r.key === "Enter" || r.key === " ") && W(H);
+                  onKeyDown: (n) => {
+                    (n.key === "Enter" || n.key === " ") && W(H);
                   },
                   "aria-label": `${U ? "Pause" : "Play"} ${T}`,
                   children: [
@@ -3756,15 +3756,15 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
                       "button",
                       {
                         onClick: _,
-                        "aria-label": w > 0 ? "Mute" : "Unmute",
+                        "aria-label": j > 0 ? "Mute" : "Unmute",
                         style: te(l, "transparent"),
-                        children: w > 0 ? /* @__PURE__ */ e.jsx(be, { size: 20, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(ye, { size: 20, "aria-hidden": "true" })
+                        children: j > 0 ? /* @__PURE__ */ e.jsx(be, { size: 20, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(ye, { size: 20, "aria-hidden": "true" })
                       }
                     ),
                     /* @__PURE__ */ e.jsx(
                       "button",
                       {
-                        onClick: j,
+                        onClick: w,
                         "aria-label": I ? "Exit Fullscreen" : "Enter Fullscreen",
                         style: te(l, "transparent"),
                         children: I ? /* @__PURE__ */ e.jsx(fe, { size: 20, "aria-hidden": "true" }) : /* @__PURE__ */ e.jsx(pe, { size: 20, "aria-hidden": "true" })
@@ -3780,10 +3780,10 @@ const Ae = (t) => t < 768 ? "sm" : t < 1024 ? "md" : "lg", Vt = ({
     }
   );
 };
-function te(t, n) {
+function te(t, r) {
   return {
     border: "none",
-    backgroundColor: n,
+    backgroundColor: r,
     color: t,
     cursor: "pointer",
     padding: "6px 10px",
@@ -3796,7 +3796,7 @@ function te(t, n) {
 }
 const lr = ({
   videos: t,
-  columns: n = 3,
+  columns: r = 3,
   responsiveColumns: o,
   gap: a = "10px",
   layout: l = "grid",
@@ -3809,20 +3809,20 @@ const lr = ({
 }) => {
   const [d, b] = M(null), [s, v] = M(
     typeof window < "u" ? window.innerWidth : 1024
-  ), [f, S] = M(n);
+  ), [f, S] = M(r);
   q(() => {
     function C() {
       const y = window.innerWidth;
       if (v(y), !o) {
-        S(n);
+        S(r);
         return;
       }
-      y < 640 ? S(o.mobile ?? n) : y < 1024 ? S(o.tablet ?? n) : S(o.desktop ?? n);
+      y < 640 ? S(o.mobile ?? r) : y < 1024 ? S(o.tablet ?? r) : S(o.desktop ?? r);
     }
     if (typeof window < "u")
       return C(), window.addEventListener("resize", C), () => window.removeEventListener("resize", C);
-  }, [n, o]);
-  const m = () => b(null), w = (C) => {
+  }, [r, o]);
+  const m = () => b(null), j = (C) => {
     C.stopPropagation(), d !== null && b((d - 1 + t.length) % t.length);
   }, E = (C) => {
     C.stopPropagation(), d !== null && b((d + 1) % t.length);
@@ -3833,7 +3833,7 @@ const lr = ({
     loop: O = !1,
     muted: z = !1,
     controls: R = !1,
-    width: j = "100%",
+    width: w = "100%",
     height: _ = "150px",
     borderRadius: N = "12px",
     backgroundColor: x = "#1e1e1e",
@@ -3842,20 +3842,20 @@ const lr = ({
     className: H,
     onClick: U
   }) => {
-    const r = J(null), h = J(null), [L, B] = M(W), [Y, A] = M(0), [D, G] = M(0), [P, K] = M(z ? 0 : 0.5), [Z, le] = M(z), [ae, Be] = M(!1), [ce, He] = M(O);
+    const n = J(null), h = J(null), [L, B] = M(W), [Y, A] = M(0), [D, G] = M(0), [P, K] = M(z ? 0 : 0.5), [Z, le] = M(z), [ae, Be] = M(!1), [ce, He] = M(O);
     q(() => {
-      r.current && (r.current.volume = P, r.current.loop = ce, r.current.muted = Z);
+      n.current && (n.current.volume = P, n.current.loop = ce, n.current.muted = Z);
     }, [P, ce, Z]);
     const Ue = () => {
-      r.current && (L ? r.current.pause() : r.current.play(), B(!L));
+      n.current && (L ? n.current.pause() : n.current.play(), B(!L));
     }, Ce = () => {
-      r.current && (A(r.current.currentTime), G(r.current.duration));
+      n.current && (A(n.current.currentTime), G(n.current.duration));
     }, Ve = (Q) => {
-      if (!r.current || !Q.currentTarget) return;
+      if (!n.current || !Q.currentTarget) return;
       const de = Q.currentTarget.getBoundingClientRect(), Ie = (Q.clientX - de.left) / de.width * D;
-      r.current.currentTime = Ie, A(Ie);
+      n.current.currentTime = Ie, A(Ie);
     }, ze = (Q) => {
-      r.current && (r.current.currentTime += Q);
+      n.current && (n.current.currentTime += Q);
     }, Xe = () => {
       h.current && (ae ? document.exitFullscreen?.() : h.current.requestFullscreen?.(), Be(!ae));
     }, qe = () => {
@@ -3873,7 +3873,7 @@ const lr = ({
         className: H,
         style: {
           position: "relative",
-          width: j,
+          width: w,
           backgroundColor: x,
           borderRadius: N,
           color: "#fff",
@@ -3889,7 +3889,7 @@ const lr = ({
           /* @__PURE__ */ e.jsx(
             "video",
             {
-              ref: r,
+              ref: n,
               src: C,
               poster: y,
               autoPlay: W,
@@ -4094,7 +4094,7 @@ const lr = ({
           /* @__PURE__ */ e.jsx(
             "button",
             {
-              onClick: w,
+              onClick: j,
               "aria-label": "Previous video",
               style: {
                 position: "absolute",
@@ -4178,23 +4178,30 @@ const lr = ({
   ] });
 }, ar = ({
   images: t,
-  columns: n = 3,
+  columns: r = 3,
   gap: o = "10px",
   layout: a = "grid",
   lightbox: l = !0,
   className: i = ""
 }) => {
-  const [c, g] = M(null), [p, k] = M(n), [u, d] = M(null), [b, s] = M(0);
+  const [c, g] = M(null), [p, k] = M(
+    typeof r == "number" ? r : r.default || 3
+  ), [u, d] = M(null), [b, s] = M(0);
   q(() => {
     const m = () => {
-      window.innerWidth < 640 ? k(1) : window.innerWidth < 1024 ? k(Math.min(2, n)) : k(n);
+      if (typeof r == "number")
+        k(r);
+      else {
+        const j = window.innerWidth;
+        j < 640 && r.sm ? k(r.sm) : j < 1024 && r.md ? k(r.md) : j < 1280 && r.lg ? k(r.lg) : j >= 1280 && r.xl ? k(r.xl) : k(r.default || 3);
+      }
     };
     return m(), window.addEventListener("resize", m), () => window.removeEventListener("resize", m);
-  }, [n]);
+  }, [r]);
   const v = () => g(null), f = (m) => {
-    m.stopPropagation(), c !== null && (d("prev"), g((w) => (w - 1 + t.length) % t.length), s((w) => w + 1));
+    m.stopPropagation(), c !== null && (d("prev"), g((j) => (j - 1 + t.length) % t.length), s((j) => j + 1));
   }, S = (m) => {
-    m.stopPropagation(), c !== null && (d("next"), g((w) => (w + 1) % t.length), s((w) => w + 1));
+    m.stopPropagation(), c !== null && (d("next"), g((j) => (j + 1) % t.length), s((j) => j + 1));
   };
   return /* @__PURE__ */ e.jsxs("div", { style: { width: "100%" }, className: i, children: [
     /* @__PURE__ */ e.jsx(
@@ -4206,7 +4213,7 @@ const lr = ({
           gap: o,
           gridAutoFlow: a === "masonry" ? "dense" : "row"
         },
-        children: t.map((m, w) => /* @__PURE__ */ e.jsx(
+        children: t.map((m, j) => /* @__PURE__ */ e.jsx(
           "div",
           {
             style: {
@@ -4216,7 +4223,7 @@ const lr = ({
               cursor: l ? "pointer" : "default"
             },
             onClick: () => {
-              g(w), d(null);
+              g(j), d(null);
             },
             children: /* @__PURE__ */ e.jsx(
               _e,
@@ -4234,7 +4241,7 @@ const lr = ({
               }
             )
           },
-          w
+          j
         ))
       }
     ),
@@ -4274,7 +4281,7 @@ const lr = ({
                     "aria-label": "Previous image",
                     style: {
                       position: "absolute",
-                      left: "-50px",
+                      left: "5px",
                       top: "50%",
                       transform: "translateY(-50%)",
                       color: "white",
@@ -4285,7 +4292,7 @@ const lr = ({
                       cursor: "pointer",
                       zIndex: 2
                     },
-                    children: /* @__PURE__ */ e.jsx(ke, { size: 32 })
+                    children: /* @__PURE__ */ e.jsx(ke, { size: 24 })
                   }
                 ),
                 /* @__PURE__ */ e.jsx(
@@ -4317,7 +4324,7 @@ const lr = ({
                     "aria-label": "Next image",
                     style: {
                       position: "absolute",
-                      right: "0px",
+                      right: "5px",
                       top: "50%",
                       transform: "translateY(-50%)",
                       color: "white",
@@ -4328,7 +4335,7 @@ const lr = ({
                       cursor: "pointer",
                       zIndex: 2
                     },
-                    children: /* @__PURE__ */ e.jsx(Se, { size: 28 })
+                    children: /* @__PURE__ */ e.jsx(Se, { size: 24 })
                   }
                 )
               ]
@@ -4354,19 +4361,19 @@ const lr = ({
             }
           ),
           /* @__PURE__ */ e.jsx("style", { children: `
-      @keyframes slideInFromRight {
-        from { transform: translateX(100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes slideInFromLeft {
-        from { transform: translateX(-100%); opacity: 0; }
-        to { transform: translateX(0); opacity: 1; }
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    ` })
+            @keyframes slideInFromRight {
+              from { transform: translateX(100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideInFromLeft {
+              from { transform: translateX(-100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+          ` })
         ]
       }
     )
