@@ -31,7 +31,8 @@ const AudioGalleryDocs: React.FC = () => {
       prop: "tracks",
       type: "Array<{ src: string; title: string; thumbnail?: string }>",
       default: "—",
-      description: "Array of audio track objects with source, title, and optional thumbnail.",
+      description:
+        "Array of audio track objects with source, title, and optional thumbnail.",
     },
     {
       prop: "className",
@@ -61,7 +62,8 @@ const AudioGalleryDocs: React.FC = () => {
       prop: "secondaryColor",
       type: "string",
       default: `"#e5e7eb"`,
-      description: "Secondary background color for inactive track items and controls background.",
+      description:
+        "Secondary background color for inactive track items and controls background.",
     },
     {
       prop: "autoplay",
@@ -78,10 +80,11 @@ const AudioGalleryDocs: React.FC = () => {
   ];
 
   return (
-    <div className="py-10 max-w-4xl font-primary mx-auto bg-zinc-950">
+    <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8">
-        <span className="text-primary">AudioGallery</span> Component Documentation
+        <span className="text-primary">AudioGallery</span> Component
+        Documentation
       </h1>
 
       {/* Import */}
@@ -107,10 +110,20 @@ const AudioGalleryDocs: React.FC = () => {
 />`}
           previewContent={
             <AudioGallery
+              primaryColor="#00c214"
+              secondaryColor="#042e00"
+              maxWidth={500}
               tracks={[
-                { src: "/sample1.mp3", title: "Sample Track 1", thumbnail: "/thumb1.jpg" },
+                {
+                  src: "/sample1.mp3",
+                  title: "Sample Track 1",
+                  thumbnail:
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQykzoZeCE0p7LeuyHnLYCdPP2jju9d5PaMeA&s",
+                  artist: "taha",
+                  duration: "10m",
+                },
                 { src: "/sample2.mp3", title: "Sample Track 2" },
-                { src: "/sample3.mp3", title: "Sample Track 3", thumbnail: "/thumb3.jpg" },
+                { src: "/sample3.mp3", title: "Sample Track 3" },
               ]}
             />
           }
@@ -120,10 +133,12 @@ const AudioGalleryDocs: React.FC = () => {
       {/* Description */}
       <section className="mb-16">
         <p className="text-gray-300 leading-relaxed">
-          The <code>AudioGallery</code> component renders a list of audio tracks with play/pause controls.
-          It supports autoplay, looping, and customizable theming through colors.
-          Users can click tracks to play or pause them, and view optional thumbnails.
-          Playback controls include skip ±10 seconds, volume mute toggle, loop toggle, and fullscreen mode.
+          The <code>AudioGallery</code> component renders a list of audio tracks
+          with play/pause controls. It supports autoplay, looping, and
+          customizable theming through colors. Users can click tracks to play or
+          pause them, and view optional thumbnails. Playback controls include
+          skip ±10 seconds, volume mute toggle, loop toggle, and fullscreen
+          mode.
         </p>
       </section>
 
@@ -134,17 +149,27 @@ const AudioGalleryDocs: React.FC = () => {
           <thead>
             <tr className="bg-primary text-white">
               {columns.map(({ label, key }) => (
-                <th key={key} className="px-3 py-2 border border-primary">{label}</th>
+                <th key={key} className="px-3 py-2 border border-primary">
+                  {label}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {data.map(({ prop, type, default: def, description }) => (
               <tr key={prop} className="even:bg-zinc-800 odd:bg-zinc-900">
-                <td className="border border-primary px-3 py-2 font-mono">{prop}</td>
-                <td className="border border-primary px-3 py-2 font-mono">{type}</td>
-                <td className="border border-primary px-3 py-2 font-mono">{def}</td>
-                <td className="border border-primary px-3 py-2">{description}</td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {prop}
+                </td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {type}
+                </td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {def}
+                </td>
+                <td className="border border-primary px-3 py-2">
+                  {description}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -170,7 +195,11 @@ const AudioGalleryDocs: React.FC = () => {
             <AudioGallery
               tracks={[
                 { src: "/sample1.mp3", title: "Relaxing Tune" },
-                { src: "/sample2.mp3", title: "Upbeat Song", thumbnail: "/cover.jpg" },
+                {
+                  src: "/sample2.mp3",
+                  title: "Upbeat Song",
+                  thumbnail: "/cover.jpg",
+                },
               ]}
               autoplay
               loop
@@ -211,10 +240,22 @@ const AudioGalleryDocs: React.FC = () => {
         <h2 className="text-2xl font-semibold mb-4">Behavior Details</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-300">
           <li>Clicking a track toggles play/pause of that specific audio.</li>
-          <li>Only one track plays at a time; selecting another track stops the current one.</li>
-          <li>Playback controls include skip ±10 seconds, mute/unmute, loop toggle, and fullscreen mode.</li>
-          <li>Keyboard accessible: tracks can be focused and toggled with Enter or Space keys.</li>
-          <li>Supports theming with customizable colors for primary, background, text, and secondary elements.</li>
+          <li>
+            Only one track plays at a time; selecting another track stops the
+            current one.
+          </li>
+          <li>
+            Playback controls include skip ±10 seconds, mute/unmute, loop
+            toggle, and fullscreen mode.
+          </li>
+          <li>
+            Keyboard accessible: tracks can be focused and toggled with Enter or
+            Space keys.
+          </li>
+          <li>
+            Supports theming with customizable colors for primary, background,
+            text, and secondary elements.
+          </li>
           <li>Volume and playback position updates live during playback.</li>
           <li>Seek bar supports click and keyboard arrow key adjustments.</li>
         </ul>
