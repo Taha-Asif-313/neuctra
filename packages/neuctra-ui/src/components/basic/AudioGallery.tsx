@@ -74,7 +74,7 @@ export function AudioGallery({
   backgroundColor = "#0f0f23",
   textColor = "#e4e4e7",
   secondaryColor = "#1a1a2e",
-  border = 1,
+  border = 0,
   borderColor,
   maxWidth = 420,
   autoplay = false,
@@ -230,16 +230,11 @@ export function AudioGallery({
         color: textColor,
         borderRadius: "24px",
         padding: "24px 16px",
-        boxShadow: `
-          0 20px 60px rgba(0,0,0,0.4),
-          0 8px 16px rgba(0,0,0,0.2),
-          inset 0 1px 0 rgba(255,255,255,0.1)
-        `,
         fontFamily:
           "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
         userSelect: "none",
         backdropFilter: "blur(20px)",
-        border: `${border}px solid ${borderColor || primaryColor}`,
+        border: `${border}px solid ${borderColor}40`,
       }}
     >
       {/* Header */}

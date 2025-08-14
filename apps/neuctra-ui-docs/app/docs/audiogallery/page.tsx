@@ -112,6 +112,7 @@ const AudioGalleryDocs: React.FC = () => {
             <AudioGallery
               primaryColor="#00c214"
               secondaryColor="#042e00"
+              borderColor="transparent"
               maxWidth={500}
               tracks={[
                 {
