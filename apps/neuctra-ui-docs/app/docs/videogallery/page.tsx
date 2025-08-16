@@ -1,26 +1,13 @@
 "use client";
 
 import React from "react";
-import { VideoGallery } from "@neuctra/ui"; // Adjust import path if needed
-import {
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Maximize,
-  Minimize,
-  RotateCcw,
-  SkipBack,
-  SkipForward,
-  X,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Button, Table, VideoGallery } from "@neuctra/ui";
+import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, RotateCcw, SkipBack, SkipForward, X, ChevronLeft, ChevronRight, Settings, Download, Share2, Heart, Eye, Calendar, Clock, User, Tag, Loader, Search, Filter } from "lucide-react";
 import CodeBlock from "@/app/components/docs/CodeBlock";
 import CodePreviewBlock from "@/app/components/docs/CodePreviewBlock";
 
 const VideoGalleryDocs: React.FC = () => {
-  // Props table columns
+  // Define columns for the props table
   const columns = [
     { key: "prop", label: "Prop", sortable: true },
     { key: "type", label: "Type", sortable: true },
@@ -28,167 +15,402 @@ const VideoGalleryDocs: React.FC = () => {
     { key: "description", label: "Description", sortable: false },
   ];
 
-  // Combined props (VideoGallery + VideoPlayer)
+  // Data for VideoGallery component props
   const data = [
     {
       prop: "videos",
-      type: "Array<{ src: string; poster?: string }>",
-      default: "—",
-      description: "List of video objects to display in the gallery.",
-    },
-    {
-      prop: "columns",
-      type: "number",
-      default: "3",
-      description: "Default number of columns when no responsive setting applies.",
-    },
-    {
-      prop: "responsiveColumns",
-      type: "{ mobile?: number; tablet?: number; desktop?: number }",
-      default: "undefined",
-      description: "Responsive columns count based on screen size breakpoints.",
-    },
-    {
-      prop: "gap",
-      type: "string",
-      default: `"10px"`,
-      description: "Spacing between video items.",
+      type: "VideoData[]",
+      default: "[]",
+      description: "Array of video objects to display in the gallery",
     },
     {
       prop: "layout",
-      type: `"grid" | "masonry"`,
+      type: `"grid" | "masonry" | "carousel" | "list" | "mosaic"`,
       default: `"grid"`,
-      description: "Display layout type for videos.",
+      description: "Layout type for the video gallery",
     },
     {
-      prop: "lightbox",
+      prop: "columns",
+      type: "ResponsiveConfig",
+      default: "{ xs: 1, sm: 2, md: 2, lg: 3, xl: 4, '2xl': 5 }",
+      description: "Number of columns at different breakpoints",
+    },
+    {
+      prop: "gap",
+      type: "string | ResponsiveConfig",
+      default: `"16px"`,
+      description: "Gap between video items",
+    },
+    {
+      prop: "aspectRatio",
+      type: `"16:9" | "4:3" | "1:1" | "3:2" | "21:9" | "auto"`,
+      default: `"16:9"`,
+      description: "Aspect ratio for video thumbnails",
+    },
+    {
+      prop: "theme",
+      type: "ThemeConfig",
+      default: `{
+        primary: "#3b82f6",
+        secondary: "#6366f1",
+        accent: "#f59e0b",
+        background: "#0f172a",
+        surface: "#1e293b",
+        text: "#f8fafc",
+        textSecondary: "#94a3b8",
+        border: "#334155",
+        shadow: "0 10px 25px rgba(0,0,0,0.3)",
+        gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+        borderRadius: "12px"
+      }`,
+      description: "Custom theme configuration for the gallery",
+    },
+    {
+      prop: "showThumbnails",
       type: "boolean",
       default: "true",
-      description: "Enables fullscreen modal preview of videos on click.",
+      description: "Whether to show video thumbnails",
+    },
+    {
+      prop: "showMetadata",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show video metadata (title, description, etc.)",
+    },
+    {
+      prop: "showControls",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show video player controls",
+    },
+    {
+      prop: "showProgress",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show progress bar",
+    },
+    {
+      prop: "showVolume",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show volume controls",
     },
     {
       prop: "autoPlay",
       type: "boolean",
       default: "false",
-      description: "Automatically plays videos when rendered.",
+      description: "Whether videos autoplay when opened",
+    },
+    {
+      prop: "autoAdvance",
+      type: "boolean",
+      default: "false",
+      description: "Whether to automatically advance to next video",
     },
     {
       prop: "loop",
       type: "boolean",
       default: "false",
-      description: "Loops video playback when finished.",
+      description: "Whether videos should loop",
     },
     {
       prop: "muted",
       type: "boolean",
-      default: "false",
-      description: "Starts videos muted.",
+      default: "true",
+      description: "Whether videos start muted",
     },
     {
-      prop: "controls",
+      prop: "preload",
+      type: `"none" | "metadata" | "auto"`,
+      default: `"metadata"`,
+      description: "Video preload strategy",
+    },
+    {
+      prop: "lazyLoading",
       type: "boolean",
       default: "true",
-      description: "Shows the native HTML video controls.",
+      description: "Whether to lazy load videos",
+    },
+    {
+      prop: "infiniteScroll",
+      type: "boolean",
+      default: "false",
+      description: "Whether to enable infinite scrolling",
+    },
+    {
+      prop: "lightbox",
+      type: "boolean",
+      default: "true",
+      description: "Whether to enable lightbox mode for videos",
+    },
+    {
+      prop: "lightboxAnimation",
+      type: `"fade" | "slide" | "zoom" | "flip" | "none"`,
+      default: `"zoom"`,
+      description: "Animation type for lightbox transitions",
+    },
+    {
+      prop: "keyboard",
+      type: "boolean",
+      default: "true",
+      description: "Whether to enable keyboard navigation",
+    },
+    {
+      prop: "swipeGestures",
+      type: "boolean",
+      default: "true",
+      description: "Whether to enable swipe gestures on mobile",
+    },
+    {
+      prop: "title",
+      type: "string",
+      default: `"Video Gallery"`,
+      description: "Title for the gallery",
+    },
+    {
+      prop: "description",
+      type: "string",
+      default: `"A collection of videos"`,
+      description: "Description for the gallery",
+    },
+    {
+      prop: "structured",
+      type: "boolean",
+      default: "true",
+      description: "Whether to include structured data (JSON-LD) for SEO",
+    },
+    {
+      prop: "search",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show search functionality",
+    },
+    {
+      prop: "filter",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show category filtering",
+    },
+    {
+      prop: "sort",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show sorting options",
+    },
+    {
+      prop: "playlist",
+      type: "boolean",
+      default: "false",
+      description: "Whether to show playlist functionality",
+    },
+    {
+      prop: "fullscreen",
+      type: "boolean",
+      default: "true",
+      description: "Whether to allow fullscreen mode",
+    },
+    {
+      prop: "sharing",
+      type: "boolean",
+      default: "true",
+      description: "Whether to show share options",
+    },
+    {
+      prop: "download",
+      type: "boolean",
+      default: "false",
+      description: "Whether to show download options",
+    },
+    {
+      prop: "favorites",
+      type: "boolean",
+      default: "true",
+      description: "Whether to allow favoriting videos",
+    },
+    {
+      prop: "onVideoClick",
+      type: "(video: VideoData, index: number) => void",
+      default: "undefined",
+      description: "Callback when a video is clicked",
+    },
+    {
+      prop: "onVideoEnd",
+      type: "(video: VideoData, index: number) => void",
+      default: "undefined",
+      description: "Callback when a video ends",
+    },
+    {
+      prop: "onVideoPlay",
+      type: "(video: VideoData, index: number) => void",
+      default: "undefined",
+      description: "Callback when a video starts playing",
+    },
+    {
+      prop: "onVideoPause",
+      type: "(video: VideoData, index: number) => void",
+      default: "undefined",
+      description: "Callback when a video is paused",
     },
     {
       prop: "className",
       type: "string",
       default: `""`,
-      description: "Custom CSS classes for the gallery container.",
-    },
-    // VideoPlayer props
-    {
-      prop: "width",
-      type: "string",
-      default: `"100%"`,
-      description: "Width of the individual video player.",
-    },
-    {
-      prop: "height",
-      type: "string",
-      default: `"150px"`,
-      description: "Height of the video player.",
-    },
-    {
-      prop: "borderRadius",
-      type: "string",
-      default: `"12px"`,
-      description: "Border radius for the video container.",
-    },
-    {
-      prop: "backgroundColor",
-      type: "string",
-      default: `"#1e1e1e"`,
-      description: "Background color behind the video.",
-    },
-    {
-      prop: "primaryColor",
-      type: "string",
-      default: `"#ff4081"`,
-      description: "Theme color for buttons and progress bar.",
-    },
-    {
-      prop: "padding",
-      type: "string",
-      default: `"16px"`,
-      description: "Padding inside the video container.",
-    },
-    {
-      prop: "onClick",
-      type: "(e: React.MouseEvent) => void",
-      default: "undefined",
-      description: "Custom click handler for the video container.",
+      description: "Additional CSS class for the gallery container",
     },
   ];
 
+  // Sample video data for examples
+  const sampleVideos = [
+    {
+      id: "1",
+      src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      title: "Beautiful Sunset",
+      description: "Watch this amazing sunset over the mountains",
+      duration: 120,
+      author: "Nature Films",
+      publishDate: "2023-05-15",
+      tags: ["nature", "sunset", "mountains"],
+      views: 15000,
+      likes: 1200,
+      category: "nature"
+    },
+    {
+      id: "2",
+      src: "https://example.com/video2.mp4",
+      poster: "https://example.com/thumbnail2.jpg",
+      title: "City Time Lapse",
+      description: "A day in the life of a bustling city",
+      duration: 90,
+      author: "Urban Media",
+      publishDate: "2023-06-20",
+      tags: ["city", "timelapse", "urban"],
+      views: 25000,
+      likes: 1800,
+      category: "urban"
+    }
+  ];
+
   return (
-    <div className="py-10 max-w-6xl font-primary mx-auto bg-zinc-950">
+    <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950">
       {/* Page Title */}
       <h1 className="text-4xl font-bold mb-8">
         <span className="text-primary">VideoGallery</span> Component Documentation
       </h1>
 
       {/* Import Statement */}
+            {/* Import Statement */}
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Import</h2>
         <CodeBlock
           language="javascript"
-          code={`import { VideoGallery } from "@neuctra/ui";`}
+          code={`import { VideoGallery } from "@neuctra/ui";
+import { VideoData } from "@neuctra/ui/types";`}
         />
       </section>
 
-      {/* Basic Usage */}
+      {/* Live Demo with Code */}
       <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-4">Basic Usage Example</h2>
         <CodePreviewBlock
           language="javascript"
-          code={`<VideoGallery
-  videos={[
-    { src: "/video1.mp4", poster: "/poster1.jpg" },
-    { src: "/video2.mp4", poster: "/poster2.jpg" },
-    { src: "/video3.mp4" }
-  ]}
+          code={`const videos = [
+  {
+    id: "1",
+    src: "video1.mp4",
+    poster: "thumbnail1.jpg",
+    title: "Beautiful Sunset",
+    description: "Watch this amazing sunset",
+    duration: 120,
+    author: "Nature Films",
+    publishDate: "2023-05-15",
+    tags: ["nature", "sunset"],
+    views: 15000,
+    likes: 1200,
+    category: "nature"
+  },
+  // ... more videos
+];
+
+<VideoGallery 
+  videos={videos}
+  layout="grid"
+  title="My Video Collection"
+  description="A curated selection of videos"
 />`}
           previewContent={
-            <VideoGallery
-              videos={[
-                { src: "/sample1.mp4", poster: "/poster1.jpg" },
-                { src: "/sample2.mp4", poster: "/poster2.jpg" },
-                { src: "/sample3.mp4" }
-              ]}
-            />
+            <div className="[&_.carousel-container]:[scrollbar-width:none] [&_.carousel-container::-webkit-scrollbar]:[display:none]">
+              <VideoGallery 
+                videos={sampleVideos}
+                layout="grid"
+                columns={2}
+                responsiveColumns={{desktop:2}}
+                lightbox
+              />
+            </div>
+          }
+        />
+      </section>
+
+      {/* Live Demo with Code */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-semibold mb-4">Basic Usage Example</h2>
+        <CodePreviewBlock
+          language="javascript"
+          code={`const videos = [
+  {
+    id: "1",
+    src: "video1.mp4",
+    poster: "thumbnail1.jpg",
+    title: "Beautiful Sunset",
+    description: "Watch this amazing sunset",
+    duration: 120,
+    author: "Nature Films",
+    publishDate: "2023-05-15",
+    tags: ["nature", "sunset"],
+    views: 15000,
+    likes: 1200,
+    category: "nature"
+  },
+  {
+    id: "2",
+    src: "video2.mp4",
+    poster: "thumbnail2.jpg",
+    title: "City Time Lapse",
+    description: "A day in the city",
+    duration: 90,
+    author: "Urban Media",
+    publishDate: "2023-06-20",
+    tags: ["city", "timelapse"],
+    views: 25000,
+    likes: 1800,
+    category: "urban"
+  }
+];
+
+<VideoGallery 
+  videos={videos}
+  layout="grid"
+  title="My Video Collection"
+  description="A curated selection of videos"
+/>`}
+          previewContent={
+           <VideoGallery 
+  videos={sampleVideos}
+  layout="grid"
+  columns={2}
+  responsiveColumns={{desktop:2}}
+  lightbox
+
+/>
           }
         />
       </section>
 
       {/* Component Description */}
       <section className="mb-16">
-        <p className="text-gray-300 leading-relaxed">
-          The <code>VideoGallery</code> component provides a responsive, customizable video
-          grid with optional lightbox fullscreen viewing. It supports both grid
-          and masonry layouts, custom gaps, responsive columns, autoplay, looping,
-          muting, and native video controls. Each video uses a built-in player with
-          play/pause, skip, seek, volume, loop toggle, and fullscreen functionality.
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+          The <code>VideoGallery</code> component is a feature-rich React component for displaying collections of videos with multiple layout options, search, filtering, and a full-featured lightbox viewer. It includes comprehensive video player controls, responsive design, and extensive customization options.
         </p>
       </section>
 
@@ -216,107 +438,189 @@ const VideoGalleryDocs: React.FC = () => {
         </table>
       </section>
 
-      {/* Usage Examples */}
+      {/* Usage Examples Section */}
       <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-6">Usage Examples</h2>
 
         <CodePreviewBlock
           language="javascript"
-          code={`<VideoGallery
-  videos={[
-    { src: "/video1.mp4" },
-    { src: "/video2.mp4" },
-    { src: "/video3.mp4" }
-  ]}
-  columns={4}
-  gap="20px"
+          code={`// Masonry layout with custom theme
+<VideoGallery
+  videos={videos}
+  layout="masonry"
+  theme={{
+    primary: "#8b5cf6",
+    background: "#111827",
+    surface: "#1f2937",
+    text: "#f9fafb"
+  }}
 />`}
           previewContent={
-            <VideoGallery
-              videos={[
-                { src: "/sample1.mp4" },
-                { src: "/sample2.mp4" },
-                { src: "/sample3.mp4" }
-              ]}
-              columns={4}
-              gap="20px"
-            />
+            <div className="border border-gray-200 dark:border-gray-700 p-4 rounded-lg">
+              <p className="text-gray-500 dark:text-gray-400">
+                Masonry layout with custom theme
+              </p>
+            </div>
           }
           className="mb-8"
         />
 
         <CodePreviewBlock
           language="javascript"
-          code={`<VideoGallery
-  videos={[
-    { src: "/video1.mp4" },
-    { src: "/video2.mp4" }
-  ]}
-  responsiveColumns={{ mobile: 1, tablet: 2, desktop: 4 }}
-/>`}
-          previewContent={
-            <VideoGallery
-              videos={[
-                { src: "/sample1.mp4" },
-                { src: "/sample2.mp4" }
-              ]}
-              responsiveColumns={{ mobile: 1, tablet: 2, desktop: 4 }}
-            />
-          }
-          className="mb-8"
-        />
-
-        <CodePreviewBlock
-          language="javascript"
-          code={`<VideoGallery
-  videos={[
-    { src: "/video1.mp4" },
-    { src: "/video2.mp4" }
-  ]}
+          code={`// Minimal gallery without metadata
+<VideoGallery
+  videos={videos}
+  showMetadata={false}
+  showControls={false}
   lightbox={false}
 />`}
           previewContent={
-            <VideoGallery
-              videos={[
-                { src: "/sample1.mp4" },
-                { src: "/sample2.mp4" }
-              ]}
-              lightbox={false}
-            />
+            <div className="border border-gray-200 dark:border-gray-700 p-4 rounded-lg">
+              <p className="text-gray-500 dark:text-gray-400">
+                Minimal gallery without metadata
+              </p>
+            </div>
           }
           className="mb-8"
         />
 
         <CodePreviewBlock
           language="javascript"
-          code={`<VideoGallery
-  videos={[
-    { src: "/video1.mp4" }
-  ]}
-  autoPlay
-  loop
-  muted
+          code={`// Infinite scroll with search and filtering
+<VideoGallery
+  videos={largeVideoCollection}
+  infiniteScroll={true}
+  search={true}
+  filter={true}
+  sort={true}
 />`}
           previewContent={
-            <VideoGallery
-              videos={[{ src: "/sample1.mp4" }]}
-              autoPlay
-              loop
-              muted
-            />
+            <div className="border border-gray-200 dark:border-gray-700 p-4 rounded-lg">
+              <p className="text-gray-500 dark:text-gray-400">
+                Infinite scroll gallery with search and filtering
+              </p>
+            </div>
           }
+          className="mb-8"
         />
       </section>
 
-      {/* Behavior Details */}
-      <section>
+      {/* VideoData Interface Section */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-semibold mb-4">VideoData Interface</h2>
+        <CodeBlock
+          language="typescript"
+          code={`interface VideoData {
+  id: string;
+  src: string;
+  poster?: string;
+  title?: string;
+  description?: string;
+  duration?: number;
+  author?: string;
+  publishDate?: string;
+  tags?: string[];
+  views?: number;
+  likes?: number;
+  category?: string;
+  thumbnail?: string;
+  quality?: 'auto' | '720p' | '1080p' | '4k';
+  subtitles?: { src: string; label: string; language: string }[];
+  chapters?: { time: number; title: string }[];
+}`}
+        />
+      </section>
+
+      {/* ResponsiveConfig Interface Section */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-semibold mb-4">ResponsiveConfig Interface</h2>
+        <CodeBlock
+          language="typescript"
+          code={`interface ResponsiveConfig {
+  xs?: number;  // < 480px
+  sm?: number;  // 480px - 640px
+  md?: number;  // 640px - 768px
+  lg?: number;  // 768px - 1024px
+  xl?: number;  // 1024px - 1280px
+  '2xl'?: number; // > 1280px
+}`}
+        />
+      </section>
+
+      {/* ThemeConfig Interface Section */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-semibold mb-4">ThemeConfig Interface</h2>
+        <CodeBlock
+          language="typescript"
+          code={`interface ThemeConfig {
+  primary?: string;
+  secondary?: string;
+  accent?: string;
+  background?: string;
+  surface?: string;
+  text?: string;
+  textSecondary?: string;
+  border?: string;
+  shadow?: string;
+  gradient?: string;
+  borderRadius?: string;
+}`}
+        />
+      </section>
+
+      {/* Behavior Section */}
+      <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-4">Behavior Details</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-300">
-          <li>Automatically adjusts number of columns based on screen width when <code>responsiveColumns</code> is provided.</li>
-          <li>Clicking a video opens the lightbox (if enabled) for fullscreen viewing.</li>
-          <li>Lightbox supports navigation with Previous, Next, and Close buttons.</li>
-          <li>VideoPlayer includes controls for play/pause, skip ±10s, seek, loop, mute, and fullscreen toggle.</li>
-          <li>Custom styling via <code>className</code> and inline styles for <code>VideoPlayer</code> appearance.</li>
+        <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+          <li>
+            The gallery automatically adapts to screen size with responsive columns
+          </li>
+          <li>
+            Videos can be viewed in a lightbox with full controls when clicked
+          </li>
+          <li>
+            Keyboard navigation (arrows, escape) works when lightbox is open
+          </li>
+          <li>
+            Swipe gestures on mobile allow navigating between videos in lightbox
+          </li>
+          <li>
+            Infinite scroll loads more videos as the user scrolls down
+          </li>
+          <li>
+            Search filters videos by title, description, and tags
+          </li>
+          <li>
+            Category filtering shows only videos from selected category
+          </li>
+          <li>
+            Sorting options include by date, title, views, and likes
+          </li>
+        </ul>
+      </section>
+
+      {/* Customization Section */}
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Customization</h2>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          The VideoGallery can be extensively customized through props:
+        </p>
+        <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+          <li>
+            <strong>Layout:</strong> Choose from grid, masonry, list, or carousel layouts
+          </li>
+          <li>
+            <strong>Theme:</strong> Fully customize colors, borders, shadows, and more
+          </li>
+          <li>
+            <strong>Controls:</strong> Toggle which controls are visible
+          </li>
+          <li>
+            <strong>Behavior:</strong> Configure autoplay, looping, preloading, etc.
+          </li>
+          <li>
+            <strong>Features:</strong> Enable/disable search, filtering, sorting, etc.
+          </li>
         </ul>
       </section>
     </div>
