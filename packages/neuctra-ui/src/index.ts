@@ -6,7 +6,7 @@ export { Image } from "./components/basic/Image"; // Finalled
 export { Button } from "./components/basic/Button"; // Finalled
 export { Input } from "./components/basic/Input"; // Finalled
 export { List } from "./components/basic/List"; // Finalled
-export { LeftTabs, RightTabs, TopTabs } from "./components/basic/Tabs"; // Finalled
+export { LeftTabs, RightTabs, TopTabs, Tabs } from "./components/basic/Tabs"; // Finalled
 export { VideoPlayer } from "./components/basic/VideoPlayer"; // Finalled
 export { AudioPlayer } from "./components/basic/AudioPlayer"; // Finalled
 export { Container } from "./components/basic/Container"; // Finalled

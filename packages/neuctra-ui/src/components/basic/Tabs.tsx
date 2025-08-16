@@ -4,6 +4,8 @@ interface TabItem {
   label: React.ReactNode;
   content: React.ReactNode;
   icon?: React.ReactNode;
+  disabled?: boolean;
+  ariaLabel?: string;
 }
 
 interface TabsBaseProps {
@@ -27,8 +29,14 @@ interface TabsBaseProps {
   textColor?: string;
   backgroundColor?: string;
   hoverTextColor?: string;
-  responsiveBreakpoint?: number; // px (default 768)
-  showDrawerLabel?: string; // Optional label for mobile drawer
+  disabledColor?: string;
+  responsiveBreakpoint?: number;
+  showDrawerLabel?: string;
+  drawerIcon?: React.ReactNode;
+  transitionDuration?: number;
+  onTabChange?: (index: number) => void;
+  role?: string;
+  ariaOrientation?: "horizontal" | "vertical";
 }
 
 const BaseTabs: React.FC<
@@ -50,13 +58,19 @@ const BaseTabs: React.FC<
   tabsWidth = "240px",
   tabGap = 8,
   tabPadding = "12px 16px",
-  tabBorderRadius = 12,
+  tabBorderRadius = 8,
   primaryColor = "#2563eb",
   textColor = "#374151",
   backgroundColor = "#ffffff",
   hoverTextColor = "#1e40af",
+  disabledColor = "#d1d5db",
   responsiveBreakpoint = 768,
   showDrawerLabel = "Select Tab",
+  drawerIcon = "☰",
+  transitionDuration = 200,
+  onTabChange,
+  role = "tablist",
+  ariaOrientation = "horizontal",
 }) => {
   const [activeTab, setActiveTab] = useState(defaultActive);
   const [hoveredTab, setHoveredTab] = useState<number | null>(null);
@@ -67,19 +81,34 @@ const BaseTabs: React.FC<
     const checkViewport = () => {
       setIsMobile(window.innerWidth <= responsiveBreakpoint);
     };
+    
     checkViewport();
     window.addEventListener("resize", checkViewport);
     return () => window.removeEventListener("resize", checkViewport);
   }, [responsiveBreakpoint]);
 
+  useEffect(() => {
+    if (defaultActive >= 0 && defaultActive < tabs.length) {
+      setActiveTab(defaultActive);
+    }
+  }, [defaultActive, tabs.length]);
+
+  const handleTabChange = (index: number) => {
+    if (tabs[index].disabled) return;
+    setActiveTab(index);
+    onTabChange?.(index);
+  };
+
   const isVertical = tabPosition === "left" || tabPosition === "right";
-  const containerDirection = isVertical
-    ? isMobile
-      ? "column"
-      : tabPosition === "left"
-      ? "row"
-      : "row-reverse"
-    : "column";
+  
+  // Mobile layout always uses vertical tabs in a drawer
+  const containerDirection = isMobile 
+    ? "column" 
+    : isVertical
+      ? tabPosition === "left"
+        ? "row"
+        : "row-reverse"
+      : "column";
 
   const containerStyles: CSSProperties = {
     display: "flex",
@@ -87,32 +116,28 @@ const BaseTabs: React.FC<
     width: "100%",
     height: "100%",
     backgroundColor,
-    ...(isVertical && !isMobile
-      ? {} // No wrap needed in horizontal layout
-      : { flexWrap: "wrap" }),
     ...style,
   };
 
+  // Mobile tabs container is full width
   const tabsContainerStyles: CSSProperties = {
-    width: isVertical && !isMobile ? tabsWidth : "100%",
+    width: isMobile ? "100%" : (isVertical ? tabsWidth : "100%"),
     display: "flex",
-    flexDirection: isVertical && !isMobile ? "column" : "row",
-    justifyContent: !isVertical && tabPosition === "top" ? "center" : undefined,
+    flexDirection: isMobile ? "column" : (isVertical ? "column" : "row"),
     gap: tabGap,
-    padding: 8,
+    padding: isMobile ? "0" : "8px",
     boxSizing: "border-box",
+    overflowX: isMobile ? "hidden" : "visible",
     ...tabContainerStyle,
   };
 
   const contentStyles: CSSProperties = {
     flexGrow: 1,
-    padding: 24,
+    padding: isMobile ? "16px" : "24px",
     background: "#f9fafb",
     boxSizing: "border-box",
     minWidth: 0,
-    ...(isVertical && !isMobile
-      ? { width: "calc(100% - " + tabsWidth + ")" } // content takes rest of width
-      : { width: "100%" }),
+    width: isMobile ? "100%" : (isVertical ? `calc(100% - ${tabsWidth})` : "100%"),
     ...contentContainerStyle,
   };
 
@@ -126,18 +151,20 @@ const BaseTabs: React.FC<
     border: "none",
     backgroundColor: "transparent",
     fontWeight: 500,
-    transition: "all 0.2s ease",
-    width: isVertical && !isMobile ? "100%" : "auto",
-    marginBottom: isVertical && !isMobile ? tabGap : 0,
-    marginRight: !isVertical || isMobile ? tabGap : 0,
+    transition: `all ${transitionDuration}ms ease`,
+    width: isMobile || isVertical ? "100%" : "auto",
+    marginBottom: isMobile || isVertical ? tabGap : 0,
+    marginRight: !isVertical && !isMobile ? tabGap : 0,
     justifyContent: "flex-start",
+    textAlign: "left",
+    fontSize: isMobile ? "14px" : "inherit",
   };
 
   const activeStyles: CSSProperties = {
     backgroundColor: primaryColor,
     color: "#fff",
-    fontWeight: 700,
-    boxShadow: `0 2px 10px ${primaryColor}55`,
+    fontWeight: 600,
+    boxShadow: `0 2px 10px ${primaryColor}33`,
     ...activeTabStyle,
   };
 
@@ -148,68 +175,123 @@ const BaseTabs: React.FC<
   };
 
   const hoverStyles: CSSProperties = {
-    backgroundColor: `${primaryColor}22`,
+    backgroundColor: `${primaryColor}11`,
     color: hoverTextColor,
   };
 
+  const disabledStyles: CSSProperties = {
+    cursor: "not-allowed",
+    color: disabledColor,
+    opacity: 0.7,
+  };
+
+  // Mobile drawer button styles
+  const drawerButtonStyles: CSSProperties = {
+    ...baseTabStyles,
+    ...activeStyles,
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: tabGap,
+    fontSize: "16px",
+  };
+
   return (
-    <div className={className} style={containerStyles}>
-      {/* Media Query Styles */}
+    <div 
+      className={`react-tabs ${className}`} 
+      style={containerStyles}
+      role={role}
+      aria-orientation={isMobile ? "vertical" : (isVertical ? "vertical" : ariaOrientation)}
+    >
+      {/* Inlined CSS for better performance and scoping */}
       <style>
         {`
+        .react-tabs {
+          --primary-color: ${primaryColor};
+          --text-color: ${textColor};
+          --bg-color: ${backgroundColor};
+          --hover-color: ${hoverTextColor};
+          --disabled-color: ${disabledColor};
+          --transition-duration: ${transitionDuration}ms;
+        }
+        
+        .react-tabs__mobile-drawer {
+          display: flex;
+          flex-direction: column;
+          gap: ${tabGap}px;
+          width: 100%;
+          animation: react-tabs-slideDown ${transitionDuration}ms ease-out;
+        }
+        
+        @keyframes react-tabs-slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .react-tabs [role="tab"][aria-selected="true"] {
+          background-color: var(--primary-color);
+          color: white;
+        }
+        
+        .react-tabs [role="tabpanel"] {
+          outline: none;
+        }
+        
         @media (max-width: ${responsiveBreakpoint}px) {
-          .custom-tab-drawer-button {
+          .react-tabs__drawer-button {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 16px;
+            padding: ${tabPadding};
+            border-radius: ${tabBorderRadius}px;
+            margin-bottom: ${tabGap}px;
           }
-          .custom-tab-mobile-drawer {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 8px;
-            width: 100%;
-            animation: slideDown 0.3s ease-out;
+          
+          .react-tabs__nav {
+            padding: 0;
           }
-          @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+          
+          .react-tabs__content {
+            padding: 16px;
           }
         }
         `}
       </style>
 
-      {/* Responsive Drawer for Vertical Tabs */}
-      {isMobile && isVertical ? (
-        <div style={{ width: "100%", marginBottom: 12 }}>
+      {/* Mobile Drawer Implementation */}
+      {isMobile ? (
+        <>
           <button
             onClick={() => setDrawerOpen(!drawerOpen)}
-            style={{
-              ...baseTabStyles,
-              ...activeStyles,
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-            className="custom-tab-drawer-button"
+            style={drawerButtonStyles}
+            className="react-tabs__drawer-button"
+            aria-expanded={drawerOpen}
+            aria-controls="mobile-tabs-drawer"
+            aria-haspopup="true"
           >
             <span>{showDrawerLabel}</span>
-            <span style={{ fontSize: 18 }}>☰</span>
+            <span>{drawerIcon}</span>
           </button>
+          
           {drawerOpen && (
-            <div className="custom-tab-mobile-drawer">
+            <div 
+              id="mobile-tabs-drawer"
+              className="react-tabs__mobile-drawer"
+              role="menu"
+            >
               {tabs.map((tab, idx) => {
                 const isActive = idx === activeTab;
                 const isHovered = hoveredTab === idx;
+                const isDisabled = tab.disabled;
+                
                 return (
                   <button
                     key={idx}
                     onClick={() => {
-                      setActiveTab(idx);
+                      handleTabChange(idx);
                       setDrawerOpen(false);
                     }}
-                    onMouseEnter={() => setHoveredTab(idx)}
+                    onMouseEnter={() => !isDisabled && setHoveredTab(idx)}
                     onMouseLeave={() => setHoveredTab(null)}
                     className={
                       isActive ? activeTabClassName : inactiveTabClassName
@@ -217,40 +299,59 @@ const BaseTabs: React.FC<
                     style={{
                       ...baseTabStyles,
                       ...(isActive ? activeStyles : inactiveStyles),
-                      ...(isHovered && !isActive ? hoverStyles : {}),
+                      ...(isHovered && !isActive && !isDisabled ? hoverStyles : {}),
+                      ...(isDisabled ? disabledStyles : {}),
                     }}
+                    role="menuitemradio"
+                    aria-checked={isActive}
+                    aria-disabled={isDisabled}
+                    aria-label={tab.ariaLabel || (typeof tab.label === 'string' ? tab.label : `Tab ${idx + 1}`)}
+                    disabled={isDisabled}
                   >
-                    {tab.icon && <span>{tab.icon}</span>}
+                    {tab.icon && <span aria-hidden="true">{tab.icon}</span>}
                     <span>{tab.label}</span>
                   </button>
                 );
               })}
             </div>
           )}
-        </div>
+        </>
       ) : (
         <nav
-          className={tabContainerClassName}
+          className={`react-tabs__nav ${tabContainerClassName}`}
           style={tabsContainerStyles}
+          role={role}
           aria-label="Tabs Navigation"
         >
           {tabs.map((tab, idx) => {
             const isActive = idx === activeTab;
             const isHovered = hoveredTab === idx;
+            const isDisabled = tab.disabled;
+            
             return (
               <button
                 key={idx}
-                onClick={() => setActiveTab(idx)}
-                onMouseEnter={() => setHoveredTab(idx)}
+                onClick={() => handleTabChange(idx)}
+                onMouseEnter={() => !isDisabled && setHoveredTab(idx)}
                 onMouseLeave={() => setHoveredTab(null)}
-                className={isActive ? activeTabClassName : inactiveTabClassName}
+                className={
+                  isActive ? activeTabClassName : inactiveTabClassName
+                }
                 style={{
                   ...baseTabStyles,
                   ...(isActive ? activeStyles : inactiveStyles),
-                  ...(isHovered && !isActive ? hoverStyles : {}),
+                  ...(isHovered && !isActive && !isDisabled ? hoverStyles : {}),
+                  ...(isDisabled ? disabledStyles : {}),
                 }}
+                role="tab"
+                aria-selected={isActive}
+                aria-disabled={isDisabled}
+                aria-controls={`tabpanel-${idx}`}
+                id={`tab-${idx}`}
+                tabIndex={isActive ? 0 : -1}
+                disabled={isDisabled}
               >
-                {tab.icon && <span>{tab.icon}</span>}
+                {tab.icon && <span aria-hidden="true">{tab.icon}</span>}
                 <span>{tab.label}</span>
               </button>
             );
@@ -258,11 +359,14 @@ const BaseTabs: React.FC<
         </nav>
       )}
 
-      {/* Content */}
+      {/* Tab Content */}
       <section
-        className={contentContainerClassName}
+        className={`react-tabs__content ${contentContainerClassName}`}
         style={contentStyles}
         role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+        tabIndex={0}
       >
         {tabs[activeTab]?.content}
       </section>
@@ -270,9 +374,9 @@ const BaseTabs: React.FC<
   );
 };
 
-// Exports
+// Exported Components with TypeScript
 export const LeftTabs: React.FC<TabsBaseProps> = (props) => (
-  <BaseTabs {...props} tabPosition="left" />
+  <BaseTabs {...props} tabPosition="left" ariaOrientation="vertical" />
 );
 
 export const TopTabs: React.FC<TabsBaseProps> = (props) => (
@@ -280,5 +384,12 @@ export const TopTabs: React.FC<TabsBaseProps> = (props) => (
 );
 
 export const RightTabs: React.FC<TabsBaseProps> = (props) => (
-  <BaseTabs {...props} tabPosition="right" />
+  <BaseTabs {...props} tabPosition="right" ariaOrientation="vertical" />
 );
+
+// Default export
+export const Tabs = {
+  Left: LeftTabs,
+  Top: TopTabs,
+  Right: RightTabs,
+};
