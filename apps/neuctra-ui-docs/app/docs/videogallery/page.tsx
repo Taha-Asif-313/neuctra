@@ -343,9 +343,15 @@ import { VideoData } from "@neuctra/ui/types";`}
               <VideoGallery 
                 videos={sampleVideos}
                 layout="grid"
-                columns={{lg:2}}
+                columns={{lg:2,xl:2,md:2,xs:2,"2xl":2}}
                 lightbox
-
+                showSpeedOptions
+showControls
+download
+favorites
+showQualityOptions
+showProgress
+loop
               />
             </div>
           }

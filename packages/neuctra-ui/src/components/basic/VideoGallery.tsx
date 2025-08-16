@@ -236,7 +236,7 @@ const defaultTheme: ThemeConfig = {
   hoverShadow: "0 15px 30px rgba(0,0,0,0.4)",
   gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
   // Shapes
-  borderRadius: "12px",
+  borderRadius: "0px 0px 12px 12px",
   borderRadiusSmall: "6px",
   borderRadiusLarge: "16px",
   // Transitions
@@ -696,6 +696,7 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     onClick?: () => void;
   }> = ({ video, isLightbox = false, onClick }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const controlsRef = useRef<HTMLDivElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
@@ -703,9 +704,39 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     const [isMuted, setIsMuted] = useState(muted);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const [isBuffering, setIsBuffering] = useState(false);
+    const [showControls, setShowControls] = useState(true);
+    const [isMobile, setIsMobile] = useState(false);
+    const [touchStartX, setTouchStartX] = useState(0);
+    const [touchStartY, setTouchStartY] = useState(0);
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
     const [showQualityMenu, setShowQualityMenu] = useState(false);
     const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+
+    // Detect mobile on mount
+    useEffect(() => {
+      const checkIfMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+      checkIfMobile();
+      window.addEventListener("resize", checkIfMobile);
+      return () => window.removeEventListener("resize", checkIfMobile);
+    }, []);
+
+    // Auto-hide controls after delay when playing
+    useEffect(() => {
+      let timeout: NodeJS.Timeout;
+
+      if (isPlaying) {
+        setShowControls(true);
+        timeout = setTimeout(() => {
+          setShowControls(false);
+        }, 2000);
+      } else {
+        setShowControls(true);
+      }
+
+      return () => clearTimeout(timeout);
+    }, [isPlaying, currentTime]);
 
     // Play/pause toggle
     const togglePlay = useCallback(() => {
@@ -783,13 +814,39 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     const changeVideoQuality = (quality: string) => {
       setVideoQuality(quality);
       setShowQualityMenu(false);
-      // In a real implementation, you would switch video sources here
+    };
+
+    // Handle touch events for mobile controls
+    const handleTouchStart = (e: React.TouchEvent) => {
+      setTouchStartX(e.touches[0].clientX);
+      setTouchStartY(e.touches[0].clientY);
+      setShowControls(true);
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+
+      // Only consider horizontal swipes with minimal vertical movement
+      if (Math.abs(diffX) > 50 && Math.abs(diffY) < 50) {
+        if (diffX > 0) {
+          // Swipe left - forward 10 seconds
+          if (videoRef.current) videoRef.current.currentTime += 10;
+        } else {
+          // Swipe right - rewind 10 seconds
+          if (videoRef.current) videoRef.current.currentTime -= 10;
+        }
+      } else {
+        // Tap - toggle play/pause
+        togglePlay();
+      }
     };
 
     // Get aspect ratio style
     const getAspectRatioStyle = () => {
       if (aspectRatio === "auto" || aspectRatio === "custom") return {};
-
       const ratios: Record<Exclude<AspectRatio, "auto" | "custom">, string> = {
         "16:9": "56.25%",
         "4:3": "75%",
@@ -798,7 +855,6 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         "21:9": "42.86%",
         "9:16": "177.78%",
       };
-
       return { paddingBottom: ratios[aspectRatio] };
     };
 
@@ -840,8 +896,6 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         style={{
           position: "relative",
           overflow: "hidden",
-          transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-          transform: "scale(1)",
           backgroundColor: mergedTheme.surface,
           borderRadius: mergedTheme.borderRadius,
           boxShadow: mergedTheme.shadow,
@@ -849,16 +903,9 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
           cursor: onClick ? "pointer" : "default",
           height: "100%",
         }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLElement).style.transform = "scale(1.02)";
-          (e.currentTarget as HTMLElement).style.boxShadow =
-            mergedTheme.hoverShadow || "none";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-          (e.currentTarget as HTMLElement).style.boxShadow =
-            mergedTheme.shadow || "none";
-        }}
+        onTouchStart={isMobile ? handleTouchStart : undefined}
+        onTouchEnd={isMobile ? handleTouchEnd : undefined}
+        onMouseMove={() => setShowControls(true)}
         className={videoItemClassName}
       >
         {/* Video Container */}
@@ -892,88 +939,59 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                transition: `transform ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
                 borderRadius:
                   aspectRatio === "auto"
                     ? mergedTheme.borderRadius
                     : `${mergedTheme.borderRadius} ${mergedTheme.borderRadius} 0 0`,
                 ...(aspectRatio === "auto"
                   ? { aspectRatio: "16/9" }
-                  : {
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                    }),
+                  : { position: "absolute", top: 0, left: 0 }),
               }}
             />
           )}
 
-          {/* Play Overlay */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
-              opacity: 0,
-              transition: `opacity ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-              cursor: "pointer",
-              backdropFilter: `blur(${mergedTheme.backdropBlur})`,
-            }}
-            onClick={onClick || togglePlay}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "1";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "0";
-            }}
-          >
-            {isBuffering ? (
-              customLoader || (
+          {/* Play Overlay - Only show when not in lightbox mode and not playing */}
+          {selectedIndex === null && !isPlaying && (
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "rgba(0, 0, 0, 0.3)",
+                cursor: "pointer",
+                backdropFilter: `blur(${mergedTheme.backdropBlur})`,
+              }}
+              onClick={onClick || togglePlay}
+            >
+              {isBuffering ? (
+                customLoader || (
+                  <div style={{ animation: "spin 1s linear infinite" }}>
+                    <Loader size={48} color={mergedTheme.primary} />
+                  </div>
+                )
+              ) : (
                 <div
                   style={{
-                    animation: "spin 1s linear infinite",
-                    display: "inline-block",
+                    backgroundColor: `${mergedTheme.primary}33`,
+                    backdropFilter: "blur(4px)",
+                    borderRadius: "50%",
+                    padding: "16px",
                   }}
                 >
-                  <Loader size={48} color={mergedTheme.primary} />
-                </div>
-              )
-            ) : (
-              <div
-                style={{
-                  backgroundColor: `${mergedTheme.primary}33`,
-                  backdropFilter: "blur(4px)",
-                  borderRadius: "50%",
-                  padding: "16px",
-                  transition: `transform ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                  cursor: "pointer",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform =
-                    "scale(1.1)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-                }}
-              >
-                {isPlaying ? (
-                  <Pause size={32} color={mergedTheme.text} />
-                ) : (
                   <Play
                     size={32}
                     color={mergedTheme.text}
                     fill={mergedTheme.text}
                   />
-                )}
-              </div>
-            )}
-          </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Duration Badge */}
           {video.duration && (
@@ -1009,19 +1027,9 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                 padding: "8px",
                 borderRadius: "50%",
                 backgroundColor: "rgba(0, 0, 0, 0.5)",
-                opacity: 0,
-                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
                 border: "none",
                 cursor: "pointer",
                 backdropFilter: `blur(${mergedTheme.backdropBlur})`,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "1";
-                (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.opacity = "0";
-                (e.currentTarget as HTMLElement).style.transform = "scale(1)";
               }}
               aria-label={
                 favoriteVideos.has(video.id) ? "Unlike video" : "Like video"
@@ -1042,32 +1050,238 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
           )}
         </div>
 
+        {/* Lightbox Controls - Only show when controls should be visible */}
+        {isLightbox && showControls && (
+          <div
+            ref={controlsRef}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: mergedTheme.spacingUnit,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+              borderRadius: `0 0 ${mergedTheme.borderRadius} ${mergedTheme.borderRadius}`,
+              backdropFilter: `blur(${mergedTheme.backdropBlur})`,
+              transition: `opacity ${mergedTheme.transitionSpeed} ease`,
+              opacity: showControls ? 1 : 0,
+            }}
+            className={controlsClassName}
+          >
+            {/* Progress Bar */}
+            {showProgress && (
+              <div
+                onClick={handleSeek}
+                style={{
+                  height: "4px",
+                  backgroundColor: "rgba(255, 255, 255, 0.3)",
+                  borderRadius: mergedTheme.borderRadiusSmall,
+                  cursor: "pointer",
+                  position: "relative",
+                  marginBottom: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    height: "100%",
+                    borderRadius: mergedTheme.borderRadiusSmall,
+                    width: `${(currentTime / duration) * 100 || 0}%`,
+                    backgroundColor: mergedTheme.primary,
+                  }}
+                />
+              </div>
+            )}
+
+            {/* Main Controls */}
+        
+            <div
+              style={{
+                display:  "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                <button
+                  onClick={togglePlay}
+                  style={{
+                    padding: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: mergedTheme.primary,
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  aria-label={isPlaying ? "Pause" : "Play"}
+                >
+                  {isPlaying ? (
+                    <Pause size={20} color={mergedTheme.text} />
+                  ) : (
+                    <Play size={20} color={mergedTheme.text} />
+                  )}
+                </button>
+
+                {showVolume && (
+                  <>
+                    <button
+                      onClick={toggleMute}
+                      style={{
+                        padding: "6px",
+                        borderRadius: "50%",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                      aria-label={isMuted ? "Unmute" : "Mute"}
+                    >
+                      {isMuted ? (
+                        <VolumeX size={18} color={mergedTheme.text} />
+                      ) : (
+                        <Volume2 size={18} color={mergedTheme.text} />
+                      )}
+                    </button>
+
+                    {!isMobile && (
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.1"
+                        value={isMuted ? 0 : volume}
+                        onChange={(e) => {
+                          const newVolume = parseFloat(e.target.value);
+                          setVolume(newVolume);
+                          if (videoRef.current) {
+                            videoRef.current.volume = newVolume;
+                            if (newVolume > 0) setIsMuted(false);
+                          }
+                        }}
+                        style={{
+                          width: "80px",
+                          height: "4px",
+                          borderRadius: "2px",
+                          background: `linear-gradient(to right, ${
+                            mergedTheme.primary
+                          } 0%, ${mergedTheme.primary} ${
+                            (isMuted ? 0 : volume) * 100
+                          }%, rgba(255,255,255,0.3) ${
+                            (isMuted ? 0 : volume) * 100
+                          }%, rgba(255,255,255,0.3) 100%)`,
+                        }}
+                        aria-label="Volume control"
+                      />
+                    )}
+                  </>
+                )}
+
+                <span
+                  style={{
+                    fontSize: "14px",
+                    color: mergedTheme.text,
+                    minWidth: "40px",
+                  }}
+                >
+                  {formatTime(currentTime)} / {formatTime(duration)}
+                </span>
+              </div>
+
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                {showSpeedOptions && (
+                  <div style={{ position: "relative" }}>
+                    <button
+                      onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+                      style={{
+                        padding: "6px 10px",
+                        borderRadius: mergedTheme.borderRadiusSmall,
+                        backgroundColor: showSpeedMenu
+                          ? "rgba(255, 255, 255, 0.2)"
+                          : "transparent",
+                        border: "none",
+                        color: mergedTheme.text,
+                        cursor: "pointer",
+                        fontSize: "14px",
+                      }}
+                      aria-label="Playback speed"
+                    >
+                      {playbackSpeed}x
+                    </button>
+                    {showSpeedMenu && (
+                      <div
+                        style={{
+                          position: "absolute",
+                          bottom: "100%",
+                          right: 0,
+                          backgroundColor: mergedTheme.surface,
+                          borderRadius: mergedTheme.borderRadiusSmall,
+                          padding: "8px",
+                          boxShadow: mergedTheme.shadow,
+                          zIndex: 10,
+                          minWidth: "80px",
+                        }}
+                      >
+                        {[0.5, 0.75, 1, 1.25, 1.5, 2].map((speed) => (
+                          <button
+                            key={speed}
+                            onClick={() => changePlaybackSpeed(speed)}
+                            style={{
+                              width: "100%",
+                              padding: "6px 10px",
+                              backgroundColor:
+                                playbackSpeed === speed
+                                  ? mergedTheme.primary + "33"
+                                  : "transparent",
+                              border: "none",
+                              color: mergedTheme.text,
+                              cursor: "pointer",
+                            }}
+                          >
+                            {speed}x
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {fullscreen && (
+                  <button
+                    onClick={toggleFullscreen}
+                    style={{
+                      padding: "6px",
+                      borderRadius: "50%",
+                      backgroundColor: "transparent",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    aria-label={
+                      isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
+                    }
+                  >
+                    {isFullscreen ? (
+                      <Minimize size={18} color={mergedTheme.text} />
+                    ) : (
+                      <Maximize size={18} color={mergedTheme.text} />
+                    )}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Metadata */}
         {showMetadata && (
-          <div
-            style={getMetadataPositionStyle()}
-            onMouseEnter={
-              metadataPosition === "hover"
-                ? (e) => {
-                    (e.currentTarget as HTMLElement).style.opacity = "1";
-                  }
-                : undefined
-            }
-            onMouseLeave={
-              metadataPosition === "hover"
-                ? (e) => {
-                    (e.currentTarget as HTMLElement).style.opacity = "0";
-                  }
-                : undefined
-            }
-          >
+          <div style={getMetadataPositionStyle()}>
             {video.title && (
               <h3
                 style={{
                   color: mergedTheme.text,
                   fontWeight: mergedTheme.fontWeightBold,
                   fontSize: "14px",
-                  lineHeight: "1.4",
                   margin: "0 0 8px 0",
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
@@ -1084,7 +1298,6 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                 style={{
                   color: mergedTheme.textSecondary,
                   fontSize: "12px",
-                  lineHeight: "1.5",
                   margin: "0 0 8px 0",
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
@@ -1096,7 +1309,6 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
               </p>
             )}
 
-            {/* Video Stats */}
             <div
               style={{
                 display: "flex",
@@ -1104,53 +1316,52 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                 justifyContent: "space-between",
                 fontSize: "12px",
                 color: mergedTheme.textSecondary,
-                marginBottom: "8px",
               }}
             >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "12px" }}
-              >
+              <div style={{ display: "flex", gap: "12px" }}>
                 {video.views && (
-                  <div
+                  <span
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: "4px",
                     }}
                   >
-                    <Eye size={12} />
-                    <span>{video.views.toLocaleString()}</span>
-                  </div>
+                    <Eye size={12} /> {video.views.toLocaleString()}
+                  </span>
                 )}
                 {video.likes && (
-                  <div
+                  <span
                     style={{
                       display: "flex",
                       alignItems: "center",
                       gap: "4px",
                     }}
                   >
-                    <Heart size={12} />
-                    <span>{video.likes.toLocaleString()}</span>
-                  </div>
+                    <Heart size={12} /> {video.likes.toLocaleString()}
+                  </span>
                 )}
               </div>
 
               {video.publishDate && (
-                <div
+                <span
                   style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 >
-                  <Calendar size={12} />
-                  <span>
-                    {new Date(video.publishDate).toLocaleDateString()}
-                  </span>
-                </div>
+                  <Calendar size={12} />{" "}
+                  {new Date(video.publishDate).toLocaleDateString()}
+                </span>
               )}
             </div>
 
-            {/* Tags */}
             {video.tags && video.tags.length > 0 && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "4px",
+                  marginTop: "8px",
+                }}
+              >
                 {video.tags.slice(0, 3).map((tag, index) => (
                   <span
                     key={index}
@@ -1180,498 +1391,8 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
               height: "4px",
               width: `${(currentTime / duration) * 100}%`,
               backgroundColor: mergedTheme.primary,
-              transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
             }}
           />
-        )}
-
-        {/* Custom Controls for Lightbox */}
-        {isLightbox && showControls && (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: mergedTheme.spacingUnit,
-              background:
-                "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
-              borderRadius: `0 0 ${mergedTheme.borderRadius} ${mergedTheme.borderRadius}`,
-              backdropFilter: `blur(${mergedTheme.backdropBlur})`,
-            }}
-            className={controlsClassName}
-          >
-            {/* Main Controls */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: mergedTheme.spacingUnit,
-                marginBottom: mergedTheme.spacingUnit,
-              }}
-            >
-              <button
-                onClick={() =>
-                  videoRef.current && (videoRef.current.currentTime -= 10)
-                }
-                style={{
-                  padding: "8px",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    "rgba(255, 255, 255, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    "rgba(255, 255, 255, 0.2)";
-                }}
-                aria-label="Rewind 10 seconds"
-              >
-                <SkipBack size={20} color={mergedTheme.text} />
-              </button>
-
-              <button
-                onClick={togglePlay}
-                style={{
-                  padding: "12px",
-                  borderRadius: "50%",
-                  backgroundColor: mergedTheme.primary,
-                  border: "none",
-                  cursor: "pointer",
-                  transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform =
-                    "scale(1.05)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.transform = "scale(1)";
-                }}
-                aria-label={isPlaying ? "Pause" : "Play"}
-              >
-                {isPlaying ? (
-                  <Pause size={24} color={mergedTheme.text} />
-                ) : (
-                  <Play
-                    size={24}
-                    color={mergedTheme.text}
-                    fill={mergedTheme.text}
-                  />
-                )}
-              </button>
-
-              <button
-                onClick={() =>
-                  videoRef.current && (videoRef.current.currentTime += 10)
-                }
-                style={{
-                  padding: "8px",
-                  borderRadius: "50%",
-                  backgroundColor: "rgba(255, 255, 255, 0.2)",
-                  border: "none",
-                  cursor: "pointer",
-                  transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    "rgba(255, 255, 255, 0.3)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    "rgba(255, 255, 255, 0.2)";
-                }}
-                aria-label="Forward 10 seconds"
-              >
-                <SkipForward size={20} color={mergedTheme.text} />
-              </button>
-            </div>
-
-            {/* Progress Bar */}
-            {showProgress && (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: mergedTheme.spacingUnit,
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "14px",
-                    color: mergedTheme.text,
-                    minWidth: "40px",
-                    textAlign: "center",
-                  }}
-                >
-                  {formatTime(currentTime)}
-                </span>
-
-                <div
-                  onClick={handleSeek}
-                  style={{
-                    flex: 1,
-                    height: "8px",
-                    backgroundColor: "rgba(255, 255, 255, 0.3)",
-                    borderRadius: mergedTheme.borderRadiusSmall,
-                    cursor: "pointer",
-                    position: "relative",
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      width: `${(currentTime / duration) * 100 || 0}%`,
-                      backgroundColor: mergedTheme.primary,
-                      transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                    }}
-                  />
-                </div>
-
-                <span
-                  style={{
-                    fontSize: "14px",
-                    color: mergedTheme.text,
-                    minWidth: "40px",
-                    textAlign: "center",
-                  }}
-                >
-                  {formatTime(duration)}
-                </span>
-              </div>
-            )}
-
-            {/* Additional Controls */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                marginTop: mergedTheme.spacingUnit,
-              }}
-            >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                {/* Volume Control */}
-                {showVolume && (
-                  <>
-                    <button
-                      onClick={toggleMute}
-                      style={{
-                        padding: "6px",
-                        borderRadius: mergedTheme.borderRadiusSmall,
-                        backgroundColor: "transparent",
-                        border: "none",
-                        cursor: "pointer",
-                        transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor =
-                          "rgba(255, 255, 255, 0.1)";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor =
-                          "transparent";
-                      }}
-                      aria-label={isMuted ? "Unmute" : "Mute"}
-                    >
-                      {isMuted ? (
-                        <VolumeX size={16} color={mergedTheme.text} />
-                      ) : (
-                        <Volume2 size={16} color={mergedTheme.text} />
-                      )}
-                    </button>
-
-                    <input
-                      type="range"
-                      min="0"
-                      max="1"
-                      step="0.1"
-                      value={isMuted ? 0 : volume}
-                      onChange={(e) => {
-                        const newVolume = parseFloat(e.target.value);
-                        setVolume(newVolume);
-                        if (videoRef.current) {
-                          videoRef.current.volume = newVolume;
-                          if (newVolume > 0) setIsMuted(false);
-                        }
-                      }}
-                      style={{
-                        width: "80px",
-                        height: "4px",
-                        borderRadius: "2px",
-                        background: `linear-gradient(to right, ${
-                          mergedTheme.primary
-                        } 0%, ${mergedTheme.primary} ${
-                          (isMuted ? 0 : volume) * 100
-                        }%, rgba(255,255,255,0.3) ${
-                          (isMuted ? 0 : volume) * 100
-                        }%, rgba(255,255,255,0.3) 100%)`,
-                        outline: "none",
-                        cursor: "pointer",
-                      }}
-                      aria-label="Volume control"
-                    />
-                  </>
-                )}
-              </div>
-
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                {/* Playback Speed */}
-                {showSpeedOptions && (
-                  <div style={{ position: "relative" }}>
-                    <button
-                      onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                      style={{
-                        padding: "6px 10px",
-                        borderRadius: mergedTheme.borderRadiusSmall,
-                        backgroundColor: showSpeedMenu
-                          ? "rgba(255, 255, 255, 0.2)"
-                          : "transparent",
-                        border: "none",
-                        color: mergedTheme.text,
-                        cursor: "pointer",
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px",
-                        transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor =
-                          "rgba(255, 255, 255, 0.1)";
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!showSpeedMenu) {
-                          (
-                            e.currentTarget as HTMLElement
-                          ).style.backgroundColor = "transparent";
-                        }
-                      }}
-                      aria-label="Playback speed"
-                    >
-                      {playbackSpeed}x
-                    </button>
-                    {showSpeedMenu && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: "100%",
-                          right: 0,
-                          backgroundColor: mergedTheme.surface,
-                          borderRadius: mergedTheme.borderRadiusSmall,
-                          padding: "8px",
-                          boxShadow: mergedTheme.shadow,
-                          zIndex: 10,
-                          minWidth: "80px",
-                        }}
-                        onMouseLeave={() => setShowSpeedMenu(false)}
-                      >
-                        {[0.5, 0.75, 1, 1.25, 1.5, 2].map((speed) => (
-                          <button
-                            key={speed}
-                            onClick={() => changePlaybackSpeed(speed)}
-                            style={{
-                              width: "100%",
-                              padding: "6px 10px",
-                              borderRadius: mergedTheme.borderRadiusSmall,
-                              backgroundColor:
-                                playbackSpeed === speed
-                                  ? mergedTheme.primary + "33"
-                                  : "transparent",
-                              border: "none",
-                              color: mergedTheme.text,
-                              cursor: "pointer",
-                              textAlign: "left",
-                              transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                            }}
-                            onMouseEnter={(e) => {
-                              (
-                                e.currentTarget as HTMLElement
-                              ).style.backgroundColor =
-                                mergedTheme.primary + "33";
-                            }}
-                            onMouseLeave={(e) => {
-                              (
-                                e.currentTarget as HTMLElement
-                              ).style.backgroundColor =
-                                playbackSpeed === speed
-                                  ? mergedTheme.primary + "33"
-                                  : "transparent";
-                            }}
-                          >
-                            {speed}x
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Quality Options */}
-                {showQualityOptions && (
-                  <div style={{ position: "relative" }}>
-                    <button
-                      onClick={() => setShowQualityMenu(!showQualityMenu)}
-                      style={{
-                        padding: "6px 10px",
-                        borderRadius: mergedTheme.borderRadiusSmall,
-                        backgroundColor: showQualityMenu
-                          ? "rgba(255, 255, 255, 0.2)"
-                          : "transparent",
-                        border: "none",
-                        color: mergedTheme.text,
-                        cursor: "pointer",
-                        fontSize: "14px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px",
-                        transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                      }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.backgroundColor =
-                          "rgba(255, 255, 255, 0.1)";
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!showQualityMenu) {
-                          (
-                            e.currentTarget as HTMLElement
-                          ).style.backgroundColor = "transparent";
-                        }
-                      }}
-                      aria-label="Video quality"
-                    >
-                      {videoQuality}
-                    </button>
-                    {showQualityMenu && (
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: "100%",
-                          right: 0,
-                          backgroundColor: mergedTheme.surface,
-                          borderRadius: mergedTheme.borderRadiusSmall,
-                          padding: "8px",
-                          boxShadow: mergedTheme.shadow,
-                          zIndex: 10,
-                          minWidth: "80px",
-                        }}
-                        onMouseLeave={() => setShowQualityMenu(false)}
-                      >
-                        {["auto", "720p", "1080p", "4k"].map((quality) => (
-                          <button
-                            key={quality}
-                            onClick={() => changeVideoQuality(quality)}
-                            style={{
-                              width: "100%",
-                              padding: "6px 10px",
-                              borderRadius: mergedTheme.borderRadiusSmall,
-                              backgroundColor:
-                                videoQuality === quality
-                                  ? mergedTheme.primary + "33"
-                                  : "transparent",
-                              border: "none",
-                              color: mergedTheme.text,
-                              cursor: "pointer",
-                              textAlign: "left",
-                              transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                            }}
-                            onMouseEnter={(e) => {
-                              (
-                                e.currentTarget as HTMLElement
-                              ).style.backgroundColor =
-                                mergedTheme.primary + "33";
-                            }}
-                            onMouseLeave={(e) => {
-                              (
-                                e.currentTarget as HTMLElement
-                              ).style.backgroundColor =
-                                videoQuality === quality
-                                  ? mergedTheme.primary + "33"
-                                  : "transparent";
-                            }}
-                          >
-                            {quality}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Settings */}
-                {(showSpeedOptions || showQualityOptions) && (
-                  <button
-                    onClick={() => setShowSettingsMenu(!showSettingsMenu)}
-                    style={{
-                      padding: "6px",
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: showSettingsMenu
-                        ? "rgba(255, 255, 255, 0.2)"
-                        : "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!showSettingsMenu) {
-                        (e.currentTarget as HTMLElement).style.backgroundColor =
-                          "transparent";
-                      }
-                    }}
-                    aria-label="Settings"
-                  >
-                    <Settings size={16} color={mergedTheme.text} />
-                  </button>
-                )}
-
-                {/* Fullscreen */}
-                {fullscreen && (
-                  <button
-                    onClick={toggleFullscreen}
-                    style={{
-                      padding: "6px",
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "transparent";
-                    }}
-                    aria-label={
-                      isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
-                    }
-                  >
-                    {isFullscreen ? (
-                      <Minimize size={16} color={mergedTheme.text} />
-                    ) : (
-                      <Maximize size={16} color={mergedTheme.text} />
-                    )}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
         )}
       </div>
     );
@@ -1685,33 +1406,45 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     if (!currentVideo) return null;
 
     const goToPrevious = () => {
-      setSelectedIndex(prev => 
+      setSelectedIndex((prev) =>
         prev !== null ? (prev - 1 + videos.length) % videos.length : null
       );
     };
 
     const goToNext = () => {
-      setSelectedIndex(prev => 
+      setSelectedIndex((prev) =>
         prev !== null ? (prev + 1) % videos.length : null
       );
     };
+
+    // Toggle fullscreen
+    const toggleFullscreen = () => {
+      if (!lightboxRef.current) return;
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        lightboxRef.current.requestFullscreen();
+      }
+    };
+
+    // Mobile detection
+    const isMobile = window.innerWidth < 768;
 
     return (
       <div
         ref={lightboxRef}
         style={{
-          position: 'fixed',
+          position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.95)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          backgroundColor: "rgba(0, 0, 0, 0.95)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           zIndex: 9999,
-          padding: '20px',
-          animation: `${lightboxAnimation}In ${lightboxTransitionSpeed}ms ease`
+          padding: "20px",
         }}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
@@ -1723,24 +1456,27 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         <button
           onClick={() => setSelectedIndex(null)}
           style={{
-            position: 'absolute',
-            top: '20px',
-            right: '20px',
-            padding: '12px',
-            borderRadius: '50%',
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            border: 'none',
-            cursor: 'pointer',
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            padding: "12px",
+            borderRadius: "50%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            border: "none",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             zIndex: 10000,
-            transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-            (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)';
+            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+            e.currentTarget.style.transform = "scale(1.1)";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-            (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
+            e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            e.currentTarget.style.transform = "scale(1)";
           }}
           aria-label="Close lightbox"
         >
@@ -1753,25 +1489,28 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
             <button
               onClick={goToPrevious}
               style={{
-                position: 'absolute',
-                left: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                padding: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                border: 'none',
-                cursor: 'pointer',
+                position: "absolute",
+                left: "20px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                padding: "12px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 zIndex: 10000,
-                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.1)';
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)';
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1)";
               }}
               aria-label="Previous video"
             >
@@ -1781,25 +1520,28 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
             <button
               onClick={goToNext}
               style={{
-                position: 'absolute',
-                right: '20px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                padding: '12px',
-                borderRadius: '50%',
-                backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                border: 'none',
-                cursor: 'pointer',
+                position: "absolute",
+                right: "20px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                padding: "12px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(0, 0, 0, 0.7)",
+                border: "none",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
                 zIndex: 10000,
-                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.1)';
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.9)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1.1)";
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)';
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+                e.currentTarget.style.transform = "translateY(-50%) scale(1)";
               }}
               aria-label="Next video"
             >
@@ -1811,189 +1553,226 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         {/* Video Content */}
         <div
           style={{
-            width: '100%',
-            maxWidth: '90vw',
-            maxHeight: '90vh',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px'
+            position: "relative",
+            width: "100%",
+            maxWidth: "90vw",
+            maxHeight: "90vh",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
           }}
         >
-          <VideoPlayer 
-            video={currentVideo} 
-            isLightbox={true}
-          />
-        </div>
-
-        {/* Video Info Overlay */}
-        {showMetadata && currentVideo.title && (
+          {/* Top Controls Bar - Always Visible */}
           <div
             style={{
-              position: 'absolute',
-              bottom: '20px',
-              left: '20px',
-              right: '20px',
-              padding: '20px',
-              backgroundColor: 'rgba(0, 0, 0, 0.8)',
-              borderRadius: mergedTheme.borderRadius,
-              backdropFilter: `blur(${mergedTheme.backdropBlur})`
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              padding: "16px",
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0.8), transparent)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              zIndex: 1000,
             }}
           >
-            <h2 style={{ 
-              color: 'white', 
-              fontSize: '24px', 
-              margin: '0 0 8px 0',
-              fontWeight: mergedTheme.fontWeightBold
-            }}>
-              {currentVideo.title}
-            </h2>
-            {currentVideo.description && (
-              <p style={{ 
-                color: 'rgba(255, 255, 255, 0.8)', 
-                fontSize: '16px', 
-                margin: '0 0 12px 0',
-                lineHeight: '1.5'
-              }}>
-                {currentVideo.description}
-              </p>
-            )}
-            
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '12px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                {currentVideo.author && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <User size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
-                      {currentVideo.author}
-                    </span>
-                  </div>
-                )}
-                
+            {/* Video Info */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <h2
+                style={{
+                  color: "white",
+                  fontSize: isMobile ? "18px" : "20px",
+                  fontWeight: "bold",
+                  margin: "0 0 4px 0",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {currentVideo.title}
+              </h2>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "16px",
+                  color: "rgb(209, 213, 219)",
+                  fontSize: isMobile ? "12px" : "14px",
+                }}
+              >
                 {currentVideo.views && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Eye size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
-                      {currentVideo.views.toLocaleString()} views
-                    </span>
-                  </div>
-                )}
-
-                {currentVideo.duration && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Clock size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
-                      {formatTime(currentVideo.duration)}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {favorites && (
-                  <button
-                    onClick={() => handleVideoLike(currentVideo.id)}
+                  <span
                     style={{
-                      padding: '8px 12px',
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      border: 'none',
-                      color: 'white',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    }}
-                    aria-label={favoriteVideos.has(currentVideo.id) ? 'Unlike video' : 'Like video'}
                   >
-                    <Heart 
-                      size={16} 
-                      color={favoriteVideos.has(currentVideo.id) ? mergedTheme.accent : 'white'}
-                      fill={favoriteVideos.has(currentVideo.id) ? mergedTheme.accent : 'none'}
-                    />
-                    {favoriteVideos.has(currentVideo.id) ? 'Liked' : 'Like'}
-                  </button>
+                    <Eye size={isMobile ? 12 : 14} />{" "}
+                    {currentVideo.views.toLocaleString()} views
+                  </span>
                 )}
-
-                {sharing && (
-                  <button
-                    onClick={() => handleVideoShare(currentVideo)}
+                {currentVideo.likes && (
+                  <span
                     style={{
-                      padding: '8px 12px',
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      border: 'none',
-                      color: 'white',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    }}
-                    aria-label="Share video"
                   >
-                    <Share2 size={16} />
-                    Share
-                  </button>
-                )}
-
-                {download && (
-                  <button
-                    onClick={() => handleVideoDownload(currentVideo)}
-                    style={{
-                      padding: '8px 12px',
-                      borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                      border: 'none',
-                      color: 'white',
-                      cursor: 'pointer',
-                      fontSize: '14px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-                    }}
-                    aria-label="Download video"
-                  >
-                    <Download size={16} />
-                    Download
-                  </button>
+                    <Heart size={isMobile ? 12 : 14} />{" "}
+                    {currentVideo.likes.toLocaleString()} likes
+                  </span>
                 )}
               </div>
             </div>
+
+            {/* Action Buttons */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: isMobile ? "8px" : "12px",
+              }}
+            >
+              {favorites && (
+                <button
+                  onClick={() => handleVideoLike(currentVideo.id)}
+                  style={{
+                    padding: isMobile ? "6px" : "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(255, 255, 255, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                  aria-label={
+                    favoriteVideos.has(currentVideo.id)
+                      ? "Unlike video"
+                      : "Like video"
+                  }
+                >
+                  <Heart
+                    size={isMobile ? 18 : 20}
+                    color={
+                      favoriteVideos.has(currentVideo.id)
+                        ? mergedTheme.accent
+                        : "white"
+                    }
+                    fill={
+                      favoriteVideos.has(currentVideo.id)
+                        ? mergedTheme.accent
+                        : "none"
+                    }
+                  />
+                  {isMobile && (
+                    <span
+                      style={{
+                        fontSize: "10px",
+                        color: "white",
+                        marginTop: "2px",
+                      }}
+                    >
+                      {favoriteVideos.has(currentVideo.id) ? "Liked" : "Like"}
+                    </span>
+                  )}
+                </button>
+              )}
+              {download && (
+                <button
+                  onClick={() => handleVideoDownload(currentVideo)}
+                  style={{
+                    padding: isMobile ? "6px" : "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(255, 255, 255, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                  aria-label="Download video"
+                >
+                  <Download size={isMobile ? 18 : 20} color="white" />
+                  {isMobile && (
+                    <span
+                      style={{
+                        fontSize: "10px",
+                        color: "white",
+                        marginTop: "2px",
+                      }}
+                    >
+                      Download
+                    </span>
+                  )}
+                </button>
+              )}
+              {sharing && (
+                <button
+                  onClick={() => handleVideoShare(currentVideo)}
+                  style={{
+                    padding: isMobile ? "6px" : "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      "rgba(255, 255, 255, 0.1)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                  aria-label="Share video"
+                >
+                  <Share2 size={isMobile ? 18 : 20} color="white" />
+                  {isMobile && (
+                    <span
+                      style={{
+                        fontSize: "10px",
+                        color: "white",
+                        marginTop: "2px",
+                      }}
+                    >
+                      Share
+                    </span>
+                  )}
+                </button>
+              )}
+            </div>
           </div>
-        )}
+
+          {/* Video Player */}
+          <VideoPlayer video={currentVideo} isLightbox={true} />
+        </div>
       </div>
     );
   };
-
 
   // Get grid styles based on layout
   const getGridStyles = (): React.CSSProperties => {
