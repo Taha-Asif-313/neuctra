@@ -2,7 +2,32 @@
 
 import React from "react";
 import { Button, Table, VideoGallery } from "@neuctra/ui";
-import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, RotateCcw, SkipBack, SkipForward, X, ChevronLeft, ChevronRight, Settings, Download, Share2, Heart, Eye, Calendar, Clock, User, Tag, Loader, Search, Filter } from "lucide-react";
+import {
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize,
+  Minimize,
+  RotateCcw,
+  SkipBack,
+  SkipForward,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Settings,
+  Download,
+  Share2,
+  Heart,
+  Eye,
+  Calendar,
+  Clock,
+  User,
+  Tag,
+  Loader,
+  Search,
+  Filter,
+} from "lucide-react";
 import CodeBlock from "@/app/components/docs/CodeBlock";
 import CodePreviewBlock from "@/app/components/docs/CodePreviewBlock";
 
@@ -264,7 +289,8 @@ const VideoGalleryDocs: React.FC = () => {
     {
       id: "1",
       src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      poster: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      poster:
+        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
       title: "Beautiful Sunset",
       description: "Watch this amazing sunset over the mountains",
       duration: 120,
@@ -273,7 +299,7 @@ const VideoGalleryDocs: React.FC = () => {
       tags: ["nature", "sunset", "mountains"],
       views: 15000,
       likes: 1200,
-      category: "nature"
+      category: "nature",
     },
     {
       id: "2",
@@ -287,19 +313,20 @@ const VideoGalleryDocs: React.FC = () => {
       tags: ["city", "timelapse", "urban"],
       views: 25000,
       likes: 1800,
-      category: "urban"
-    }
+      category: "urban",
+    },
   ];
 
   return (
     <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950">
       {/* Page Title */}
       <h1 className="text-4xl font-bold mb-8">
-        <span className="text-primary">VideoGallery</span> Component Documentation
+        <span className="text-primary">VideoGallery</span> Component
+        Documentation
       </h1>
 
       {/* Import Statement */}
-            {/* Import Statement */}
+      {/* Import Statement */}
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Import</h2>
         <CodeBlock
@@ -340,18 +367,18 @@ import { VideoData } from "@neuctra/ui/types";`}
 />`}
           previewContent={
             <div className="[&_.carousel-container]:[scrollbar-width:none] [&_.carousel-container::-webkit-scrollbar]:[display:none]">
-              <VideoGallery 
+              <VideoGallery
                 videos={sampleVideos}
                 layout="grid"
-                columns={{lg:2,xl:2,md:2,xs:2,"2xl":2}}
+                columns={{ lg: 2, xl: 2, md: 2, xs: 2, "2xl": 2 }}
                 lightbox
                 showSpeedOptions
-showControls
-download
-favorites
-showQualityOptions
-showProgress
-loop
+                showControls
+                download
+                favorites
+                showQualityOptions
+                showProgress
+                loop
               />
             </div>
           }
@@ -401,13 +428,12 @@ loop
   description="A curated selection of videos"
 />`}
           previewContent={
-           <VideoGallery 
-  videos={sampleVideos}
-  layout="grid"
-  showQualityOptions ={true}
-  lightbox
-
-/>
+            <VideoGallery
+              videos={sampleVideos}
+              layout="grid"
+              showQualityOptions={true}
+              lightbox
+            />
           }
         />
       </section>
@@ -415,7 +441,11 @@ loop
       {/* Component Description */}
       <section className="mb-16">
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          The <code>VideoGallery</code> component is a feature-rich React component for displaying collections of videos with multiple layout options, search, filtering, and a full-featured lightbox viewer. It includes comprehensive video player controls, responsive design, and extensive customization options.
+          The <code>VideoGallery</code> component is a feature-rich React
+          component for displaying collections of videos with multiple layout
+          options, search, filtering, and a full-featured lightbox viewer. It
+          includes comprehensive video player controls, responsive design, and
+          extensive customization options.
         </p>
       </section>
 
@@ -426,17 +456,27 @@ loop
           <thead>
             <tr className="bg-primary text-white">
               {columns.map(({ label, key }) => (
-                <th key={key} className="px-3 py-2 border border-primary">{label}</th>
+                <th key={key} className="px-3 py-2 border border-primary">
+                  {label}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {data.map(({ prop, type, default: def, description }) => (
               <tr key={prop} className="even:bg-zinc-800 odd:bg-zinc-900">
-                <td className="border border-primary px-3 py-2 font-mono">{prop}</td>
-                <td className="border border-primary px-3 py-2 font-mono">{type}</td>
-                <td className="border border-primary px-3 py-2 font-mono">{def}</td>
-                <td className="border border-primary px-3 py-2">{description}</td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {prop}
+                </td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {type}
+                </td>
+                <td className="border border-primary px-3 py-2 font-mono">
+                  {def}
+                </td>
+                <td className="border border-primary px-3 py-2">
+                  {description}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -538,7 +578,9 @@ loop
 
       {/* ResponsiveConfig Interface Section */}
       <section className="mb-16">
-        <h2 className="text-2xl font-semibold mb-4">ResponsiveConfig Interface</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          ResponsiveConfig Interface
+        </h2>
         <CodeBlock
           language="typescript"
           code={`interface ResponsiveConfig {
@@ -578,7 +620,8 @@ loop
         <h2 className="text-2xl font-semibold mb-4">Behavior Details</h2>
         <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
           <li>
-            The gallery automatically adapts to screen size with responsive columns
+            The gallery automatically adapts to screen size with responsive
+            columns
           </li>
           <li>
             Videos can be viewed in a lightbox with full controls when clicked
@@ -589,18 +632,10 @@ loop
           <li>
             Swipe gestures on mobile allow navigating between videos in lightbox
           </li>
-          <li>
-            Infinite scroll loads more videos as the user scrolls down
-          </li>
-          <li>
-            Search filters videos by title, description, and tags
-          </li>
-          <li>
-            Category filtering shows only videos from selected category
-          </li>
-          <li>
-            Sorting options include by date, title, views, and likes
-          </li>
+          <li>Infinite scroll loads more videos as the user scrolls down</li>
+          <li>Search filters videos by title, description, and tags</li>
+          <li>Category filtering shows only videos from selected category</li>
+          <li>Sorting options include by date, title, views, and likes</li>
         </ul>
       </section>
 
@@ -612,19 +647,23 @@ loop
         </p>
         <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
           <li>
-            <strong>Layout:</strong> Choose from grid, masonry, list, or carousel layouts
+            <strong>Layout:</strong> Choose from grid, masonry, list, or
+            carousel layouts
           </li>
           <li>
-            <strong>Theme:</strong> Fully customize colors, borders, shadows, and more
+            <strong>Theme:</strong> Fully customize colors, borders, shadows,
+            and more
           </li>
           <li>
             <strong>Controls:</strong> Toggle which controls are visible
           </li>
           <li>
-            <strong>Behavior:</strong> Configure autoplay, looping, preloading, etc.
+            <strong>Behavior:</strong> Configure autoplay, looping, preloading,
+            etc.
           </li>
           <li>
-            <strong>Features:</strong> Enable/disable search, filtering, sorting, etc.
+            <strong>Features:</strong> Enable/disable search, filtering,
+            sorting, etc.
           </li>
         </ul>
       </section>
