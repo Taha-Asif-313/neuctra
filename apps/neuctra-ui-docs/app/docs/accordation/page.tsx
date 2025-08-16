@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Accordion } from "@neuctra/ui"; // Adjust import path as needed
+import { Accordation } from "@neuctra/ui"; // Adjust import path as needed
 import CodeBlock from "@/app/components/docs/CodeBlock";
 import CodePreviewBlock from "@/app/components/docs/CodePreviewBlock";
 
-const AccordionDocs: React.FC = () => {
+const AccordationDocs: React.FC = () => {
   // Define columns for the props table
   const columns = [
     { key: "prop", label: "Prop", sortable: true },
@@ -14,13 +14,13 @@ const AccordionDocs: React.FC = () => {
     { key: "description", label: "Description", sortable: false },
   ];
 
-  // Data for Accordion component props
+  // Data for Accordation component props
   const data = [
     {
       prop: "items",
-      type: "AccordionItem[]",
+      type: "AccordationItem[]",
       default: "—",
-      description: "Array of accordion items with title and content.",
+      description: "Array of Accordation items with title and content.",
     },
     {
       prop: "allowMultiple",
@@ -38,19 +38,19 @@ const AccordionDocs: React.FC = () => {
       prop: "borderColor",
       type: "string",
       default: `"#d1d5db"`,
-      description: "Border color of each accordion item.",
+      description: "Border color of each Accordation item.",
     },
     {
       prop: "backgroundColor",
       type: "string",
       default: `"#ffffff"`,
-      description: "Background color of the accordion headers.",
+      description: "Background color of the Accordation headers.",
     },
     {
       prop: "textColor",
       type: "string",
       default: `"#111827"`,
-      description: "Text color of the accordion headers.",
+      description: "Text color of the Accordation headers.",
     },
     {
       prop: "hoverBgColor",
@@ -80,7 +80,7 @@ const AccordionDocs: React.FC = () => {
       prop: "margin",
       type: "string",
       default: `"12px 0"`,
-      description: "Margin between accordion items.",
+      description: "Margin between Accordation items.",
     },
     {
       prop: "iconOpen",
@@ -104,13 +104,13 @@ const AccordionDocs: React.FC = () => {
       prop: "borderRadius",
       type: "string",
       default: `"8px"`,
-      description: "Border radius of each accordion item.",
+      description: "Border radius of each Accordation item.",
     },
     {
       prop: "shadow",
       type: "string",
       default: `"0 2px 8px rgba(0, 0, 0, 0.05)"`,
-      description: "Box shadow of accordion items.",
+      description: "Box shadow of Accordation items.",
     },
     {
       prop: "contentPadding",
@@ -164,13 +164,13 @@ const AccordionDocs: React.FC = () => {
       prop: "className",
       type: "string",
       default: `""`,
-      description: "Additional CSS classes for accordion container.",
+      description: "Additional CSS classes for Accordation container.",
     },
     {
       prop: "style",
       type: "React.CSSProperties",
       default: "undefined",
-      description: "Inline styles applied to accordion container.",
+      description: "Inline styles applied to Accordation container.",
     },
   ];
 
@@ -178,7 +178,7 @@ const AccordionDocs: React.FC = () => {
     <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950 text-white">
       {/* Page Title */}
       <h1 className="text-4xl font-bold mb-8">
-        <span className="text-primary">Accordion</span> Component Documentation
+        <span className="text-primary">Accordation</span> Component Documentation
       </h1>
 
       {/* Import Statement */}
@@ -186,7 +186,7 @@ const AccordionDocs: React.FC = () => {
         <h2 className="text-2xl font-semibold mb-4">Import</h2>
         <CodeBlock
           language="javascript"
-          code={`import { Accordion } from "@neuctra/ui";`}
+          code={`import { Accordation } from "@neuctra/ui";`}
         />
       </section>
 
@@ -195,7 +195,7 @@ const AccordionDocs: React.FC = () => {
         <h2 className="text-2xl font-semibold mb-4">Basic Usage Example</h2>
         <CodePreviewBlock
           language="tsx"
-          code={`<Accordion
+          code={`<Accordation
   items={[
     { title: "Section 1", content: "Content for section 1" },
     { title: "Section 2", content: <div>Custom React node content</div> },
@@ -203,7 +203,7 @@ const AccordionDocs: React.FC = () => {
   ]}
 />`}
           previewContent={
-            <Accordion
+            <Accordation
               items={[
                 { title: "Section 1", content: "Content for section 1" },
                 { title: "Section 2", content: <div>Custom React node content</div> },
@@ -246,7 +246,7 @@ const AccordionDocs: React.FC = () => {
 
         <CodePreviewBlock
           language="tsx"
-          code={`<Accordion
+          code={`<Accordation
   items={[
     { title: "FAQ 1", content: "Answer to FAQ 1" },
     { title: "FAQ 2", content: "Answer to FAQ 2" },
@@ -255,7 +255,7 @@ const AccordionDocs: React.FC = () => {
   defaultOpenIndex={[0]}
 />`}
           previewContent={
-            <Accordion
+            <Accordation
               items={[
                 { title: "FAQ 1", content: "Answer to FAQ 1" },
                 { title: "FAQ 2", content: "Answer to FAQ 2" },
@@ -269,7 +269,7 @@ const AccordionDocs: React.FC = () => {
 
         <CodePreviewBlock
           language="tsx"
-          code={`<Accordion
+          code={`<Accordation
   items={[
     { title: "Custom Icons", content: "Using custom open and close icons" },
   ]}
@@ -277,7 +277,7 @@ const AccordionDocs: React.FC = () => {
   iconClose={<span>+</span>}
 />`}
           previewContent={
-            <Accordion
+            <Accordation
               items={[
                 { title: "Custom Icons", content: "Using custom open and close icons" },
               ]}
@@ -290,9 +290,9 @@ const AccordionDocs: React.FC = () => {
 
         <CodePreviewBlock
           language="tsx"
-          code={`<Accordion
+          code={`<Accordation
   items={[
-    { title: "Styled Accordion", content: "With custom colors and shadows" },
+    { title: "Styled Accordation", content: "With custom colors and shadows" },
   ]}
   backgroundColor="#1f2937"
   textColor="#f9fafb"
@@ -303,9 +303,9 @@ const AccordionDocs: React.FC = () => {
   borderRadius="12px"
 />`}
           previewContent={
-            <Accordion
+            <Accordation
               items={[
-                { title: "Styled Accordion", content: "With custom colors and shadows" },
+                { title: "Styled Accordation", content: "With custom colors and shadows" },
               ]}
               backgroundColor="#1f2937"
               textColor="#f9fafb"
@@ -322,7 +322,7 @@ const AccordionDocs: React.FC = () => {
       {/* Component Description */}
       <section className="mb-16">
         <p className="text-gray-300 leading-relaxed">
-          The <code>Accordion</code> component allows you to display collapsible
+          The <code>Accordation</code> component allows you to display collapsible
           sections of content with customizable styles and behavior. You can
           configure whether multiple sections can be open at once, customize
           colors, padding, icons, fonts, and transitions. The component
@@ -360,4 +360,4 @@ const AccordionDocs: React.FC = () => {
   );
 };
 
-export default AccordionDocs;
+export default AccordationDocs;

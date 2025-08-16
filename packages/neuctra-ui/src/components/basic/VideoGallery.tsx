@@ -1685,13 +1685,13 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
     if (!currentVideo) return null;
 
     const goToPrevious = () => {
-      setSelectedIndex((prev) =>
+      setSelectedIndex(prev => 
         prev !== null ? (prev - 1 + videos.length) % videos.length : null
       );
     };
 
     const goToNext = () => {
-      setSelectedIndex((prev) =>
+      setSelectedIndex(prev => 
         prev !== null ? (prev + 1) % videos.length : null
       );
     };
@@ -1700,18 +1700,18 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
       <div
         ref={lightboxRef}
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.95)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          backgroundColor: 'rgba(0, 0, 0, 0.95)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           zIndex: 9999,
-          padding: "20px",
-          animation: `${lightboxAnimation}In ${lightboxTransitionSpeed}ms ease`,
+          padding: '20px',
+          animation: `${lightboxAnimation}In ${lightboxTransitionSpeed}ms ease`
         }}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
@@ -1723,26 +1723,24 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         <button
           onClick={() => setSelectedIndex(null)}
           style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            padding: "12px",
-            borderRadius: "50%",
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            border: "none",
-            cursor: "pointer",
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            padding: '12px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            border: 'none',
+            cursor: 'pointer',
             zIndex: 10000,
-            transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+            transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor =
-              "rgba(0, 0, 0, 0.9)";
-            (e.currentTarget as HTMLElement).style.transform = "scale(1.1)";
+            (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+            (e.currentTarget as HTMLElement).style.transform = 'scale(1.1)';
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.backgroundColor =
-              "rgba(0, 0, 0, 0.7)";
-            (e.currentTarget as HTMLElement).style.transform = "scale(1)";
+            (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            (e.currentTarget as HTMLElement).style.transform = 'scale(1)';
           }}
           aria-label="Close lightbox"
         >
@@ -1755,29 +1753,25 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
             <button
               onClick={goToPrevious}
               style={{
-                position: "absolute",
-                left: "20px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                padding: "12px",
-                borderRadius: "50%",
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                border: "none",
-                cursor: "pointer",
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                padding: '12px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                border: 'none',
+                cursor: 'pointer',
                 zIndex: 10000,
-                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "rgba(0, 0, 0, 0.9)";
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-50%) scale(1.1)";
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "rgba(0, 0, 0, 0.7)";
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-50%) scale(1)";
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)';
               }}
               aria-label="Previous video"
             >
@@ -1787,29 +1781,25 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
             <button
               onClick={goToNext}
               style={{
-                position: "absolute",
-                right: "20px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                padding: "12px",
-                borderRadius: "50%",
-                backgroundColor: "rgba(0, 0, 0, 0.7)",
-                border: "none",
-                cursor: "pointer",
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                padding: '12px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                border: 'none',
+                cursor: 'pointer',
                 zIndex: 10000,
-                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+                transition: `all ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "rgba(0, 0, 0, 0.9)";
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-50%) scale(1.1)";
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1.1)';
               }}
               onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.backgroundColor =
-                  "rgba(0, 0, 0, 0.7)";
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-50%) scale(1)";
+                (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-50%) scale(1)';
               }}
               aria-label="Next video"
             >
@@ -1821,121 +1811,83 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
         {/* Video Content */}
         <div
           style={{
-            width: "100%",
-            maxWidth: "90vw",
-            maxHeight: "90vh",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
+            width: '100%',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px'
           }}
         >
-          <VideoPlayer video={currentVideo} isLightbox={true} />
+          <VideoPlayer 
+            video={currentVideo} 
+            isLightbox={true}
+          />
         </div>
 
         {/* Video Info Overlay */}
         {showMetadata && currentVideo.title && (
           <div
             style={{
-              position: "absolute",
-              bottom: "20px",
-              left: "20px",
-              right: "20px",
-              padding: "20px",
-              backgroundColor: "rgba(0, 0, 0, 0.8)",
+              position: 'absolute',
+              bottom: '20px',
+              left: '20px',
+              right: '20px',
+              padding: '20px',
+              backgroundColor: 'rgba(0, 0, 0, 0.8)',
               borderRadius: mergedTheme.borderRadius,
-              backdropFilter: `blur(${mergedTheme.backdropBlur})`,
+              backdropFilter: `blur(${mergedTheme.backdropBlur})`
             }}
           >
-            <h2
-              style={{
-                color: "white",
-                fontSize: "24px",
-                margin: "0 0 8px 0",
-                fontWeight: mergedTheme.fontWeightBold,
-              }}
-            >
+            <h2 style={{ 
+              color: 'white', 
+              fontSize: '24px', 
+              margin: '0 0 8px 0',
+              fontWeight: mergedTheme.fontWeightBold
+            }}>
               {currentVideo.title}
             </h2>
             {currentVideo.description && (
-              <p
-                style={{
-                  color: "rgba(255, 255, 255, 0.8)",
-                  fontSize: "16px",
-                  margin: "0 0 12px 0",
-                  lineHeight: "1.5",
-                }}
-              >
+              <p style={{ 
+                color: 'rgba(255, 255, 255, 0.8)', 
+                fontSize: '16px', 
+                margin: '0 0 12px 0',
+                lineHeight: '1.5'
+              }}>
                 {currentVideo.description}
               </p>
             )}
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                flexWrap: "wrap",
-                gap: "12px",
-              }}
-            >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "16px" }}
-              >
+            
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 {currentVideo.author && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <User size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span
-                      style={{
-                        color: "rgba(255, 255, 255, 0.8)",
-                        fontSize: "14px",
-                      }}
-                    >
+                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
                       {currentVideo.author}
                     </span>
                   </div>
                 )}
-
+                
                 {currentVideo.views && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Eye size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span
-                      style={{
-                        color: "rgba(255, 255, 255, 0.8)",
-                        fontSize: "14px",
-                      }}
-                    >
+                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
                       {currentVideo.views.toLocaleString()} views
                     </span>
                   </div>
                 )}
 
                 {currentVideo.duration && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                    }}
-                  >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Clock size={16} color="rgba(255, 255, 255, 0.8)" />
-                    <span
-                      style={{
-                        color: "rgba(255, 255, 255, 0.8)",
-                        fontSize: "14px",
-                      }}
-                    >
+                    <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '14px' }}>
                       {formatTime(currentVideo.duration)}
                     </span>
                   </div>
@@ -1943,53 +1895,37 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
               </div>
 
               {/* Action Buttons */}
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {favorites && (
                   <button
                     onClick={() => handleVideoLike(currentVideo.id)}
                     style={{
-                      padding: "8px 12px",
+                      padding: '8px 12px',
                       borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      border: "none",
-                      color: "white",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      border: 'none',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.2)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                     }}
-                    aria-label={
-                      favoriteVideos.has(currentVideo.id)
-                        ? "Unlike video"
-                        : "Like video"
-                    }
+                    aria-label={favoriteVideos.has(currentVideo.id) ? 'Unlike video' : 'Like video'}
                   >
-                    <Heart
-                      size={16}
-                      color={
-                        favoriteVideos.has(currentVideo.id)
-                          ? mergedTheme.accent
-                          : "white"
-                      }
-                      fill={
-                        favoriteVideos.has(currentVideo.id)
-                          ? mergedTheme.accent
-                          : "none"
-                      }
+                    <Heart 
+                      size={16} 
+                      color={favoriteVideos.has(currentVideo.id) ? mergedTheme.accent : 'white'}
+                      fill={favoriteVideos.has(currentVideo.id) ? mergedTheme.accent : 'none'}
                     />
-                    {favoriteVideos.has(currentVideo.id) ? "Liked" : "Like"}
+                    {favoriteVideos.has(currentVideo.id) ? 'Liked' : 'Like'}
                   </button>
                 )}
 
@@ -1997,25 +1933,23 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                   <button
                     onClick={() => handleVideoShare(currentVideo)}
                     style={{
-                      padding: "8px 12px",
+                      padding: '8px 12px',
                       borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      border: "none",
-                      color: "white",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      border: 'none',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.2)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                     }}
                     aria-label="Share video"
                   >
@@ -2028,25 +1962,23 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
                   <button
                     onClick={() => handleVideoDownload(currentVideo)}
                     style={{
-                      padding: "8px 12px",
+                      padding: '8px 12px',
                       borderRadius: mergedTheme.borderRadiusSmall,
-                      backgroundColor: "rgba(255, 255, 255, 0.1)",
-                      border: "none",
-                      color: "white",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`,
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                      border: 'none',
+                      color: 'white',
+                      cursor: 'pointer',
+                      fontSize: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      transition: `background-color ${mergedTheme.transitionSpeed} ${mergedTheme.transitionEasing}`
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.2)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.backgroundColor =
-                        "rgba(255, 255, 255, 0.1)";
+                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                     }}
                     aria-label="Download video"
                   >
@@ -2061,6 +1993,7 @@ export const VideoGallery: React.FC<VideoGalleryProps> = ({
       </div>
     );
   };
+
 
   // Get grid styles based on layout
   const getGridStyles = (): React.CSSProperties => {

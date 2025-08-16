@@ -343,9 +343,9 @@ import { VideoData } from "@neuctra/ui/types";`}
               <VideoGallery 
                 videos={sampleVideos}
                 layout="grid"
-                columns={2}
-                responsiveColumns={{desktop:2}}
+                columns={{lg:2}}
                 lightbox
+
               />
             </div>
           }
@@ -398,8 +398,7 @@ import { VideoData } from "@neuctra/ui/types";`}
            <VideoGallery 
   videos={sampleVideos}
   layout="grid"
-  columns={2}
-  responsiveColumns={{desktop:2}}
+  showQualityOptions ={true}
   lightbox
 
 />
