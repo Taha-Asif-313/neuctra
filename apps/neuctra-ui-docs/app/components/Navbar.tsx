@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   X,
@@ -15,6 +15,7 @@ import React from "react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const router = useRouter();
 
   const navLinks = [
@@ -24,11 +25,29 @@ const Navbar: React.FC = () => {
     { label: "Templates", href: "/templates" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <nav
-      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl z-50 ${
-        isOpen ? "bg-black" : "bg-transparent"
-      } text-white`}
+      className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl z-50 transition-colors duration-300 ${
+        isOpen || isScrolled ? "bg-zinc-950" : "bg-transparent"
+      } text-white border-b ${
+        isOpen || isScrolled ? "border-zinc-800" : "border-transparent"
+      }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between lg:px-0 px-4 py-3 lg:py-3">
         {/* Logo */}
@@ -71,7 +90,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Drawer Nav */}
       <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 bg-black ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ${
           isOpen ? "max-h-[500px] pb-4" : "max-h-0"
         }`}
       >

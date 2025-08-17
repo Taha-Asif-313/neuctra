@@ -14,7 +14,7 @@ const GetStartedPage: React.FC = () => {
         <header>
           <h1 className="text-4xl font-extrabold mb-3 text-white">
             Get started with{" "}
-            <span className="text-primary font-semibold">@neuctra/ui</span>
+            <span className="text-primary font-semibold">Neuctra</span> Ui
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed">
             A modern, customizable <span className="text-primary">React</span>{" "}
