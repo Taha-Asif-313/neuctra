@@ -5,7 +5,12 @@ interface Column {
   key: string;
   label: string;
   sortable?: boolean;
-  icon?: ReactNode; // Optional icon next to label
+  icon?: ReactNode;
+  width?: string | number; // Custom column width
+  align?: "left" | "center" | "right"; // Column-specific alignment
+  headerClassName?: string; // Custom class for header cell
+  cellClassName?: string; // Custom class for body cells
+  render?: (value: any, row: Record<string, any>) => ReactNode; // Custom cell renderer
 }
 
 interface TableProps {
@@ -23,12 +28,35 @@ interface TableProps {
     hoverBg?: string;
     paginationBg?: string;
     paginationText?: string;
+    evenRowBg?: string; // Alternate row color
+    selectedRowBg?: string; // Selected row color
   };
-  headerBorderRadius?: string; // border-radius for header row corners
-  tableBorderRadius?: string; // border-radius for entire table (all corners)
-  sortable?: boolean; // Global toggle to enable/disable sorting for all columns
-  bodyAlign?: "left" | "center" | "right"; // alignment for tbody cells
-  headerAlign?: "left" | "center" | "right"; // alignment for thead cells
+  borderRadius?: {
+    table?: string;
+    header?: string;
+    pagination?: string;
+  };
+  sortable?: boolean;
+  defaultSort?: {
+    column: string;
+    direction: "asc" | "desc";
+  };
+  bodyAlign?: "left" | "center" | "right";
+  headerAlign?: "left" | "center" | "right";
+  rowSelection?: {
+    enabled?: boolean;
+    onSelect?: (selectedRows: Record<string, any>[]) => void;
+    selectionColumnWidth?: string;
+    selectionColumnHeader?: ReactNode;
+  };
+  emptyState?: ReactNode;
+  onRowClick?: (row: Record<string, any>, index: number) => void;
+  rowClassName?: (row: Record<string, any>, index: number) => string;
+  cellPadding?: string;
+  headerCellPadding?: string;
+  stickyHeader?: boolean;
+  maxHeight?: string;
+  scrollShadow?: boolean;
 }
 
 export const Table: React.FC<TableProps> = ({
@@ -46,17 +74,33 @@ export const Table: React.FC<TableProps> = ({
     hoverBg: "#e5e7eb",
     paginationBg: "#d1d5db",
     paginationText: "#000000",
+    evenRowBg: "#f9fafb",
+    selectedRowBg: "#e0f2fe",
   },
-  headerBorderRadius = "8px",
-  tableBorderRadius = "8px",
+  borderRadius = {
+    table: "8px",
+    header: "8px",
+    pagination: "6px",
+  },
   sortable = true,
+  defaultSort,
   bodyAlign = "left",
-  headerAlign = "left"
+  headerAlign = "left",
+  rowSelection = { enabled: false },
+  emptyState = <div style={{ padding: "20px", textAlign: "center" }}>No data available</div>,
+  onRowClick,
+  rowClassName,
+  cellPadding = "12px",
+  headerCellPadding = "12px",
+  stickyHeader = false,
+  maxHeight,
+  scrollShadow = false,
 }) => {
-  const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortColumn, setSortColumn] = useState<string | null>(defaultSort?.column || null);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">(defaultSort?.direction || "asc");
   const [currentPage, setCurrentPage] = useState(1);
   const [hoverRowIndex, setHoverRowIndex] = useState<number | null>(null);
+  const [selectedRows, setSelectedRows] = useState<Record<string, any>[]>([]);
 
   const handleSort = (key: string, colSortable?: boolean) => {
     if (!sortable || !colSortable) return;
@@ -67,6 +111,34 @@ export const Table: React.FC<TableProps> = ({
       setSortOrder("asc");
     }
     setCurrentPage(1);
+  };
+
+  const handleRowSelect = (row: Record<string, any>) => {
+    const isSelected = selectedRows.some(
+      (selectedRow) => selectedRow.id === row.id
+    );
+    let newSelectedRows: Record<string, any>[];
+    
+    if (isSelected) {
+      newSelectedRows = selectedRows.filter(
+        (selectedRow) => selectedRow.id !== row.id
+      );
+    } else {
+      newSelectedRows = [...selectedRows, row];
+    }
+    
+    setSelectedRows(newSelectedRows);
+    rowSelection.onSelect?.(newSelectedRows);
+  };
+
+  const handleSelectAll = () => {
+    if (selectedRows.length === paginatedData.length) {
+      setSelectedRows([]);
+      rowSelection.onSelect?.([]);
+    } else {
+      setSelectedRows([...paginatedData]);
+      rowSelection.onSelect?.([...paginatedData]);
+    }
   };
 
   const sortedData = React.useMemo(() => {
@@ -113,7 +185,11 @@ export const Table: React.FC<TableProps> = ({
 
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
-  // Sorting icons same as before
+  const isRowSelected = (row: Record<string, any>) => {
+    return selectedRows.some((selectedRow) => selectedRow.id === row.id);
+  };
+
+  // Sorting icons
   const arrowUpIcon = (
     <svg
       stroke="currentColor"
@@ -162,8 +238,52 @@ export const Table: React.FC<TableProps> = ({
     </svg>
   );
 
+  const checkboxIcon = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+      <path d="M9 12l2 2 4-4"></path>
+    </svg>
+  );
+
+  const indeterminateCheckboxIcon = (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="8" y1="12" x2="16" y2="12"></line>
+    </svg>
+  );
+
+  const allSelected = selectedRows.length === paginatedData.length && paginatedData.length > 0;
+  const someSelected = selectedRows.length > 0 && !allSelected;
+
   return (
-    <div style={{ overflowX: "auto", width: "100%" }} className={className}>
+    <div 
+      style={{ 
+        overflowX: "auto", 
+        width: "100%",
+        maxHeight: maxHeight,
+        position: "relative",
+        boxShadow: scrollShadow ? "0 2px 4px rgba(0,0,0,0.1)" : "none"
+      }} 
+      className={className}
+    >
       <table
         style={{
           width: "100%",
@@ -171,32 +291,73 @@ export const Table: React.FC<TableProps> = ({
           border: `1px solid ${colors.borderColor}`,
           tableLayout: "auto",
           minWidth: "400px",
-          borderRadius: tableBorderRadius,
-          // Important: for border-radius to show on table, set borderSpacing and borderCollapse accordingly
+          borderRadius: borderRadius.table,
           borderSpacing: 0,
           overflow: "hidden"
         }}
       >
         <thead>
           <tr>
-            {columns.map(({ key, label, sortable: colSortable, icon }, i) => (
+            {rowSelection.enabled && (
+              <th
+                style={{
+                  width: rowSelection.selectionColumnWidth || "40px",
+                  padding: headerCellPadding,
+                  backgroundColor: colors.headerBg,
+                  color: colors.headerText,
+                  border: `1px solid ${colors.borderColor}`,
+                  position: stickyHeader ? "sticky" : undefined,
+                  top: stickyHeader ? 0 : undefined,
+                  zIndex: stickyHeader ? 1 : undefined,
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer"
+                  }}
+                  onClick={handleSelectAll}
+                >
+                  {someSelected ? indeterminateCheckboxIcon : allSelected ? checkboxIcon : (
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    </svg>
+                  )}
+                </div>
+              </th>
+            )}
+            {columns.map(({ key, label, sortable: colSortable, icon, width, align, headerClassName }, i) => (
               <th
                 key={key}
                 onClick={() => handleSort(key, colSortable)}
                 style={{
-                  padding: "12px",
-                  fontSize:"14px",
+                  width,
+                  padding: headerCellPadding,
                   border: `1px solid ${colors.borderColor}`,
                   cursor: sortable && colSortable ? "pointer" : "default",
                   backgroundColor: colors.headerBg,
                   color: colors.headerText,
                   userSelect: "none",
-                  borderTopLeftRadius: i === 0 ? headerBorderRadius : undefined,
-                  borderTopRightRadius:
-                    i === columns.length - 1 ? headerBorderRadius : undefined,
-                  textAlign: headerAlign,
+                  borderTopLeftRadius: i === 0 && !rowSelection.enabled ? borderRadius.header : undefined,
+                  borderTopRightRadius: i === columns.length - 1 ? borderRadius.header : undefined,
+                  textAlign: align || headerAlign,
                   whiteSpace: "nowrap",
+                  position: stickyHeader ? "sticky" : undefined,
+                  top: stickyHeader ? 0 : undefined,
+                  zIndex: stickyHeader ? 1 : undefined,
                 }}
+                className={headerClassName}
                 aria-sort={
                   sortColumn === key
                     ? sortOrder === "asc"
@@ -218,7 +379,7 @@ export const Table: React.FC<TableProps> = ({
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "6px",
-                    justifyContent: "center",
+                    justifyContent: align === "right" ? "flex-end" : align === "center" ? "center" : "flex-start",
                   }}
                 >
                   {icon && <span>{icon}</span>}
@@ -236,33 +397,88 @@ export const Table: React.FC<TableProps> = ({
         </thead>
 
         <tbody>
-          {paginatedData.map((row, rowIndex) => (
-            <tr
-              key={rowIndex}
-              style={{
-                backgroundColor:
-                  hoverRowIndex === rowIndex ? colors.hoverBg : colors.rowBg,
-                color: colors.rowText,
-                transition: "background-color 0.2s ease-in-out",
-              }}
-              onMouseEnter={() => setHoverRowIndex(rowIndex)}
-              onMouseLeave={() => setHoverRowIndex(null)}
-            >
-              {columns.map(({ key }) => (
-                <td
-                  key={key}
+          {paginatedData.length > 0 ? (
+            paginatedData.map((row, rowIndex) => {
+              const isSelected = isRowSelected(row);
+              const isEven = rowIndex % 2 === 0;
+              
+              return (
+                <tr
+                  key={rowIndex}
                   style={{
-                    padding: "12px",
-                    border: `1px solid ${colors.borderColor}`,
-                    whiteSpace: "nowrap",
-                    textAlign: bodyAlign,
+                    backgroundColor: isSelected
+                      ? colors.selectedRowBg
+                      : isEven
+                      ? colors.evenRowBg || colors.rowBg
+                      : colors.rowBg,
+                    color: colors.rowText,
+                    transition: "background-color 0.2s ease-in-out",
+                    cursor: onRowClick ? "pointer" : "default",
                   }}
+                  onMouseEnter={() => setHoverRowIndex(rowIndex)}
+                  onMouseLeave={() => setHoverRowIndex(null)}
+                  onClick={() => onRowClick?.(row, rowIndex)}
+                  className={rowClassName?.(row, rowIndex)}
                 >
-                  {row[key]}
-                </td>
-              ))}
+                  {rowSelection.enabled && (
+                    <td
+                      style={{
+                        padding: cellPadding,
+                        border: `1px solid ${colors.borderColor}`,
+                        textAlign: "center",
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRowSelect(row);
+                      }}
+                    >
+                      {isSelected ? checkboxIcon : (
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        </svg>
+                      )}
+                    </td>
+                  )}
+                  {columns.map(({ key, align, render, cellClassName }) => (
+                    <td
+                      key={key}
+                      style={{
+                        padding: cellPadding,
+                        border: `1px solid ${colors.borderColor}`,
+                        whiteSpace: "nowrap",
+                        textAlign: align || bodyAlign,
+                      }}
+                      className={cellClassName}
+                    >
+                      {render ? render(row[key], row) : row[key]}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td 
+                colSpan={columns.length + (rowSelection.enabled ? 1 : 0)}
+                style={{
+                  padding: "20px",
+                  textAlign: "center",
+                  border: `1px solid ${colors.borderColor}`,
+                }}
+              >
+                {emptyState}
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
 
@@ -282,10 +498,10 @@ export const Table: React.FC<TableProps> = ({
               display: "flex",
               alignItems: "center",
               gap: 4,
-              padding: "4px 10px",
+              padding: "6px 12px",
               backgroundColor: colors.paginationBg,
               color: colors.paginationText,
-              borderRadius: "6px",
+              borderRadius: borderRadius.pagination,
               border: "none",
               opacity: currentPage === 1 ? 0.5 : 1,
               cursor: currentPage === 1 ? "not-allowed" : "pointer",
@@ -299,18 +515,52 @@ export const Table: React.FC<TableProps> = ({
             <ChevronLeft size={16} />
             Prev
           </button>
-          <span style={{ color: colors.paginationText }}>
-            Page {currentPage} / {totalPages}
-          </span>
+          
+          <div style={{ display: "flex", gap: "4px" }}>
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+              let pageNum;
+              if (totalPages <= 5) {
+                pageNum = i + 1;
+              } else if (currentPage <= 3) {
+                pageNum = i + 1;
+              } else if (currentPage >= totalPages - 2) {
+                pageNum = totalPages - 4 + i;
+              } else {
+                pageNum = currentPage - 2 + i;
+              }
+              
+              return (
+                <button
+                  key={pageNum}
+                  style={{
+                    padding: "6px 12px",
+                    backgroundColor: currentPage === pageNum ? colors.headerBg : colors.paginationBg,
+                    color: currentPage === pageNum ? colors.headerText : colors.paginationText,
+                    borderRadius: borderRadius.pagination,
+                    border: "none",
+                    cursor: "pointer",
+                    fontSize: "0.875rem",
+                    minWidth: "36px",
+                  }}
+                  onClick={() => setCurrentPage(pageNum)}
+                  aria-label={`Page ${pageNum}`}
+                  type="button"
+                >
+                  {pageNum}
+                </button>
+              );
+            })}
+          </div>
+          
           <button
             style={{
               display: "flex",
               alignItems: "center",
               gap: 4,
-              padding: "4px 10px",
+              padding: "6px 12px",
               backgroundColor: colors.paginationBg,
               color: colors.paginationText,
-              borderRadius: "6px",
+              borderRadius: borderRadius.pagination,
               border: "none",
               opacity: currentPage === totalPages ? 0.5 : 1,
               cursor: currentPage === totalPages ? "not-allowed" : "pointer",

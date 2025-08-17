@@ -298,7 +298,7 @@ const TabsDocs: React.FC = () => {
           previewContent={
             <div className="w-full h-48">
               <TopTabs
-                contentContainerStyle={{ backgroundColor: "#010101" }}
+                contentContainerStyle={{ backgroundColor: "#111111" }}
                 backgroundColor="transparent"
                 textColor="#fff"
                 tabs={[
