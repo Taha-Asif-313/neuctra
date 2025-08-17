@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "GridView Component | Neuctra UI - Responsive Grid Layout System",
+  description: "A powerful React GridView component with customizable columns, responsive breakpoints, and gap controls. Perfect for galleries, dashboards, and card-based layouts.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React GridView Component",
+    "Responsive Grid Layout",
+    "CSS Grid Wrapper",
+    "Card Grid System",
+    "Neuctra UI Components",
+    "Masonry Grid",
+    "Auto-Fit Grid",
+    "Grid Gap Utilities",
+    "Image Gallery Grid"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "GridView Component | Neuctra UI - Flexible Layout Engine",
+    description: "Create pixel-perfect responsive grids with column control, auto-placement, and customizable spacing. Supports variable item sizes and dynamic content loading.",
+    url: "https://yourdomain.com/components/gridview",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/gridview-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI GridView showing responsive column layouts"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "GridView Component | Neuctra UI",
+    description: "Advanced grid layout system for React applications",
+    images: ["https://yourdomain.com/images/gridview-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/gridview"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

@@ -1,24 +1,40 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
+  title: "Alert Component - Neuctra UI",
   description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+    "The Alert component in Neuctra UI displays contextual feedback messages with customizable styles, icons, and animations for success, error, warning, and info states.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
+    "React Alert Component",
+    "Notification Messages",
+    "Toast Notifications",
+    "Error Alerts",
+    "Success Alerts",
     "Neuctra UI",
     "React UI Components",
+    "User Feedback System"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
+    title: "Alert Component - Neuctra UI",
     description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+      "Elegant and flexible Alert system for React. Supports dismissible alerts, auto-timeout, custom icons, and seamless integration with any theme.",
+    url: "https://yourdomain.com/components/alert",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/alert-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Alert Component Preview"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Alert Component - Neuctra UI",
+    description: "Beautiful and functional alerts for React applications"
+  }
 };
 
 export default function Layout({
@@ -26,9 +42,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

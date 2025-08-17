@@ -1,24 +1,56 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "AudioPlayer Component | Neuctra UI - Modern React Audio Component",
+  description: "A fully customizable React AudioPlayer component with playlist support, waveform visualization, keyboard controls, and seamless theme integration. Perfect for podcasts, music apps, and audio content.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React AudioPlayer",
+    "Web Audio Player",
+    "Custom Audio Component",
+    "Music Player React",
+    "Podcast Player UI",
+    "Neuctra UI Components",
+    "HTML5 Audio Player",
+    "Accessible Audio Player",
+    "Audio Visualization"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "AudioPlayer Component | Neuctra UI - Feature-Rich React Audio Solution",
+    description: "Build professional audio experiences with our React AudioPlayer. Includes playlist management, volume control, playback speed, and responsive design. Supports all modern browsers.",
+    url: "https://yourdomain.com/components/audio-player",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/audio-player-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI AudioPlayer Component with Playlist and Waveform Visualization"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AudioPlayer Component | Neuctra UI",
+    description: "Professional-grade React audio player with advanced controls and visualization",
+    images: ["https://yourdomain.com/images/audio-player-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/audio-player"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +58,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

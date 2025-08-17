@@ -1,24 +1,53 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "VideoPlayer Component | Neuctra UI - Adaptive Media Player",
+  description: "A feature-rich React VideoPlayer with adaptive bitrate streaming, customizable controls, and cross-browser support. Supports HLS, MP4, and embedded platforms with full responsiveness.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Video Player",
+    "Custom Media Player",
+    "Adaptive Streaming",
+    "Neuctra UI Components",
+    "HLS Video Player",
+    "MP4 Player Component",
+    "Video JS Alternative",
+    "Accessible Video Player",
+    "Embeddable Video"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "VideoPlayer Component | Neuctra UI - Professional Media Playback",
+    description: "Deliver premium video experiences with our player featuring quality selection, playback speed control, PiP mode, and seamless fullscreen transitions. Works across all devices.",
+    url: "https://yourdomain.com/components/video-player",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/video-player-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI VideoPlayer with custom controls and playback options"
+      }
+    ]
   },
+  twitter: {
+    card: "player",
+    title: "VideoPlayer Component | Neuctra UI",
+    description: "Enterprise-grade video player for React applications",
+    images: ["https://yourdomain.com/images/video-player-twitter.jpg"],
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/video-player"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +55,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

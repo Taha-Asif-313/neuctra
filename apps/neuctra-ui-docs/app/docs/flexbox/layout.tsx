@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "FlexBox Component | Neuctra UI - Modern CSS Flexbox Layouts",
+  description: "A powerful React FlexBox component that simplifies responsive layouts with intuitive props for alignment, spacing, and direction control. Perfect for component composition.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React FlexBox Component",
+    "CSS Flexbox Wrapper",
+    "Flex Layout System",
+    "Responsive Flex Container",
+    "Neuctra UI Components",
+    "Flex Gap Utilities",
+    "Justify Content",
+    "Align Items",
+    "Flex Direction"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "FlexBox Component | Neuctra UI - Smart Layout Simplification",
+    description: "Build flexible layouts faster with our FlexBox component. Features responsive direction control, gap spacing, alignment utilities, and nested flex containers.",
+    url: "https://yourdomain.com/components/flexbox",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/flexbox-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI FlexBox Component showing various layout examples"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "FlexBox Component | Neuctra UI",
+    description: "CSS Flexbox abstraction for building modern React layouts",
+    images: ["https://yourdomain.com/images/flexbox-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/flexbox"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

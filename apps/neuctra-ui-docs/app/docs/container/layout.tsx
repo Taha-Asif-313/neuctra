@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "Container Component | Neuctra UI - Responsive Content Wrapper",
+  description: "A flexible React Container component with responsive breakpoints, max-width constraints, and padding controls. Perfect for creating consistent layouts across all screen sizes.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Container Component",
+    "Responsive Wrapper",
+    "Layout Container",
+    "Content Constraint",
+    "Neuctra UI Components",
+    "Page Layout",
+    "Breakpoint Management",
+    "Fluid Containers",
+    "Fixed-Width Containers"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "Container Component | Neuctra UI - Layout Foundation",
+    description: "Build consistent layouts with our Container component. Features responsive width control, padding variants, and seamless integration with grid systems.",
+    url: "https://yourdomain.com/components/container",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/container-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Container Component showing responsive behavior"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Container Component | Neuctra UI",
+    description: "Responsive layout container for building consistent React applications",
+    images: ["https://yourdomain.com/images/container-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/container"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

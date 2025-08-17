@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "Modal Component | Neuctra UI - Elegant Dialog Windows",
+  description: "A responsive React Modal component with animations, focus management, and customizable sizing. Perfect for alerts, forms, and focused content presentation.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Modal Component",
+    "Dialog Window",
+    "Popup Modal",
+    "Accessible Modal",
+    "Neuctra UI Components",
+    "Modal with Backdrop",
+    "Animated Modal",
+    "Fullscreen Modal",
+    "Centered Dialog"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "Modal Component | Neuctra UI - Focused Content Containers",
+    description: "Create polished dialogs with our Modal component featuring smooth transitions, scroll locking, multiple sizes, and complete keyboard navigation support.",
+    url: "https://yourdomain.com/components/modal",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/modal-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Modal Component showing centered dialog example"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Modal Component | Neuctra UI",
+    description: "Professional modal/dialog component for React applications",
+    images: ["https://yourdomain.com/images/modal-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/modal"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

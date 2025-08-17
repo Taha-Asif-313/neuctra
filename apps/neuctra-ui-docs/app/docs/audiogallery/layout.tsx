@@ -1,24 +1,43 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
+  title: "AudioGallery Component - Neuctra UI",
   description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+    "The AudioGallery component in Neuctra UI provides a beautiful way to display and play multiple audio tracks with playlist functionality, waveform visualization, and customizable controls.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
+    "React Audio Player",
+    "Audio Gallery Component",
+    "Music Player UI",
+    "Waveform Visualization",
+    "Playlist Component",
     "Neuctra UI",
-    "React UI Components",
+    "React Media Components",
+    "Web Audio API"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
+    title: "AudioGallery Component - Neuctra UI",
     description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+      "Feature-rich audio gallery for React applications with playlist management, customizable themes, progress tracking, and responsive design for all devices.",
+    url: "https://yourdomain.com/components/audio-gallery",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/audio-gallery-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI AudioGallery Component Preview"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "AudioGallery Component - Neuctra UI",
+    description: "Modern audio gallery and player for React applications with advanced features"
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/audio-gallery"
+  }
 };
 
 export default function Layout({
@@ -26,9 +45,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

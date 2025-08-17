@@ -1,24 +1,53 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "Table Component | Neuctra UI - Data Visualization & Management",
+  description: "A high-performance React Table component with sorting, pagination, and filtering capabilities. Supports responsive layouts, row selection, and customizable cells for complex data display.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Table Component",
+    "Data Table UI",
+    "Sortable Table",
+    "Pagination Table",
+    "Neuctra UI Components",
+    "Responsive Data Table",
+    "Filterable Table",
+    "Virtualized Table",
+    "Accessible Table"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "Table Component | Neuctra UI - Advanced Data Grid",
+    description: "Display and manage large datasets with our feature-rich Table component including column resizing, row expansion, server-side operations, and seamless theme integration.",
+    url: "https://yourdomain.com/components/table",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/table-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Table Component showing sortable columns and pagination"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Table Component | Neuctra UI",
+    description: "Enterprise-grade table component for React applications",
+    images: ["https://yourdomain.com/images/table-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/table"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +55,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

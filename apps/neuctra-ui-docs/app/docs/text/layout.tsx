@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "Text Component | Neuctra UI - Typography & Content Styling",
+  description: "A versatile React Text component for consistent typography with responsive sizing, color variants, and semantic text elements. Perfect for paragraphs, headings, and inline text styling.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Text Component",
+    "Typography System",
+    "Text Styling",
+    "Responsive Typography",
+    "Neuctra UI Components",
+    "Heading Components",
+    "Paragraph Styling",
+    "Text Color Variants",
+    "Accessible Text"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "Text Component | Neuctra UI - Beautiful Typography Made Simple",
+    description: "Implement consistent text styling across your application with our Text component featuring font hierarchy control, truncation, text transforms, and seamless theme integration.",
+    url: "https://yourdomain.com/components/text",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/text-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Text Component showing typography hierarchy examples"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Text Component | Neuctra UI",
+    description: "Flexible typography component for React applications",
+    images: ["https://yourdomain.com/images/text-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/text"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }

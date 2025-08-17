@@ -1,24 +1,52 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Button Component - Neuctra UI",
-  description:
-    "The Button component in Neuctra UI is a customizable React button with icons, loading states, and styling options.",
+  title: "Drawer Component | Neuctra UI - Smooth Side Panels & Navigation",
+  description: "A responsive React Drawer component with multiple placement options, smooth animations, and customizable overlay effects. Perfect for mobile menus, settings panels, and contextual information.",
   keywords: [
-    "React Button Component",
-    "Custom Button",
-    "UI Library Button",
-    "Neuctra UI",
-    "React UI Components",
+    "React Drawer Component",
+    "Side Panel UI",
+    "Mobile Navigation Drawer",
+    "Sliding Panel",
+    "Off-Canvas Menu",
+    "Neuctra UI Components",
+    "Overlay Drawer",
+    "Push Content Drawer",
+    "Accessible Drawer"
   ],
   openGraph: {
-    title: "Button Component - Neuctra UI",
-    description:
-      "Explore the Button component from Neuctra UI — a modern, customizable button with icons, loading states, and full styling control.",
-    url: "https://yourdomain.com/components/button",
+    title: "Drawer Component | Neuctra UI - Elegant Slide-Out Panels",
+    description: "Implement smooth, accessible drawers with multiple positions (left, right, top, bottom), animation controls, and responsive behavior. Works seamlessly with app layouts.",
+    url: "https://yourdomain.com/components/drawer",
     siteName: "Neuctra UI",
-    type: "article",
+    type: "website",
+    images: [
+      {
+        url: "https://yourdomain.com/images/drawer-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Neuctra UI Drawer Component showing left-side navigation example"
+      }
+    ]
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Drawer Component | Neuctra UI",
+    description: "Flexible sliding panel component for React applications",
+    images: ["https://yourdomain.com/images/drawer-twitter.jpg"]
+  },
+  alternates: {
+    canonical: "https://yourdomain.com/components/drawer"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large'
+    }
+  }
 };
 
 export default function Layout({
@@ -26,9 +54,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-
-      <div>{children}</div>
-
-  );
+  return <div>{children}</div>;
 }
