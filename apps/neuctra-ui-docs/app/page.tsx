@@ -2,7 +2,7 @@
 import React from "react";
 import CopyButton from "./components/docs/CopyButton";
 import { Button } from "@neuctra/ui";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -62,7 +62,7 @@ const Page = () => {
             </div>
           </div>
           <div className="w-full flex items-center justify-center max-lg:hidden">
-            <Image height={500} width={500} src="/logo.png" alt="Hero Pic" />
+            <Image priority height={500} width={500} src="/logo.png" alt="Hero Pic" />
           </div>
         </div>
       </div>

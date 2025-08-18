@@ -170,7 +170,7 @@ const AlertDocs: React.FC = () => {
   ];
 
   return (
-    <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950 px-4 sm:px-0">
+    <div className="py-10 max-w-5xl font-primary mx-auto bg-zinc-950">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8">
         <span className="text-primary">Alert</span> Component Documentation
