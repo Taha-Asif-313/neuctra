@@ -56,10 +56,10 @@ const AboutPage: React.FC = () => {
     <div className="bg-zinc-950 font-primary text-gray-100 min-h-screen">
       {/* Header/Navigation would go here */}
       
-      <main className="pt-12 pb-16 max-sm:pt-20 px-4 sm:px-6 lg:px-8">
+      <main className="pt-20 pb-16 max-sm:pt-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Logo */}
-          <div className="flex justify-center mb-8 sm:mb-12">
+          <div className="flex justify-center mb-8 sm:mb-2">
             <Link href="/" className="flex items-center gap-2 group">
               <img 
                 src="/logo.png" 

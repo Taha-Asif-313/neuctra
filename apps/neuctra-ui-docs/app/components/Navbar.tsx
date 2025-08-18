@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
       className={`fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl z-50 transition-colors duration-300 ${
         isOpen || isScrolled ? "bg-zinc-950" : "bg-transparent"
       } text-white border-b ${
-        isOpen || isScrolled ? "border-zinc-800" : "border-transparent"
+        isOpen || isScrolled ? "border-transparent" : "border-transparent"
       }`}
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between lg:px-0 px-4 py-3 lg:py-3">
