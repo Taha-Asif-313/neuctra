@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Sidebar from "../components/docs/Sidebar";
+import Sidebar from "../../components/docs/Sidebar";
 
 export const metadata: Metadata = {
   title: "Get Started - Neuctra UI a modern UI library with modern designs",

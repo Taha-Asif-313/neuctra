@@ -3,8 +3,8 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@neuctra/ui";
-import CodeBlock from "../components/docs/CodeBlock";
-import CodePreviewBlock from "../components/docs/CodePreviewBlock";
+import CodeBlock from "../../components/docs/CodeBlock";
+import CodePreviewBlock from "../../components/docs/CodePreviewBlock";
 
 const GetStartedPage: React.FC = () => {
   return (

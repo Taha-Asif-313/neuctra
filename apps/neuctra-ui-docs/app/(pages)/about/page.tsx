@@ -53,31 +53,16 @@ const AboutPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-zinc-950 font-primary text-gray-100 min-h-screen">
-      {/* Header/Navigation would go here */}
-      
+    <div className="bg-zinc-950 font-primary px-4 text-gray-100 min-h-screen">
       <main className="pt-20 pb-16 max-sm:pt-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Logo */}
-          <div className="flex justify-center mb-8 sm:mb-2">
-            <Link href="/" className="flex items-center gap-2 group">
-              <img 
-                src="/logo.png" 
-                alt="Neuctra UI Logo" 
-                className="w-10 h-10 sm:w-12 sm:h-12 object-contain transition-transform group-hover:scale-105" 
-              />
-              <h2 className="text-xl sm:text-2xl font-bold">
-                Neuctra<span className="text-primary">UI</span>
-              </h2>
-            </Link>
-          </div>
-
+      
           {/* Hero Section */}
           <section className="text-center mb-16 sm:mb-20">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-white">
+            <h1 className="text-3xl sm:text-3xl font-extrabold mb-4 text-white">
               About <span className="text-primary">Neuctra UI</span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
               A modern React component library designed to help developers build
               beautiful, accessible, and high-performance user interfaces faster.
             </p>
