@@ -65,14 +65,14 @@ export default function ContactSection() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 font-bold text-white text-2xl"
+            className="flex items-center gap-1 font-bold text-white"
           >
             <img
               src="/logo.png"
               alt="Neuctra"
-              className="w-12 h-12 object-contain drop-shadow-[0_0_10px_#05FF1A]"
+              className="w-20 object-cover"
             />
-            <span className="tracking-tight">Neuctra</span>
+            <p className="text-xl" >Neuctra</p>
           </Link>
 
           <p className="text-gray-400 text-sm leading-relaxed">
@@ -112,12 +112,12 @@ export default function ContactSection() {
             </div>
 
             {/* Visit Us */}
-            <div>
+            {/* <div>
               <h4 className="text-lg font-semibold text-white flex items-center gap-2">
                 <MapPin className="text-primary w-5 h-5" /> Visit Us
               </h4>
               <p className="ml-7 text-gray-400">San Francisco, CA</p>
-            </div>
+            </div> */}
 
             {/* Website */}
             <div>

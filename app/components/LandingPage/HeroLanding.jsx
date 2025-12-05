@@ -19,13 +19,19 @@ const HeroContent = dynamic(() => import("./HeroSection/HeroContent"), {
 export default function HeroLanding() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Prevent hydration errors by binding only after window exists
   useEffect(() => {
-    const handleMouseMove = (e) =>
+    // Only run on client
+    if (typeof window === "undefined") return;
+
+    const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (

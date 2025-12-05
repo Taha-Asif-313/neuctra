@@ -87,7 +87,7 @@ export default function HeroContent() {
       >
         <motion.a
           href="#products"
-          className="px-6 py-3 bg-primary font-semibold rounded-lg shadow-[0_0_20px_#00d912]/50 hover:shadow-[0_0_30px_#00ff88]/70 transition-all"
+          className="px-6 py-3 bg-primary font-semibold rounded-lg hover:shadow-[0_0_10px_#00d912]/70 transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
