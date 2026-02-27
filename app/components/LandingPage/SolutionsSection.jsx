@@ -6,38 +6,38 @@ export default function SolutionsSection() {
   const solutions = [
     {
       icon: <ShieldCheck className="text-primary w-10 h-10" />,
-      title: "Enterprise Security",
-      desc: "Protect your infrastructure with AI-enhanced authentication, 2FA, and end-to-end encryption powered by Neuctra Authix.",
+      title: "Authentication & Identity Management",
+      desc: "Secure authentication systems with role-based access control, API security, session management, and enterprise-grade identity protection powered by Neuctra Authix.",
       link: "https://authix.neuctra.com",
     },
     {
       icon: <Layout className="text-primary w-10 h-10" />,
-      title: "Design Systems",
-      desc: "Build stunning interfaces faster with Neuctra UI — 100+ Tailwind and Framer Motion powered components.",
+      title: "Modern UI & Design Systems",
+      desc: "Scalable UI frameworks and reusable component libraries built for SaaS platforms, admin dashboards, and responsive web applications using modern design standards.",
       link: "https://ui.neuctra.com",
     },
     {
       icon: <Brain className="text-primary w-10 h-10" />,
-      title: "AI Collaboration",
-      desc: "Empower your team with smart note-taking, AI summaries, and real-time sync through Neuctra Notlix.",
+      title: "Productivity & Collaboration Tools",
+      desc: "Cloud-based productivity platforms with intelligent automation, workflow optimization, and real-time collaboration for modern digital teams.",
       link: "https://notlix.neuctra.com",
     },
     {
       icon: <Cloud className="text-primary w-10 h-10" />,
-      title: "Cloud Integration",
-      desc: "Seamlessly connect Neuctra APIs with your existing cloud stack — AWS, Firebase, Supabase, or custom setups.",
+      title: "Cloud-Native Architecture",
+      desc: "Scalable cloud infrastructure engineered for AWS, Firebase, Supabase, and custom enterprise environments to ensure performance, flexibility, and reliability.",
       link: "#",
     },
     {
       icon: <Lock className="text-primary w-10 h-10" />,
-      title: "Zero-Trust Access",
-      desc: "Enforce strict identity and session control to eliminate breaches before they happen.",
+      title: "Secure SaaS Development",
+      desc: "Zero-trust architecture, secure backend systems, and protected APIs designed to safeguard data and maintain compliance across digital platforms.",
       link: "#",
     },
     {
       icon: <Zap className="text-primary w-10 h-10" />,
-      title: "Performance Optimization",
-      desc: "Experience lightning-fast, scalable SaaS architecture optimized for high performance and low latency.",
+      title: "High-Performance Systems",
+      desc: "Optimized SaaS architecture and web applications built for speed, scalability, and seamless user experience across devices and global markets.",
       link: "#",
     },
   ];
@@ -45,7 +45,7 @@ export default function SolutionsSection() {
   return (
     <section
       id="solutions"
-      className="relative py-24 px-6 md:px-12 bg-[#0b0b0b] text-white overflow-hidden"
+      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
     >
       {/* Section Header */}
       <motion.div
@@ -57,8 +57,10 @@ export default function SolutionsSection() {
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
           Discover <span className="text-primary">Neuctra Solutions</span>
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          A suite of intelligent, secure, and high-performance SaaS solutions — designed to scale with your vision.
+        <p className="text-gray-400 max-w-3xl mx-auto">
+          Neuctra delivers scalable SaaS products and custom web development 
+          solutions powered by secure cloud-native architecture, modern UI systems, 
+          and high-performance infrastructure designed for growing businesses.
         </p>
       </motion.div>
 
@@ -74,7 +76,9 @@ export default function SolutionsSection() {
           >
             <div className="p-3 bg-primary/10 rounded-xl">{solution.icon}</div>
             <h3 className="text-xl font-semibold">{solution.title}</h3>
-            <p className="text-gray-400 text-sm grow">{solution.desc}</p>
+            <p className="text-gray-400 text-sm grow leading-relaxed">
+              {solution.desc}
+            </p>
             <motion.a
               href={solution.link}
               target="_blank"

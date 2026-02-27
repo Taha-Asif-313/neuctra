@@ -35,7 +35,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative py-24 px-6 md:px-12 bg-[#080808] text-white overflow-hidden"
+      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
     >
       {/* Header */}
       <motion.div
@@ -67,12 +67,8 @@ export default function ContactSection() {
             href="/"
             className="flex items-center gap-1 font-bold text-white"
           >
-            <img
-              src="/logo.png"
-              alt="Neuctra"
-              className="w-20 object-cover"
-            />
-            <p className="text-xl" >Neuctra</p>
+            <img src="/logo.png" alt="Neuctra" className="w-20 object-cover" />
+            <p className="text-xl">Neuctra</p>
           </Link>
 
           <p className="text-gray-400 text-sm leading-relaxed">

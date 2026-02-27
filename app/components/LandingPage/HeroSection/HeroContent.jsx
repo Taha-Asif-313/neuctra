@@ -7,10 +7,10 @@ import { ShieldCheck, Zap, Brain } from "lucide-react";
 
 export default function HeroContent() {
   const words = [
-    "Intelligent SaaS",
-    "Next-Gen Security",
-    "AI Innovation",
-    "Automation Power",
+    "AI-Driven SaaS Solutions",
+    "Enterprise-Grade Security",
+    "Smart Business Automation",
+    "Next-Level Digital Innovation",
   ];
 
   const [text, setText] = useState("");
@@ -20,7 +20,7 @@ export default function HeroContent() {
   // Typing animation
   useEffect(() => {
     const current = words[index % words.length];
-    let speed = isDeleting ? 50 : 100;
+    let speed = isDeleting ? 50 : 90;
 
     const timeout = setTimeout(() => {
       setText((prev) =>
@@ -30,7 +30,7 @@ export default function HeroContent() {
       );
 
       if (!isDeleting && text === current) {
-        setTimeout(() => setIsDeleting(true), 900);
+        setTimeout(() => setIsDeleting(true), 1000);
       } else if (isDeleting && text === "") {
         setIsDeleting(false);
         setIndex((prev) => prev + 1);
@@ -42,9 +42,10 @@ export default function HeroContent() {
 
   return (
     <section className="relative py-16 z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 text-center">
+      
       {/* Logo */}
       <motion.div
-        initial={{ scale: 0.6, opacity: 0, rotate: -10 }}
+        initial={{ scale: 0.6, opacity: 0, rotate: -8 }}
         animate={{ scale: 1, opacity: 1, rotate: 0 }}
         transition={{ duration: 1 }}
       >
@@ -54,6 +55,7 @@ export default function HeroContent() {
           width={260}
           height={260}
           className="object-contain mb-8"
+          priority
           style={{ filter: "drop-shadow(0 0 40px #05FF1A)" }}
         />
       </motion.div>
@@ -61,11 +63,11 @@ export default function HeroContent() {
       {/* Title */}
       <motion.h1
         className="text-4xl flex flex-col sm:text-5xl md:text-6xl lg:text-6xl px-5 font-extrabold text-white leading-tight mb-6"
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        Empowering your Business with{" "}
+        Transforming Businesses with{" "}
         <span className="text-primary">
           {text}
           <motion.span
@@ -78,29 +80,41 @@ export default function HeroContent() {
         </span>
       </motion.h1>
 
+      {/* Subtext */}
+      <motion.p
+        className="max-w-2xl text-gray-200 text-base sm:text-lg mt-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.8 }}
+      >
+        Neuctra delivers scalable, secure, and AI-powered SaaS platforms 
+        designed to streamline operations, enhance productivity, 
+        and accelerate digital growth.
+      </motion.p>
+
       {/* CTA Buttons */}
       <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6"
+        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.6 }}
       >
         <motion.a
           href="#products"
-          className="px-6 py-3 bg-primary font-semibold rounded-lg hover:shadow-[0_0_10px_#00d912]/70 transition-all"
+          className="px-7 py-3 bg-primary font-semibold rounded-xl hover:shadow-[0_0_20px_#00d912]/60 transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          Explore Products
+          Get Started
         </motion.a>
 
         <motion.a
-          href="#solutions"
-          className="px-6 py-3 border border-primary text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all"
+          href="#contact"
+          className="px-7 py-3 border border-primary text-primary font-semibold rounded-xl hover:bg-primary/10 transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          View Solutions
+          Book a Demo
         </motion.a>
       </motion.div>
 
@@ -110,23 +124,22 @@ export default function HeroContent() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        transition={{ staggerChildren: 0.2 }}
       >
         {[
           {
             icon: <ShieldCheck className="text-primary w-8 h-8" />,
-            title: "Enterprise Security",
-            desc: "End-to-end encrypted systems ensuring data integrity and trust.",
+            title: "Advanced Security",
+            desc: "Enterprise-grade protection with encrypted infrastructure and compliance-ready architecture.",
           },
           {
             icon: <Brain className="text-primary w-8 h-8" />,
-            title: "AI-Powered Tools",
-            desc: "Harnessing intelligence for smarter workflows and automation.",
+            title: "AI Automation",
+            desc: "Intelligent workflows that reduce manual effort and improve operational efficiency.",
           },
           {
             icon: <Zap className="text-primary w-8 h-8" />,
-            title: "Lightning Performance",
-            desc: "Optimized for speed and reliability, trusted by global teams.",
+            title: "High Performance",
+            desc: "Blazing-fast cloud architecture built for scale, reliability, and global teams.",
           },
         ].map((feature, idx) => (
           <motion.div

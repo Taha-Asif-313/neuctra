@@ -51,7 +51,7 @@ export default function ProductsSection() {
   return (
     <section
       id="products"
-      className="relative py-24 px-6 md:px-12 bg-[#0b0b0b] text-white overflow-hidden"
+      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
     >
       {/* Section Header */}
       <motion.div
