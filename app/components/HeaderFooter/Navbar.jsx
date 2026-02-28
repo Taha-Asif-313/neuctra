@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Home", path: "/" },
@@ -16,123 +25,194 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="h-full top-0 left-0 w-full z-50 bg-black/30 backdrop-blur-xl">
-      {/* Top Bar */}
-      <motion.div
-        className="flex items-center justify-between px-6 md:px-10 py-4"
-        initial={{ y: -60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+    <>
+      <motion.nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          scrolled 
+            ? "bg-black/80" 
+            : "bg-transparent"
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-white text-xl">
-          <img src="/logo.png" alt="Neuctra" className="w-12 h-12 object-contain" />
-          <span className="hidden sm:block tracking-tight">Neuctra</span>
-        </Link>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.path}
-              className="text-gray-300 hover:text-white transition-colors font-medium"
+        {/* Top Bar */}
+        <div className="flex items-center justify-between px-6 md:px-12 py-4 max-w-7xl mx-auto">
+          {/* Logo with modern animation */}
+          <Link href="/" className="relative group">
+            <motion.div 
+              className="flex items-center gap-3"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              {item.name}
-            </Link>
-          ))}
+              <div className="relative">
+                <img 
+                  src="/logo.png" 
+                  alt="Neuctra" 
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain relative z-10"
+                />
+                <motion.div 
+                  className="absolute inset-0 bg-primary/20 rounded-ful"
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </div>
+              <span className="hidden sm:block text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Neuctra
+              </span>
+            </motion.div>
+          </Link>
 
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-10">
+            {navItems.map((item, index) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                className="relative group"
+              >
+                <span className="text-gray-300 hover:text-white transition-colors duration-300 font-medium text-sm tracking-wide">
+                  {item.name}
+                </span>
+                <motion.span 
+                  className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"
+                  whileHover={{ width: "100%" }}
+                />
+              </Link>
+            ))}
+
+            <motion.button
+              className="px-6 py-2.5 bg-linear-to-r from-primary to-primary/80 font-semibold rounded-full text-sm tracking-wide relative overflow-hidden group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <span className="relative z-10">Get in touch</span>
+              <motion.div 
+                className="absolute inset-0 bg-white/20"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.5 }}
+              />
+            </motion.button>
+          </div>
+
+          {/* Mobile Menu Icon */}
           <motion.button
-            className="px-5 py-2 bg-primary font-semibold rounded-lg"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 25px rgba(0, 255, 136, 0.4)",
-            }}
-            whileTap={{ scale: 0.95 }}
+            className="md:hidden text-white relative w-10 h-10 flex items-center justify-center"
+            onClick={() => setMenuOpen(!menuOpen)}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle menu"
           >
-            Get Started
+            <motion.div
+              animate={{ rotate: menuOpen ? 90 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </motion.div>
           </motion.button>
         </div>
-
-        {/* Mobile Menu Icon */}
-        <button
-          className="md:hidden text-white"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={26} /> : <Menu size={26} />}
-        </button>
-      </motion.div>
+      </motion.nav>
 
       {/* Mobile Drawer */}
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
-            className="fixed top-0 right-0 h-full w-4/5 sm:w-2/5 bg-black/95 border-l border-primary/20 flex flex-col items-start p-6 space-y-6 shadow-2xl"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 80, damping: 15 }}
-          >
-            {/* Header */}
-            <div className="flex w-full justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-white">Neuctra</h2>
-              <button
-                className="text-gray-400 hover:text-white"
-                onClick={() => setMenuOpen(false)}
-              >
-                <X size={26} />
-              </button>
-            </div>
-
-            {/* Mobile Links */}
-            <div className="flex flex-col space-y-5 w-full">
-              {navItems.map((item, idx) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ x: 40, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.05 * idx }}
-                >
-                  <Link
-                    href={item.path}
-                    className="text-lg text-gray-300 hover:text-primary transition-colors"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <motion.button
-              className="mt-auto w-full px-6 py-3 bg-primary text-black font-semibold rounded-lg"
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 25px rgba(0, 255, 136, 0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/60 z-40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
-            >
-              Get Started
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            />
 
-      {/* Overlay */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            className="fixed inset-0 md:hidden bg-black/40 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMenuOpen(false)}
-          />
+            {/* Drawer */}
+            <motion.div
+              className="fixed top-0 right-0 h-full w-72 bg-linear-to-b from-gray-900 to-black border-l border-white/10 shadow-2xl z-50 md:hidden overflow-hidden"
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            >
+              {/* Header with close button */}
+              <div className="flex justify-between items-center p-6 border-b border-white/10">
+                <motion.h2 
+                  className="text-2xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  Neuctra
+                </motion.h2>
+                <motion.button
+                  className="text-gray-400 hover:text-white p-2 hover:bg-white/10 rounded-full transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, rotate: -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <X size={20} />
+                </motion.button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex flex-col p-6 space-y-4">
+                {navItems.map((item, idx) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05 }}
+                  >
+                    <Link
+                      href={item.path}
+                      className="group flex items-center justify-between text-gray-300 hover:text-white py-3 px-4 rounded-xl hover:bg-white/5 transition-all duration-300"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <span className="font-medium">{item.name}</span>
+                      <ChevronRight 
+                        size={16} 
+                        className="opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" 
+                      />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA Button */}
+              <motion.div 
+                className="absolute bottom-8 left-6 right-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <motion.button
+                  className="w-full px-6 py-3.5 bg-linear-to-r from-primary to-primary/80 font-semibold rounded-xl relative overflow-hidden group"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span className="relative z-10">Get in touch</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-white/20"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
