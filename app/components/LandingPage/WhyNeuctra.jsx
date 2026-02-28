@@ -29,7 +29,7 @@ export default function WhyNeuctra() {
   return (
     <section className="py-24 px-6 text-white">
       <div className="text-center mb-16">
-        <h2 className="text-5xl font-bold">
+        <h2 className="text-4xl md:text-6xl mb-3 font-bold">
           Why Choose <span className="text-primary">Neuctra</span>?
         </h2>
         <p className="text-gray-200 mt-4 max-w-3xl mx-auto">
@@ -40,7 +40,7 @@ export default function WhyNeuctra() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
         {points.map((item, i) => (
           <motion.div
             key={i}

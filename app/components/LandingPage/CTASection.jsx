@@ -6,21 +6,21 @@ export default function CTASection() {
     <section className="relative py-28 px-6 text-center text-white overflow-hidden">
       
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10 blur-3xl opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-r from-primary/10 via-transparent to-primary/10 blur-3xl opacity-40 pointer-events-none" />
 
       <motion.h2
-        className="relative text-4xl md:text-5xl font-bold mb-6 leading-tight"
+        className="relative text-4xl md:text-6xl font-black mb-3"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        Accelerate Your Growth with{" "}
+        Accelerate Your Growth with{" "}<br/>
         <span className="text-primary">AI-Powered SaaS</span>
       </motion.h2>
 
       <motion.p
-        className="relative text-gray-400 max-w-2xl mx-auto mb-10 text-base md:text-lg"
+        className="relative text-gray-200 max-w-3xl mx-auto mb-10 text-base md:text-lg"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.8 }}

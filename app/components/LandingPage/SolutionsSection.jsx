@@ -54,10 +54,10 @@ export default function SolutionsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+        <h2 className="text-4xl md:text-6xl font-bold mb-3">
           Discover <span className="text-primary">Neuctra Solutions</span>
         </h2>
-        <p className="text-gray-400 max-w-3xl mx-auto">
+        <p className="text-gray-200 max-w-3xl mx-auto">
           Neuctra delivers scalable SaaS products and custom web development 
           solutions powered by secure cloud-native architecture, modern UI systems, 
           and high-performance infrastructure designed for growing businesses.

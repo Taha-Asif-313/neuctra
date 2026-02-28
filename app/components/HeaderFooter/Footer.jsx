@@ -94,7 +94,7 @@ export default function Footer() {
               <Twitter size={20} />
             </a>
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/company/neuctra"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition"
@@ -110,7 +110,7 @@ export default function Footer() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-500"
+        className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-300"
       >
         © {year} Neuctra. All rights reserved.
       </motion.div>

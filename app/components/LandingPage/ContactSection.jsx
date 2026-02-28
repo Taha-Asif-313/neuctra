@@ -44,10 +44,10 @@ export default function ContactSection() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight">
+        <h2 className="text-4xl sm:text-6xl font-extrabold mb-3 tracking-tight">
           Let’s <span className="text-primary">Connect</span>
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-200 max-w-md mx-auto">
           Whether you have a question about our products, need assistance, or
           just want to say hi — our team is ready to help.
         </p>
@@ -67,8 +67,8 @@ export default function ContactSection() {
             href="/"
             className="flex items-center gap-1 font-bold text-white"
           >
-            <img src="/logo.png" alt="Neuctra" className="w-20 object-cover" />
-            <p className="text-xl">Neuctra</p>
+            <img src="/logo.png" alt="Neuctra" className="w-10 object-cover" />
+            <p className="text-lg">Neuctra</p>
           </Link>
 
           <p className="text-gray-400 text-sm leading-relaxed">

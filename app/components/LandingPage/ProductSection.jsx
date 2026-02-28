@@ -1,24 +1,26 @@
 "use client";
+
 import { motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function ProductsSection() {
   const products = [
     {
       name: "Neuctra Authix",
-      image: "/authix.png", // ✅ Add product image
-      desc: "Authenticate. Authorize. Secure — all in one API-driven suite.",
-      features: ["OAuth2, 2FA, SSO, and Biometrics"],
+      image: "/authix.png",
+      desc: "Enterprise-grade authentication & authorization infrastructure built for modern applications.",
+      features: ["OAuth2", "2FA", "SSO", "Biometrics"],
       links: {
         learn: "https://authix.neuctra.com",
         start: "https://authix.neuctra.com/signup",
       },
+      featured: true,
     },
     {
       name: "Neuctra UI",
       image: "/ui.png",
-      desc: "A modern UI library for developers who love design.",
-      features: ["100+ components · Framer Motion · Tailwind v4"],
+      desc: "A premium component system powered by Tailwind & Motion for building stunning interfaces.",
+      features: ["100+ Components", "Framer Motion", "Tailwind v4"],
       links: {
         learn: "https://ui.neuctra.com",
         start: "https://ui.neuctra.com/docs",
@@ -27,8 +29,8 @@ export default function ProductsSection() {
     {
       name: "Neuctra Notlix",
       image: "/notlix.png",
-      desc: "AI notes. Smarter teams. One seamless workspace.",
-      features: ["AI summaries · Sync · Collaboration"],
+      desc: "AI-powered collaborative workspace for smarter documentation and team productivity.",
+      features: ["AI Summaries", "Sync", "Real-time Collaboration"],
       links: {
         learn: "https://notlix.neuctra.com",
         start: "https://notlix.neuctra.com/signup",
@@ -37,10 +39,8 @@ export default function ProductsSection() {
     {
       name: "LyfeSync",
       image: "/lyfesync.png",
-      desc: "Design your day. Design your life — productivity powered by AI and mindfulness.",
-      features: [
-        "Smart Task Planning · Time Intelligence · Mindful Productivity · Progress Insights · Life Notes",
-      ],
+      desc: "Intelligent productivity platform blending AI planning with mindful performance tracking.",
+      features: ["Smart Planning", "Time Intelligence", "Progress Insights"],
       links: {
         learn: "https://lyfesync.com",
         start: "https://lyfesync.com/signup",
@@ -51,150 +51,91 @@ export default function ProductsSection() {
   return (
     <section
       id="products"
-      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
+      className="relative py-28 px-6 md:px-12"
     >
       {/* Section Header */}
       <motion.div
-        className="text-center mb-16"
+        className="text-center max-w-3xl mx-auto mb-20"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-          Explore the <span className="text-primary">Neuctra Suite</span>
+        <h2 className="text-4xl md:text-6xl font-bold mb-3 tracking-tight">
+          The <span className="text-primary">Neuctra Product Suite</span>
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Innovative SaaS tools for security, design, and productivity — built
-          for modern creators.
+        <p className="text-gray-200 text-lg leading-relaxed">
+          A unified ecosystem of security, design systems, and AI productivity
+          tools engineered for builders and enterprises.
         </p>
       </motion.div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 max-w-7xl mx-auto">
         {products.map((product, index) => (
           <motion.div
             key={index}
-            className="group relative bg-zinc-950 rounded-xl
-      overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300
-      flex flex-col h-full" // ← Ensures equal height
-            initial={{ opacity: 0, y: 20 }}
+            className={`group relative rounded-2xl overflow-hidden border border-white/10 
+            bg-zinc-950 backdrop-blur-xl transition-all duration-500
+            hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10
+            ${product.featured ? "md:col-span-2 xl:col-span-2" : ""}`}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.4 }}
-            whileHover={{ y: -4 }}
+            transition={{ delay: index * 0.1 }}
           >
-            {/* Popular Badge */}
-            {product.popular && (
-              <div className="absolute top-4 left-4 z-10">
-                <span className="px-3 py-1 text-xs font-semibold bg-primary text-white rounded-full shadow">
-                  Popular
-                </span>
-              </div>
-            )}
+            {/* Product Image Preview */}
+            <div className="relative h-56 bg-zinc-900/50 flex items-center justify-center">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="max-h-40 object-contain transition-transform duration-500 group-hover:scale-105"
+              />
 
-            {/* Image/Icon Section */}
-            <div className="p-6 pb-0">
-              <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-transparent mb-4">
-                {product.icon ? (
-                  <product.icon className="w-8 h-8 text-primary" />
-                ) : (
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-14 h-14 object-contain"
-                  />
-                )}
-              </div>
+              {product.featured && (
+                <div className="absolute top-5 right-5 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                  Featured
+                </div>
+              )}
             </div>
 
-            {/* Content Section */}
-            <div className="p-6 pt-0 flex flex-col grow">
-              {" "}
-              {/* ← Fix alignment */}
-              {/* Title */}
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+            {/* Content */}
+            <div className="p-8 flex flex-col h-full">
+              <h3 className="text-2xl font-semibold mb-3 tracking-tight">
                 {product.name}
               </h3>
-              {/* Tagline */}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                {product.tagline}
-              </p>
-              {/* Description */}
-              <p className="text-gray-700 dark:text-gray-300 mb-5 text-sm leading-relaxed">
+
+              <p className="text-gray-400 leading-relaxed mb-6">
                 {product.desc}
               </p>
-              {/* Key Features */}
-              {product.features && product.features.length > 0 && (
-                <div className="mb-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Key Features
-                    </span>
-                  </div>
-                  <div className="space-y-2">
-                    {product.features.slice(0, 3).map((feature, i) => (
-                      <div key={i} className="flex items-start gap-2">
-                        <Check className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {/* Pricing */}
-              {product.price && (
-                <div className="mb-5 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                      ${product.price}
-                    </span>
-                    <span className="text-gray-500 dark:text-gray-400">
-                      /month
-                    </span>
-                  </div>
-                  {product.savings && (
-                    <p className="text-xs text-green-600 dark:text-green-400 mt-1">
-                      Save {product.savings}% with annual billing
-                    </p>
-                  )}
-                </div>
-              )}
-              {/* Action Buttons */}
-              <div className="mt-auto flex gap-3">
-                {" "}
-                {/* ← Forces buttons to bottom */}
+
+            
+
+              {/* CTA */}
+              <div className="flex gap-4">
                 <motion.a
                   href={product.links.learn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 border border-gray-300 dark:border-gray-700 
-            text-gray-700 dark:text-gray-300 font-medium rounded-lg px-4 py-2.5 
-            hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="text-sm font-medium text-gray-300 hover:text-white transition"
                 >
-                  Learn More
-                  <ArrowRight className="w-3 h-3" />
+                  Learn More <ArrowRight className="inline w-4 h-4 ml-1" />
                 </motion.a>
+
                 <motion.a
                   href={product.links.start}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 bg-primary/90 text-white font-medium 
-            rounded-lg px-4 py-2.5 hover:bg-blue-700 transition-colors text-sm"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="ml-auto bg-primary text-white text-sm font-semibold px-5 py-2.5 rounded-lg 
+                  shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
                 >
                   Get Started
-                  <ArrowRight className="w-3 h-3" />
+                  <ArrowRight className="inline w-4 h-4 ml-2" />
                 </motion.a>
               </div>
             </div>
-
-            {/* Hover Effect Border */}
-            <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/30 rounded-xl pointer-events-none transition-colors duration-300" />
           </motion.div>
         ))}
       </div>
