@@ -41,7 +41,7 @@ export default function HeroContent() {
   }, [text, isDeleting, index]);
 
   return (
-    <section className="relative py-16 z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 text-center">
+    <section className="relative py-6 z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 text-center">
       
       {/* Logo */}
       <motion.div
@@ -54,15 +54,14 @@ export default function HeroContent() {
           alt="Neuctra Logo"
           width={260}
           height={260}
-          className="object-contain mb-8"
+          className="object-contain mb-0"
           priority
-          style={{ filter: "drop-shadow(0 0 40px #05FF1A)" }}
         />
       </motion.div>
 
       {/* Title */}
       <motion.h1
-        className="text-4xl flex flex-col sm:text-5xl md:text-6xl lg:text-6xl px-5 font-extrabold text-white leading-tight mb-6"
+        className="text-4xl flex flex-col sm:text-6xl px-5 font-black text-white mb-3"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
@@ -82,7 +81,7 @@ export default function HeroContent() {
 
       {/* Subtext */}
       <motion.p
-        className="max-w-2xl text-gray-200 text-base sm:text-lg mt-2"
+        className="max-w-4xl text-gray-200 text-base sm:text-lg mt-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.8 }}
@@ -94,7 +93,7 @@ export default function HeroContent() {
 
       {/* CTA Buttons */}
       <motion.div
-        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
+        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.6 }}

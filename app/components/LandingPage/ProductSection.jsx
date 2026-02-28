@@ -7,7 +7,7 @@ export default function ProductsSection() {
   const products = [
     {
       name: "Neuctra Authix",
-      image: "/authix.png",
+      image: "/logos/authix.png",
       desc: "Enterprise-grade authentication & authorization infrastructure built for modern applications.",
       features: ["OAuth2", "2FA", "SSO", "Biometrics"],
       links: {
@@ -18,7 +18,7 @@ export default function ProductsSection() {
     },
     {
       name: "Neuctra UI",
-      image: "/ui.png",
+      image: "/logos/ui.png",
       desc: "A premium component system powered by Tailwind & Motion for building stunning interfaces.",
       features: ["100+ Components", "Framer Motion", "Tailwind v4"],
       links: {
@@ -27,8 +27,18 @@ export default function ProductsSection() {
       },
     },
     {
+      name: "Neuctra Codinel",
+      image: "/logos/codinel.png",
+      desc: "Intelligent productivity platform blending AI planning with mindful performance tracking.",
+      features: ["Smart Planning", "Time Intelligence", "Progress Insights"],
+      links: {
+        learn: "https://codinel.neuctra.com",
+        start: "https://codinel.neuctra.com/signup",
+      },
+    },
+    {
       name: "Neuctra Notlix",
-      image: "/notlix.png",
+      image: "/logos/notlix.png",
       desc: "AI-powered collaborative workspace for smarter documentation and team productivity.",
       features: ["AI Summaries", "Sync", "Real-time Collaboration"],
       links: {
@@ -37,22 +47,19 @@ export default function ProductsSection() {
       },
     },
     {
-      name: "LyfeSync",
-      image: "/lyfesync.png",
+      name: "Neuctra LyfeSync",
+      image: "/logos/lyfesync.png",
       desc: "Intelligent productivity platform blending AI planning with mindful performance tracking.",
       features: ["Smart Planning", "Time Intelligence", "Progress Insights"],
       links: {
-        learn: "https://lyfesync.com",
-        start: "https://lyfesync.com/signup",
+        learn: "https://lyfesync.neuctra.com",
+        start: "https://lyfesync.neuctra.com/signup",
       },
     },
   ];
 
   return (
-    <section
-      id="products"
-      className="relative py-28 px-6 md:px-12"
-    >
+    <section id="products" className="relative py-28 px-6 md:px-12">
       {/* Section Header */}
       <motion.div
         className="text-center max-w-3xl mx-auto mb-20"
@@ -61,7 +68,7 @@ export default function ProductsSection() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-6xl font-bold mb-3 tracking-tight">
-          The <span className="text-primary">Neuctra Product Suite</span>
+          The <span className="text-primary">Neuctra</span> Product Suite
         </h2>
         <p className="text-gray-200 text-lg leading-relaxed">
           A unified ecosystem of security, design systems, and AI productivity
@@ -107,10 +114,8 @@ export default function ProductsSection() {
                 {product.desc}
               </p>
 
-            
-
               {/* CTA */}
-              <div className="flex gap-4">
+              <div className="flex gap-4 items-center">
                 <motion.a
                   href={product.links.learn}
                   target="_blank"

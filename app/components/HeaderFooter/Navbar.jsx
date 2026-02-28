@@ -28,43 +28,29 @@ export default function Navbar() {
     <>
       <motion.nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled 
-            ? "bg-black/80" 
-            : "bg-transparent"
+          scrolled ? "bg-black" : "bg-transparent"
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       >
         {/* Top Bar */}
-        <div className="flex items-center justify-between px-6 md:px-12 py-4 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between px-6 md:px-12 py-2 max-w-7xl mx-auto">
           {/* Logo with modern animation */}
           <Link href="/" className="relative group">
-            <motion.div 
-              className="flex items-center gap-3"
+            <motion.div
+              className="flex items-center"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <div className="relative">
-                <img 
-                  src="/logo.png" 
-                  alt="Neuctra" 
-                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain relative z-10"
-                />
-                <motion.div 
-                  className="absolute inset-0 bg-primary/20 rounded-ful"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3]
-                  }}
-                  transition={{ 
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
+                <img
+                  src="/logo.png"
+                  alt="Neuctra"
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-cover relative z-10"
                 />
               </div>
-              <span className="hidden sm:block text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="hidden sm:block text-lg font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Neuctra
               </span>
             </motion.div>
@@ -73,34 +59,29 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-10">
             {navItems.map((item, index) => (
-              <Link
-                key={item.name}
-                href={item.path}
-                className="relative group"
-              >
+              <Link key={item.name} href={item.path} className="relative group">
                 <span className="text-gray-300 hover:text-white transition-colors duration-300 font-medium text-sm tracking-wide">
                   {item.name}
                 </span>
-                <motion.span 
+                <motion.span
                   className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"
                   whileHover={{ width: "100%" }}
                 />
               </Link>
             ))}
 
-            <motion.button
+            <Link href="/contact"
               className="px-6 py-2.5 bg-linear-to-r from-primary to-primary/80 font-semibold rounded-full text-sm tracking-wide relative overflow-hidden group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              
             >
               <span className="relative z-10">Get in touch</span>
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-white/20"
                 initial={{ x: "-100%" }}
                 whileHover={{ x: "100%" }}
                 transition={{ duration: 0.5 }}
               />
-            </motion.button>
+            </Link>
           </div>
 
           {/* Mobile Menu Icon */}
@@ -143,7 +124,7 @@ export default function Navbar() {
             >
               {/* Header with close button */}
               <div className="flex justify-between items-center p-6 border-b border-white/10">
-                <motion.h2 
+                <motion.h2
                   className="text-2xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -178,9 +159,9 @@ export default function Navbar() {
                       onClick={() => setMenuOpen(false)}
                     >
                       <span className="font-medium">{item.name}</span>
-                      <ChevronRight 
-                        size={16} 
-                        className="opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300" 
+                      <ChevronRight
+                        size={16}
+                        className="opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300"
                       />
                     </Link>
                   </motion.div>
@@ -188,26 +169,25 @@ export default function Navbar() {
               </div>
 
               {/* CTA Button */}
-              <motion.div 
+              <motion.div
                 className="absolute bottom-8 left-6 right-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <motion.button
+                <Link href="/contact"
                   className="w-full px-6 py-3.5 bg-linear-to-r from-primary to-primary/80 font-semibold rounded-xl relative overflow-hidden group"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+               
                   onClick={() => setMenuOpen(false)}
                 >
                   <span className="relative z-10">Get in touch</span>
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-white/20"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.5 }}
                   />
-                </motion.button>
+                </Link>
               </motion.div>
             </motion.div>
           </>

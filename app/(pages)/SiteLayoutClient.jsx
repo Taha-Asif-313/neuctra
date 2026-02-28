@@ -8,7 +8,7 @@ export default function SiteLayout({ children }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen mb-5 max-w-7xl mx-auto">
+      <main className="min-h-screen pt-18 mb-5 max-w-7xl mx-auto">
         {children}
       </main>
       <Footer />

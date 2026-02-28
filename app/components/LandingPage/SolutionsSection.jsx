@@ -55,7 +55,7 @@ export default function SolutionsSection() {
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-6xl font-bold mb-3">
-          Discover <span className="text-primary">Neuctra Solutions</span>
+          Discover <span className="text-primary">Neuctra</span> Solutions
         </h2>
         <p className="text-gray-200 max-w-3xl mx-auto">
           Neuctra delivers scalable SaaS products and custom web development 

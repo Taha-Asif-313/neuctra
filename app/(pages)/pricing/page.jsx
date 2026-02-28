@@ -169,8 +169,8 @@ export default function PricingPage() {
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Banner */}
       <div className="border-b border-zinc-800 bg-black/60 backdrop-blur">
-        <div className="max-w-6xl mx-auto px-6 py-8 md:py-28 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="max-w-6xl mx-auto px-6 py-8 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 flex flex-row items-center justify-center gap-3">
             <DollarSign className="text-primary w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
 
             <span>
