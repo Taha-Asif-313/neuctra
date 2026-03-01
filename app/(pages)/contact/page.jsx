@@ -1,17 +1,14 @@
+"use client";
 import toast from "react-hot-toast";
 
-export const metadata = {
-  title: "Contact Us | Neuctra",
-  description:
-    "Get in touch with Neuctra for custom web development services or inquiries about our SaaS ecosystem including Authix, Neuctra UI, Notlix, Codinel, and Lyfsync.",
-};
+
 
 export default function ContactPage() {
   const onSubmit = async (event) => {
     event.preventDefault();
     toast.loading("Sending....");
     const formData = new FormData(event.target);
-    formData.append("access_key", "fb9b8bda-0811-4995-a14d-c7ac35038001");
+    formData.append("access_key", process.env.NEXT_WEB3FORMS_KEY);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
@@ -57,7 +54,7 @@ export default function ContactPage() {
               </h2>
 
               <form
-                onSubmit={() => onSubmit()}
+                onSubmit={onSubmit}
                 className="space-y-5 sm:space-y-6"
               >
                 {/* Name + Email */}
@@ -76,16 +73,9 @@ export default function ContactPage() {
                   />
                 </div>
 
-                {/* Company */}
-                <input
-                  type="text"
-                  name="message"
-                  placeholder="Company (Optional)"
-                  className="w-full bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"
-                />
-
                 {/* Message */}
                 <textarea
+                name="message"
                   rows={5}
                   placeholder="Tell us about your project or inquiry..."
                   className="w-full bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary resize-none"
