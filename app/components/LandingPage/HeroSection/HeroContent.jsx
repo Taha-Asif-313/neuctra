@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Brain } from "lucide-react";
+import { ShieldCheck, Zap, Brain, Layers, Cloud, Code, Rocket, TrendingUp } from "lucide-react";
 
 export default function HeroContent() {
   const words = [
@@ -61,7 +61,7 @@ export default function HeroContent() {
 
       {/* Title */}
       <motion.h1
-        className="text-4xl flex flex-col sm:text-6xl px-5 font-black text-white mb-3"
+        className="text-4xl flex flex-col sm:text-6xl px-5 font-black leading-tight text-white mb-3"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
@@ -116,46 +116,60 @@ export default function HeroContent() {
           Book a Demo
         </motion.a>
       </motion.div>
-
-      {/* Feature Highlights */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20 w-full max-w-5xl px-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {[
-          {
-            icon: <ShieldCheck className="text-primary w-8 h-8" />,
-            title: "Advanced Security",
-            desc: "Enterprise-grade protection with encrypted infrastructure and compliance-ready architecture.",
-          },
-          {
-            icon: <Brain className="text-primary w-8 h-8" />,
-            title: "AI Automation",
-            desc: "Intelligent workflows that reduce manual effort and improve operational efficiency.",
-          },
-          {
-            icon: <Zap className="text-primary w-8 h-8" />,
-            title: "High Performance",
-            desc: "Blazing-fast cloud architecture built for scale, reliability, and global teams.",
-          },
-        ].map((feature, idx) => (
-          <motion.div
-            key={idx}
-            className="bg-[#0f0f0f]/70 border border-[#1f1f1f] hover:border-primary rounded-2xl p-6 text-center hover:shadow-[0_0_30px_#00ff88]/20 transition-all"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.2, duration: 0.6 }}
-          >
-            <div className="flex justify-center mb-3">{feature.icon}</div>
-            <h3 className="text-lg font-semibold text-white mb-2">
-              {feature.title}
-            </h3>
-            <p className="text-gray-400 text-sm">{feature.desc}</p>
-          </motion.div>
-        ))}
-      </motion.div>
+{/* Feature Highlights */}
+<motion.div
+  className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-20 w-full max-w-5xl px-6"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true }}
+>
+  {[
+    {
+      icon: <ShieldCheck className="text-primary w-8 h-8" />,
+      title: "Secure Digital Infrastructure",
+      desc: "Enterprise-grade authentication, encrypted systems, and scalable backend architecture built for modern businesses.",
+    },
+    {
+      icon: <Layers className="text-primary w-8 h-8" />,
+      title: "SaaS Ecosystem",
+      desc: "A connected suite of powerful products including Authix, UI systems, productivity tools, and commerce platforms.",
+    },
+    {
+      icon: <Cloud className="text-primary w-8 h-8" />,
+      title: "Cloud-Native Architecture",
+      desc: "High-performance, globally scalable cloud systems designed for reliability, speed, and long-term growth.",
+    },
+    {
+      icon: <Code className="text-primary w-8 h-8" />,
+      title: "Custom Web Solutions",
+      desc: "Modern web development services delivering secure dashboards, e-commerce platforms, and full-stack applications.",
+    },
+    {
+      icon: <Rocket className="text-primary w-8 h-8" />,
+      title: "Product Innovation",
+      desc: "We transform internal tools into scalable SaaS products that empower startups, developers, and enterprises.",
+    },
+    {
+      icon: <TrendingUp className="text-primary w-8 h-8" />,
+      title: "Growth-Focused Strategy",
+      desc: "Hybrid business model combining client services and subscription SaaS to drive sustainable expansion.",
+    },
+  ].map((feature, idx) => (
+    <motion.div
+      key={idx}
+      className="bg-[#0f0f0f]/70 border border-[#1f1f1f] hover:border-primary rounded-2xl p-6 text-center hover:shadow-[0_0_30px_#00ff88]/20 transition-all"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: idx * 0.15, duration: 0.6 }}
+    >
+      <div className="flex justify-center mb-3">{feature.icon}</div>
+      <h3 className="text-lg font-semibold text-white mb-2">
+        {feature.title}
+      </h3>
+      <p className="text-gray-400 text-sm">{feature.desc}</p>
+    </motion.div>
+  ))}
+</motion.div>
     </section>
   );
 }

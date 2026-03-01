@@ -16,6 +16,24 @@ export default function ProductsSection() {
       },
       featured: true,
     },
+    // ✅ New Product Added
+    {
+      name: "Neuctra Bynity",
+      image: "/logos/bynity.png",
+      desc: "Enterprise-ready marketplace infrastructure for seamless selling and order management.",
+      features: [
+        "Shop Creation",
+        "Product Management",
+        "Order Management",
+        "Order Tracking",
+        "Multi-Vendor Support",
+      ],
+      links: {
+        learn: "https://bynity.neuctra.com",
+        start: "https://bynity.neuctra.com/signup",
+      },
+      featured: true,
+    },
     {
       name: "Neuctra UI",
       image: "/logos/ui.png",
@@ -25,6 +43,7 @@ export default function ProductsSection() {
         learn: "https://ui.neuctra.com",
         start: "https://ui.neuctra.com/docs",
       },
+      featured: true,
     },
     {
       name: "Neuctra Codinel",
@@ -35,6 +54,7 @@ export default function ProductsSection() {
         learn: "https://codinel.neuctra.com",
         start: "https://codinel.neuctra.com/signup",
       },
+      featured: true,
     },
     {
       name: "Neuctra Notlix",
@@ -83,8 +103,7 @@ export default function ProductsSection() {
             key={index}
             className={`group relative rounded-2xl overflow-hidden border border-white/10 
             bg-zinc-950 backdrop-blur-xl transition-all duration-500
-            hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10
-            ${product.featured ? "md:col-span-2 xl:col-span-2" : ""}`}
+            hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10`}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}

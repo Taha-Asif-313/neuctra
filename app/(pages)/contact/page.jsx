@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export const metadata = {
   title: "Contact Us | Neuctra",
   description:
@@ -5,6 +7,26 @@ export const metadata = {
 };
 
 export default function ContactPage() {
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    toast.loading("Sending....");
+    const formData = new FormData(event.target);
+    formData.append("access_key", "fb9b8bda-0811-4995-a14d-c7ac35038001");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      toast.success("Form Submitted Successfully");
+      event.target.reset();
+    } else {
+      toast.error("Error");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Hero Section */}
@@ -34,16 +56,21 @@ export default function ContactPage() {
                 Send Us a Message
               </h2>
 
-              <form className="space-y-5 sm:space-y-6">
+              <form
+                onSubmit={() => onSubmit()}
+                className="space-y-5 sm:space-y-6"
+              >
                 {/* Name + Email */}
                 <div className="grid gap-5 sm:gap-6 sm:grid-cols-2">
                   <input
                     type="text"
+                    name="name"
                     placeholder="Full Name"
                     className="bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary w-full"
                   />
                   <input
                     type="email"
+                    name="email"
                     placeholder="Email Address"
                     className="bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary w-full"
                   />
@@ -52,6 +79,7 @@ export default function ContactPage() {
                 {/* Company */}
                 <input
                   type="text"
+                  name="message"
                   placeholder="Company (Optional)"
                   className="w-full bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"
                 />

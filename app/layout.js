@@ -1,4 +1,5 @@
 // app/layout.js or RootLayout.js
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         {children}
+        <Toaster/>
       </body>
     </html>
   );
