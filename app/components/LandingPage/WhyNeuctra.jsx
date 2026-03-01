@@ -29,30 +29,61 @@ export default function WhyNeuctra() {
   return (
     <section className="py-24 px-6 text-white">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-6xl mb-3 font-bold">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-6xl mb-3 font-bold"
+        >
           Why Choose <span className="text-primary">Neuctra</span>?
-        </h2>
-        <p className="text-gray-200 mt-4 max-w-3xl mx-auto">
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8 }}
+          className="text-gray-200 mt-4 max-w-3xl mx-auto"
+        >
           Neuctra is a modern technology company delivering scalable SaaS products 
           and custom web development services. We combine clean UI/UX design, 
           secure cloud-native architecture, and intelligent automation to help 
           businesses build, launch, and scale powerful digital platforms.
-        </p>
+        </motion.p>
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6 max-w-7xl mx-auto">
+      <motion.div
+        className="grid md:grid-cols-2 gap-6 max-w-7xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false }}
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
         {points.map((item, i) => (
           <motion.div
             key={i}
-            className="bg-[#111]/60 border border-[#1f1f1f] rounded-xl p-6 hover:border-primary transition-all"
+            variants={{
+              hidden: { opacity: 0, y: 50 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             whileHover={{ y: -6 }}
+            className="bg-[#111]/60 border border-[#1f1f1f] rounded-xl p-6 hover:border-primary transition-all"
           >
             <div className="mb-4">{item.icon}</div>
             <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
             <p className="text-gray-400 text-sm">{item.desc}</p>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
