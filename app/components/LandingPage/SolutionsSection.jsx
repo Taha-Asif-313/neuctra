@@ -80,7 +80,7 @@ export default function SolutionsSection() {
   return (
     <section
       id="solutions"
-      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
+      className="relative py-24 px-6 max-w-7xl mx-auto text-white overflow-hidden"
     >
       {/* Section Header */}
       <motion.div

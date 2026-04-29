@@ -7,5 +7,5 @@ export const metadata = {
 };
 
 export default function SiteLayout({ children }) {
-  return <SiteLayoutClient children={children} />;
+  return <SiteLayoutClient>{children}</SiteLayoutClient>;
 }

@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 // Dynamically import client-only components to avoid hydration issues
-const BackgroundCircuit = dynamic(() => import("./HeroSection/BackgroundCircuit"), {
-  ssr: false,
-});
+const BackgroundCircuit = dynamic(
+  () => import("./HeroSection/BackgroundCircuit"),
+  {
+    ssr: false,
+  },
+);
 
 const MouseGlow = dynamic(() => import("./HeroSection/MouseGlow"), {
   ssr: false,

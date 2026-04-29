@@ -8,7 +8,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black text-gray-400 border-t border-white/10 ">
+    <footer className="relative bg-black text-gray-300 border-t border-white/10 ">
       <div className="max-w-7xl px-6 md:px-12 py-12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo & Brand */}
         <motion.div
@@ -17,15 +17,27 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center md:items-start gap-3"
         >
-          <div className="flex items-center">
-            <img
-              src="/logo.png"
-              alt="Neuctra Logo"
-              className="w-10 h-10 sm:w-12 sm:h-12"
-            />
-            <h3 className="text-white font-bold text-lg">Neuctra</h3>
-          </div>
-          <p className="text-sm text-gray-400 text-center md:text-left">
+          {/* Logo */}
+          <Link href="/" className="relative group flex items-center">
+            <div className="flex items-center gap-2">
+              {/* Logo Image */}
+              <img
+                src="/logo.png"
+                alt="Neuctra Logo"
+                className="w-6 h-6 object-contain transition-transform duration-300"
+              />
+
+              {/* Brand Text */}
+              <span
+                className=" text-lg font-bold tracking-tight 
+      bg-clip-text text-transparent 
+      bg-linear-to-r from-white to-gray-300"
+              >
+                Neuctra
+              </span>
+            </div>
+          </Link>
+          <p className="text-sm text-gray-200 text-center md:text-left">
             Empowering businesses with AI-driven, secure, and scalable SaaS
             solutions.
           </p>

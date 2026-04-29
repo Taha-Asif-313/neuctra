@@ -27,7 +27,7 @@ export default function WhyNeuctra() {
   ];
 
   return (
-    <section className="py-24 px-6 text-white">
+    <section className="py-24 px-6 max-w-7xl mx-auto text-white">
       <div className="text-center mb-16">
         <motion.h2
           initial={{ opacity: 0, y: 40 }}
@@ -46,10 +46,11 @@ export default function WhyNeuctra() {
           transition={{ duration: 0.8 }}
           className="text-gray-200 mt-4 max-w-3xl mx-auto"
         >
-          Neuctra is a modern technology company delivering scalable SaaS products 
-          and custom web development services. We combine clean UI/UX design, 
-          secure cloud-native architecture, and intelligent automation to help 
-          businesses build, launch, and scale powerful digital platforms.
+          Neuctra is a modern technology company delivering scalable SaaS
+          products and custom web development services. We combine clean UI/UX
+          design, secure cloud-native architecture, and intelligent automation
+          to help businesses build, launch, and scale powerful digital
+          platforms.
         </motion.p>
       </div>
 

@@ -5,27 +5,38 @@ import CircuitNode from "./CircuitNode";
 
 export default function BackgroundCircuit() {
   return (
-    <div className="absolute inset-0 flex items-start justify-center pointer-events-none">
+    <div className="absolute inset-0 w-full h-full pointer-events-none">
       <svg
-        className="w-full max-w-[1600px] h-screen mx-auto opacity-70"
+        className="w-full h-full opacity-70"
         xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1600 700"   // 👈 IMPORTANT
+        preserveAspectRatio="none" // 👈 makes it stretch full width
       >
-        {/* Horizontal Lines */}
-        <CircuitLine delay={0} path="M 0 100 L 300 100 L 320 120 L 500 120" />
-        <CircuitLine delay={0.5} path="M 800 150 L 1000 150 L 1020 170 L 1400 170" />
-        <CircuitLine delay={1} path="M 200 250 L 400 250 L 420 230 L 700 230" />
-        <CircuitLine delay={1.5} path="M 900 300 L 1100 300 L 1120 320 L 1600 320" />
-        <CircuitLine delay={2} path="M 0 400 L 250 400 L 270 420 L 600 420" />
-        <CircuitLine delay={0.3} path="M 700 450 L 1000 450 L 1020 470 L 1400 470" />
-        <CircuitLine delay={1.8} path="M 100 550 L 350 550 L 370 570 L 800 570" />
-        <CircuitLine delay={0.7} path="M 1000 600 L 1200 600 L 1220 620 L 1600 620" />
+        {/* LEFT → CENTER */}
+        <CircuitLine delay={0} path="M 0 120 L 300 120 L 350 160 L 700 160" />
+        <CircuitLine delay={0.6} path="M 0 260 L 250 260 L 300 220 L 650 220" />
+        <CircuitLine delay={1.2} path="M 0 420 L 200 420 L 260 460 L 600 460" />
+        <CircuitLine delay={1.8} path="M 0 580 L 280 580 L 320 540 L 700 540" />
 
-        {/* Diagonal Lines */}
-        <CircuitLine delay={0.4} path="M 400 0 L 450 100 L 500 200" />
-        <CircuitLine delay={1.2} path="M 800 100 L 850 200 L 900 350" />
-        <CircuitLine delay={0.9} path="M 1200 0 L 1250 150 L 1300 250" />
-        <CircuitLine delay={1.6} path="M 600 300 L 650 450 L 700 600" />
-        <CircuitLine delay={0.6} path="M 1400 200 L 1450 350 L 1500 500" />
+        {/* RIGHT → CENTER */}
+        <CircuitLine delay={0.3} path="M 1600 140 L 1300 140 L 1250 180 L 900 180" />
+        <CircuitLine delay={0.9} path="M 1600 300 L 1350 300 L 1300 260 L 950 260" />
+        <CircuitLine delay={1.5} path="M 1600 480 L 1400 480 L 1350 520 L 1000 520" />
+        <CircuitLine delay={2.1} path="M 1600 620 L 1300 620 L 1250 580 L 900 580" />
+
+        {/* CENTER CONNECTORS */}
+        <CircuitLine delay={1} path="M 700 160 L 900 180" />
+        <CircuitLine delay={1.4} path="M 650 220 L 950 260" />
+        <CircuitLine delay={1.8} path="M 600 460 L 1000 520" />
+        <CircuitLine delay={2.2} path="M 700 540 L 900 580" />
+
+        {/* LEFT DIAGONALS */}
+        <CircuitLine delay={0.5} path="M 200 0 L 350 150 L 500 300" />
+        <CircuitLine delay={1.3} path="M 300 300 L 450 450 L 600 650" />
+
+        {/* RIGHT DIAGONALS */}
+        <CircuitLine delay={0.8} path="M 1400 0 L 1250 150 L 1100 300" />
+        <CircuitLine delay={1.6} path="M 1300 300 L 1150 450 L 1000 650" />
 
         {/* Vertical Lines */}
         <CircuitLine delay={1.3} path="M 250 0 L 250 200 L 270 220 L 270 400" />

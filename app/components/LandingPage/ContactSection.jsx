@@ -102,9 +102,25 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Link href="/" className="flex items-center gap-1 font-bold text-white">
-            <img src="/logo.png" alt="Neuctra" className="w-10 object-cover" />
-            <p className="text-lg">Neuctra</p>
+          {/* Logo */}
+          <Link href="/" className="relative group flex items-center">
+            <div className="flex items-center gap-2">
+              {/* Logo Image */}
+              <img
+                src="/logo.png"
+                alt="Neuctra Logo"
+                className="w-6 h-6 object-contain transition-transform duration-300"
+              />
+
+              {/* Brand Text */}
+              <span
+                className=" text-lg font-bold tracking-tight 
+      bg-clip-text text-transparent 
+      bg-linear-to-r from-white to-gray-300"
+              >
+                Neuctra
+              </span>
+            </div>
           </Link>
 
           <p className="text-gray-400 text-sm leading-relaxed">

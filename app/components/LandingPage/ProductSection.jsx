@@ -8,26 +8,17 @@ export default function ProductsSection() {
     {
       name: "Neuctra Authix",
       image: "/logos/authix.png",
-      desc: "Enterprise-grade authentication & authorization infrastructure built for modern applications.",
-      features: ["OAuth2", "2FA", "SSO", "Biometrics"],
+      desc: "Secure, scalable authentication and authorization infrastructure for modern applications and SaaS platforms.",
       links: {
         learn: "https://authix.neuctra.com",
         start: "https://authix.neuctra.com/signup",
       },
       featured: true,
     },
-    // ✅ New Product Added
     {
       name: "Neuctra Bynity",
       image: "/logos/bynity.png",
-      desc: "Enterprise-ready marketplace infrastructure for seamless selling and order management.",
-      features: [
-        "Shop Creation",
-        "Product Management",
-        "Order Management",
-        "Order Tracking",
-        "Multi-Vendor Support",
-      ],
+      desc: "Powerful multi-vendor marketplace platform designed for seamless selling, management, and growth.",
       links: {
         learn: "https://bynity.neuctra.com",
         start: "https://bynity.neuctra.com/signup",
@@ -37,8 +28,7 @@ export default function ProductsSection() {
     {
       name: "Neuctra UI",
       image: "/logos/ui.png",
-      desc: "A premium component system powered by Tailwind & Motion for building stunning interfaces.",
-      features: ["100+ Components", "Framer Motion", "Tailwind v4"],
+      desc: "A modern UI system with production-ready components and animations.",
       links: {
         learn: "https://ui.neuctra.com",
         start: "https://ui.neuctra.com/docs",
@@ -48,8 +38,7 @@ export default function ProductsSection() {
     {
       name: "Neuctra Codinel",
       image: "/logos/codinel.png",
-      desc: "Intelligent productivity platform blending AI planning with mindful performance tracking.",
-      features: ["Smart Planning", "Time Intelligence", "Progress Insights"],
+      desc: "AI-powered productivity engine for planning and optimizing workflows.",
       links: {
         learn: "https://codinel.neuctra.com",
         start: "https://codinel.neuctra.com/signup",
@@ -59,8 +48,7 @@ export default function ProductsSection() {
     {
       name: "Neuctra Notlix",
       image: "/logos/notlix.png",
-      desc: "AI-powered collaborative workspace for smarter documentation and team productivity.",
-      features: ["AI Summaries", "Sync", "Real-time Collaboration"],
+      desc: "Collaborative workspace with AI-assisted documentation and real-time sync.",
       links: {
         learn: "https://notlix.neuctra.com",
         start: "https://notlix.neuctra.com/signup",
@@ -69,8 +57,7 @@ export default function ProductsSection() {
     {
       name: "Neuctra LyfeSync",
       image: "/logos/lyfesync.png",
-      desc: "Intelligent productivity platform blending AI planning with mindful performance tracking.",
-      features: ["Smart Planning", "Time Intelligence", "Progress Insights"],
+      desc: "Smart life management system for habits, goals, and productivity.",
       links: {
         learn: "https://lyfesync.neuctra.com",
         start: "https://lyfesync.neuctra.com/signup",
@@ -79,84 +66,84 @@ export default function ProductsSection() {
   ];
 
   return (
-    <section id="products" className="relative py-28 px-6 md:px-12">
-      {/* Section Header */}
+    <section id="products" className="relative max-w-7xl mx-auto py-28 px-6">
+      {/* Header */}
       <motion.div
         className="text-center max-w-3xl mx-auto mb-20"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl md:text-6xl font-bold mb-3 tracking-tight">
+        <h2 className="text-4xl md:text-6xl font-bold mb-3">
           The <span className="text-primary">Neuctra</span> Product Suite
         </h2>
-        <p className="text-gray-200 text-lg leading-relaxed">
-          A unified ecosystem of security, design systems, and AI productivity
-          tools engineered for builders and enterprises.
+        <p className="text-gray-300 text-lg">
+          A unified ecosystem of security, design systems, and AI tools.
         </p>
       </motion.div>
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 max-w-7xl mx-auto">
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {products.map((product, index) => (
           <motion.div
             key={index}
-            className={`group relative rounded-2xl overflow-hidden border border-white/10 
-            bg-zinc-950 backdrop-blur-xl transition-all duration-500
-            hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10`}
-            initial={{ opacity: 0, y: 30 }}
+            className="group relative flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 
+            bg-gradient-to-b from-zinc-900/80 to-zinc-950/90 backdrop-blur-xl
+            transition-all duration-500 hover:-translate-y-2 hover:border-primary/40"
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.08 }}
           >
-            {/* Product Image Preview */}
-            <div className="relative h-56 bg-zinc-900/50 flex items-center justify-center">
+            {/* Glow */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
+              <div className="absolute -inset-1 bg-primary/10 blur-2xl rounded-2xl" />
+            </div>
+
+            {/* Image */}
+            <div className="relative h-52 flex items-center justify-center overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-60" />
+
               <img
                 src={product.image}
                 alt={product.name}
-                className="max-h-40 object-contain transition-transform duration-500 group-hover:scale-105"
+                className="relative z-10 max-h-36 object-contain transition duration-500 group-hover:scale-110"
               />
 
               {product.featured && (
-                <div className="absolute top-5 right-5 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
+                <div className="absolute top-4 right-4 bg-primary   text-xs font-semibold px-3 py-1 rounded-full">
                   Featured
                 </div>
               )}
             </div>
 
             {/* Content */}
-            <div className="p-8 flex flex-col h-full">
-              <h3 className="text-2xl font-semibold mb-3 tracking-tight">
+            <div className="p-6 flex flex-col flex-1">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition">
                 {product.name}
               </h3>
 
-              <p className="text-gray-400 leading-relaxed mb-6">
-                {product.desc}
-              </p>
+              <p className="text-gray-400 text-sm mb-6">{product.desc}</p>
 
               {/* CTA */}
-              <div className="flex gap-4 items-center">
+              <div className="flex items-center gap-4 mt-auto">
                 <motion.a
-                  href={product.links.learn}
+                  href={product.links?.learn || "#"}
                   target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="text-sm font-medium text-gray-300 hover:text-white transition"
+                  whileHover={{ x: 4 }}
+                  className="text-sm text-gray-300 hover:text-white flex items-center"
                 >
-                  Learn More <ArrowRight className="inline w-4 h-4 ml-1" />
+                  Learn More
+                  <ArrowRight className="w-4 h-4 ml-1" />
                 </motion.a>
 
                 <motion.a
-                  href={product.links.start}
+                  href={product.links?.start || "#"}
                   target="_blank"
-                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="ml-auto bg-primary text-white text-sm font-semibold px-5 py-2.5 rounded-lg 
-                  shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-all"
+                  whileTap={{ scale: 0.95 }}
+                  className="ml-auto bg-primary   text-sm font-semibold px-5 py-2 rounded-lg 
+                  shadow-[0_0_20px_#00ff88]/30 hover:shadow-[0_0_30px_#00ff88]/60"
                 >
                   Get Started
-                  <ArrowRight className="inline w-4 h-4 ml-2" />
                 </motion.a>
               </div>
             </div>
