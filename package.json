@@ -10,13 +10,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@neuctra/authix": "^1.2.14",
+    "@neuctra/cms-core": "^1.0.1",
+    "@neuctra/ui": "^0.2.40",
     "framer-motion": "^12.23.25",
     "lucide-react": "^0.555.0",
     "next": "16.0.7",
     "next-sitemap": "^4.2.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "react-hot-toast": "^2.6.0"
+    "react-hot-toast": "^2.6.0",
+    "react-syntax-highlighter": "^15.6.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
