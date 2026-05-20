@@ -2,20 +2,13 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-import {
-  ArrowLeft,
-  Save,
-  Eye,
-  Folder,
-  Tag,
-  ImagePlus,
-} from "lucide-react";
+import { ArrowLeft, Save, Eye, Folder, Tag, ImagePlus } from "lucide-react";
 
 import { Input, Select, Button, Switch } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { getSingleBlog, updateBlog } from "@/app/services/blog";
 import { ReactSignedIn } from "@neuctra/authix";
-import { NeuctraEditor } from "@neuctra/cms-core"
+import { NeuctraEditor } from "@neuctra/cms-core";
 import { createBlock } from "@/app/utils/blogBlocks";
 import { defaultBlogState } from "@/app/states/blog";
 import BlogPreviewModal from "@/app/components/blog/BlogPreviewModal";
@@ -85,6 +78,7 @@ const EditBlogPage = () => {
                 username: blogData.author?.username || user?.username || "",
                 avatar: blogData.author?.avatar || user?.avatar || "",
               },
+              productName: blogData.productName || "",
               category: blogData.category || "React",
               tags: Array.isArray(blogData.tags)
                 ? blogData.tags.join(", ")
@@ -327,6 +321,20 @@ const EditBlogPage = () => {
                   }
                   label="Tags"
                   placeholder="react, ui, saas"
+                />
+
+                <Input
+                  prefixIcon={Package}
+                  value={formData.productName}
+                  inputClassName="bg-zinc-950/50!"
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      productName: e.target.value,
+                    }))
+                  }
+                  label="Product Name"
+                  placeholder="Neuctra Authix"
                 />
 
                 {/* FEATURED SWITCH */}

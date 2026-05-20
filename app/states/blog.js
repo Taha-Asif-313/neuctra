@@ -14,6 +14,7 @@ export const defaultBlogState = (overrides = {}) => ({
     ...(overrides.author || {}),
   },
 
+  productName: "",
   category: "React",
   tags: [],
 

@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://neuctra.com',
+  siteUrl: 'https://www.neuctra.com',
   generateRobotsTxt: true,
   sitemapSize: 7000,
 };

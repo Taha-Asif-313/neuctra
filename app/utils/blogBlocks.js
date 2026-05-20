@@ -1,15 +1,26 @@
+import crypto from "crypto";
+
+const generateId = () => {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+
+  // fallback for older environments
+  return Math.random().toString(36).substring(2) + Date.now().toString(36);
+};
+
 export const createBlock = (type) => {
   switch (type) {
     case "text":
       return {
-        id: crypto.randomUUID(),
+        id: generateId(),
         type: "text",
         content: "",
       };
 
     case "heading":
       return {
-        id: crypto.randomUUID(),
+        id: generateId(),
         type: "heading",
         content: "",
         level: "h1",
@@ -17,7 +28,7 @@ export const createBlock = (type) => {
 
     case "image":
       return {
-        id: crypto.randomUUID(),
+        id: generateId(),
         type: "image",
         url: "",
         caption: "",
@@ -30,7 +41,7 @@ export const createBlock = (type) => {
 
     case "code":
       return {
-        id: crypto.randomUUID(),
+        id: generateId(),
         type: "code",
         language: "javascript",
         content: "",
@@ -38,7 +49,7 @@ export const createBlock = (type) => {
 
     case "table":
       return {
-        id: crypto.randomUUID(),
+        id: generateId(),
         type: "table",
         headers: ["Column 1", "Column 2"],
         rows: [

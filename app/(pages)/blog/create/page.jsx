@@ -10,14 +10,10 @@ import {
   Folder,
   Tag,
   ImagePlus,
+  Package,
 } from "lucide-react";
 
-import {
-  Input,
-  Select,
-  Button,
-  Switch,
-} from "@neuctra/ui";
+import { Input, Select, Button, Switch } from "@neuctra/ui";
 
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { createBlog } from "@/app/services/blog";
@@ -34,27 +30,21 @@ const BlogPreviewModal = dynamic(
   () => import("@/app/components/blog/BlogPreviewModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 const CoverImageModal = dynamic(
-  () =>
-    import(
-      "@/app/components/blog/modals/CoverImageModal"
-    ),
+  () => import("@/app/components/blog/modals/CoverImageModal"),
   {
     ssr: false,
-  }
+  },
 );
 
 const NeuctraEditor = dynamic(
-  () =>
-    import("@neuctra/cms-core").then(
-      (mod) => mod.NeuctraEditor
-    ),
+  () => import("@neuctra/cms-core").then((mod) => mod.NeuctraEditor),
   {
     ssr: false,
-  }
+  },
 );
 
 /* =========================================================
@@ -177,7 +167,7 @@ const CreateBlogPage = () => {
   };
 
   return (
-    <ReactSignedIn fallback={()=>router.push("/blog/admin/login")}>
+    <ReactSignedIn fallback={() => router.push("/blog/admin/login")}>
       <div className="min-h-screen flex flex-col">
         {/* TOP BAR */}
         <div className="sticky top-0 z-50 border-b border-white/10">
@@ -265,7 +255,7 @@ const CreateBlogPage = () => {
           {/* RIGHT: SIDEBAR */}
           <div className="lg:col-span-4 space-y-6">
             {/* PUBLISH SETTINGS */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
               <div className="flex items-center gap-2 mb-5">
                 <Folder size={16} className="text-primary" />
                 <h3 className="font-medium">Publish Settings</h3>
@@ -291,6 +281,20 @@ const CreateBlogPage = () => {
                   }
                   label="Tags"
                   placeholder="react, ui, saas"
+                />
+
+                <Input
+                  prefixIcon={Package}
+                  value={formData.productName}
+                  inputClassName="bg-zinc-950/50!"
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      productName: e.target.value,
+                    }))
+                  }
+                  label="Product Name"
+                  placeholder="Neuctra Authix"
                 />
 
                 {/* FEATURED SWITCH */}
@@ -322,7 +326,7 @@ const CreateBlogPage = () => {
             </div>
 
             {/* CONTENT STATS */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <Eye size={15} />
                 <h3 className="font-medium">Content Stats</h3>

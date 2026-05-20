@@ -58,7 +58,7 @@ const BlogPostPage = () => {
         <div className="max-w-md text-center">
           <h1 className="text-3xl font-semibold mb-3">Post not found</h1>
 
-          <p className="text-zinc-500 mb-6">
+          <p className="text-zinc-300 mb-6">
             The article you're looking for doesn't exist or was removed.
           </p>
 
@@ -158,7 +158,7 @@ const BlogPostPage = () => {
                 )}
 
                 <div>
-                  <p className="text-xs text-zinc-500">Written by</p>
+                  <p className="text-xs text-zinc-300">Written by</p>
                   <p className="text-sm font-medium text-white">
                     {author.name}
                   </p>
@@ -173,7 +173,7 @@ const BlogPostPage = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs text-zinc-500">Published</p>
+                  <p className="text-xs text-zinc-300">Published</p>
                   <p className="text-sm font-medium text-white">
                     {new Date(displayDate).toLocaleDateString()}
                   </p>
@@ -188,7 +188,7 @@ const BlogPostPage = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs text-zinc-500">Read Time</p>
+                  <p className="text-xs text-zinc-300">Read Time</p>
                   <p className="text-sm font-medium text-white">{readTime}</p>
                 </div>
               </div>
@@ -204,7 +204,7 @@ const BlogPostPage = () => {
             {blocks?.length > 0 ? (
               <NeuctraEditorPreview blocks={blocks} className="px-0!" />
             ) : (
-              <p className="text-zinc-500">No content available.</p>
+              <p className="text-zinc-300">No content available.</p>
             )}
           </article>
         </main>
@@ -216,7 +216,7 @@ const BlogPostPage = () => {
                 Article Info
               </h3>
 
-              <div className="space-y-4 text-sm text-zinc-500">
+              <div className="space-y-4 text-sm text-zinc-300">
                 {author?.name && (
                   <div className="flex items-center gap-3">
                     <User size={15} />

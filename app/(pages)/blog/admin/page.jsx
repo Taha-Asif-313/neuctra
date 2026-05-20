@@ -223,12 +223,12 @@ const AdminPanelPage = () => {
         </header>
 
         {/* ---------------- CONTENT ---------------- */}
-        <main className="relative z-10 mx-auto max-w-7xl py-2">
+        <main className="relative z-10 mx-auto max-w-7xl">
           {/* ---------------- STATS ---------------- */}
           {!loading && totalBlogs > 0 && (
             <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {/* Total */}
-              <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-4 backdrop-blur-xl sm:p-5 lg:p-6">
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-4 backdrop-blur-xl sm:p-5 lg:p-6">
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="rounded-2xl bg-primary/10 p-2.5 text-primary sm:p-3">
                     <FileText size={20} className="sm:size-5.5" />
@@ -247,7 +247,7 @@ const AdminPanelPage = () => {
               </div>
 
               {/* Featured */}
-              <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-4 backdrop-blur-xl sm:p-5 lg:p-6">
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-4 backdrop-blur-xl sm:p-5 lg:p-6">
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="rounded-2xl bg-primary/10 p-2.5 text-primary sm:p-3">
                     <Star size={20} className="sm:size-5.5" />
@@ -268,7 +268,7 @@ const AdminPanelPage = () => {
               </div>
 
               {/* Public */}
-              <div className="rounded-3xl border border-zinc-800 bg-zinc-900 p-4 backdrop-blur-xl sm:p-5 lg:p-6 sm:col-span-2 xl:col-span-1">
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-4 backdrop-blur-xl sm:p-5 lg:p-6 sm:col-span-2 xl:col-span-1">
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="rounded-2xl bg-primary/10 p-2.5 text-primary sm:p-3">
                     <Eye size={20} className="sm:size-5.5" />
@@ -290,7 +290,7 @@ const AdminPanelPage = () => {
 
           {/* ---------------- SEARCH ---------------- */}
           {blogs?.length > 0 && (
-            <div className="mb-4 rounded-3xl border border-zinc-800 bg-zinc-900 p-5 backdrop-blur-xl">
+            <div className="mb-4 rounded-3xl border border-zinc-900 bg-zinc-950 p-5 backdrop-blur-xl">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h2 className="text-lg font-semibold">Manage Blogs</h2>
