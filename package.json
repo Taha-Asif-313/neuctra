@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
-    "@neuctra/authix": "^1.2.14",
+    "@neuctra/authix": "^1.2.15",
     "@neuctra/cms-core": "^1.0.1",
     "@neuctra/ui": "^0.2.40",
     "framer-motion": "^12.23.25",

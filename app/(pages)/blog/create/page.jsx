@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
+import dynamic from "next/dynamic";
+
 import {
   ArrowLeft,
   Save,
@@ -9,16 +11,51 @@ import {
   Tag,
   ImagePlus,
 } from "lucide-react";
-import { Input, Select, Button, Switch } from "@neuctra/ui";
+
+import {
+  Input,
+  Select,
+  Button,
+  Switch,
+} from "@neuctra/ui";
+
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { createBlog } from "@/app/services/blog";
 import { ReactSignedIn } from "@neuctra/authix";
-import { NeuctraEditor } from "@neuctra/cms-core";
 import { createBlock } from "@/app/utils/blogBlocks";
 import { defaultBlogState } from "@/app/states/blog";
-import BlogPreviewModal from "@/app/components/blog/BlogPreviewModal";
-import CoverImageModal from "@/app/components/blog/modals/CoverImageModal";
 import { useRouter } from "next/navigation";
+
+/* =========================================================
+   DYNAMIC IMPORTS
+========================================================= */
+
+const BlogPreviewModal = dynamic(
+  () => import("@/app/components/blog/BlogPreviewModal"),
+  {
+    ssr: false,
+  }
+);
+
+const CoverImageModal = dynamic(
+  () =>
+    import(
+      "@/app/components/blog/modals/CoverImageModal"
+    ),
+  {
+    ssr: false,
+  }
+);
+
+const NeuctraEditor = dynamic(
+  () =>
+    import("@neuctra/cms-core").then(
+      (mod) => mod.NeuctraEditor
+    ),
+  {
+    ssr: false,
+  }
+);
 
 /* =========================================================
    PAGE
