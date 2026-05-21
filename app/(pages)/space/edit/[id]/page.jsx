@@ -57,7 +57,7 @@ const EditBlogPage = () => {
 
   const [formData, setFormData] = useState(null);
 
-  console.log(blog);
+  console.log(formData);
   
 
   /* =========================================================
