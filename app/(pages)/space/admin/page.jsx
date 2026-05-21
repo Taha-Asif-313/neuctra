@@ -20,7 +20,7 @@ import { Badge, Button, Dropdown, Input, useToast } from "@neuctra/ui";
 import { getAllBlogs, deleteBlog } from "@/app/services/blog";
 import { authix } from "@/app/utils/neuctraAuthix";
 import { useRouter } from "next/navigation";
-import DeleteConfirmModal from "@/app/components/blog/modals/DeleteConfirmModal";
+import DeleteConfirmModal from "@/app/components/space/modals/DeleteConfirmModal";
 import Link from "next/link";
 import { ReactSignedIn } from "@neuctra/authix";
 
@@ -141,13 +141,9 @@ const AdminPanelPage = () => {
   }
 
   return (
-    <ReactSignedIn fallback={() => router.push("/blog/admin/login")} >
+    <ReactSignedIn fallback={() => router.push("/space/admin/login")} >
       <div className="min-h-screen text-white">
-        {/* ---------------- BACKGROUND ---------------- */}
-        <div className="pointer-events-none fixed inset-0 overflow-hidden">
-          <div className="absolute -left-100 top-0 h-100 w-100 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute bottom-0 -right-80 h-100 w-100 rounded-full bg-primary/10 blur-3xl" />
-        </div>
+
 
         {/* ---------------- HEADER ---------------- */}
         <header className="sticky top-0 z-50 py-4">
@@ -173,7 +169,7 @@ const AdminPanelPage = () => {
               {/* Desktop Actions */}
               <div className="hidden items-center gap-3 sm:flex">
                 <Link
-                  href="/blog/create"
+                  href="/space/create"
                   className="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
                 >
                   <Plus size={18} />
@@ -206,7 +202,7 @@ const AdminPanelPage = () => {
                     {
                       label: "Create Blog",
                       icon: <Plus size={16} />,
-                      onClick: () => router.push("/blog/admin/create"),
+                      onClick: () => router.push("/space/admin/create"),
                     },
                     { separator: true },
                     {
@@ -387,7 +383,7 @@ const AdminPanelPage = () => {
                                 icon: <Edit2 size={15} />,
                                 onClick: () =>
                                   router.push(
-                                    `/blog/edit/${blog.dataId || blog.id}`,
+                                    `/space/edit/${blog.dataId || blog.id}`,
                                   ),
                               },
                               { separator: true },
@@ -441,7 +437,7 @@ const AdminPanelPage = () => {
                       <Button
                         onClick={() =>
                           router.push(
-                            `/blog/admin/edit/${blog.dataId || blog.id}`,
+                            `/space/edit/${blog.dataId || blog.id}`,
                           )
                         }
                         className="rounded-2xl bg-primary p-4 text-zinc-100 transition hover:bg-primary/10 hover:text-primary"

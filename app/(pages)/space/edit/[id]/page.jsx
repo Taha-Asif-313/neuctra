@@ -2,18 +2,41 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-import { ArrowLeft, Save, Eye, Folder, Tag, ImagePlus } from "lucide-react";
+import { ArrowLeft, Save, Eye, Folder, Tag, ImagePlus, Package } from "lucide-react";
 
 import { Input, Select, Button, Switch } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { getSingleBlog, updateBlog } from "@/app/services/blog";
 import { ReactSignedIn } from "@neuctra/authix";
-import { NeuctraEditor } from "@neuctra/cms-core";
 import { createBlock } from "@/app/utils/blogBlocks";
 import { defaultBlogState } from "@/app/states/blog";
-import BlogPreviewModal from "@/app/components/blog/BlogPreviewModal";
-import CoverImageModal from "@/app/components/blog/modals/CoverImageModal";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+/* =========================================================
+   DYNAMIC IMPORTS
+========================================================= */
+
+const BlogPreviewModal = dynamic(
+  () => import("@/app/components/space/BlogPreviewModal"),
+  {
+    ssr: false,
+  },
+);
+
+const CoverImageModal = dynamic(
+  () => import("@/app/components/space/modals/CoverImageModal"),
+  {
+    ssr: false,
+  },
+);
+
+const NeuctraEditor = dynamic(
+  () => import("@neuctra/cms-core").then((mod) => mod.NeuctraEditor),
+  {
+    ssr: false,
+  },
+);
 
 /* =========================================================
    PAGE
@@ -33,6 +56,9 @@ const EditBlogPage = () => {
   const [showCoverModal, setShowCoverModal] = useState(false);
 
   const [formData, setFormData] = useState(null);
+
+  console.log(blog);
+  
 
   /* =========================================================
      CATEGORIES
@@ -164,6 +190,7 @@ const EditBlogPage = () => {
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
+        productName: formData.productName,
         blocks: formData.blocks,
         content: generatedContent,
         readTime: `${Math.ceil(wordCount / 200)} min read`,
@@ -177,7 +204,7 @@ const EditBlogPage = () => {
       });
 
       if (response.success) {
-        router.push("/blog/admin");
+        router.push("/space/admin");
       }
     } catch (error) {
       console.error("Update Blog Error:", error);
@@ -209,7 +236,7 @@ const EditBlogPage = () => {
   }
 
   return (
-    <ReactSignedIn fallback={router.push("/blog/admin/login")}>
+    <ReactSignedIn fallback={() => router.push("/space/admin/login")}>
       <div className="min-h-screen bg-black text-white flex flex-col">
         {/* TOP BAR */}
         <div className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-2xl">

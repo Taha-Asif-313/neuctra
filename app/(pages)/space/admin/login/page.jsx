@@ -10,23 +10,11 @@ const LoginPage = () => {
   const router = useRouter();
 
   return (
-    <div className="relative bg-black text-white w-full overflow-hidden min-h-screen">
-      <div className="absolute inset-0 opacity-20" aria-hidden="true">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
+    <div className="relative  text-white w-full overflow-hidden min-h-screen">
 
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <ReactUserLogin
-          logoUrl="/logo.png"
+          logoUrl="/favicon.png"
           title="Sign in to Neuctra Admin"
           subtitle="Access your blog dashboard"
           onSuccess={(user) => {
@@ -34,9 +22,9 @@ const LoginPage = () => {
 
             setTimeout(() => {
               if (user.isVerified) {
-                router.push("/blog/admin");
+                router.push("/space/admin");
               } else {
-                router.push("/blog/verify-email");
+                router.push("/space/verify-email");
               }
             }, 0);
           }}

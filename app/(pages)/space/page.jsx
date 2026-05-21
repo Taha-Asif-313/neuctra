@@ -2,8 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-import BlogCards from "@/app/components/blog/BlogCards";
-import BlogsHeader from "@/app/components/blog/BlogsHeader";
+import BlogCards from "@/app/components/space/BlogCards";
+import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
 
 import { getAllBlogs } from "@/app/services/blog";
 
@@ -74,10 +74,10 @@ const AllBlogsPage = () => {
   }, [blogs, searchTerm, selectedCategory, sortBy]);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       {/* Header */}
       <div className="sticky top-0 z-50">
-        <BlogsHeader
+        <NeuctraSpaceHeader
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           selectedCategory={selectedCategory}

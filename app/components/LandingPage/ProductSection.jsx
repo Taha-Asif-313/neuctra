@@ -93,10 +93,7 @@ export default function ProductsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
           >
-            {/* Glow */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition">
-              <div className="absolute -inset-1 bg-primary/10 blur-2xl rounded-2xl" />
-            </div>
+
 
             {/* Image */}
             <div className="relative h-52 flex items-center justify-center overflow-hidden">
@@ -140,8 +137,8 @@ export default function ProductsSection() {
                   target="_blank"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="ml-auto bg-primary   text-sm font-semibold px-5 py-2 rounded-lg 
-                  shadow-[0_0_20px_#00ff88]/30 hover:shadow-[0_0_30px_#00ff88]/60"
+                  className="ml-auto bg-primary text-sm font-semibold px-5 py-2 rounded-full 
+                  "
                 >
                   Get Started
                 </motion.a>

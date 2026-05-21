@@ -128,7 +128,7 @@ const BlogsHeader = ({
             <p className="flex items-center gap-2 text-base font-black tracking-tight text-white">
               Neuctra
               <span className="h-4 w-px bg-zinc-600" />
-              <span className="text-primary">Blog</span>
+              <span className="text-primary italic">Space</span>
             </p>
           </div>
         </div>

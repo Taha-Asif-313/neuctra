@@ -96,6 +96,13 @@ const BlogCards = ({ blogs = [] }) => {
                     {blog.title}
                   </h3>
 
+                  {/* PRODUCT NAME */}
+                  {blog.productName && (
+                    <p className="mt-1 text-xs font-medium text-primary/80">
+                      {blog.productName}
+                    </p>
+                  )}
+
                   <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">
                     {getExcerpt(blog.blocks)}
                   </p>

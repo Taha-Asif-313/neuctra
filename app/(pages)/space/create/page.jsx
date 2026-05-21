@@ -22,19 +22,17 @@ import { createBlock } from "@/app/utils/blogBlocks";
 import { defaultBlogState } from "@/app/states/blog";
 import { useRouter } from "next/navigation";
 
-/* =========================================================
-   DYNAMIC IMPORTS
-========================================================= */
+  //  DYNAMIC IMPORTS
 
 const BlogPreviewModal = dynamic(
-  () => import("@/app/components/blog/BlogPreviewModal"),
+  () => import("@/app/components/space/BlogPreviewModal"),
   {
     ssr: false,
   },
 );
 
 const CoverImageModal = dynamic(
-  () => import("@/app/components/blog/modals/CoverImageModal"),
+  () => import("@/app/components/space/modals/CoverImageModal"),
   {
     ssr: false,
   },
@@ -158,7 +156,7 @@ const CreateBlogPage = () => {
 
       await createBlog(user.id, blogData);
 
-      router.push("/blog/admin");
+      router.push("/space/admin");
     } catch (error) {
       console.error(error);
     } finally {
@@ -246,7 +244,7 @@ const CreateBlogPage = () => {
           {/* LEFT: EDITOR */}
           <div className="lg:col-span-8">
             <NeuctraEditor
-              className="py-0! px-0!"
+            className="rounded-2xl!"
               blocks={formData.blocks}
               setBlocks={setBlocks}
             />
