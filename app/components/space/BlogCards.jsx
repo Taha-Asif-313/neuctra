@@ -237,20 +237,18 @@ export default function BlogCards({ blogs = [] }) {
           className="
             min-h-[280px]
             rounded-2xl
-            border border-dashed border-[rgba(0,255,120,0.2)]
-            bg-[rgba(0,10,5,0.6)]
-
+            border border-dashed border-white
             flex flex-col items-center justify-center
             text-center
           "
         >
-          <Newspaper size={48} className="text-[rgba(0,255,120,0.2)]" />
+          <Newspaper size={48} className="text-primary" />
 
-          <h3 className="mt-5 text-lg font-medium text-[rgba(200,255,230,0.7)]">
+          <h3 className="mt-5 text-lg font-medium ">
             No blogs found
           </h3>
 
-          <p className="mt-2 text-[13px] text-[rgba(0,255,120,0.4)]">
+          <p className="mt-2 text-[13px] text-primary">
             Start publishing your first article.
           </p>
         </div>

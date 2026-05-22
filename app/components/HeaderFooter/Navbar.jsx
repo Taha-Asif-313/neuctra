@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronRight, Rocket } from "lucide-react";
+import { Menu, X, ChevronRight, Rocket, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -35,9 +35,8 @@ export default function Navbar() {
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
       >
         <div className="flex items-center justify-between px-6 md:px-12 py-5 max-w-7xl mx-auto">
-          {/* LEFT SIDE: Logo + Nav */}
+          {/* LEFT SIDE */}
           <div className="flex items-center gap-10">
-            {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <img
                 src="/logo.png"
@@ -45,12 +44,11 @@ export default function Navbar() {
                 className="w-6 h-6 object-contain transition-transform duration-300 group-hover:scale-110"
               />
 
-              <span className="text-lg font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white to-gray-300">
+              <span className="text-lg font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
                 Neuctra
               </span>
             </Link>
 
-            {/* Desktop Menu (moved LEFT) */}
             <div className="hidden md:flex items-center gap-8">
               {navItems.map((item) => (
                 <Link
@@ -65,9 +63,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* RIGHT SIDE: Actions */}
+          {/* RIGHT SIDE */}
           <div className="hidden md:flex items-center gap-3">
-            {/* CTA */}
             <Link
               href="/contact"
               className="px-5 py-1.5 bg-primary font-semibold rounded-full text-[13px] relative overflow-hidden group"
@@ -81,46 +78,16 @@ export default function Navbar() {
               />
             </Link>
 
-            {/* Space Button */}
-            <motion.button
-              onClick={() => router.push("/space")}
-              whileHover={{
-                boxShadow: "0 0 25px rgba(0, 194, 20,0.5)",
-              }}
-              whileTap={{ scale: 0.97 }}
-              className="relative px-6 py-1.5 rounded-full text-white font-medium tracking-wide overflow-hidden"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(0, 194, 20,0.12), rgba(0, 194, 20,0.35))",
-              }}
+            <Link
+              href="/space"
+              className="flex items-center gap-2 overflow-hidden rounded-full font-semibold bg-transparent border border-white hover:border-primary hover:bg-primary duration-300 px-5 p-1.5 text-[13px] text-white"
             >
-              {/* glow */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(circle at 30% 30%, rgba(0, 194, 20,0.25), transparent 60%)",
-                }}
-              />
-
-              {/* shimmer */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{ x: ["-120%", "120%"] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: "linear" }}
-                style={{
-                  background:
-                    "linear-gradient(90deg, transparent, rgba(0, 194, 20,0.2), transparent)",
-                }}
-              />
-
-              <span className="relative z-10 flex items-center gap-2 text-[13px]">
-                Go to Neuctra Space <Rocket size={16} />
-              </span>
-            </motion.button>
+              <span>Go to Neuctra Space</span>
+              <ArrowUpRight size={18} />
+            </Link>
           </div>
 
-          {/* Mobile */}
+          {/* MOBILE */}
           <motion.button
             className="md:hidden text-white w-10 h-10 flex items-center justify-center"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -132,11 +99,10 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Drawer */}
+      {/* MOBILE DRAWER */}
       <AnimatePresence>
         {menuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               className="fixed inset-0 bg-black/60 z-40 md:hidden"
               initial={{ opacity: 0 }}
@@ -145,36 +111,29 @@ export default function Navbar() {
               onClick={() => setMenuOpen(false)}
             />
 
-            {/* Drawer */}
             <motion.div
-              className="fixed top-0 right-0 h-full w-72 bg-linear-to-b from-zinc-950 to-black border-l border-white/10 shadow-2xl z-50 md:hidden flex flex-col"
+              className="fixed top-0 right-0 h-full w-72 bg-gradient-to-b from-zinc-950 to-black border-l border-white/10 shadow-2xl z-50 md:hidden flex flex-col"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
             >
-              {/* Drawer Header */}
+              {/* HEADER */}
               <div className="flex justify-between items-center p-6 border-b border-white/10 shrink-0">
-                {/* Logo */}
                 <Link href="/" className="relative group flex items-center">
                   <div className="flex items-center gap-2">
-                    {/* Logo Image */}
                     <img
                       src="/logo.png"
                       alt="Neuctra Logo"
                       className="w-6 h-6 object-contain transition-transform duration-300"
                     />
 
-                    {/* Brand Text */}
-                    <span
-                      className=" text-lg font-bold tracking-tight 
-      bg-clip-text text-transparent 
-      bg-linear-to-r from-white to-gray-300"
-                    >
+                    <span className="text-lg font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
                       Neuctra
                     </span>
                   </div>
                 </Link>
+
                 <motion.button
                   className="text-gray-400 hover:text-white p-2 hover:bg-white/10 rounded-full transition-colors"
                   onClick={() => setMenuOpen(false)}
@@ -184,7 +143,7 @@ export default function Navbar() {
                 </motion.button>
               </div>
 
-              {/* Navigation Links */}
+              {/* LINKS */}
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 {navItems.map((item, idx) => (
                   <motion.div
@@ -208,21 +167,38 @@ export default function Navbar() {
                 ))}
               </div>
 
-              {/* CTA Button pinned at bottom */}
+              {/* CTA */}
               <motion.div
-                className="shrink-0 p-6 w-full"
+                className="shrink-0 p-6 w-full space-y-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
+                {/* Get in touch */}
                 <Link
                   href="/contact"
-                  className="block w-full text-center px-0 py-3.5 bg-linear-to-r from-primary to-primary/80 font-semibold rounded-xl relative overflow-hidden group"
+                  className="block w-full text-center px-0 py-3.5 bg-gradient-to-r from-primary to-primary/80 font-semibold rounded-xl relative overflow-hidden group"
                   onClick={() => setMenuOpen(false)}
                 >
                   <span className="relative z-10">Get in touch</span>
                   <motion.div
                     className="absolute inset-0 bg-white/20"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </Link>
+
+                {/* Go to Space */}
+                <Link
+                  href="/space"
+                  className="block w-full text-center px-0 py-3.5 bg-transparent border border-white/10 hover:border-primary font-semibold rounded-xl relative overflow-hidden group text-white"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span className="relative z-10">Go to Neuctra Space</span>
+
+                  <motion.div
+                    className="absolute inset-0 bg-primary/20"
                     initial={{ x: "-100%" }}
                     whileHover={{ x: "100%" }}
                     transition={{ duration: 0.5 }}

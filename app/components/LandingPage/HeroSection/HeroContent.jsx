@@ -9,14 +9,18 @@ import {
   Code,
   Rocket,
   TrendingUp,
+  ArrowUp01,
+  ArrowUpRight,
+  Mail,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroContent() {
   const words = [
-    "AI-Driven SaaS Solutions",
-    "Enterprise-Grade Security",
+    "AI Driven SaaS Solutions",
+    "Enterprise Grade Security",
     "Smart Business Automation",
-    "Next-Level Digital Innovation",
+    "Next Level Digital Innovation",
   ];
 
   const [text, setText] = useState("");
@@ -82,28 +86,32 @@ export default function HeroContent() {
 
       {/* 🔥 CTA */}
       <motion.div
-        className="flex flex-col sm:flex-row gap-4 mt-8"
+        className="flex flex-col sm:flex-row justify-center gap-4 mt-8 w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.a
-          href="#products"
-          className="px-8 py-3 bg-primary font-semibold rounded-xl shadow-lg hover:shadow-[0_0_25px_#00ff88]/50 transition"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        {/* Space CTA */}
+        <Link
+          href="/space"
+          className="flex w-full sm:w-auto items-center justify-center gap-2 overflow-hidden rounded-full font-semibold bg-primary hover:bg-primary/90 transition-colors duration-300 px-6 sm:px-10 py-2.5 text-sm text-white"
         >
-          Get Started
-        </motion.a>
+          <span>Go to Neuctra Space</span>
+          <ArrowUpRight size={18} />
+        </Link>
 
-        <motion.a
-          href="#contact"
-          className="px-8 py-3 border border-primary text-primary font-semibold rounded-xl hover:bg-primary/10 transition"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        {/* Contact CTA */}
+        <Link
+          href="/contact"
+          className="group flex w-full sm:w-auto items-center justify-center gap-2 overflow-hidden rounded-full border border-white bg-transparent px-6 sm:px-8 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-primary hover:border-primary"
         >
-          Book a Demo
-        </motion.a>
+          <span>Get in touch</span>
+
+          <Mail
+            size={18}
+            className="transition-transform duration-300 group-hover:translate-x-0.5"
+          />
+        </Link>
       </motion.div>
 
       {/* 🔥 Features (moved lower + lighter feel) */}
