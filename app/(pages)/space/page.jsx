@@ -15,8 +15,6 @@ const AllBlogsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("latest");
 
-  console.log(blogs);
-
   /* ---------------- FETCH BLOGS ---------------- */
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -100,13 +98,7 @@ const AllBlogsPage = () => {
           </div>
         ) : (
           <>
-            {/* Results */}
-            <div className="mb-6 flex items-center justify-between">
-              <p className="text-sm text-gray-400">
-                {filteredBlogs.length} article
-                {filteredBlogs.length !== 1 ? "s" : ""} found
-              </p>
-            </div>
+         
 
             {/* Blogs Grid */}
             <BlogCards blogs={filteredBlogs} />

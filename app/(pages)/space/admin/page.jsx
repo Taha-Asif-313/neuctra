@@ -101,7 +101,7 @@ const AdminPanelPage = () => {
   /* ---------------- LOGOUT ---------------- */
   const handleLogoutClick = async () => {
     await authix.logoutUser();
-    router.push("/");
+    router.push("/space");
   };
 
   /* ---------------- FILTER BLOGS ---------------- */

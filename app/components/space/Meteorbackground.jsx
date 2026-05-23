@@ -158,7 +158,7 @@ export default function MeteorBackground({ children }) {
       <StarField count={220} />
 
       {/* Meteors SVG layer */}
-      <svg
+      {/* <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ overflow: "visible" }}
@@ -182,7 +182,7 @@ export default function MeteorBackground({ children }) {
         {meteors.map((m) => (
           <Meteor key={m.id} {...m} />
         ))}
-      </svg>
+      </svg> */}
 
       {/* Vignette */}
       <div

@@ -14,10 +14,18 @@ import {
   Info,
 } from "lucide-react";
 
-import { Input, Select } from "@neuctra/ui";
+import { Button, Input, Select } from "@neuctra/ui";
 import Link from "next/link";
+import {
+  ReactSignedIn,
+  ReactSignedOut,
+  ReactUserButton,
+} from "@neuctra/authix";
+import { authix } from "@/app/utils/neuctraAuthix";
+import { useRouter } from "next/navigation";
+import UserButton from "./user/UserButton";
 
-const BlogsHeader = ({
+const NeuctraSpaceHeader = ({
   searchTerm,
   setSearchTerm,
   selectedCategory,
@@ -25,29 +33,8 @@ const BlogsHeader = ({
   sortBy,
   setSortBy,
 }) => {
+  const router = useRouter();
   const [showMobileSearch, setShowMobileSearch] = useState(false);
-
-  /* ---------------- NAV LINKS (EDIT HERE) ---------------- */
-  const navLinks = useMemo(
-    () => [
-      {
-        label: "Home",
-        to: "/",
-        icon: Home,
-      },
-      {
-        label: "Blogs",
-        to: "/blog",
-        icon: BookOpen,
-      },
-      {
-        label: "About",
-        to: "/about",
-        icon: Info,
-      },
-    ],
-    [],
-  );
 
   /* ---------------- Categories ---------------- */
   const categories = useMemo(
@@ -119,36 +106,57 @@ const BlogsHeader = ({
       {/* ---------------- Top Header ---------------- */}
       <div className="flex items-center justify-between gap-3 py-6">
         {/* ---------------- Left - Logo ---------------- */}
-        <div className="flex min-w-0 items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2.5">
           {/* Logo */}
-          <img className="h-7 w-7" src="/logo.png" alt="Neuctra Logo" />
+          <img
+            className="h-5 w-5 object-contain"
+            src="/logo.png"
+            alt="Neuctra Logo"
+          />
 
           {/* Text */}
-          <div className="min-w-0">
-            <p className="flex items-center gap-2 text-base font-black tracking-tight text-white">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="text-sm font-black tracking-tight text-white">
               Neuctra
-              <span className="h-4 w-px bg-zinc-600" />
-              <span className="text-primary italic">Space</span>
-            </p>
+            </span>
+
+            <span className="h-4 w-px bg-zinc-700" />
+
+            <span className="text-sm font-bold -mt-0.5 italic text-primary">
+              Space
+            </span>
           </div>
         </div>
 
-        {/* NAV LINKS */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((item) => {
-            const Icon = item?.icon;
-            return (
-              <Link
-                key={item.to}
-                href={item.to}
-                className="flex items-center gap-2 text-sm text-gray-300 transition hover:text-white"
-              >
-                <Icon size={16} />
-                {item.label}
+        {/* ACTION BUTTONS */}
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <ReactSignedOut>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Link href="/space/login">
+                <Button
+                  className="text-[13px] py-1!"
+                  size="sm"
+                  variant="outline"
+                >
+                  Login
+                </Button>
               </Link>
-            );
-          })}
-        </nav>
+
+              <Link href="/space/signup">
+                <Button className="text-[13px] py-1!" size="sm">
+                  <span className="hidden sm:inline">Get Started</span>
+                  <span className="sm:hidden">Start</span>
+                </Button>
+              </Link>
+            </div>
+          </ReactSignedOut>
+
+          <ReactSignedIn>
+            <div className="max-w-full">
+              <UserButton />
+            </div>
+          </ReactSignedIn>
+        </div>
       </div>
 
       {/* ---------------- Filters ---------------- */}
@@ -164,6 +172,7 @@ const BlogsHeader = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               wrapperClassName="w-full"
+              inputClassName="border-border!"
             />
           </div>
 
@@ -252,4 +261,4 @@ const BlogsHeader = ({
   );
 };
 
-export default BlogsHeader;
+export default NeuctraSpaceHeader;
