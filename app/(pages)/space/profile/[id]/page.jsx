@@ -5,7 +5,6 @@ import { getUserSparks } from "@/app/services/spark";
 import { useParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  User,
   Mail,
   Phone,
   MapPin,
@@ -19,6 +18,7 @@ import {
   Eye,
   Clock3,
 } from "lucide-react";
+import Link from "next/link";
 
 const AuthorProfile = () => {
   const { id } = useParams();
@@ -50,6 +50,7 @@ const AuthorProfile = () => {
 
   const joinedDate = useMemo(() => {
     if (!user?.createdAt) return "";
+
     return new Date(user.createdAt).toLocaleDateString("en-US", {
       month: "long",
       year: "numeric",
@@ -80,10 +81,11 @@ const AuthorProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen text-white flex items-center justify-center">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-          <p className="text-zinc-400">Loading profile...</p>
+          <div className="h-10 w-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+
+          <p className="text-sm text-zinc-500">Loading profile...</p>
         </div>
       </div>
     );
@@ -98,22 +100,17 @@ const AuthorProfile = () => {
   }
 
   return (
-    <div className="min-h-screen text-white relative overflow-hidden">
-  
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-10">
-        {/* HERO CARD */}
-        <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-6 md:p-10 shadow-2xl">
-          {/* Glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/20 pointer-events-none" />
-
-          <div className="relative flex flex-col xl:flex-row gap-10 xl:items-center xl:justify-between">
+    <div className="min-h-screen bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        {/* PROFILE */}
+        <div className="rounded-3xl border border-white/10 bg-zinc-950 p-6 md:p-8">
+          <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-8">
             {/* LEFT */}
             <div className="flex flex-col md:flex-row gap-6 md:items-center">
-              {/* Avatar */}
+              {/* AVATAR */}
               <div className="relative">
-                <div className="h-28 w-28 rounded-full bg-primary p-0.5">
-                  <div className="h-full w-full rounded-full bg-black flex items-center justify-center overflow-hidden">
+                <div className="h-24 w-24 rounded-full bg-primary p-[2px]">
+                  <div className="h-full w-full rounded-full bg-zinc-900 overflow-hidden flex items-center justify-center">
                     {user.avatarUrl ? (
                       <img
                         src={user.avatarUrl}
@@ -121,7 +118,7 @@ const AuthorProfile = () => {
                         className="h-full w-full object-cover"
                       />
                     ) : (
-                      <span className="text-4xl font-bold text-white">
+                      <span className="text-3xl font-bold">
                         {user?.name?.charAt(0) || "U"}
                       </span>
                     )}
@@ -129,23 +126,23 @@ const AuthorProfile = () => {
                 </div>
 
                 {user.isVerified && (
-                  <div className="absolute bottom-0.5 right-0.5 h-6 w-6 rounded-full bg-primary flex items-center justify-center">
-                    <BadgeCheck size={18} />
+                  <div className="absolute bottom-0 right-0 h-6 w-6 rounded-full bg-primary flex items-center justify-center text-white">
+                    <BadgeCheck size={15} />
                   </div>
                 )}
               </div>
 
-              {/* USER INFO */}
+              {/* INFO */}
               <div>
                 <div className="flex items-center gap-3 flex-wrap">
-                  <h1 className="text-3xl md:text-5xl font-black tracking-tight">
+                  <h1 className="text-3xl md:text-4xl font-bold">
                     {user.name}
                   </h1>
 
                   <span
                     className={`px-3 py-1 rounded-full text-xs border ${
                       user.isActive
-                        ? "bg-emerald-500/10 text-primary border-emerald-500/20"
+                        ? "bg-primary/10 text-primary border-primary/20"
                         : "bg-red-500/10 text-red-400 border-red-500/20"
                     }`}
                   >
@@ -153,26 +150,30 @@ const AuthorProfile = () => {
                   </span>
                 </div>
 
-                <p className="mt-2 text-zinc-400 text-lg">
+                <p className="mt-2 text-zinc-400">
                   {user.role === "admin"
                     ? "Admin Author & Spark Creator"
                     : "Spark Author"}
                 </p>
 
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                    <Sparkles size={18} className="text-primary" />
-                    <div>
-                      <p className="text-sm text-zinc-400">Total Sparks</p>
-                      <p className="font-bold text-lg">{sparks.length}</p>
+                  <div className="rounded-2xl border border-white/10 bg-zinc-900 px-4 py-3">
+                    <p className="text-xs text-zinc-500">Total Sparks</p>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      <Sparkles size={16} className="text-primary" />
+
+                      <p className="font-semibold">{sparks.length}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-                    <CalendarDays size={18} className="text-cyan-400" />
-                    <div>
-                      <p className="text-sm text-zinc-400">Joined</p>
-                      <p className="font-bold">{joinedDate}</p>
+                  <div className="rounded-2xl border border-white/10 bg-zinc-900 px-4 py-3">
+                    <p className="text-xs text-zinc-500">Joined</p>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      <CalendarDays size={16} className="text-zinc-400" />
+
+                      <p className="font-semibold">{joinedDate}</p>
                     </div>
                   </div>
                 </div>
@@ -183,43 +184,43 @@ const AuthorProfile = () => {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={shareProfile}
-                className="h-12 px-5 rounded-2xl bg-emerald-500 hover:bg-primary transition-all duration-300 text-black font-semibold flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+                className="h-11 px-5 rounded-xl bg-primary text-white font-medium hover:opacity-90 transition-all flex items-center gap-2"
               >
-                <Share2 size={17} />
+                <Share2 size={16} />
                 Share Profile
               </button>
 
               <button
                 onClick={copyProfile}
-                className="h-12 px-5 rounded-2xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-all duration-300 flex items-center gap-2"
+                className="h-11 px-5 rounded-xl border border-white/10 bg-zinc-900 hover:bg-zinc-800 transition-all flex items-center gap-2"
               >
-                <Copy size={17} />
+                <Copy size={16} />
                 {copied ? "Copied!" : "Copy Link"}
               </button>
             </div>
           </div>
 
           {/* INFO GRID */}
-          <div className="relative mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <div className="flex items-center gap-3">
-                <Mail className="text-primary" size={18} />
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-8">
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-4">
+              <div className="flex items-start gap-3">
+                <Mail size={18} className="text-primary mt-0.5" />
+
                 <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider">
-                    Email
-                  </p>
+                  <p className="text-xs text-zinc-500 uppercase">Email</p>
+
                   <p className="text-sm mt-1 break-all">{user.email}</p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <div className="flex items-center gap-3">
-                <Phone className="text-cyan-400" size={18} />
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-4">
+              <div className="flex items-start gap-3">
+                <Phone size={18} className="text-zinc-400 mt-0.5" />
+
                 <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider">
-                    Phone
-                  </p>
+                  <p className="text-xs text-zinc-500 uppercase">Phone</p>
+
                   <p className="text-sm mt-1">
                     {user.phone || "Not Provided"}
                   </p>
@@ -227,13 +228,13 @@ const AuthorProfile = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <div className="flex items-center gap-3">
-                <MapPin className="text-pink-400" size={18} />
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-4">
+              <div className="flex items-start gap-3">
+                <MapPin size={18} className="text-zinc-400 mt-0.5" />
+
                 <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider">
-                    Address
-                  </p>
+                  <p className="text-xs text-zinc-500 uppercase">Address</p>
+
                   <p className="text-sm mt-1">
                     {user.address || "Unknown"}
                   </p>
@@ -241,13 +242,18 @@ const AuthorProfile = () => {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-white/10 bg-black/30 p-5">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="text-yellow-400" size={18} />
+            <div className="rounded-2xl border border-white/10 bg-zinc-900 p-4">
+              <div className="flex items-start gap-3">
+                <ShieldCheck
+                  size={18}
+                  className="text-zinc-400 mt-0.5"
+                />
+
                 <div>
-                  <p className="text-xs text-zinc-500 uppercase tracking-wider">
+                  <p className="text-xs text-zinc-500 uppercase">
                     Verification
                   </p>
+
                   <p className="text-sm mt-1">
                     {user.isVerified
                       ? "Verified Account"
@@ -259,30 +265,33 @@ const AuthorProfile = () => {
           </div>
         </div>
 
-        {/* SPARKS SECTION */}
+        {/* SPARKS */}
         <div className="mt-12">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-black">Published Sparks</h2>
-              <p className="text-zinc-400 mt-1">
+              <h2 className="text-2xl md:text-3xl font-bold">
+                Published Sparks
+              </h2>
+
+              <p className="text-zinc-500 mt-1">
                 Explore all public sparks created by this author
               </p>
             </div>
 
-            <div className="hidden md:flex items-center gap-2 text-zinc-400">
-              <Sparkles size={16} />
+            <div className="hidden md:flex items-center gap-2 text-zinc-500">
+              <Sparkles size={15} />
               {sparks.length} Sparks
             </div>
           </div>
 
           {sparks.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.03] py-20 text-center">
+            <div className="rounded-3xl border border-dashed border-white/10 bg-zinc-950 py-20 text-center">
               <Sparkles
-                size={42}
-                className="mx-auto mb-4 text-zinc-600"
+                size={40}
+                className="mx-auto mb-4 text-zinc-700"
               />
 
-              <h3 className="text-2xl font-bold">No Sparks Yet</h3>
+              <h3 className="text-2xl font-semibold">No Sparks Yet</h3>
 
               <p className="text-zinc-500 mt-2">
                 This author hasn’t published any sparks yet.
@@ -293,7 +302,7 @@ const AuthorProfile = () => {
               {sparks.map((spark) => (
                 <div
                   key={spark.id}
-                  className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.06] transition-all duration-300"
+                  className="group rounded-3xl overflow-hidden border border-white/10 bg-zinc-950"
                 >
                   {/* IMAGE */}
                   <div className="relative h-56 overflow-hidden">
@@ -310,7 +319,7 @@ const AuthorProfile = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-xl border border-white/10 text-xs">
+                      <span className="px-3 py-1 rounded-full bg-black/60 border border-white/10 text-xs backdrop-blur">
                         {spark.category}
                       </span>
                     </div>
@@ -318,13 +327,13 @@ const AuthorProfile = () => {
 
                   {/* CONTENT */}
                   <div className="p-5">
-                    <div className="flex items-center gap-3 text-xs text-zinc-400 mb-3">
+                    <div className="flex items-center gap-3 text-xs text-zinc-500 mb-3">
                       <div className="flex items-center gap-1">
                         <Clock3 size={13} />
                         {spark.readTime}
                       </div>
 
-                      <div className="h-1 w-1 rounded-full bg-zinc-600" />
+                      <div className="h-1 w-1 rounded-full bg-zinc-700" />
 
                       <div className="flex items-center gap-1">
                         <Eye size={13} />
@@ -332,25 +341,23 @@ const AuthorProfile = () => {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-bold line-clamp-2">
+                    <h3 className="text-xl font-semibold line-clamp-2">
                       {spark.title}
                     </h3>
 
                     <p className="mt-3 text-sm text-zinc-400 line-clamp-3">
-                      {spark.blocks?.find((b) => b.type === "text")?.content
-                        ?.replace(/<[^>]+>/g, "")
+                      {spark.blocks
+                        ?.find((b) => b.type === "text")
+                        ?.content?.replace(/<[^>]+>/g, "")
                         ?.slice(0, 140)}
                       ...
                     </p>
 
-                    <button className="mt-5 w-full h-11 rounded-2xl border border-white/10 bg-black/40 hover:bg-emerald-500 hover:text-black transition-all duration-300 font-medium flex items-center justify-center gap-2">
+                    <Link href={`/space/${user.id}/${spark.id}`} className="mt-5 w-full h-11 rounded-xl bg-primary text-white hover:opacity-90 transition-all font-medium flex items-center justify-center gap-2">
                       Read Spark
                       <ArrowRight size={16} />
-                    </button>
+                    </Link>
                   </div>
-
-                  {/* Glow Hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-emerald-500/10 via-transparent to-cyan-500/10" />
                 </div>
               ))}
             </div>
