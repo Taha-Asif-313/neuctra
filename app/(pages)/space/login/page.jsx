@@ -22,7 +22,7 @@ const LoginPage = () => {
 
             setTimeout(() => {
               if (user.isVerified) {
-                router.push("/space/admin");
+                router.push("/space");
               } else {
                 router.push("/space/verify-email");
               }

@@ -8,8 +8,6 @@ import { Dropdown, Avatar } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { authix } from "@/app/utils/neuctraAuthix";
 
-
-
 const UserButton = () => {
   const router = useRouter();
   const { user, logout } = useAdmin();
@@ -18,11 +16,10 @@ const UserButton = () => {
   const userEmail = user?.email || "admin@example.com";
   const userAvatar = user?.avatarUrl;
 
-    const handleLogoutClick = async () => {
+  const handleLogoutClick = async () => {
     await authix.logoutUser();
     router.push("/space");
   };
-
 
   const items = [
     {
@@ -38,21 +35,15 @@ const UserButton = () => {
     { separator: true },
 
     {
+      label: "Manage Sparks",
+      icon: <LayoutDashboard size={16} />,
+      onClick: () => router.push("/space/manage/sparks"),
+    },
+
+    {
       label: "Profile",
       icon: <User size={16} />,
-      onClick: () => router.push("/profile"),
-    },
-
-    {
-      label: "Dashboard",
-      icon: <LayoutDashboard size={16} />,
-      onClick: () => router.push("/dashboard"),
-    },
-
-    {
-      label: "Settings",
-      icon: <Settings size={16} />,
-      onClick: () => router.push("/settings"),
+      onClick: () => router.push("/space/profile"),
     },
 
     { separator: true },
@@ -61,7 +52,7 @@ const UserButton = () => {
       label: "Logout",
       icon: <LogOut size={16} />,
       danger: true,
-      onClick: handleLogoutClick
+      onClick: handleLogoutClick,
     },
   ];
 
@@ -77,6 +68,8 @@ const UserButton = () => {
         <Avatar
           src={userAvatar}
           alt={userName}
+          isOnline={user?.isVerified === true}
+          isOffline={user?.isVerified === false}
           fallback={userName?.charAt(0)?.toUpperCase()}
           className="h-9 w-9 cursor-pointer border-2 border-primary"
         />

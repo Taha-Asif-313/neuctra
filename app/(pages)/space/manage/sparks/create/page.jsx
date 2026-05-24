@@ -16,13 +16,13 @@ import {
 import { Input, Select, Button, Switch } from "@neuctra/ui";
 
 import { useAdmin } from "@/app/contexts/AdminContext";
-import { createBlog } from "@/app/services/blog";
+import { createSpark } from "@/app/services/spark";
 import { ReactSignedIn } from "@neuctra/authix";
-import { createBlock } from "@/app/utils/blogBlocks";
+import { createBlock } from "@/app/utils/blocks";
 import { defaultBlogState } from "@/app/states/blog";
 import { useRouter } from "next/navigation";
 
-  //  DYNAMIC IMPORTS
+//  DYNAMIC IMPORTS
 
 const BlogPreviewModal = dynamic(
   () => import("@/app/components/space/BlogPreviewModal"),
@@ -49,7 +49,7 @@ const NeuctraEditor = dynamic(
    PAGE
 ========================================================= */
 
-const CreateBlogPage = () => {
+const CreateSparkPage = () => {
   const router = useRouter();
   const { user } = useAdmin();
   const [loading, setLoading] = useState(false);
@@ -83,15 +83,7 @@ const CreateBlogPage = () => {
     { label: "Design", value: "Design" },
     { label: "Development", value: "Development" },
   ];
-
-  /* =========================================================
-     CONTENT JSON
-  ========================================================= */
-
-  const generatedContent = useMemo(() => {
-    return JSON.stringify(formData.blocks, null, 2);
-  }, [formData.blocks]);
-
+  
   /* =========================================================
      WORD COUNT
   ========================================================= */
@@ -149,14 +141,16 @@ const CreateBlogPage = () => {
           .map((t) => t.trim())
           .filter(Boolean),
         blocks: formData.blocks,
-        content: generatedContent,
         readTime: `${Math.ceil(wordCount / 200)} min read`,
+        likes: 0,
+        views: 0,
+        comments: [],
         createdAt: new Date().toISOString(),
       };
 
-      await createBlog(user.id, blogData);
+      await createSpark(user.id, blogData);
 
-      router.push("/space/admin");
+      router.push("/space/manage/sparks");
     } catch (error) {
       console.error(error);
     } finally {
@@ -175,7 +169,7 @@ const CreateBlogPage = () => {
               <Button
                 iconBefore={<ArrowLeft size={18} />}
                 variant="ghost"
-                onClick={() => router.push("/blog/admin")}
+                onClick={() => router.push("/space/manage/sparks")}
                 className="flex items-center gap-2 hover:text-zinc-200 transition"
               >
                 Back
@@ -244,7 +238,7 @@ const CreateBlogPage = () => {
           {/* LEFT: EDITOR */}
           <div className="lg:col-span-8">
             <NeuctraEditor
-            className="rounded-2xl!"
+              className="rounded-2xl!"
               blocks={formData.blocks}
               setBlocks={setBlocks}
             />
@@ -369,4 +363,4 @@ const CreateBlogPage = () => {
   );
 };
 
-export default CreateBlogPage;
+export default CreateSparkPage;

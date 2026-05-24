@@ -3,9 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Calendar, Clock, User, ArrowLeft, Tag } from "lucide-react";
-import { NeuctraEditorPreview } from "@neuctra/cms-core";
-import { getSingleBlog } from "@/app/services/blog";
+import { getSingleSpark } from "@/app/services/spark";
 import { Button } from "@neuctra/ui";
+import dynamic from "next/dynamic";
+const NeuctraEditorPreview = dynamic(
+  () => import("@neuctra/cms-core").then((mod) => mod.NeuctraEditorPreview),
+  {
+    ssr: false,
+  },
+);
 
 const BlogPostPage = () => {
   const router = useRouter();
@@ -15,7 +21,6 @@ const BlogPostPage = () => {
   const blogId = params?.blogId;
 
   const [blog, setBlog] = useState(null);
-  const [relatedBlogs, setRelatedBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // FETCH BLOG
@@ -24,7 +29,7 @@ const BlogPostPage = () => {
       try {
         setLoading(true);
 
-        const response = await getSingleBlog(userId, blogId);
+        const response = await getSingleSpark(userId, blogId);
 
         if (response.success) {
           setBlog(response.data);
@@ -54,7 +59,7 @@ const BlogPostPage = () => {
   // NOT FOUND
   if (!blog) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center px-6">
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="max-w-md text-center">
           <h1 className="text-3xl font-semibold mb-3">Post not found</h1>
 
@@ -99,7 +104,7 @@ const BlogPostPage = () => {
   const heroImage = getCoverImage(blog);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen  text-white">
       {/* HERO */}
       <section className="relative overflow-hidden rounded-b-4xl">
         {heroImage && (
@@ -115,7 +120,7 @@ const BlogPostPage = () => {
 
         <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-14 pb-12">
           <Button
-            onClick={() => router.push("/blog")}
+            onClick={() => router.push("/space")}
             variant="ghost"
             className="mb-4 hover:bg-zinc-950/5"
           >

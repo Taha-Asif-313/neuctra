@@ -1,36 +1,33 @@
 import { authix } from "../utils/neuctraAuthix";
 
 /* =========================================================
-   CREATE BLOG
+   CREATE SPARK
 ========================================================= */
-export const createBlog = async (userId, blog) => {
+export const createSpark = async (userId, spark) => {
   try {
     const response = await authix.addUserData({
       userId,
-      dataCategory: "blog",
-      data: blog,
+      dataCategory: "spark",
+      data: spark,
     });
 
     return response;
   } catch (error) {
-    console.error("Create Blog Error:", error);
+    console.error("Create Spark Error:", error);
     throw error;
   }
 };
 
 /* =========================================================
-   GET ALL BLOGS
+   GET ALL SPARKS
 ========================================================= */
-export const getAllBlogs = async () => {
+export const getAllSparks = async () => {
   try {
-    const blogs = await authix.getUsersData("blog");
+    const sparks = await authix.getAppUsersData("spark");
 
-    return {
-      success: true,
-      data: blogs.data || [],
-    };
+    return sparks
   } catch (error) {
-    console.error("Get Blogs Error:", error);
+    console.error("Get Sparks Error:", error);
 
     return {
       success: false,
@@ -40,18 +37,18 @@ export const getAllBlogs = async () => {
 };
 
 /* =========================================================
-   GET SINGLE BLOG
+   GET SINGLE SPARK
 ========================================================= */
-export const getSingleBlog = async (userId, dataId) => {
+export const getSingleSpark = async (userId, dataId) => {
   try {
-    const blog = await authix.getSingleUserData({
+    const spark = await authix.getSingleUserData({
       userId,
       dataId,
     });
 
-    return blog;
+    return spark;
   } catch (error) {
-    console.error("Get Single Blog Error:", error);
+    console.error("Get Single Spark Error:", error);
 
     return {
       success: false,
@@ -61,21 +58,18 @@ export const getSingleBlog = async (userId, dataId) => {
 };
 
 /* =========================================================
-   GET BLOGS BY USER
+   GET SPARKS BY USER
 ========================================================= */
-export const getUserBlogs = async (userId) => {
+export const getUserSparks = async (userId) => {
   try {
-    const blogs = await authix.searchAppDataByKeys({
-      category: "blogs",
+    const sparks = await authix.getUserData({
       userId,
+      category: "spark",
     });
 
-    return {
-      success: true,
-      data: blogs || [],
-    };
+  return sparks || [];
   } catch (error) {
-    console.error("Get User Blogs Error:", error);
+    console.error("Get User Sparks Error:", error);
 
     return {
       success: false,
@@ -85,14 +79,18 @@ export const getUserBlogs = async (userId) => {
 };
 
 /* =========================================================
-   UPDATE BLOG
+   UPDATE SPARK
 ========================================================= */
-export const updateBlog = async ({ dataId, userId, updatedBlog }) => {
+export const updateSpark = async ({
+  dataId,
+  userId,
+  updatedSpark,
+}) => {
   try {
     const response = await authix.updateUserData({
-      dataId,
       userId,
-      data: updatedBlog,
+      dataId,
+      data: updatedSpark,
     });
 
     return {
@@ -100,7 +98,7 @@ export const updateBlog = async ({ dataId, userId, updatedBlog }) => {
       data: response,
     };
   } catch (error) {
-    console.error("Update Blog Error:", error);
+    console.error("Update Spark Error:", error);
 
     return {
       success: false,
@@ -110,9 +108,9 @@ export const updateBlog = async ({ dataId, userId, updatedBlog }) => {
 };
 
 /* =========================================================
-   DELETE BLOG
+   DELETE SPARK
 ========================================================= */
-export const deleteBlog = async (userId, dataId) => {
+export const deleteSpark = async (userId, dataId) => {
   try {
     await authix.deleteUserData({
       userId,
@@ -123,7 +121,7 @@ export const deleteBlog = async (userId, dataId) => {
       success: true,
     };
   } catch (error) {
-    console.error("Delete Blog Error:", error);
+    console.error("Delete Spark Error:", error);
 
     return {
       success: false,
@@ -133,21 +131,21 @@ export const deleteBlog = async (userId, dataId) => {
 };
 
 /* =========================================================
-   SEARCH BLOGS
+   SEARCH SPARKS
 ========================================================= */
-export const searchBlogs = async (query) => {
+export const searchSparks = async (query) => {
   try {
-    const blogs = await authix.searchAppDataByKeys({
-      category: "blogs",
+    const sparks = await authix.searchAppDataByKeys({
+      category: "spark",
       q: query,
     });
 
     return {
       success: true,
-      data: blogs || [],
+      data: sparks || [],
     };
   } catch (error) {
-    console.error("Search Blogs Error:", error);
+    console.error("Search Sparks Error:", error);
 
     return {
       success: false,

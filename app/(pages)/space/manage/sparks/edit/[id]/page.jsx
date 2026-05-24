@@ -2,13 +2,21 @@
 
 import React, { useEffect, useMemo, useState } from "react";
 
-import { ArrowLeft, Save, Eye, Folder, Tag, ImagePlus, Package } from "lucide-react";
+import {
+  ArrowLeft,
+  Save,
+  Eye,
+  Folder,
+  Tag,
+  ImagePlus,
+  Package,
+} from "lucide-react";
 
 import { Input, Select, Button, Switch } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
-import { getSingleBlog, updateBlog } from "@/app/services/blog";
+import { getSingleSpark, updateSpark } from "@/app/services/spark";
 import { ReactSignedIn } from "@neuctra/authix";
-import { createBlock } from "@/app/utils/blogBlocks";
+import { createBlock } from "@/app/utils/blocks";
 import { defaultBlogState } from "@/app/states/blog";
 import { useParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
@@ -47,18 +55,38 @@ const EditBlogPage = () => {
   const router = useRouter();
 
   const { user } = useAdmin();
+  console.log(user);
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
 
-  const [blog, setBlog] = useState(null);
+  const [blog, setBlog] = useState();
   const [showPreview, setShowPreview] = useState(false);
   const [showCoverModal, setShowCoverModal] = useState(false);
 
-  const [formData, setFormData] = useState(null);
-
-  console.log(formData);
-  
+  const [formData, setFormData] = useState(() =>
+    defaultBlogState({
+      id: "",
+      slug: "",
+      title: "",
+      coverImage: "",
+      authorId: "",
+      author: { name: "", username: "", avatar: "" },
+      productName: "",
+      category: "React",
+      tags: "",
+      blocks: [createBlock("text")],
+      featured: false,
+      visibility: "public",
+      readTime: 0,
+      views: 0,
+      likes: [],
+      comments: [],
+      createdAt: "",
+      updatedAt: "",
+      publishedAt: "",
+    }),
+  );
 
   /* =========================================================
      CATEGORIES
@@ -78,27 +106,30 @@ const EditBlogPage = () => {
   ========================================================= */
 
   useEffect(() => {
+    if (!id || !user?.id) return; // ✅ IMPORTANT GUARD
+
+    let isMounted = true;
+
     const fetchBlog = async () => {
       try {
         setLoading(true);
 
-        if (!user?.id || !id) return;
+        const response = await getSingleSpark(user.id, id);
 
-        const response = await getSingleBlog(user.id, id);
+        if (!isMounted) return;
 
-        if (response.success && response.data) {
+        if (response?.success && response?.data) {
           const blogData = response.data;
 
           setBlog(blogData);
 
-          // Map the existing blog data to our form state
           setFormData(
             defaultBlogState({
               id: blogData.id || "",
               slug: blogData.slug || "",
               title: blogData.title || "",
               coverImage: blogData.coverImage || "",
-              authorId: blogData.authorId || user?.id || "",
+              authorId: blogData.authorId || user.id,
               author: {
                 name: blogData.author?.name || user?.name || "",
                 username: blogData.author?.username || user?.username || "",
@@ -117,8 +148,7 @@ const EditBlogPage = () => {
               readTime: blogData.readTime || 0,
               views: blogData.views || 0,
               likes: blogData.likes || [],
-              bookmarks: blogData.bookmarks || [],
-              commentsCount: blogData.commentsCount || 0,
+              comments: blogData.comments || [],
               createdAt: blogData.createdAt || "",
               updatedAt: blogData.updatedAt || "",
               publishedAt: blogData.publishedAt || "",
@@ -128,12 +158,16 @@ const EditBlogPage = () => {
       } catch (error) {
         console.error("Fetch Blog Error:", error);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
 
     fetchBlog();
-  }, [id, user]);
+
+    return () => {
+      isMounted = false; // ✅ prevent race condition
+    };
+  }, [id, user?.id]);
 
   //  CONTENT JSON
   const generatedContent = useMemo(() => {
@@ -160,23 +194,19 @@ const EditBlogPage = () => {
 
   //  SET BLOCKS
   const setBlocks = (value) => {
-    if (typeof value === "function") {
-      setFormData((prev) => ({
+    setFormData((prev) => {
+      if (!prev) return prev;
+
+      return {
         ...prev,
-        blocks: value(prev.blocks),
-      }));
-
-      return;
-    }
-
-    setFormData((prev) => ({
-      ...prev,
-      blocks: value,
-    }));
+        blocks: typeof value === "function" ? value(prev.blocks) : value,
+      };
+    });
   };
 
   //  SUBMIT
   const handleSubmit = async () => {
+    if (!user?.id) return;
     try {
       setSaving(true);
 
@@ -197,14 +227,14 @@ const EditBlogPage = () => {
         updatedAt: new Date().toISOString(),
       };
 
-      const response = await updateBlog({
+      const response = await updateSpark({
         userId: user.id,
         dataId: id,
-        updatedBlog: blogData,
+        updatedSpark: blogData,
       });
 
       if (response.success) {
-        router.push("/space/admin");
+        router.push("/space/manage/sparks");
       }
     } catch (error) {
       console.error("Update Blog Error:", error);
@@ -246,7 +276,7 @@ const EditBlogPage = () => {
               <Button
                 variant="ghost"
                 iconBefore={<ArrowLeft size={18} />}
-                onClick={() => router.push("/blog/admin")}
+                onClick={() => router.push("/space/manage/sparks")}
                 className="flex items-center gap-2  hover:text-white transition"
               >
                 Back

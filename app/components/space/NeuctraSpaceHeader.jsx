@@ -12,6 +12,7 @@ import {
   House,
   Home,
   Info,
+  Users,
 } from "lucide-react";
 
 import { Button, Input, Select } from "@neuctra/ui";
@@ -152,7 +153,20 @@ const NeuctraSpaceHeader = ({
           </ReactSignedOut>
 
           <ReactSignedIn>
-            <div className="max-w-full">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Spark Authors Link (ONLY AFTER LOGIN) */}
+              <Link href="/space/spark/authors">
+                <Button
+                  iconBefore={<Users size={16} />}
+                  className="text-[13px] py-1! lg:px-3 px-2"
+                  textClassName="hidden! lg:inline!"
+                  size="sm"
+                  variant="outline"
+                >
+                  Spark Authors
+                </Button>
+              </Link>
+
               <UserButton />
             </div>
           </ReactSignedIn>

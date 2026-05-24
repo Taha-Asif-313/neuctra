@@ -3,6 +3,7 @@
 @import "tailwindcss";
 
 @source "../node_modules/@neuctra/ui";
+@source "../node_modules/@neuctra/cms-core";
 
 /* =============================
    BASE GLOBAL STYLES
