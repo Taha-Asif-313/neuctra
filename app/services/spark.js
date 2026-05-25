@@ -21,18 +21,20 @@ export const createSpark = async (userId, spark) => {
 /* =========================================================
    GET ALL SPARKS
 ========================================================= */
-export const getAllSparks = async () => {
+export const getAllSparks = async (params = {}) => {
   try {
-    const sparks = await authix.getAppUsersData("spark");
+    const response = await authix.getAppUsersData({
+      category: "spark",
+      limit: params.limit || 10,
+      cursor: params.cursor || null,
+    });
+console.log(response);
 
-    return sparks
+    return response;
   } catch (error) {
     console.error("Get Sparks Error:", error);
-
-    return {
-      success: false,
-      error,
-    };
+    console.log(error);
+    
   }
 };
 

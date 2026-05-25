@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
 import SparkCards from "@/app/components/space/SparkCards";
@@ -10,31 +10,76 @@ import { getAllSparks } from "@/app/services/spark";
 const AllSparksPage = () => {
   const [sparks, setSparks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("latest");
 
-  /* ---------------- FETCH SPARKS ---------------- */
+  const [cursor, setCursor] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+
+  const observerRef = useRef(null);
+
+  /* ---------------- INITIAL FETCH ---------------- */
   useEffect(() => {
-    const fetchSparks = async () => {
+    const fetchInitial = async () => {
       try {
         setLoading(true);
 
-        const response = await getAllSparks();
+        const res = await getAllSparks({
+          limit: 10,
+        });
 
-        if (response?.success) {
-          setSparks(response?.data || []);
+        if (res?.success) {
+          setSparks(res.data || []);
+          setCursor(res.nextCursor);
+          setHasMore(res.hasMore);
         }
-      } catch (error) {
-        console.error("Fetch Sparks Error:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchSparks();
+    fetchInitial();
   }, []);
+
+  /* ---------------- LOAD MORE ---------------- */
+  const loadMore = async () => {
+    if (!hasMore || loadingMore) return;
+
+    try {
+      setLoadingMore(true);
+
+      const res = await getAllSparks({
+        limit: 10,
+        cursor,
+      });
+
+      if (res?.success) {
+        setSparks((prev) => [...prev, ...(res.data || [])]);
+        setCursor(res.nextCursor);
+        setHasMore(res.hasMore);
+      }
+    } finally {
+      setLoadingMore(false);
+    }
+  };
+
+  /* ---------------- INFINITE SCROLL OBSERVER ---------------- */
+  const lastItemRef = (node) => {
+    if (loadingMore) return;
+
+    if (observerRef.current) observerRef.current.disconnect();
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMore) {
+        loadMore();
+      }
+    });
+
+    if (node) observerRef.current.observe(node);
+  };
 
   /* ---------------- FILTER + SORT ---------------- */
   const filteredSparks = useMemo(() => {
@@ -44,14 +89,9 @@ const AllSparksPage = () => {
       const title = spark?.title || "";
       const category = spark?.category || "";
 
-      /* content is array + stringified json */
       const blocksText = Array.isArray(spark?.blocks)
         ? spark.blocks
-            .map((block) => {
-              if (block?.content) return block.content;
-              if (block?.caption) return block.caption;
-              return "";
-            })
+            .map((block) => block?.content || block?.caption || "")
             .join(" ")
         : "";
 
@@ -64,13 +104,11 @@ const AllSparksPage = () => {
 
       const matchesCategory =
         selectedCategory === "all" ||
-        category.toLowerCase() ===
-          selectedCategory.toLowerCase();
+        category.toLowerCase() === selectedCategory.toLowerCase();
 
       return matchesSearch && matchesCategory;
     });
 
-    /* SORTING */
     switch (sortBy) {
       case "latest":
         filtered.sort(
@@ -89,21 +127,14 @@ const AllSparksPage = () => {
         break;
 
       case "popular":
-        filtered.sort(
-          (a, b) => (b?.views || 0) - (a?.views || 0)
-        );
-        break;
-
-      default:
+        filtered.sort((a, b) => (b?.views || 0) - (a?.views || 0));
         break;
     }
 
     return filtered;
   }, [sparks, searchTerm, selectedCategory, sortBy]);
 
-  console.log(filteredSparks);
-  
-
+  /* ---------------- RENDER ---------------- */
   return (
     <div className="min-h-screen text-white">
       {/* HEADER */}
@@ -122,29 +153,28 @@ const AllSparksPage = () => {
       <div className="mx-auto max-w-7xl py-6">
         {loading ? (
           <div className="flex min-h-screen items-center justify-center">
-            <div className="text-center">
-              <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-
-              <p className="text-white/50">
-                Loading sparks...
-              </p>
-            </div>
-          </div>
-        ) : filteredSparks.length === 0 ? (
-          /* EMPTY STATE */
-          <div className="flex min-h-[60vh] items-center justify-center">
-            <div className="text-center">
-              <h2 className="mb-2 text-2xl font-semibold">
-                No Sparks Found
-              </h2>
-
-              <p className="text-white/50">
-                Try changing search or category filters.
-              </p>
-            </div>
+            <div className="h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           </div>
         ) : (
-          <SparkCards sparks={filteredSparks} />
+          <>
+            <SparkCards
+              sparks={filteredSparks}
+              lastItemRef={lastItemRef} // 🔥 important
+            />
+
+            {/* LOADING MORE */}
+            {loadingMore && (
+              <div className="py-6 text-center text-white/50">
+                Loading more sparks...
+              </div>
+            )}
+
+            {!hasMore && (
+              <div className="py-6 text-center text-white/30">
+                No more sparks
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
