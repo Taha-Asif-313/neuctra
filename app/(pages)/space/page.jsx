@@ -114,7 +114,7 @@ const AllSparksPage = () => {
         filtered.sort(
           (a, b) =>
             new Date(b?.createdAt || 0).getTime() -
-            new Date(a?.createdAt || 0).getTime()
+            new Date(a?.createdAt || 0).getTime(),
         );
         break;
 
@@ -122,7 +122,7 @@ const AllSparksPage = () => {
         filtered.sort(
           (a, b) =>
             new Date(a?.createdAt || 0).getTime() -
-            new Date(b?.createdAt || 0).getTime()
+            new Date(b?.createdAt || 0).getTime(),
         );
         break;
 
@@ -164,13 +164,13 @@ const AllSparksPage = () => {
 
             {/* LOADING MORE */}
             {loadingMore && (
-              <div className="py-6 text-center text-white/50">
-                Loading more sparks...
-              </div>
+              <div className="flex items-center justify-center py-6">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            </div>
             )}
 
             {!hasMore && (
-              <div className="py-6 text-center text-white/30">
+              <div className="py-6 text-sm text-center text-zinc-200">
                 No more sparks
               </div>
             )}

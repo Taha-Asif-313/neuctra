@@ -1,13 +1,18 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import {
   CalendarDays,
   Clock3,
   ArrowUpRight,
+  Heart,
+  Eye,
+  MessageCircle,
+  Sparkles,
   Terminal,
+  TrendingUp,
 } from "lucide-react";
-import Link from "next/link";
 
 const formatDate = (date) => {
   if (!date) return "";
@@ -30,10 +35,10 @@ const getExcerpt = (blocks = []) => {
   const textBlock = blocks.find((b) => b.type === "text");
 
   if (!textBlock?.content) {
-    return "Discover this spark.";
+    return "Discover this spark and explore new ideas.";
   }
 
-  return stripHtml(textBlock.content).slice(0, 110);
+  return stripHtml(textBlock.content).slice(0, 140);
 };
 
 const getCoverImage = (spark) => {
@@ -50,140 +55,183 @@ export default function SparkCard({ spark }) {
   const cover = getCoverImage(spark);
 
   return (
-    <Link
-      href={`/space/${spark.userId}/${spark.id}`}
-      className="block h-full"
-    >
+    <Link href={`/space/${spark.userId}/${spark.id}`} className="block h-full">
       <article
         className="
-          group relative flex flex-col h-full overflow-hidden rounded-2xl
-          bg-zinc-950 border border-zinc-900
-          transition-all duration-300
+          group relative flex flex-col h-full overflow-hidden
+          rounded-[28px]
+          border border-white/10
+          bg-[#050505]
+          backdrop-blur-xl
+          transition-all duration-500
           hover:border-primary/40
         "
       >
-        {/* Image */}
-        <div className="relative h-52 overflow-hidden bg-[#000d05] shrink-0">
+        {/* Background Glow */}
+        <div
+          className="
+            absolute inset-0 opacity-0 group-hover:opacity-100
+            transition-opacity duration-500 pointer-events-none
+          "
+        >
+          <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        </div>
+
+        {/* Cover */}
+        <div className="relative h-60 overflow-hidden">
           {cover ? (
-            <div
-              className="
-                w-full h-full bg-cover bg-center
-                transition-transform duration-700
-                group-hover:scale-105
-              "
-              style={{
-                backgroundImage: `url('${cover}')`,
-              }}
-            />
+            <>
+              <div
+                className="
+                  absolute inset-0 bg-cover bg-center
+                  transition-transform duration-700
+                  group-hover:scale-110
+                "
+                style={{
+                  backgroundImage: `url('${cover}')`,
+                }}
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+            </>
           ) : (
             <div
               className="
-                w-full h-full flex items-center justify-center
-                bg-[#000d05]
+                absolute inset-0
+                bg-gradient-to-br from-[#001a0c] via-black to-[#00150a]
+                flex items-center justify-center
               "
             >
-              <Terminal
-                size={30}
-                className="text-[rgba(0,255,120,0.2)]"
-              />
+              <div className="relative">
+                <div className="absolute inset-0 blur-3xl bg-primary/20 rounded-full" />
+
+                <div
+                  className="
+                    relative w-20 h-20 rounded-3xl
+                    border border-primary/20
+                    bg-primary/5
+                    flex items-center justify-center
+                  "
+                >
+                  <Terminal size={36} className="text-primary/70" />
+                </div>
+              </div>
             </div>
           )}
 
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,8,3,0.95)] via-[rgba(0,8,3,0.35)] to-transparent" />
-
-          {/* Top badges */}
-          <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
-            {spark.featured && (
+          {/* Top Bar */}
+          <div className="absolute top-4 left-4 right-4 flex items-start justify-between z-20">
+            <div className="flex items-center gap-2 flex-wrap">
               <span
                 className="
-                  px-2 py-[4px]
-                  rounded-full
-                  text-[10px] uppercase tracking-[0.6px]
-                  bg-[rgba(255,190,40,0.12)]
-                  border border-[rgba(255,190,40,0.35)]
-                  text-[#ffbe28]
-                  font-semibold
+                  px-3 py-1 rounded-full
+                  text-[11px] font-semibold capitalize
+                  bg-primary text-white
                 "
               >
-                Featured
+                Spark
               </span>
-            )}
 
-            <span
-              className="
-                px-2 py-[4px]
-                rounded-full
-                text-[10px]
-                capitalize
-                bg-primary
-                text-white
-                font-bold
-              "
-            >
-              {spark.category || "Spark"}
-            </span>
+              {spark.productName && (
+                <span
+                  className="
+                  px-3 py-1 rounded-full
+                  text-[11px] font-semibold capitalize
+                  bg-primary text-white
+                "
+                >
+                  {spark.productName || "General"}
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Decorative corners */}
-          <div className="absolute top-2 left-2 h-[10px] w-[10px] border-l border-t border-primary/50" />
-          <div className="absolute top-2 right-2 h-[10px] w-[10px] border-r border-t border-primary/50" />
-
-          {/* Glow line */}
+          {/* Floating Stats */}
           <div
             className="
-              absolute bottom-0 left-0 right-0 h-px
-              opacity-0 group-hover:opacity-100
-              transition-opacity duration-300
-              bg-gradient-to-r from-transparent via-primary to-transparent
+              absolute bottom-4 left-4 z-20
+              flex items-center gap-2 flex-wrap
             "
-          />
+          >
+            <div
+              className="
+                flex items-center gap-1.5
+                px-3 py-1.5 rounded-full
+                bg-black/45 backdrop-blur-md
+                border border-white/10
+                text-[11px] text-white
+              "
+            >
+              <Heart size={12} className="text-red-400" />
+              {spark.likes || 0}
+            </div>
+
+            <div
+              className="
+                flex items-center gap-1.5
+                px-3 py-1.5 rounded-full
+                bg-black/45 backdrop-blur-md
+                border border-white/10
+                text-[11px] text-white
+              "
+            >
+              <Eye size={12} className="text-blue-400" />
+              {spark.views || 0}
+            </div>
+
+            <div
+              className="
+                flex items-center gap-1.5
+                px-3 py-1.5 rounded-full
+                bg-black/45 backdrop-blur-md
+                border border-white/10
+                text-[11px] text-white
+              "
+            >
+              <MessageCircle size={12} className="text-emerald-400" />
+              {spark.comments?.length || 0}
+            </div>
+          </div>
         </div>
 
         {/* Content */}
-        <div className="flex flex-1 flex-col p-4">
+        <div className="relative flex flex-1 flex-col p-5">
           {/* Meta */}
-          <div className="mb-3 flex items-center gap-3 text-[11px] font-semibold text-zinc-400">
-            <span className="flex items-center gap-1">
-              <CalendarDays size={12} />
+          <div
+            className="
+              flex items-center gap-4
+              text-[12px] text-zinc-400 font-medium
+            "
+          >
+            <span className="flex items-center gap-1.5">
+              <CalendarDays size={13} />
               {formatDate(spark.createdAt)}
             </span>
 
-            <span className="flex items-center gap-1">
-              <Clock3 size={12} />
-              {spark.readTime || "1 min"}
+            <span className="flex items-center gap-1.5">
+              <Clock3 size={13} />
+              {spark.readTime || "1 min read"}
             </span>
           </div>
 
           {/* Title */}
           <h3
             className="
-              text-lg md:text-xl
-              font-bold leading-[1.4]
-              text-white
-              transition-colors duration-200
+              mt-4 text-[1.3rem] leading-[1.4]
+              font-bold text-white
+              transition-colors duration-300
               group-hover:text-primary
+              line-clamp-2
             "
           >
             {spark.title}
           </h3>
 
-          {/* Product */}
-          {spark.productName && (
-            <div className="mt-2 flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-primary" />
-
-              <p className="text-xs font-semibold text-primary">
-                {spark.productName}
-              </p>
-            </div>
-          )}
-
           {/* Excerpt */}
           <p
             className="
               mt-3 flex-1
-              text-[13px] leading-[1.7]
+              text-sm leading-[1.8]
               text-zinc-400
               line-clamp-3
             "
@@ -191,46 +239,74 @@ export default function SparkCard({ spark }) {
             {getExcerpt(spark.blocks)}
           </p>
 
+          {/* Tags */}
+          {spark.tags?.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {spark.tags.slice(0, 3).map((tag, index) => (
+                <span
+                  key={index}
+                  className="
+                    px-2.5 py-1 rounded-full
+                    text-[11px] font-medium
+                    bg-white/[0.03]
+                    border border-white/[0.06]
+                    text-zinc-300
+                  "
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+
           {/* Footer */}
           <div
             className="
-              mt-4 pt-3
-              border-t border-primary/10
+              mt-5 pt-4
+              border-t border-white/[0.06]
               flex items-center justify-between
             "
           >
-            <span
-              className="
-                text-[12px] font-medium tracking-[0.3px]
-                text-zinc-300
-                group-hover:text-primary
-                transition-colors duration-200
-              "
-            >
-              Open Spark
-            </span>
+            <div className="flex items-center gap-2">
+              <div>
+                <p className="text-sm font-semibold text-white">Open Spark</p>
+                <p className="text-[11px] text-zinc-500">Explore ideas</p>
+              </div>
+            </div>
 
             <div
               className="
+                w-11 h-11 rounded-2xl
+                border border-primary/20
+                bg-primary/5
                 flex items-center justify-center
-                w-8 h-8 rounded-xl
-                border border-primary/40
-                transition-all duration-200
+                transition-all duration-300
                 group-hover:bg-primary
                 group-hover:border-primary
+                group-hover:rotate-45
               "
             >
               <ArrowUpRight
-                size={14}
+                size={18}
                 className="
                   text-primary
-                  transition-colors duration-200
+                  transition-colors duration-300
                   group-hover:text-white
                 "
               />
             </div>
           </div>
         </div>
+
+        {/* Bottom Glow Line */}
+        <div
+          className="
+            absolute bottom-0 left-0 h-[2px] w-0
+            bg-gradient-to-r from-transparent via-primary to-transparent
+            transition-all duration-500
+            group-hover:w-full
+          "
+        />
       </article>
     </Link>
   );

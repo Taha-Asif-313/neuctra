@@ -83,7 +83,7 @@ const CreateSparkPage = () => {
     { label: "Design", value: "Design" },
     { label: "Development", value: "Development" },
   ];
-  
+
   /* =========================================================
      WORD COUNT
   ========================================================= */
@@ -130,25 +130,25 @@ const CreateSparkPage = () => {
     try {
       setLoading(true);
 
-      const blogData = {
+      const sparkData = {
         title: formData.title,
-        category: formData.category,
-        featured: formData.featured,
+        blocks: formData.blocks,
         coverImage: formData.coverImage,
         visibility: formData.visibility,
+        category: formData.category,
+        productName: formData.productName,
         tags: formData.tags
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
-        blocks: formData.blocks,
-        readTime: `${Math.ceil(wordCount / 200)} min read`,
         likes: 0,
         views: 0,
         comments: [],
+        readTime: `${Math.ceil(wordCount / 200)} min read`,
         createdAt: new Date().toISOString(),
       };
 
-      await createSpark(user.id, blogData);
+      await createSpark(user.id, sparkData);
 
       router.push("/space/manage/sparks");
     } catch (error) {
@@ -287,19 +287,6 @@ const CreateSparkPage = () => {
                   }
                   label="Product Name"
                   placeholder="Neuctra Authix"
-                />
-
-                {/* FEATURED SWITCH */}
-                <Switch
-                  mode="single"
-                  label="Featured article"
-                  checked={formData.featured}
-                  onCheckedChange={(checked) =>
-                    setFormData((p) => ({
-                      ...p,
-                      featured: Boolean(checked),
-                    }))
-                  }
                 />
 
                 {/* VISIBILITY SWITCH */}

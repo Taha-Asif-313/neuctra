@@ -28,13 +28,11 @@ export const getAllSparks = async (params = {}) => {
       limit: params.limit || 10,
       cursor: params.cursor || null,
     });
-console.log(response);
 
     return response;
   } catch (error) {
     console.error("Get Sparks Error:", error);
     console.log(error);
-    
   }
 };
 
@@ -62,32 +60,28 @@ export const getSingleSpark = async (userId, dataId) => {
 /* =========================================================
    GET SPARKS BY USER
 ========================================================= */
-export const getUserSparks = async (userId) => {
+/* =========================================================
+   GET SPARKS BY USER
+========================================================= */
+export const getUserSparks = async (userId, params = {}) => {
   try {
-    const sparks = await authix.getUserData({
+    const response = await authix.getUserData({
       userId,
-      category: "spark",
+      type: "spark", // 🔥 because backend uses `type`
+      limit: params.limit || 10,
+      cursor: params.cursor || null,
     });
 
-  return sparks || [];
+    return response;
   } catch (error) {
     console.error("Get User Sparks Error:", error);
-
-    return {
-      success: false,
-      error,
-    };
   }
 };
 
 /* =========================================================
    UPDATE SPARK
 ========================================================= */
-export const updateSpark = async ({
-  dataId,
-  userId,
-  updatedSpark,
-}) => {
+export const updateSpark = async ({ dataId, userId, updatedSpark }) => {
   try {
     const response = await authix.updateUserData({
       userId,

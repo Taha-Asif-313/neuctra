@@ -76,7 +76,6 @@ const EditBlogPage = () => {
       category: "React",
       tags: "",
       blocks: [createBlock("text")],
-      featured: false,
       visibility: "public",
       readTime: 0,
       views: 0,
@@ -143,7 +142,6 @@ const EditBlogPage = () => {
               blocks: blogData.blocks?.length
                 ? blogData.blocks
                 : [createBlock("text")],
-              featured: blogData.featured || false,
               visibility: blogData.visibility || "public",
               readTime: blogData.readTime || 0,
               views: blogData.views || 0,
@@ -168,12 +166,6 @@ const EditBlogPage = () => {
       isMounted = false; // ✅ prevent race condition
     };
   }, [id, user?.id]);
-
-  //  CONTENT JSON
-  const generatedContent = useMemo(() => {
-    if (!formData?.blocks) return "";
-    return JSON.stringify(formData.blocks, null, 2);
-  }, [formData?.blocks]);
 
   //  WORD COUNT
   const wordCount = useMemo(() => {
@@ -212,17 +204,15 @@ const EditBlogPage = () => {
 
       const blogData = {
         title: formData.title,
+        blocks: formData.blocks,
         coverImage: formData.coverImage,
         visibility: formData.visibility,
         category: formData.category,
-        featured: formData.featured,
+        productName: formData.productName,
         tags: formData.tags
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
-        productName: formData.productName,
-        blocks: formData.blocks,
-        content: generatedContent,
         readTime: `${Math.ceil(wordCount / 200)} min read`,
         updatedAt: new Date().toISOString(),
       };
@@ -352,7 +342,7 @@ const EditBlogPage = () => {
           {/* RIGHT: SIDEBAR */}
           <div className="lg:col-span-4 space-y-2">
             {/* PUBLISH SETTINGS */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
               <div className="flex items-center gap-2 mb-5">
                 <Folder size={16} className="text-primary" />
                 <h3 className="font-medium">Publish Settings</h3>
@@ -394,19 +384,6 @@ const EditBlogPage = () => {
                   placeholder="Neuctra Authix"
                 />
 
-                {/* FEATURED SWITCH */}
-                <Switch
-                  mode="single"
-                  label="Featured article"
-                  checked={formData.featured}
-                  onCheckedChange={(checked) =>
-                    setFormData((p) => ({
-                      ...p,
-                      featured: Boolean(checked),
-                    }))
-                  }
-                />
-
                 {/* VISIBILITY SWITCH */}
                 <Switch
                   mode="single"
@@ -423,7 +400,7 @@ const EditBlogPage = () => {
             </div>
 
             {/* CONTENT STATS */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <Eye size={15} />
                 <h3 className="font-medium">Content Stats</h3>
@@ -454,7 +431,7 @@ const EditBlogPage = () => {
 
             {/* BLOG INFO */}
             {formData.createdAt && (
-              <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+              <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
                 <h3 className="font-medium mb-3">Blog Info</h3>
 
                 <div className="space-y-2 text-xs text-white/50">
