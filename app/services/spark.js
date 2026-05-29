@@ -37,6 +37,23 @@ export const getAllSparks = async (params = {}) => {
 };
 
 /* =========================================================
+   GET SEARCH SPARKS
+========================================================= */
+export const getSearchSparks = async (query) => {
+  try {
+    const response = await authix.searchAllUsersDataByKeys({
+      dataCategory: "spark",
+      query,
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Get Sparks Error:", error);
+    console.log(error);
+  }
+};
+
+/* =========================================================
    GET SINGLE SPARK
 ========================================================= */
 export const getSingleSpark = async (userId, dataId) => {
@@ -68,8 +85,6 @@ export const getUserSparks = async (userId, params = {}) => {
     const response = await authix.getUserData({
       userId,
       type: "spark", // 🔥 because backend uses `type`
-      limit: params.limit || 10,
-      cursor: params.cursor || null,
     });
 
     return response;

@@ -1,107 +1,13 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import {
-  Search,
-  Filter,
-  Sparkles,
-  Code2,
-  Palette,
-  Laptop,
-  BookOpen,
-  House,
-  Home,
-  Info,
-  Users,
-} from "lucide-react";
-
-import { Button, Input, Select } from "@neuctra/ui";
+import React from "react";
 import Link from "next/link";
-import {
-  ReactSignedIn,
-  ReactSignedOut,
-  ReactUserButton,
-} from "@neuctra/authix";
-import { authix } from "@/app/utils/neuctraAuthix";
-import { useRouter } from "next/navigation";
 import UserButton from "./user/UserButton";
+import { Users } from "lucide-react";
+import { Button } from "@neuctra/ui";
+import { ReactSignedIn, ReactSignedOut } from "@neuctra/authix";
 
-const NeuctraSpaceHeader = ({
-  searchTerm,
-  setSearchTerm,
-  selectedCategory,
-  setSelectedCategory,
-  sortBy,
-  setSortBy,
-}) => {
-  const router = useRouter();
-  const [showMobileSearch, setShowMobileSearch] = useState(false);
-
-  /* ---------------- Categories ---------------- */
-  const categories = useMemo(
-    () => [
-      {
-        label: "All Posts",
-        value: "all",
-        icon: <Sparkles size={15} />,
-        description: "Browse all blog articles",
-      },
-      {
-        label: "React",
-        value: "React",
-        icon: <Code2 size={15} />,
-        description: "React tutorials & guides",
-      },
-      {
-        label: "JavaScript",
-        value: "JavaScript",
-        icon: <Laptop size={15} />,
-        description: "Modern JavaScript content",
-      },
-      {
-        label: "CSS",
-        value: "CSS",
-        icon: <Palette size={15} />,
-        description: "Styling & animations",
-      },
-      {
-        label: "Tutorial",
-        value: "Tutorial",
-        icon: <Code2 size={15} />,
-        description: "Step by step tutorials",
-      },
-      {
-        label: "Design",
-        value: "Design",
-        icon: <Palette size={15} />,
-        description: "UI/UX design resources",
-      },
-      {
-        label: "Development",
-        value: "Development",
-        icon: <Laptop size={15} />,
-        description: "Web development articles",
-      },
-    ],
-    [],
-  );
-
-  /* ---------------- Sort Options ---------------- */
-  const sortOptions = [
-    {
-      label: "Latest Posts",
-      value: "latest",
-    },
-    {
-      label: "Popular Posts",
-      value: "popular",
-    },
-    {
-      label: "Oldest Posts",
-      value: "oldest",
-    },
-  ];
-
+const NeuctraSpaceHeader = () => {
   return (
     <header className="sticky top-0 z-40">
       {/* ---------------- Top Header ---------------- */}
@@ -110,20 +16,18 @@ const NeuctraSpaceHeader = ({
         <div className="flex min-w-0 items-center gap-2.5">
           {/* Logo */}
           <img
-            className="h-5 w-5 object-contain"
+            className="h-6 w-6 object-contain"
             src="/logo.png"
             alt="Neuctra Logo"
           />
 
-          {/* Text */}
-          <div className="flex items-center gap-1.5 min-w-0">
-            <span className="text-sm font-black tracking-tight text-white">
+          {/* Logo Text */}
+          <div className="flex items-center gap-1.5 min-w-0 select-none">
+            <span className="text-lg font-extrabold tracking-tight text-white">
               Neuctra
             </span>
 
-            <span className="h-4 w-px bg-zinc-700" />
-
-            <span className="text-sm font-bold -mt-0.5 italic text-primary">
+            <span className=" text-lg font-bold tracking-tight text-primary drop-shadow-[0_0_14px_rgba(34,197,94,0.45)]">
               Space
             </span>
           </div>
@@ -135,8 +39,7 @@ const NeuctraSpaceHeader = ({
             <div className="flex items-center gap-2 sm:gap-3">
               <Link href="/space/login">
                 <Button
-                  className="text-[13px] py-1!"
-                  size="sm"
+                  className="rounded-xl text-[13px] px-4 py-1"
                   variant="outline"
                 >
                   Login
@@ -144,7 +47,7 @@ const NeuctraSpaceHeader = ({
               </Link>
 
               <Link href="/space/signup">
-                <Button className="text-[13px] py-1!" size="sm">
+                <Button className="rounded-xl text-[13px] bg-primary px-4 py-1">
                   <span className="hidden sm:inline">Get Started</span>
                   <span className="sm:hidden">Start</span>
                 </Button>
@@ -158,7 +61,7 @@ const NeuctraSpaceHeader = ({
               <Link href="/space/spark/authors">
                 <Button
                   iconBefore={<Users size={16} />}
-                  className="text-[13px] py-1! lg:px-3 px-2"
+                  className="text-[13px] bg-primary rounded-xl lg:px-4 px-2"
                   textClassName="hidden! lg:inline!"
                   size="sm"
                   variant="outline"
@@ -170,105 +73,6 @@ const NeuctraSpaceHeader = ({
               <UserButton />
             </div>
           </ReactSignedIn>
-        </div>
-      </div>
-
-      {/* ---------------- Filters ---------------- */}
-      <div className="py-2">
-        {/* Desktop Layout */}
-        <div className="hidden lg:flex lg:items-center lg:gap-4">
-          {/* Search */}
-          <div className="flex-1">
-            <Input
-              type="text"
-              prefixIcon={Search}
-              placeholder="Search articles, guides, tutorials..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              wrapperClassName="w-full"
-              inputClassName="border-border!"
-            />
-          </div>
-
-          {/* Category */}
-          <div className="w-60">
-            <Select
-              prefixIcon={Filter}
-              options={categories}
-              value={selectedCategory}
-              onValueChange={setSelectedCategory}
-              placeholder="Category"
-              searchable
-              searchPlaceholder="Search category..."
-              showDescription
-              size="md"
-              maxDropdownHeight={280}
-              className="w-full"
-            />
-          </div>
-
-          {/* Sort */}
-          <div className="w-45">
-            <Select
-              options={sortOptions}
-              value={sortBy}
-              onValueChange={setSortBy}
-              placeholder="Sort articles"
-              size="md"
-              className="w-full"
-            />
-          </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="space-y-3 lg:hidden">
-          {/* Search Row */}
-          <div className="flex gap-3">
-            <div className="flex-1">
-              <Input
-                type="text"
-                prefixIcon={Search}
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-
-            {/* Mobile Toggle */}
-            <button
-              type="button"
-              className="flex px-4 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-black/40 text-gray-400 transition-all hover:border-primary/30 hover:text-white"
-              onClick={() => setShowMobileSearch((prev) => !prev)}
-            >
-              <Filter size={18} />
-            </button>
-          </div>
-
-          {/* Mobile Expanded Filters */}
-          {showMobileSearch && (
-            <div className="grid gap-3">
-              {/* Category */}
-              <Select
-                prefixIcon={Filter}
-                options={categories}
-                value={selectedCategory}
-                onValueChange={setSelectedCategory}
-                placeholder="Select category"
-                searchable
-                searchPlaceholder="Search category..."
-                showDescription
-                maxDropdownHeight={260}
-              />
-
-              {/* Sort */}
-              <Select
-                options={sortOptions}
-                value={sortBy}
-                onValueChange={setSortBy}
-                placeholder="Sort articles"
-              />
-            </div>
-          )}
         </div>
       </div>
     </header>

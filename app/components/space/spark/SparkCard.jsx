@@ -12,6 +12,7 @@ import {
   Sparkles,
   Terminal,
   TrendingUp,
+  Lightbulb,
 } from "lucide-react";
 
 const formatDate = (date) => {
@@ -49,7 +50,7 @@ const getCoverImage = (spark) => {
   return imageBlock?.url || null;
 };
 
-export default function SparkCard({ spark }) {
+const SparkCard = ({ spark }) => {
   if (!spark) return null;
 
   const cover = getCoverImage(spark);
@@ -62,21 +63,10 @@ export default function SparkCard({ spark }) {
           rounded-[28px]
           border border-white/10
           bg-[#050505]
-          backdrop-blur-xl
           transition-all duration-500
           hover:border-primary/40
         "
       >
-        {/* Background Glow */}
-        <div
-          className="
-            absolute inset-0 opacity-0 group-hover:opacity-100
-            transition-opacity duration-500 pointer-events-none
-          "
-        >
-          <div className="absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        </div>
-
         {/* Cover */}
         <div className="relative h-60 overflow-hidden">
           {cover ? (
@@ -113,7 +103,7 @@ export default function SparkCard({ spark }) {
                     flex items-center justify-center
                   "
                 >
-                  <Terminal size={36} className="text-primary/70" />
+                  <Lightbulb size={36} className="text-primary/70" />
                 </div>
               </div>
             </div>
@@ -125,7 +115,7 @@ export default function SparkCard({ spark }) {
               <span
                 className="
                   px-3 py-1 rounded-full
-                  text-[11px] font-semibold capitalize
+                  text-[11px] font-semibold
                   bg-primary text-white
                 "
               >
@@ -162,7 +152,19 @@ export default function SparkCard({ spark }) {
                 text-[11px] text-white
               "
             >
-              <Heart size={12} className="text-red-400" />
+              <Eye size={14} className="text-white" />
+              {spark.views || 0}
+            </div>
+            <div
+              className="
+                flex items-center gap-1.5
+                px-3 py-1.5 rounded-full
+                bg-black/45 backdrop-blur-md
+                border border-white/10
+                text-[11px] text-white
+              "
+            >
+              <Heart fill=" #fb2c36" size={14} className="text-red-500" />
               {spark.likes || 0}
             </div>
 
@@ -175,20 +177,11 @@ export default function SparkCard({ spark }) {
                 text-[11px] text-white
               "
             >
-              <Eye size={12} className="text-blue-400" />
-              {spark.views || 0}
-            </div>
-
-            <div
-              className="
-                flex items-center gap-1.5
-                px-3 py-1.5 rounded-full
-                bg-black/45 backdrop-blur-md
-                border border-white/10
-                text-[11px] text-white
-              "
-            >
-              <MessageCircle size={12} className="text-emerald-400" />
+              <MessageCircle
+                fill="#3B82F6"
+                size={14}
+                className="text-[#3B82F6]"
+              />
               {spark.comments?.length || 0}
             </div>
           </div>
@@ -310,4 +303,6 @@ export default function SparkCard({ spark }) {
       </article>
     </Link>
   );
-}
+};
+
+export default React.memo(SparkCard);

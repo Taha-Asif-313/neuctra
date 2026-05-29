@@ -2,10 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Calendar, Clock, User, ArrowLeft, Tag } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  User,
+  ArrowLeft,
+  Tag,
+  Heart,
+  MessageCircle,
+  Send,
+} from "lucide-react";
+
 import { getSingleSpark } from "@/app/services/spark";
 import { Button } from "@neuctra/ui";
+
 import dynamic from "next/dynamic";
+
 const NeuctraEditorPreview = dynamic(
   () => import("@neuctra/cms-core").then((mod) => mod.NeuctraEditorPreview),
   {
@@ -13,7 +25,7 @@ const NeuctraEditorPreview = dynamic(
   },
 );
 
-const BlogPostPage = () => {
+const SparkViewPage = () => {
   const router = useRouter();
   const params = useParams();
 
@@ -22,6 +34,14 @@ const BlogPostPage = () => {
 
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // LIKE STATE
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
+
+  // COMMENTS STATE
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
   // FETCH BLOG
   useEffect(() => {
@@ -33,6 +53,9 @@ const BlogPostPage = () => {
 
         if (response.success) {
           setBlog(response.data);
+
+          setLikes(response.data?.likes || 0);
+          setComments(response.data?.comments || []);
         }
       } catch (error) {
         console.error(error);
@@ -43,6 +66,39 @@ const BlogPostPage = () => {
 
     fetchBlog();
   }, [userId, blogId]);
+
+  // HANDLE LIKE
+  const handleLike = () => {
+    if (liked) {
+      setLikes((prev) => prev - 1);
+    } else {
+      setLikes((prev) => prev + 1);
+    }
+
+    setLiked(!liked);
+
+    // TODO:
+    // await likeSpark(blogId)
+  };
+
+  // HANDLE COMMENT
+  const handleAddComment = () => {
+    if (!comment.trim()) return;
+
+    const newComment = {
+      id: Date.now(),
+      name: "You",
+      text: comment,
+      createdAt: new Date().toISOString(),
+    };
+
+    setComments((prev) => [newComment, ...prev]);
+
+    setComment("");
+
+    // TODO:
+    // await addComment(blogId, comment)
+  };
 
   // LOADING
   if (loading) {
@@ -81,7 +137,6 @@ const BlogPostPage = () => {
 
   const {
     title,
-    coverImage,
     author,
     category,
     tags,
@@ -90,13 +145,13 @@ const BlogPostPage = () => {
     readTime,
     createdAt,
     publishedAt,
-    excerpt,
   } = blog;
 
   const getCoverImage = (blog) => {
     if (blog?.coverImage) return blog.coverImage;
 
     const imageBlock = blog?.blocks?.find((b) => b.type === "image");
+
     return imageBlock?.url || null;
   };
 
@@ -104,7 +159,7 @@ const BlogPostPage = () => {
   const heroImage = getCoverImage(blog);
 
   return (
-    <div className="min-h-screen  text-white">
+    <div className="min-h-screen text-white">
       {/* HERO */}
       <section className="relative overflow-hidden rounded-b-4xl">
         {heroImage && (
@@ -114,18 +169,40 @@ const BlogPostPage = () => {
               alt={title}
               className="h-full w-full object-cover opacity-40 scale-105"
             />
+
             <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/30" />
           </div>
         )}
 
         <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-14 pb-12">
-          <Button
-            onClick={() => router.push("/space")}
-            variant="ghost"
-            className="mb-4 hover:bg-zinc-950/5"
-          >
-            <ArrowLeft size={20} />
-          </Button>
+          <div className="mb-6 flex items-center justify-between gap-3">
+            {/* BACK BUTTON */}
+            <Button
+              onClick={() => router.push("/space")}
+              variant="ghost"
+              className="h-12 rounded-2xl border border-zinc-800 bg-zinc-950/70 px-4 hover:bg-zinc-900"
+            >
+              <ArrowLeft size={20} />
+            </Button>
+
+            {/* ACTIONS */}
+            <div className="flex items-center gap-3">
+              {/* LIKE BUTTON */}
+              <button
+                onClick={handleLike}
+                className={`group flex h-12 items-center gap-2 rounded-2xl border px-4 transition-all duration-300 ${
+                  liked
+                    ? "border-red-600/30 bg-red-600/10 text-red-600"
+                    : "border-zinc-800 bg-zinc-950/80 text-zinc-300 hover:border-primary/30 hover:text-cyan-400"
+                }`}
+              >
+                <Heart
+                  size={18}
+                  className={`transition ${liked ? "fill-red-600" : ""}`}
+                />
+              </button>
+            </div>
+          </div>
 
           <div className="flex flex-wrap items-center gap-3 mb-2">
             {category && (
@@ -147,6 +224,34 @@ const BlogPostPage = () => {
             </h1>
           </div>
 
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            {/* LIKE BUTTON */}
+            <button
+              onClick={handleLike}
+              className={`group flex items-center gap-2 rounded-2xl border px-5 py-3 transition-all duration-300 ${
+                liked
+                  ? "border-[#00FF88]/30 bg-[#00FF88]/10 text-[#00FF88]"
+                  : "border-zinc-800 bg-zinc-950/80 text-zinc-300 hover:border-primary/30 hover:text-cyan-400"
+              }`}
+            >
+              <Heart
+                size={18}
+                className={`transition ${liked ? "fill-[#00FF88]" : ""}`}
+              />
+
+              <span className="text-sm font-medium">{likes}</span>
+            </button>
+
+            {/* COMMENTS COUNT */}
+            <div className="flex items-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-950/80 px-5 py-3 text-zinc-300">
+              <MessageCircle size={18} className="text-cyan-400" />
+
+              <span className="text-sm font-medium">
+                {comments.length} Comments
+              </span>
+            </div>
+          </div>
+
           <div className="mt-4 flex flex-wrap items-center gap-4">
             {author?.name && (
               <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl">
@@ -164,6 +269,7 @@ const BlogPostPage = () => {
 
                 <div>
                   <p className="text-xs text-zinc-300">Written by</p>
+
                   <p className="text-sm font-medium text-white">
                     {author.name}
                   </p>
@@ -179,6 +285,7 @@ const BlogPostPage = () => {
 
                 <div>
                   <p className="text-xs text-zinc-300">Published</p>
+
                   <p className="text-sm font-medium text-white">
                     {new Date(displayDate).toLocaleDateString()}
                   </p>
@@ -194,6 +301,7 @@ const BlogPostPage = () => {
 
                 <div>
                   <p className="text-xs text-zinc-300">Read Time</p>
+
                   <p className="text-sm font-medium text-white">{readTime}</p>
                 </div>
               </div>
@@ -212,10 +320,88 @@ const BlogPostPage = () => {
               <p className="text-zinc-300">No content available.</p>
             )}
           </article>
+
+
         </main>
 
         <aside className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
+
+          {/* COMMENTS SECTION */}
+          <section className="mt-14 border-t border-zinc-900 pt-10">
+            <div className="flex items-center gap-3 mb-6">
+              <MessageCircle size={22} className="text-cyan-400" />
+
+              <h2 className="text-2xl font-semibold">
+                Comments ({comments.length})
+              </h2>
+            </div>
+
+            {/* ADD COMMENT */}
+            <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5 mb-8">
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Share your thoughts..."
+                rows={4}
+                className="w-full rounded-2xl border border-zinc-800 bg-black/40 px-4 py-4 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-primary/40"
+              />
+
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={handleAddComment}
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-xs font-medium transition hover:scale-[1.02]"
+                >
+                  <Send size={16} />
+                  Post Comment
+                </button>
+              </div>
+            </div>
+
+            {/* COMMENT LIST */}
+            <div className="space-y-4">
+              {comments.length > 0 ? (
+                comments.map((item) => (
+                  <div
+                    key={item.id}
+                    className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5"
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-11 h-11 rounded-full bg-linear-to-br from-primary/20 to-[#00FF88]/20 border border-zinc-800 flex items-center justify-center text-sm font-semibold">
+                        {item.name?.charAt(0)}
+                      </div>
+
+                      <div>
+                        <p className="text-sm font-medium text-white">
+                          {item.name}
+                        </p>
+
+                        <p className="text-xs text-zinc-500">
+                          {new Date(item.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="text-sm leading-7 text-zinc-300">
+                      {item.text}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-3xl border border-dashed border-zinc-800 p-10 text-center">
+                  <MessageCircle
+                    size={40}
+                    className="mx-auto mb-3 text-zinc-700"
+                  />
+
+                  <p className="text-zinc-500">
+                    No comments yet. Start the conversation.
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+
             <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-6">
               <h3 className="text-sm font-medium text-zinc-300 mb-5">
                 Article Info
@@ -225,6 +411,7 @@ const BlogPostPage = () => {
                 {author?.name && (
                   <div className="flex items-center gap-3">
                     <User size={15} />
+
                     <span>{author.name}</span>
                   </div>
                 )}
@@ -232,6 +419,7 @@ const BlogPostPage = () => {
                 {displayDate && (
                   <div className="flex items-center gap-3">
                     <Calendar size={15} />
+
                     <span>{new Date(displayDate).toLocaleDateString()}</span>
                   </div>
                 )}
@@ -239,6 +427,7 @@ const BlogPostPage = () => {
                 {readTime && (
                   <div className="flex items-center gap-3">
                     <Clock size={15} />
+
                     <span>{readTime}</span>
                   </div>
                 )}
@@ -256,6 +445,7 @@ const BlogPostPage = () => {
                       className="px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900 text-xs text-zinc-400 flex items-center gap-1.5"
                     >
                       <Tag size={10} />
+
                       {tag}
                     </span>
                   ))}
@@ -269,4 +459,4 @@ const BlogPostPage = () => {
   );
 };
 
-export default BlogPostPage;
+export default SparkViewPage;
