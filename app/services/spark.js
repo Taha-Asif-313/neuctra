@@ -80,11 +80,11 @@ export const getSingleSpark = async (userId, dataId) => {
 /* =========================================================
    GET SPARKS BY USER
 ========================================================= */
-export const getUserSparks = async (userId, params = {}) => {
+export const getUserSparks = async (userId) => {
   try {
     const response = await authix.getUserData({
       userId,
-      type: "spark", // 🔥 because backend uses `type`
+      category: "spark", // 🔥 because backend uses `type`
     });
 
     return response;

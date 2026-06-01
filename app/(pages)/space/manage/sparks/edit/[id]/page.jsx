@@ -10,9 +10,11 @@ import {
   Tag,
   ImagePlus,
   Package,
+  Plus,
+  MoreVertical,
 } from "lucide-react";
 
-import { Input, Select, Button, Switch } from "@neuctra/ui";
+import { Input, Select, Button, Switch, Dropdown } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { getSingleSpark, updateSpark } from "@/app/services/spark";
 import { ReactSignedIn } from "@neuctra/authix";
@@ -26,7 +28,7 @@ import dynamic from "next/dynamic";
 ========================================================= */
 
 const BlogPreviewModal = dynamic(
-  () => import("@/app/components/space/BlogPreviewModal"),
+  () => import("@/app/components/space/SparkPreviewModal"),
   {
     ssr: false,
   },
@@ -87,18 +89,16 @@ const EditBlogPage = () => {
     }),
   );
 
-  /* =========================================================
-     CATEGORIES
-  ========================================================= */
+  const [newCategory, setNewCategory] = useState("");
 
-  const categories = [
+  const [categoriesList, setCategoriesList] = useState([
     { label: "React", value: "React" },
     { label: "JavaScript", value: "JavaScript" },
     { label: "CSS", value: "CSS" },
     { label: "Tutorial", value: "Tutorial" },
     { label: "Design", value: "Design" },
     { label: "Development", value: "Development" },
-  ];
+  ]);
 
   /* =========================================================
      FETCH BLOG
@@ -196,6 +196,24 @@ const EditBlogPage = () => {
     });
   };
 
+  const handleAddCategory = () => {
+    if (!newCategory.trim()) return;
+
+    const formatted = {
+      label: newCategory,
+      value: newCategory,
+    };
+
+    setCategoriesList((prev) => [...prev, formatted]);
+
+    setFormData((p) => ({
+      ...p,
+      category: newCategory,
+    }));
+
+    setNewCategory("");
+  };
+
   //  SUBMIT
   const handleSubmit = async () => {
     if (!user?.id) return;
@@ -259,72 +277,107 @@ const EditBlogPage = () => {
     <ReactSignedIn fallback={() => router.push("/space/admin/login")}>
       <div className="min-h-screen bg-black text-white flex flex-col">
         {/* TOP BAR */}
-        <div className="sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-2xl">
-          <div className="max-w-7xl mx-auto py-4 flex items-center justify-between gap-4">
-            {/* LEFT */}
-            <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                iconBefore={<ArrowLeft size={18} />}
-                onClick={() => router.push("/space/manage/sparks")}
-                className="flex items-center gap-2  hover:text-white transition"
-              >
-                Back
-              </Button>
+        <div className="sticky top-0 z-50">
+          <div>
+            <div className="flex h-16 items-center justify-between gap-4">
+              {/* LEFT */}
+              <div className="flex items-center gap-3">
+                <Button
+                  variant="ghost"
+                  iconBefore={<ArrowLeft size={18} />}
+                  onClick={() => router.push("/space")}
+                  className="flex items-center gap-2 bg-zinc-950 hover:text-white transition"
+                >
+                  Back
+                </Button>
+              </div>
+
+              {/* CENTER TITLE (DESKTOP ONLY) */}
+              <div className="hidden md:block flex-1 max-w-2xl">
+                <input
+                  value={formData.title}
+                  onChange={(e) =>
+                    setFormData((p) => ({ ...p, title: e.target.value }))
+                  }
+                  placeholder="Untitled Article..."
+                  className="w-full h-10 bg-transparent text-lg font-semibold border-b border-zinc-400 outline-none placeholder:text-zinc-400 focus:border-primary transition"
+                />
+              </div>
+
+              {/* RIGHT ACTIONS (DESKTOP) */}
+              <div className="hidden md:flex items-center gap-3">
+                <Button
+                  variant="outline"
+                  leftIcon={ImagePlus}
+                  className="rounded-xl"
+                  onClick={() => setShowCoverModal(true)}
+                >
+                  Cover
+                </Button>
+
+                <Button
+                  variant="outline"
+                  leftIcon={Eye}
+                  className="rounded-xl bg-zinc-900"
+                  onClick={() => setShowPreview(true)}
+                >
+                  Preview
+                </Button>
+
+                <Button
+                  leftIcon={Save}
+                  loading={saving}
+                  onClick={handleSubmit}
+                  className="rounded-xl"
+                >
+                  {saving ? "Updating..." : "Update"}
+                </Button>
+              </div>
+
+              {/* MOBILE DROPDOWN */}
+              <div className="md:hidden">
+                <Dropdown
+                  align="right"
+                  width={220}
+                  menuClassName="rounded-xl border border-zinc-800 bg-zinc-950 p-2"
+                  itemClassName="rounded-lg text-sm"
+                  trigger={
+                    <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-950">
+                      <MoreVertical size={18} />
+                    </button>
+                  }
+                  items={[
+                    {
+                      label: "Cover Image",
+                      icon: <ImagePlus size={16} />,
+                      onClick: () => setShowCoverModal(true),
+                    },
+                    {
+                      label: "Preview",
+                      icon: <Eye size={16} />,
+                      onClick: () => setShowPreview(true),
+                    },
+                    {
+                      label: saving ? "Updating..." : "Update",
+                      icon: <Save size={16} />,
+                      onClick: handleSubmit,
+                    },
+                  ]}
+                />
+              </div>
             </div>
 
-            {/* CENTER TITLE INPUT */}
-            <div className="flex-1 max-w-2xl hidden md:block relative">
+            {/* MOBILE TITLE */}
+            <div className="md:hidden flex items-center justify-center pb-4">
               <input
                 value={formData.title}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, title: e.target.value }))
                 }
                 placeholder="Untitled Article..."
-                className="w-full h-10 bg-transparent text-lg font-semibold border-b border-zinc-400 outline-none placeholder:text-zinc-400 focus:border-primary transition"
+                className="w-[310px] h-10 bg-transparent text-sm font-semibold border-b border-zinc-400 outline-none placeholder:text-zinc-400 focus:border-primary transition"
               />
             </div>
-
-            {/* RIGHT ACTIONS */}
-            <div className="flex items-center gap-3">
-              <Button
-                variant="outline"
-                leftIcon={ImagePlus}
-                className="rounded-xl bg-zinc-900"
-                onClick={() => setShowCoverModal(true)}
-              >
-                Cover
-              </Button>
-              <Button
-                variant="outline"
-                leftIcon={Eye}
-                className="rounded-xl bg-zinc-900"
-                onClick={() => setShowPreview(true)}
-              >
-                Preview
-              </Button>
-
-              <Button
-                leftIcon={Save}
-                loading={saving}
-                onClick={handleSubmit}
-                className="rounded-xl"
-              >
-                {saving ? "Updating..." : "Update"}
-              </Button>
-            </div>
-          </div>
-
-          {/* MOBILE TITLE */}
-          <div className="md:hidden pb-4">
-            <Input
-              value={formData.title}
-              onChange={(e) =>
-                setFormData((p) => ({ ...p, title: e.target.value }))
-              }
-              placeholder="Untitled Article..."
-              className="h-11 bg-white/5 border-white/10 text-lg font-semibold rounded-xl"
-            />
           </div>
         </div>
 
@@ -349,25 +402,18 @@ const EditBlogPage = () => {
               </div>
 
               <div className="space-y-4">
-                <Select
-                  label="Category"
-                  triggerClassName="bg-zinc-950/50!"
-                  options={categories}
-                  value={formData.category}
-                  onValueChange={(value) =>
-                    setFormData((p) => ({ ...p, category: value }))
+                {/* VISIBILITY SWITCH */}
+                <Switch
+                  mode="single"
+                  label="Public visibility"
+                  textClassName="font-semibold! text-[13px]!"
+                  checked={formData.visibility === "public"}
+                  onCheckedChange={(checked) =>
+                    setFormData((p) => ({
+                      ...p,
+                      visibility: checked ? "public" : "private",
+                    }))
                   }
-                />
-
-                <Input
-                  prefixIcon={Tag}
-                  value={formData.tags}
-                  inputClassName="bg-zinc-950/50!"
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, tags: e.target.value }))
-                  }
-                  label="Tags"
-                  placeholder="react, ui, saas"
                 />
 
                 <Input
@@ -384,84 +430,46 @@ const EditBlogPage = () => {
                   placeholder="Neuctra Authix"
                 />
 
-                {/* VISIBILITY SWITCH */}
-                <Switch
-                  mode="single"
-                  label="Public visibility"
-                  checked={formData.visibility === "public"}
-                  onCheckedChange={(checked) =>
-                    setFormData((p) => ({
-                      ...p,
-                      visibility: checked ? "public" : "private",
-                    }))
+                <Input
+                  prefixIcon={Tag}
+                  value={formData.tags}
+                  inputClassName="bg-zinc-950/50!"
+                  onChange={(e) =>
+                    setFormData((p) => ({ ...p, tags: e.target.value }))
                   }
+                  label="Tags"
+                  placeholder="react, ui, saas"
                 />
-              </div>
-            </div>
 
-            {/* CONTENT STATS */}
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <Eye size={15} />
-                <h3 className="font-medium">Content Stats</h3>
-              </div>
+                <div>
+                  <Select
+                    label="Category"
+                    triggerClassName="bg-zinc-950/50!"
+                    options={categoriesList}
+                    value={formData.category}
+                    onValueChange={(value) =>
+                      setFormData((p) => ({ ...p, category: value }))
+                    }
+                  />
 
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/50">Blocks</span>
-                  <span>{formData.blocks.length}</span>
-                </div>
+                  <div className="mt-3 flex gap-2">
+                    <Input
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                      placeholder="New category..."
+                      inputClassName="bg-zinc-950/50! border-border!"
+                    />
 
-                <div className="flex justify-between">
-                  <span className="text-white/50">Words</span>
-                  <span>{wordCount}</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="text-white/50">Read Time</span>
-                  <span>{Math.ceil(wordCount / 200)} min</span>
-                </div>
-
-                <div className="flex justify-between">
-                  <span className="text-white/50">Views</span>
-                  <span>{formData.views}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* BLOG INFO */}
-            {formData.createdAt && (
-              <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
-                <h3 className="font-medium mb-3">Blog Info</h3>
-
-                <div className="space-y-2 text-xs text-white/50">
-                  <div className="flex justify-between">
-                    <span>Created</span>
-                    <span>
-                      {new Date(formData.createdAt).toLocaleDateString()}
-                    </span>
+                    <Button
+                      onClick={handleAddCategory}
+                      className="rounded-full! bg-primary hover:bg-primary/80"
+                    >
+                      <Plus size={16} />
+                    </Button>
                   </div>
-
-                  {formData.updatedAt && (
-                    <div className="flex justify-between">
-                      <span>Updated</span>
-                      <span>
-                        {new Date(formData.updatedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
-
-                  {formData.publishedAt && (
-                    <div className="flex justify-between">
-                      <span>Published</span>
-                      <span>
-                        {new Date(formData.publishedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>

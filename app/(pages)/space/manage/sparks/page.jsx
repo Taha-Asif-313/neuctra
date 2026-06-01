@@ -20,9 +20,11 @@ import {
   Lightbulb,
   CalendarDays,
   MoreVertical,
+  User,
+  LayoutDashboard,
 } from "lucide-react";
 
-import { Badge, Button, Dropdown, Input, useToast } from "@neuctra/ui";
+import { Avatar, Dropdown, Input, useToast } from "@neuctra/ui";
 import { deleteSpark, getUserSparks } from "@/app/services/spark";
 import { authix } from "@/app/utils/neuctraAuthix";
 import { useRouter } from "next/navigation";
@@ -30,6 +32,7 @@ import DeleteConfirmModal from "@/app/components/space/modals/DeleteConfirmModal
 import Link from "next/link";
 import { ReactSignedIn } from "@neuctra/authix";
 import { useAdmin } from "@/app/contexts/AdminContext";
+import UserButton from "@/app/components/space/user/UserButton";
 
 const formatDate = (date) => {
   if (!date) return "";
@@ -219,110 +222,85 @@ const ManageSparksPage = () => {
     <ReactSignedIn fallback={() => router.push("/space/login")}>
       <div className="min-h-screen text-white">
         {/* HEADER */}
-        <header className="sticky top-0 z-50 py-4 backdrop-blur">
-          <div className="mx-auto max-w-7xl rounded-3xl border border-zinc-900 bg-zinc-950/90 px-4 py-4 shadow-[0_0_40px_rgba(0,0,0,0.3)] backdrop-blur-xl sm:px-6">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <header className="border-b border-white/5 py-5">
+          <div className="mx-auto max-w-7xl">
+            {/* TOP ROW (ALWAYS SINGLE LINE) */}
+            <div className="flex h-16 items-center justify-between gap-4">
               {/* LEFT */}
-              <div className="min-w-0 flex-1">
-                <div className="mb-2 flex items-center gap-3">
-                  <Link
-                    href="/space"
-                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 transition hover:border-primary/40 hover:bg-zinc-800"
-                  >
-                    <ArrowLeft size={20} className="text-primary" />
-                  </Link>
+              <div className="flex min-w-0 items-center gap-3">
+                <Link
+                  href="/space"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-950 transition hover:bg-zinc-800"
+                  aria-label="Go back"
+                >
+                  <ArrowLeft size={18} />
+                </Link>
 
-                  <div>
-                    <h1 className="truncate text-2xl font-bold tracking-tight sm:text-3xl">
-                      Manage Sparks
-                    </h1>
+                <div className="min-w-0 leading-tight">
+                  <h1 className="truncate text-base font-semibold sm:text-lg">
+                    Manage Sparks
+                  </h1>
 
-                    <p className="mt-1 text-sm text-white/40">
-                      Create, edit, organize, and manage all your sparks.
-                    </p>
-                  </div>
+                  <p className="hidden text-xs text-primary/70 sm:block">
+                    Create, edit, organize sparks
+                  </p>
                 </div>
               </div>
 
-              {/* ACTIONS */}
-              <div className="flex items-center gap-3">
+              {/* DESKTOP ACTIONS */}
+              <div className="hidden items-center gap-3 sm:flex">
                 {/* SEARCH */}
-                <div className="relative hidden w-72 lg:block">
-                  <Search
-                    size={16}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                  />
-
+                <div className="w-64">
                   <Input
+                    prefixIcon={Search}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search sparks..."
-                    className="h-12 rounded-2xl border-zinc-800 bg-zinc-900 pl-11 text-white"
+                    placeholder="Search..."
+                    className="h-10 rounded-xl border border-zinc-800 bg-zinc-900 pl-10 text-sm text-white"
                   />
                 </div>
 
+                {/* CREATE */}
                 <Link
                   href="/space/manage/sparks/create"
-                  className="flex items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 text-sm font-medium text-white transition hover:scale-[1.02] hover:opacity-90"
+                  className="flex h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-medium text-white transition hover:bg-primary/90"
                 >
-                  <Plus size={18} />
-                  Create Spark
+                  <Plus size={16} />
+                  Create
                 </Link>
 
-                <button
-                  onClick={handleLogoutClick}
-                  className="hidden items-center justify-center gap-2 rounded-2xl border border-red-500/20 bg-red-500/10 px-5 py-3 text-sm font-medium text-red-400 transition hover:bg-red-500/20 sm:flex"
-                >
-                  <LogOut size={18} />
-                  Logout
-                </button>
+                {/* USER DROPDOWN (NEW) */}
+                <UserButton />
+              </div>
 
-                {/* MOBILE */}
-                <div className="sm:hidden">
-                  <Dropdown
-                    align="right"
-                    width={220}
-                    menuClassName="rounded-2xl border border-zinc-800 bg-zinc-950 p-2"
-                    itemClassName="rounded-xl text-sm"
-                    trigger={
-                      <button className="flex h-12 w-12 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900 transition hover:bg-zinc-800">
-                        <Search size={18} />
-                      </button>
-                    }
-                    items={[
-                      {
-                        label: "Logout",
-                        icon: <LogOut size={16} />,
-                        danger: true,
-                        onClick: handleLogoutClick,
-                      },
-                    ]}
-                  />
-                </div>
+              {/* MOBILE MENU BUTTON ONLY */}
+              <div className="sm:hidden flex items-center gap-2">
+                {/* CREATE */}
+                <Link
+                  href="/space/manage/sparks/create"
+                  className="flex h-10 w-10 justify-center items-center gap-2 rounded-full bg-primary text-sm font-medium text-white transition hover:bg-primary/90"
+                >
+                  <Plus size={16} />
+                </Link>
+                <UserButton />
               </div>
             </div>
 
-            {/* MOBILE SEARCH */}
-            <div className="mt-4 lg:hidden">
-              <div className="relative">
-                <Search
-                  size={16}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                />
-
-                <Input
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search sparks..."
-                  className="h-12 rounded-2xl border-zinc-800 bg-zinc-900 pl-11 text-white"
-                />
-              </div>
+            {/* MOBILE SEARCH (VISIBLE BELOW HEADER) */}
+            <div className="mt-4 sm:hidden">
+              <Input
+                prefixIcon={Search}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search sparks..."
+                className="h-11 rounded-xl border border-zinc-800 bg-zinc-900 pl-10 text-sm text-white"
+              />
             </div>
           </div>
         </header>
 
         {/* CONTENT */}
-        <main className="relative z-10 mx-auto max-w-7xl px-4 pb-10 sm:px-6">
+        <main className="relative z-10 mx-auto max-w-7xl pb-10 ">
           {/* STATS */}
           {totalSparks > 0 && (
             <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -382,9 +360,7 @@ const ManageSparksPage = () => {
             <div className="flex min-h-[420px] flex-col items-center justify-center rounded-[32px] border border-dashed border-zinc-800 bg-zinc-950/40 text-center">
               <Newspaper className="h-14 w-14 text-zinc-500" />
 
-              <h3 className="mt-5 text-xl font-semibold">
-                No sparks found
-              </h3>
+              <h3 className="mt-5 text-xl font-semibold">No sparks found</h3>
 
               <p className="mt-2 text-sm text-zinc-500">
                 Start publishing your first spark.

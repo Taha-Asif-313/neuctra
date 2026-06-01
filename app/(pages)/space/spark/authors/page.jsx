@@ -12,6 +12,7 @@ import {
   Search,
   Users,
   ArrowLeft,
+  ArrowUpRight,
 } from "lucide-react";
 import { Avatar } from "@neuctra/ui";
 
@@ -87,57 +88,156 @@ const SparkAuthers = () => {
       {/* LOADING */}
       {loading && <div className="text-gray-400">Loading authors...</div>}
 
-      {/* GRID */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filteredAuthors.map((user) => (
-          <div
+          <Link
             key={user.id}
-            className="group rounded-xl border border-white/10 bg-white/5 p-4 hover:border-primary/30 transition-all duration-200"
+            href={`/space/spark/authors/profile/${user.id}`}
+            className="group block h-full"
           >
-            {/* TOP */}
-            <div className="flex items-center justify-between">
-              {/* LEFT */}
-              <div className="flex items-center gap-3 min-w-0">
-                <Avatar
-                  src={user?.avatarUrl}
-                  fallback={user?.name[0]?.toUpperCase()}
+            <article
+              className="
+          relative h-full overflow-hidden
+          rounded-[24px]
+          border border-white/10
+          bg-[#050505]
+          p-5
+          transition-all duration-300
+          hover:border-primary/30
+          hover:-translate-y-1
+        "
+            >
+              {/* Background Glow */}
+              <div
+                className="
+            absolute inset-0 opacity-0
+            group-hover:opacity-100
+            transition-opacity duration-500
+          "
+              >
+                <div
+                  className="
+              absolute -top-20 right-0
+              w-40 h-40
+              rounded-full
+              bg-primary/10
+              blur-3xl
+            "
                 />
+              </div>
 
-                <div className="min-w-0">
-                  <h2 className="font-semibold text-white truncate">
-                    {user.name || "Unknown User"}
-                  </h2>
+              {/* Status */}
+              <div className="relative flex justify-end">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium ${
+                    user.isActive
+                      ? "bg-green-500/10 text-green-400"
+                      : "bg-red-500/10 text-red-400"
+                  }`}
+                >
+                  <span
+                    className={`w-1.5 h-1.5 rounded-full ${
+                      user.isActive ? "bg-green-400" : "bg-red-400"
+                    }`}
+                  />
+                  {user.isActive ? "Active" : "Inactive"}
+                </span>
+              </div>
 
-                  <p className="text-xs text-gray-400">Author</p>
+              {/* Avatar */}
+              <div className="relative mt-2 flex justify-center">
+                <div
+                  className="
+              relative
+              rounded-3xl
+              border border-white/10
+              p-1
+              bg-white/[0.02]
+            "
+                >
+                  <Avatar
+                    src={user.avatarUrl}
+                    fallback={user?.name?.[0]?.toUpperCase()}
+                    className="h-20 w-20"
+                  />
                 </div>
               </div>
 
-              {/* STATUS */}
-              <span
-                className={`text-[11px] px-2 py-1 rounded-full border ${
-                  user.isActive
-                    ? "border-green-500/20 text-green-400 bg-green-500/5"
-                    : "border-red-500/20 text-red-400 bg-red-500/5"
-                }`}
+              {/* Info */}
+              <div className="relative mt-5 text-center">
+                <h3
+                  className="
+      text-lg font-bold text-white
+      truncate
+      transition-colors
+      group-hover:text-primary
+    "
+                >
+                  {user.name || "Unknown User"}
+                </h3>
+
+                {/* Username */}
+                {user.username && (
+                  <p className="mt-1 text-xs text-primary font-medium">
+                    @{user.username}
+                  </p>
+                )}
+
+                <p className="mt-1 text-xs text-zinc-500 uppercase tracking-wider">
+                  Author
+                </p>
+
+                <p className="mt-3 text-sm text-zinc-400 truncate">
+                  {user.email}
+                </p>
+              </div>
+
+              {/* Action */}
+              <div
+                className="
+            relative mt-6 pt-4
+            border-t border-white/5
+            flex items-center justify-between
+          "
               >
-                {user.isActive ? "Active" : "Inactive"}
-              </span>
-            </div>
+                <div>
+                  <p className="text-sm font-medium text-white">View Profile</p>
+                  <p className="text-xs text-zinc-500">Open author page</p>
+                </div>
 
-            {/* EMAIL (minimal info only) */}
-            <div className="mt-3 text-xs text-gray-400 truncate">
-              {user.email}
-            </div>
+                <div
+                  className="
+              w-10 h-10 rounded-xl
+              bg-primary/10
+              border border-primary/20
+              flex items-center justify-center
+              transition-all duration-300
+              group-hover:bg-primary
+            "
+                >
+                  <ArrowUpRight
+                    size={18}
+                    className="
+                text-primary
+                transition-colors
+                group-hover:text-white
+              "
+                  />
+                </div>
+              </div>
 
-            {/* ACTION */}
-            <div className="mt-4 flex items-center justify-end">
-              <Link href={`/space/profile/${user.id}`}>
-                <button className="text-xs px-3 py-1.5 rounded-md bg-white/5 border border-white/10 hover:border-primary/40 hover:bg-white/10 transition">
-                  View Profile
-                </button>
-              </Link>
-            </div>
-          </div>
+              {/* Bottom Accent */}
+              <div
+                className="
+            absolute bottom-0 left-0
+            h-[2px] w-0
+            bg-primary
+            transition-all duration-500
+            group-hover:w-full
+          "
+              />
+            </article>
+          </Link>
         ))}
       </div>
 

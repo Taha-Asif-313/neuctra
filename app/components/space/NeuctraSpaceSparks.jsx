@@ -1,18 +1,25 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { Search } from "lucide-react";
-
+import Masonry from "react-masonry-css";
 import SparkCard from "./spark/SparkCard";
+import { Search } from "lucide-react";
 import { getAllSparks, getSearchSparks } from "@/app/services/spark";
 import { Button, Input } from "@neuctra/ui";
+import SparkSkeleton from "./spark/SpaceCardSkeleton";
+
+const breakpointColumns = {
+  default: 3,
+  1024: 2,
+  640: 1,
+};
 
 /* =========================
    Spark Item (memoized once)
 ========================= */
 const SparkItem = React.memo(({ spark, isLast, lastItemRef }) => {
   return (
-    <div ref={isLast ? lastItemRef : null} className="mb-6 break-inside-avoid">
+    <div ref={isLast ? lastItemRef : null} className="break-inside-avoid">
       <SparkCard spark={spark} />
     </div>
   );
@@ -143,34 +150,43 @@ export default function NeuctraSpaceSparks() {
         </Button>
       </div>
 
-      <div className="columns-1 gap-6 lg:columns-3">
-        {loading ? (
-          <div className="flex justify-center py-10">
-            <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          </div>
-        ) : (
-          sparks.map((spark, i) => (
+      {loading ? (
+        <Masonry
+          breakpointCols={breakpointColumns}
+          className="flex gap-6"
+          columnClassName="flex flex-col gap-6"
+        >
+          {Array.from({ length: 6 }).map((_, i) => (
+            <SparkSkeleton
+              key={i}
+              height={i % 3 === 0 ? "h-48" : i % 3 === 1 ? "h-64" : "h-80"}
+            />
+          ))}
+        </Masonry>
+      ) : (
+        <Masonry
+          breakpointCols={breakpointColumns}
+          className="flex gap-4"
+          columnClassName="flex flex-col gap-4"
+        >
+          {sparks.map((spark, i) => (
             <SparkItem
               key={spark.id}
               spark={spark}
               isLast={i === sparks.length - 1}
               lastItemRef={lastItemRef}
             />
-          ))
-        )}
+          ))}
 
-        {loadingMore && (
-          <div className="flex justify-center py-6">
-            <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          </div>
-        )}
-
-        {!hasMore && sparks.length > 0 && (
-          <div className="py-6 text-center text-sm text-zinc-400">
-            No more sparks
-          </div>
-        )}
-      </div>
+          {loadingMore &&
+            Array.from({ length: 3 }).map((_, i) => (
+              <SparkSkeleton
+                key={`more-${i}`}
+                height={i % 3 === 0 ? "h-48" : i % 3 === 1 ? "h-64" : "h-80"}
+              />
+            ))}
+        </Masonry>
+      )}
     </section>
   );
 }

@@ -11,9 +11,11 @@ import {
   Tag,
   ImagePlus,
   Package,
+  Plus,
+  MoreVertical,
 } from "lucide-react";
 
-import { Input, Select, Button, Switch } from "@neuctra/ui";
+import { Input, Select, Button, Switch, Dropdown } from "@neuctra/ui";
 
 import { useAdmin } from "@/app/contexts/AdminContext";
 import { createSpark } from "@/app/services/spark";
@@ -24,8 +26,8 @@ import { useRouter } from "next/navigation";
 
 //  DYNAMIC IMPORTS
 
-const BlogPreviewModal = dynamic(
-  () => import("@/app/components/space/BlogPreviewModal"),
+const SparkPreviewModal = dynamic(
+  () => import("@/app/components/space/SparkPreviewModal"),
   {
     ssr: false,
   },
@@ -71,18 +73,15 @@ const CreateSparkPage = () => {
     }),
   );
 
-  /* =========================================================
-     CATEGORIES
-  ========================================================= */
-
-  const categories = [
+  const [newCategory, setNewCategory] = useState("");
+  const [categoriesList, setCategoriesList] = useState([
     { label: "React", value: "React" },
     { label: "JavaScript", value: "JavaScript" },
     { label: "CSS", value: "CSS" },
     { label: "Tutorial", value: "Tutorial" },
     { label: "Design", value: "Design" },
     { label: "Development", value: "Development" },
-  ];
+  ]);
 
   /* =========================================================
      WORD COUNT
@@ -120,6 +119,24 @@ const CreateSparkPage = () => {
       ...prev,
       blocks: value,
     }));
+  };
+
+  const handleAddCategory = () => {
+    if (!newCategory.trim()) return;
+
+    const formatted = {
+      label: newCategory,
+      value: newCategory,
+    };
+
+    setCategoriesList((prev) => [...prev, formatted]);
+
+    setFormData((p) => ({
+      ...p,
+      category: newCategory,
+    }));
+
+    setNewCategory("");
   };
 
   /* =========================================================
@@ -162,24 +179,22 @@ const CreateSparkPage = () => {
     <ReactSignedIn fallback={() => router.push("/blog/admin/login")}>
       <div className="min-h-screen flex flex-col">
         {/* TOP BAR */}
-        <div className="sticky top-0 z-50 border-b border-white/10">
-          <div className="max-w-7xl mx-auto py-4 flex items-center justify-between gap-4">
+        <div>
+          <div className="flex h-16 items-center justify-between gap-4">
             {/* LEFT */}
             <div className="flex items-center gap-3">
               <Button
                 iconBefore={<ArrowLeft size={18} />}
                 variant="ghost"
-                onClick={() => router.push("/space/manage/sparks")}
-                className="flex items-center gap-2 hover:text-zinc-200 transition"
+                onClick={() => router.push("/space")}
+                className="flex items-center gap-2 bg-zinc-950 hover:text-zinc-200 transition"
               >
                 Back
               </Button>
-
-              <div className="hidden md:block w-px h-6 bg-white/10" />
             </div>
 
-            {/* CENTER TITLE INPUT */}
-            <div className="flex-1 max-w-2xl hidden md:block relative">
+            {/* CENTER (DESKTOP ONLY TITLE) */}
+            <div className="hidden md:block flex-1 max-w-2xl">
               <input
                 value={formData.title}
                 onChange={(e) =>
@@ -190,16 +205,17 @@ const CreateSparkPage = () => {
               />
             </div>
 
-            {/* RIGHT ACTIONS */}
-            <div className="flex items-center gap-3">
+            {/* RIGHT ACTIONS (DESKTOP) */}
+            <div className="hidden md:flex items-center gap-3">
               <Button
                 leftIcon={ImagePlus}
                 variant="outline"
                 className="rounded-xl"
                 onClick={() => setShowCoverModal(true)}
               >
-                Cover Image
+                Cover
               </Button>
+
               <Button
                 variant="outline"
                 leftIcon={Eye}
@@ -218,113 +234,142 @@ const CreateSparkPage = () => {
                 Publish
               </Button>
             </div>
+
+            {/* MOBILE DROPDOWN */}
+            <div className="md:hidden">
+              <Dropdown
+                align="right"
+                width={220}
+                menuClassName="rounded-xl border border-zinc-800 bg-zinc-950 p-2"
+                itemClassName="rounded-lg text-sm"
+                trigger={
+                  <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-950">
+                    <MoreVertical size={18} />
+                  </button>
+                }
+                items={[
+                  {
+                    label: "Cover Image",
+                    icon: <ImagePlus size={16} />,
+                    onClick: () => setShowCoverModal(true),
+                  },
+                  {
+                    label: "Preview",
+                    icon: <Eye size={16} />,
+                    onClick: () => setShowPreview(true),
+                  },
+                  {
+                    label: "Publish",
+                    icon: <Save size={16} />,
+                    onClick: handleSubmit,
+                  },
+                ]}
+              />
+            </div>
           </div>
 
           {/* MOBILE TITLE */}
-          <div className="md:hidden pb-4">
-            <Input
+          <div className="md:hidden flex items-center justify-center pb-4">
+            <input
               value={formData.title}
               onChange={(e) =>
                 setFormData((p) => ({ ...p, title: e.target.value }))
               }
               placeholder="Untitled Article..."
-              className="h-11 bg-white/5 border-white/10 text-lg font-semibold rounded-xl"
+              className="w-[310px] h-10 bg-transparent text-sm font-semibold border-b border-zinc-400 outline-none placeholder:text-zinc-400 focus:border-primary transition"
             />
           </div>
         </div>
 
         {/* MAIN CONTENT */}
-        <div className="flex-1 max-w-7xl mx-auto w-full py-10 grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* LEFT: EDITOR */}
-          <div className="lg:col-span-8">
-            <NeuctraEditor
-              className="rounded-2xl!"
-              blocks={formData.blocks}
-              setBlocks={setBlocks}
-            />
+        <div className="mx-auto grid lg:h-[calc(100vh-120px)] w-full max-w-7xl grid-cols-1 my-8 gap-3 lg:grid-cols-12">
+          {/* LEFT: EDITOR (SCROLL ONLY HERE) */}
+          <div className="lg:col-span-8 h-full overflow-hidden">
+            <div className="h-full overflow-y-auto">
+              <NeuctraEditor
+                className="rounded-2xl! bg-transparent! py-0! px-1!"
+                blocks={formData.blocks}
+                setBlocks={setBlocks}
+              />
+            </div>
           </div>
 
-          {/* RIGHT: SIDEBAR */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* PUBLISH SETTINGS */}
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
-              <div className="flex items-center gap-2 mb-5">
-                <Folder size={16} className="text-primary" />
-                <h3 className="font-medium">Publish Settings</h3>
-              </div>
-
-              <div className="space-y-4">
-                <Select
-                  label="Category"
-                  triggerClassName="bg-zinc-950/50!"
-                  options={categories}
-                  value={formData.category}
-                  onValueChange={(value) =>
-                    setFormData((p) => ({ ...p, category: value }))
-                  }
-                />
-
-                <Input
-                  prefixIcon={Tag}
-                  value={formData.tags}
-                  inputClassName="bg-zinc-950/50!"
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, tags: e.target.value }))
-                  }
-                  label="Tags"
-                  placeholder="react, ui, saas"
-                />
-
-                <Input
-                  prefixIcon={Package}
-                  value={formData.productName}
-                  inputClassName="bg-zinc-950/50!"
-                  onChange={(e) =>
-                    setFormData((p) => ({
-                      ...p,
-                      productName: e.target.value,
-                    }))
-                  }
-                  label="Product Name"
-                  placeholder="Neuctra Authix"
-                />
-
-                {/* VISIBILITY SWITCH */}
-                <Switch
-                  mode="single"
-                  label="Public visibility"
-                  checked={formData.visibility === "public"}
-                  onCheckedChange={(checked) =>
-                    setFormData((p) => ({
-                      ...p,
-                      visibility: checked ? "public" : "private",
-                    }))
-                  }
-                />
-              </div>
-            </div>
-
-            {/* CONTENT STATS */}
-            <div className="rounded-2xl border border-zinc-900 bg-zinc-950 p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <Eye size={15} />
-                <h3 className="font-medium">Content Stats</h3>
-              </div>
-
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-zinc-200">Blocks</span>
-                  <span>{formData.blocks.length}</span>
+          {/* RIGHT: SIDEBAR (FIXED PANEL) */}
+          <div className="lg:col-span-4 h-full overflow-hidden">
+            <div className="h-full overflow-y-auto space-y-6 pr-1">
+              {/* PUBLISH SETTINGS */}
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
+                <div className="mb-5 flex items-center gap-2">
+                  <Folder size={16} className="text-primary" />
+                  <h3 className="font-medium">Publish Settings</h3>
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="text-zinc-200">Words</span>
-                  <span>{wordCount}</span>
-                </div>
+                <div className="space-y-4">
+                  <Switch
+                    mode="single"
+                    label="Public visibility"
+                    textClassName="font-semibold! text-[13px]!"
+                    checked={formData.visibility === "public"}
+                    onCheckedChange={(checked) =>
+                      setFormData((p) => ({
+                        ...p,
+                        visibility: checked ? "public" : "private",
+                      }))
+                    }
+                  />
 
-                <div className="flex justify-between">
-                  <span className="text-zinc-200">Read Time</span>
-                  <span>{Math.ceil(wordCount / 200)} min</span>
+                  <Input
+                    prefixIcon={Package}
+                    value={formData.productName}
+                    inputClassName="bg-zinc-950/50! border-border!"
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        productName: e.target.value,
+                      }))
+                    }
+                    label="Product Name"
+                    placeholder="Neuctra Authix"
+                  />
+
+                  <Input
+                    prefixIcon={Tag}
+                    value={formData.tags}
+                    inputClassName="bg-zinc-950/50! border-border!"
+                    onChange={(e) =>
+                      setFormData((p) => ({ ...p, tags: e.target.value }))
+                    }
+                    label="Tags"
+                    placeholder="react, ui, saas"
+                  />
+
+                  <div>
+                    <Select
+                      label="Category"
+                      triggerClassName="bg-zinc-950/50!"
+                      options={categoriesList}
+                      value={formData.category}
+                      onValueChange={(value) =>
+                        setFormData((p) => ({ ...p, category: value }))
+                      }
+                    />
+
+                    <div className="mt-3 flex gap-2">
+                      <Input
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                        placeholder="New category..."
+                        inputClassName="bg-zinc-950/50! border-border!"
+                      />
+
+                      <Button
+                        onClick={handleAddCategory}
+                        className="rounded-full! bg-primary hover:bg-primary/80"
+                      >
+                        <Plus size={16} />
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,7 +378,7 @@ const CreateSparkPage = () => {
       </div>
 
       {/* PREVIEW MODAL */}
-      <BlogPreviewModal
+      <SparkPreviewModal
         open={showPreview}
         onClose={() => setShowPreview(false)}
         formData={formData}

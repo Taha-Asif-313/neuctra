@@ -10,10 +10,11 @@ import { authix } from "@/app/utils/neuctraAuthix";
 
 const UserButton = () => {
   const router = useRouter();
-  const { user, logout } = useAdmin();
+  const { user } = useAdmin();
 
   const userName = user?.name || "Admin User";
   const userEmail = user?.email || "admin@example.com";
+  const username = user?.username || "auther";
   const userAvatar = user?.avatarUrl;
 
   const handleLogoutClick = async () => {
@@ -24,12 +25,19 @@ const UserButton = () => {
   const items = [
     {
       label: (
-        <div className="flex flex-col px-1 py-1">
-          <span className="text-sm font-semibold text-white">{userName}</span>
-          <span className="text-xs text-white/60">{userEmail}</span>
+        <div className="flex flex-col px-2 py-1 min-w-0">
+          <span className="text-sm font-semibold text-white truncate">
+            {userName}
+          </span>
+
+          <div className="flex mt-1 items-center gap-2 text-xs text-white/60">
+            <span className="truncate">@{username}</span>
+            <span className="text-white/30">|</span>
+            <span className="truncate">{userEmail}</span>
+          </div>
         </div>
       ),
-      disabled: false,
+          onClick: () => router.push(`/space/spark/authors/profile/${user?.id}`),
     },
 
     { separator: true },
@@ -41,9 +49,9 @@ const UserButton = () => {
     },
 
     {
-      label: "Profile",
+      label: "Manage Profile",
       icon: <User size={16} />,
-      onClick: () => router.push("/space/profile"),
+      onClick: () => router.push("/space/manage/profile"),
     },
 
     { separator: true },
