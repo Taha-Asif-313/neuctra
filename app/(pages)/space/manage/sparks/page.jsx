@@ -227,24 +227,21 @@ const ManageSparksPage = () => {
             {/* TOP ROW (ALWAYS SINGLE LINE) */}
             <div className="flex h-16 items-center justify-between gap-4">
               {/* LEFT */}
-              <div className="flex min-w-0 items-center gap-3">
-                <Link
-                  href="/space"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-900 bg-zinc-950 transition hover:bg-zinc-800"
-                  aria-label="Go back"
-                >
-                  <ArrowLeft size={18} />
-                </Link>
+              <div>
+                <Link href="/space" className="flex items-center gap-4">
+                  <ArrowLeft
+                    size={24}
+                    className="transition-colors hover:text-primary"
+                  />
 
-                <div className="min-w-0 leading-tight">
-                  <h1 className="truncate text-base font-semibold sm:text-lg">
+                  <h1 className="text-xl font-bold sm:text-2xl">
                     Manage Sparks
                   </h1>
+                </Link>
 
-                  <p className="hidden text-xs text-primary/70 sm:block">
-                    Create, edit, organize sparks
-                  </p>
-                </div>
+                <p className="mt-1 text-xs text-gray-400 sm:text-sm">
+                  Create, edit, organize sparks
+                </p>
               </div>
 
               {/* DESKTOP ACTIONS */}

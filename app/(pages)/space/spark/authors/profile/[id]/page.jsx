@@ -25,7 +25,7 @@ import Link from "next/link";
 import SparkCard from "@/app/components/space/spark/SparkCard";
 import Masonry from "react-masonry-css";
 import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
-import { Input } from "@neuctra/ui";
+import { Button, Input } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import AvatarUpdateModal from "@/app/components/space/modals/AvatarUpdateModal";
 
@@ -157,12 +157,11 @@ const AuthorProfile = () => {
               <div
                 onClick={() => isOwner && setIsModalOpen(true)}
                 className={`
-      relative flex h-20 w-20 sm:h-24 sm:w-24
-      shrink-0 items-center justify-center
-      rounded-full
-      border border-zinc-800 bg-zinc-900
-      ${isOwner ? "cursor-pointer group" : ""}
-    `}
+                relative flex h-20 w-20 sm:h-24 sm:w-24
+                shrink-0 items-center justify-center
+                rounded-full
+                border border-zinc-800 bg-zinc-900
+                ${isOwner ? "cursor-pointer group" : ""}`}
               >
                 {/* Avatar */}
                 {user.avatarUrl ? (
@@ -181,19 +180,17 @@ const AuthorProfile = () => {
                 {isOwner && (
                   <div
                     className="
-          absolute bottom-1 -right-1
-          z-20
-        "
+                    absolute bottom-1 -right-1
+                    z-20"
                   >
                     <div
                       className="
-            h-7 w-7
-            rounded-full
-            bg-primary
-            border border-white/20
-            flex items-center justify-center
-            group-hover:scale-110 transition
-          "
+                      h-7 w-7
+                      rounded-full
+                      bg-primary
+                      border border-white/20
+                      flex items-center justify-center
+                      group-hover:scale-110 transition"
                     >
                       <Camera size={14} className="text-white" />
                     </div>
@@ -225,21 +222,23 @@ const AuthorProfile = () => {
 
             {/* ACTIONS */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <button
+              <Button
+                iconBefore={<Share2 size={14} />}
                 onClick={shareProfile}
-                className="flex h-10 items-center justify-center gap-2 rounded-xl bg-white px-4 text-sm font-medium text-black hover:bg-zinc-200"
+                textClassName="leading-0"
+                className=" bg-white px-4 text-[13px] text-black! hover:bg-zinc-200"
               >
-                <Share2 size={16} />
                 Share
-              </button>
+              </Button>
 
-              <button
+              <Button
+                iconBefore={<Copy size={14} />}
                 onClick={copyProfile}
-                className="flex h-10 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 text-sm font-medium text-white hover:bg-zinc-800"
+                textClassName="leading-0"
+                className=" px-4 text-[13px] text-white hover:bg-zinc-800"
               >
-                <Copy size={16} />
                 {copied ? "Copied" : "Copy"}
-              </button>
+              </Button>
             </div>
           </div>
         </div>

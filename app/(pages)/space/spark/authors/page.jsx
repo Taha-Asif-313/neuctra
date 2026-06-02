@@ -57,7 +57,7 @@ const SparkAuthers = () => {
         <div className="flex items-start gap-3">
           <div>
             <Link href={"/space"} className="flex items-center gap-4">
-              <ArrowLeft className="text-primary" size={22} />
+              <ArrowLeft className="hover:text-primary" size={24} />
               <h1 className="text-xl sm:text-2xl font-bold">Spark Authors</h1>
             </Link>
 
@@ -86,7 +86,12 @@ const SparkAuthers = () => {
       </div>
 
       {/* LOADING */}
-      {loading && <div className="text-gray-400">Loading authors...</div>}
+      {loading && (
+        <div className="flex items-center gap-3 py-8 text-zinc-400">
+          <div className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-700 border-t-primary" />
+          <span>Loading authors...</span>
+        </div>
+      )}
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filteredAuthors.map((user) => (
@@ -117,11 +122,10 @@ const SparkAuthers = () => {
               >
                 <div
                   className="
-              absolute -top-20 right-0
+              absolute -top-10 -right-10
               w-40 h-40
               rounded-full
               bg-primary/10
-              blur-3xl
             "
                 />
               </div>
@@ -146,21 +150,11 @@ const SparkAuthers = () => {
 
               {/* Avatar */}
               <div className="relative mt-2 flex justify-center">
-                <div
-                  className="
-              relative
-              rounded-3xl
-              border border-white/10
-              p-1
-              bg-white/[0.02]
-            "
-                >
-                  <Avatar
-                    src={user.avatarUrl}
-                    fallback={user?.name?.[0]?.toUpperCase()}
-                    className="h-20 w-20"
-                  />
-                </div>
+                <Avatar
+                  src={user.avatarUrl}
+                  fallback={user?.name?.[0]?.toUpperCase()}
+                  className="h-20 w-20"
+                />
               </div>
 
               {/* Info */}

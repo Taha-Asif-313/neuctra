@@ -26,6 +26,8 @@ const SparkItem = React.memo(({ spark, isLast, lastItemRef }) => {
 });
 
 export default function NeuctraSpaceSparks() {
+  const [error, setError] = useState(null);
+  const [loadMoreError, setLoadMoreError] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [sparks, setSparks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,14 +47,19 @@ export default function NeuctraSpaceSparks() {
   const fetchInitial = async () => {
     try {
       setLoading(true);
+      setError(null);
 
       const res = await getAllSparks({ limit: 10 });
 
-      if (res?.success) {
-        setSparks(res.data || []);
-        setCursor(res.nextCursor);
-        setHasMore(res.hasMore);
+      if (!res?.success) {
+        throw new Error(res?.message || "Failed to load sparks");
       }
+
+      setSparks(res.data || []);
+      setCursor(res.nextCursor);
+      setHasMore(res.hasMore);
+    } catch (err) {
+      setError(err.message || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -72,6 +79,7 @@ export default function NeuctraSpaceSparks() {
   const handleSearch = useCallback(async () => {
     try {
       setLoading(true);
+      setError(null);
 
       if (!searchInput.trim()) {
         return fetchInitial();
@@ -79,10 +87,14 @@ export default function NeuctraSpaceSparks() {
 
       const res = await getSearchSparks(searchInput);
 
-      if (res?.success) {
-        setSparks(res.data || []);
-        setHasMore(false);
+      if (!res?.success) {
+        throw new Error(res?.message || "Search failed");
       }
+
+      setSparks(res.data || []);
+      setHasMore(false);
+    } catch (err) {
+      setError(err.message || "Unable to search sparks");
     } finally {
       setLoading(false);
     }
@@ -96,17 +108,22 @@ export default function NeuctraSpaceSparks() {
 
     try {
       setLoadingMore(true);
+      setLoadMoreError(null);
 
       const res = await getAllSparks({
         limit: 10,
         cursor,
       });
 
-      if (res?.success) {
-        setSparks((prev) => [...prev, ...(res.data || [])]);
-        setCursor(res.nextCursor);
-        setHasMore(res.hasMore);
+      if (!res?.success) {
+        throw new Error(res?.message || "Failed to load more");
       }
+
+      setSparks((prev) => [...prev, ...(res.data || [])]);
+      setCursor(res.nextCursor);
+      setHasMore(res.hasMore);
+    } catch (err) {
+      setLoadMoreError(err.message || "Unable to load more sparks");
     } finally {
       setLoadingMore(false);
     }
@@ -126,9 +143,24 @@ export default function NeuctraSpaceSparks() {
     if (node) observerRef.current.observe(node);
   };
 
-  /* =========================
-     UI
-  ========================= */
+  if (error) {
+    return (
+      <section className="w-full">
+        <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-red-500/20 bg-red-500/5 p-8 text-center">
+          <h3 className="mb-2 text-lg font-semibold text-white">
+            Failed to load sparks
+          </h3>
+
+          <p className="mb-5 max-w-md text-sm text-zinc-400">{error}</p>
+
+          <Button onClick={fetchInitial} className="rounded-xl">
+            Try Again
+          </Button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="w-full">
       {/* SEARCH */}
@@ -166,7 +198,7 @@ export default function NeuctraSpaceSparks() {
       ) : (
         <Masonry
           breakpointCols={breakpointColumns}
-          className="flex gap-4"
+          className="flex gap-4 mb-5"
           columnClassName="flex flex-col gap-4"
         >
           {sparks.map((spark, i) => (
@@ -186,6 +218,14 @@ export default function NeuctraSpaceSparks() {
               />
             ))}
         </Masonry>
+      )}
+
+      {loadMoreError && (
+        <div className="mt-5 flex justify-center">
+          <Button variant="outline" onClick={loadMore} className="rounded-xl">
+            Retry Loading More
+          </Button>
+        </div>
       )}
     </section>
   );
