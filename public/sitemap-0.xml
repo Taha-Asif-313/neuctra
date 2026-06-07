@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.neuctra.com/about</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/contact</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/pricing</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/privacy</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/refund-policy</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/terms</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/blog/admin/login</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/blog/admin</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/blog/admin/verify-email</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/blog/create</loc><lastmod>2026-05-20T17:04:41.964Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://www.neuctra.com/blog</loc><lastmod>2026-05-20T17:04:41.965Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/about</loc><lastmod>2026-06-07T13:16:14.106Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/contact</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/pricing</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/privacy</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/refund-policy</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/terms</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/login</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/manage/profile</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/manage/sparks/create</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/manage/sparks</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/set-username</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/signup</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/spark/authors</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://www.neuctra.com/space/verify-email</loc><lastmod>2026-06-07T13:16:14.107Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>

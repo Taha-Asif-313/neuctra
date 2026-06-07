@@ -1,24 +1,13 @@
-"use client";
+import { Suspense } from "react";
+import SpaceContent from "./SpaceContent";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
 
-import { useSearchParams } from "next/navigation";
-import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
-import NeuctraSpaceSparks from "@/app/components/space/NeuctraSpaceSparks";
-
-const AllSparksPage = () => {
-  const searchParams = useSearchParams();
-
-  // get ?tag=react
-  const tag = searchParams.get("tag");
-
+export default function AllSparksPage() {
   return (
     <div className="min-h-screen text-white">
-      {/* HEADER */}
-      <NeuctraSpaceHeader />
-
-      {/* CONTENT */}
-      <NeuctraSpaceSparks tag={tag} />
+      <Suspense fallback={<LoadingSpinner message="Loading sparks..." />}>
+        <SpaceContent />
+      </Suspense>
     </div>
   );
-};
-
-export default AllSparksPage;
+}
