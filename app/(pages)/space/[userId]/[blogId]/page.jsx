@@ -367,7 +367,7 @@ const SparkViewPage = () => {
                 </div>
 
                 <Link
-                  href={`/space/spark/authors/profile/${author?.id}`}
+                  href={`/space/spark/authors/profile/${spark?.authorId}`}
                   className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition"
                 >
                   Visit Profile

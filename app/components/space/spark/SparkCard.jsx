@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   CalendarDays,
@@ -9,11 +9,10 @@ import {
   Heart,
   Eye,
   MessageCircle,
-  Sparkles,
-  Terminal,
-  TrendingUp,
   Lightbulb,
+  CameraIcon,
 } from "lucide-react";
+import LoadingSpinner from "../../utils/LoadingSpinner";
 
 const formatDate = (date) => {
   if (!date) return "";
@@ -53,10 +52,15 @@ const getCoverImage = (spark) => {
 const SparkCard = ({ spark }) => {
   if (!spark) return null;
 
+  const [imageLoading, setImageLoading] = useState(true);
+
   const cover = getCoverImage(spark);
 
   return (
-    <Link href={`/space/${spark.authorId}/${spark.id}`} className="block h-full">
+    <Link
+      href={`/space/${spark.authorId}/${spark.id}`}
+      className="block h-full"
+    >
       <article
         className="
           group relative flex flex-col h-full overflow-hidden
@@ -71,13 +75,21 @@ const SparkCard = ({ spark }) => {
         <div className="relative aspect-[16/10] overflow-hidden">
           {cover ? (
             <>
+              {imageLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-10">
+                  <LoadingSpinner message="Loading image..." />
+                </div>
+              )}
+
               <img
                 src={cover}
                 alt="cover"
                 className="
-                  absolute inset-0 w-full h-full
-                  object-cover
-                  transition-transform duration-700"
+        absolute inset-0 w-full h-full
+        object-cover
+        transition-transform duration-700"
+                onLoad={() => setImageLoading(false)}
+                onError={() => setImageLoading(false)}
               />
 
               <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/10 to-transparent" />
@@ -85,23 +97,21 @@ const SparkCard = ({ spark }) => {
           ) : (
             <div
               className="
-                absolute inset-0
-                bg-linear-to-br from-[#001a0c] via-black to-[#00150a]
-                flex items-center justify-center
-      "
+      absolute inset-0
+      bg-linear-to-br from-[#001a0c] via-black to-[#00150a]
+      flex items-center justify-center
+    "
             >
               <div className="relative">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 rounded-full" />
 
                 <div
                   className="
-            relative w-20 h-20 rounded-3xl
-            border border-primary/20
-            bg-primary/5
-            flex items-center justify-center
-          "
+          relative w-20 h-20
+          flex items-center justify-center
+        "
                 >
-                  <Lightbulb size={36} className="text-primary/70" />
+                  <CameraIcon size={36} className="text-primary/70" />
                 </div>
               </div>
             </div>
@@ -141,7 +151,7 @@ const SparkCard = ({ spark }) => {
               flex items-center gap-2 flex-wrap
             "
           >
-            <div
+            {/* <div
               className="
                 flex items-center gap-1.5
                 px-3 py-1.5 rounded-full
@@ -152,7 +162,7 @@ const SparkCard = ({ spark }) => {
             >
               <Eye size={14} className="text-white" />
               {spark.views || 0}
-            </div>
+            </div> */}
             <div
               className="
                 flex items-center gap-1.5

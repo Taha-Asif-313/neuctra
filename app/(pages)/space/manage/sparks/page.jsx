@@ -85,7 +85,6 @@ const ManageSparksPage = () => {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   console.log(selectedSpark);
-  
 
   /* ---------------- FETCH ALL ---------------- */
   useEffect(() => {
@@ -127,10 +126,7 @@ const ManageSparksPage = () => {
     try {
       setDeleteLoading(true);
 
-      const response = await deleteSpark(
-        user.id,
-        selectedSpark.id
-      );
+      const response = await deleteSpark(user.id, selectedSpark.id);
 
       if (response?.success) {
         setSparks((prev) =>
@@ -279,7 +275,7 @@ const ManageSparksPage = () => {
         <main className="relative z-10 mx-auto max-w-7xl pb-10 ">
           {/* STATS */}
           {totalSparks > 0 && (
-            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {/* Total */}
               <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
                 <div className="mb-4 flex items-start justify-between">
@@ -297,20 +293,7 @@ const ManageSparksPage = () => {
                 </p>
               </div>
 
-              {/* Featured */}
-              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
-                <div className="mb-4 flex items-start justify-between">
-                  <div className="rounded-2xl bg-primary/10 p-3 text-primary">
-                    <Star size={20} />
-                  </div>
 
-                  <span className="text-xs text-white/40">Featured</span>
-                </div>
-
-                <h2 className="text-3xl font-bold">{featuredSparks}</h2>
-
-                <p className="mt-2 text-sm text-white/40">Featured sparks</p>
-              </div>
 
               {/* Public */}
               <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
@@ -352,55 +335,52 @@ const ManageSparksPage = () => {
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-           {filteredSparks.map((spark) => (
-  <div
-    key={spark.dataId || spark.id}
-    className="relative"
-  >
-    <SparkCard spark={spark} />
+              {filteredSparks.map((spark) => (
+                <div key={spark.dataId || spark.id} className="relative">
+                  <SparkCard spark={spark} />
 
-    <div className="absolute top-4 right-4 z-50">
-      <Dropdown
-        align="right"
-        width={180}
-        menuClassName="rounded-2xl border border-zinc-800 bg-zinc-950 p-2"
-        itemClassName="rounded-xl text-sm"
-        trigger={
-          <button
-            onClick={(e) => e.preventDefault()}
-            className="
+                  <div className="absolute top-4 right-4 z-50">
+                    <Dropdown
+                      align="right"
+                      width={180}
+                      menuClassName="rounded-2xl border border-zinc-800 bg-zinc-950 p-2"
+                      itemClassName="rounded-xl text-sm"
+                      trigger={
+                        <button
+                          onClick={(e) => e.preventDefault()}
+                          className="
               flex h-10 w-10 items-center justify-center
               rounded-2xl border border-white/10
               bg-black/40 backdrop-blur
               transition hover:bg-black/60
             "
-          >
-            <MoreVertical size={16} />
-          </button>
-        }
-        items={[
-          {
-            label: "Edit Spark",
-            icon: <Edit2 size={15} />,
-            onClick: () =>
-              router.push(
-                `/space/manage/sparks/edit/${
-                  spark.dataId || spark.id
-                }`
-              ),
-          },
-          { separator: true },
-          {
-            label: "Delete Spark",
-            icon: <Trash2 size={15} />,
-            danger: true,
-            onClick: () => openDeleteModal(spark),
-          },
-        ]}
-      />
-    </div>
-  </div>
-))}
+                        >
+                          <MoreVertical size={16} />
+                        </button>
+                      }
+                      items={[
+                        {
+                          label: "Edit Spark",
+                          icon: <Edit2 size={15} />,
+                          onClick: () =>
+                            router.push(
+                              `/space/manage/sparks/edit/${
+                                spark.dataId || spark.id
+                              }`,
+                            ),
+                        },
+                        { separator: true },
+                        {
+                          label: "Delete Spark",
+                          icon: <Trash2 size={15} />,
+                          danger: true,
+                          onClick: () => openDeleteModal(spark),
+                        },
+                      ]}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </main>

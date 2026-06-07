@@ -1,23 +1,24 @@
 "use client";
 
-import { getUserById, updateUserAvatar } from "@/app/services/user";
+import { getUserById } from "@/app/services/user";
 import { getUserSparks } from "@/app/services/spark";
 import { useParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  Share2,
-  Copy,
-  Info,
-  Search,
-  Camera,
-} from "lucide-react";
-import Link from "next/link";
+import { Share2, Copy, Info, Search, Camera, UserX } from "lucide-react";
 import SparkCard from "@/app/components/space/spark/SparkCard";
 import Masonry from "react-masonry-css";
 import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
 import { Button, Input } from "@neuctra/ui";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import AvatarUpdateModal from "@/app/components/space/modals/AvatarUpdateModal";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
+
+const breakpointColumnsObj = {
+  default: 3,
+  1280: 3,
+  1024: 2,
+  640: 1,
+};
 
 const AuthorProfile = () => {
   const { id } = useParams();
@@ -41,7 +42,11 @@ const AuthorProfile = () => {
         const sparksRes = await getUserSparks(id);
 
         setUser(res?.data || null);
-        setSparks(sparksRes?.data || sparksRes || []);
+        setSparks(
+          (sparksRes?.data || sparksRes || []).filter(
+            (spark) => spark.visibility === "public",
+          ),
+        );
       } catch (err) {
         console.error(err);
       } finally {
@@ -60,28 +65,6 @@ const AuthorProfile = () => {
       year: "numeric",
     });
   }, [user]);
-
-  const copyProfile = async () => {
-    await navigator.clipboard.writeText(window.location.href);
-
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 1500);
-  };
-
-  const shareProfile = async () => {
-    if (navigator.share) {
-      await navigator.share({
-        title: user?.name,
-        text: "Check out this author profile",
-        url: window.location.href,
-      });
-    } else {
-      copyProfile();
-    }
-  };
 
   const filteredSparks = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -108,190 +91,219 @@ const AuthorProfile = () => {
     });
   }, [sparks, search]);
 
-  const breakpointColumnsObj = {
-    default: 3,
-    1280: 3,
-    1024: 2,
-    640: 1,
+  const copyProfile = async () => {
+    await navigator.clipboard.writeText(window.location.href);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
+  };
+
+  const shareProfile = async () => {
+    if (navigator.share) {
+      await navigator.share({
+        title: user?.name,
+        text: "Check out this author profile",
+        url: window.location.href,
+      });
+    } else {
+      copyProfile();
+    }
+  };
+
+  const handleAction = async () => {
+    try {
+      await copyProfile();
+      setCopied(true);
+
+      setTimeout(() => setCopied(false), 1500);
+
+      if (navigator.share) {
+        await navigator.share({
+          title: user?.name,
+          text: "Check out this author profile",
+          url: window.location.href,
+        });
+      } else {
+        shareProfile();
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-transparent flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-10 w-10 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-
-          <p className="text-sm text-zinc-300">Loading profile...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        User not found
-      </div>
-    );
+    return <LoadingSpinner message="Loading profile..." />;
   }
 
   return (
     <div className="min-h-screen text-white">
       <NeuctraSpaceHeader />
-      <div className="max-w-7xl mx-auto py-5">
-        {/* PROFILE */}
-        <div>
-          <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
-            {/* AVATAR */}
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
-              <div
-                onClick={() => isOwner && setIsModalOpen(true)}
-                className={`
+
+      {!user ? (
+        <div className="min-h-[80vh] bg-transparent flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <UserX size={40} className="text-zinc-400" />
+
+            <h2 className="text-lg font-semibold">User not found</h2>
+
+            <p className="text-sm text-zinc-400">
+              The profile you’re looking for doesn’t exist or was removed.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="max-w-7xl mx-auto py-5">
+          {/* PROFILE */}
+          <div>
+            <div className="flex flex-col gap-8 xl:flex-row xl:items-start xl:justify-between">
+              {/* AVATAR */}
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+                <div
+                  onClick={() => isOwner && setIsModalOpen(true)}
+                  className={`
                 relative flex h-20 w-20 sm:h-24 sm:w-24
                 shrink-0 items-center justify-center
                 rounded-full
                 border border-zinc-800 bg-zinc-900
                 ${isOwner ? "cursor-pointer group" : ""}`}
-              >
-                {/* Avatar */}
-                {user.avatarUrl ? (
-                  <img
-                    src={user.avatarUrl}
-                    alt={user.name}
-                    className="h-full w-full object-cover rounded-full"
-                  />
-                ) : (
-                  <span className="text-2xl font-semibold text-white">
-                    {user?.name?.charAt(0) || "U"}
-                  </span>
-                )}
+                >
+                  {/* Avatar */}
+                  {user.avatarUrl ? (
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.name}
+                      className="h-full w-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <span className="text-2xl font-semibold text-white">
+                      {user?.name?.charAt(0) || "U"}
+                    </span>
+                  )}
 
-                {/* CAMERA ICON (FIXED POSITION + NO CUT) */}
-                {isOwner && (
-                  <div
-                    className="
-                    absolute bottom-1 -right-1
-                    z-20"
-                  >
+                  {/* CAMERA ICON (FIXED POSITION + NO CUT) */}
+                  {isOwner && (
                     <div
                       className="
+                    absolute bottom-1 -right-1
+                    z-20"
+                    >
+                      <div
+                        className="
                       h-7 w-7
                       rounded-full
                       bg-primary
                       border border-white/20
                       flex items-center justify-center
                       group-hover:scale-110 transition"
-                    >
-                      <Camera size={14} className="text-white" />
+                      >
+                        <Camera size={14} className="text-white" />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-
-              {/* INFO */}
-              <div className="min-w-0 space-y-0.5">
-                <h1 className="truncate leading-none text-2xl font-semibold tracking-tight sm:text-3xl text-white">
-                  {user.name}
-                </h1>
-
-                <p className="text-sm text-zinc-300">@{user.username}</p>
-
-                <div className="flex flex-wrap items-center gap-2 pt-1">
-                  {user.isVerified && (
-                    <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs text-green-500">
-                      Verified
-                    </span>
                   )}
-
-                  <span className="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-zinc-300">
-                    Joined {joinedDate}
-                  </span>
                 </div>
+
+                {/* INFO */}
+                <div className="min-w-0 space-y-0.5">
+                  <h1 className="truncate leading-none text-2xl font-semibold tracking-tight sm:text-3xl text-white">
+                    {user.name}
+                  </h1>
+
+                  <p className="text-sm text-zinc-300">@{user.username}</p>
+
+                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                    {user.isVerified && (
+                      <span className="rounded-full bg-green-500/10 px-3 py-1 text-xs text-green-500">
+                        Verified
+                      </span>
+                    )}
+
+                    <span className="rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs text-zinc-300">
+                      Joined {joinedDate}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* ACTIONS */}
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Button
+                  onClick={handleAction}
+                  iconBefore={
+                    copied ? <Copy size={14} /> : <Share2 size={14} />
+                  }
+                  className="px-4 text-[13px] text-white bg-zinc-900 hover:bg-zinc-800 transition"
+                >
+                  {copied ? "Copied" : "Share"}
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* SPARKS */}
+          <div className="mt-12">
+            <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <h2 className="text-2xl font-bold md:text-3xl">
+                  Author Sparks
+                </h2>
+
+                <p className="mt-0.5 text-sm text-zinc-200">
+                  Explore all public sparks created by this author
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Input
+                  size="lg"
+                  placeholder="Search sparks..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  inputClassName="w-full sm:w-80"
+                  prefixIcon={Search}
+                />
               </div>
             </div>
 
-            {/* ACTIONS */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button
-                iconBefore={<Share2 size={14} />}
-                onClick={shareProfile}
-                textClassName="leading-0"
-                className=" bg-white px-4 text-[13px] text-black! hover:bg-zinc-200"
-              >
-                Share
-              </Button>
+            {filteredSparks.length === 0 ? (
+              <div className="rounded-3xl border-2 border-dashed border-zinc-900 py-20 text-center">
+                <Info size={40} className="mx-auto mb-2 text-zinc-300" />
 
-              <Button
-                iconBefore={<Copy size={14} />}
-                onClick={copyProfile}
-                textClassName="leading-0"
-                className=" px-4 text-[13px] text-white hover:bg-zinc-800"
+                <h3 className="text-2xl font-semibold">
+                  {search ? "No matching sparks found" : "No Sparks Yet"}
+                </h3>
+
+                <p className="mt-2 text-zinc-400">
+                  {search
+                    ? `No sparks match "${search}".`
+                    : "This author hasn’t published any sparks yet."}
+                </p>
+              </div>
+            ) : (
+              <Masonry
+                breakpointCols={breakpointColumnsObj}
+                className="flex gap-6"
+                columnClassName="flex flex-col gap-6"
               >
-                {copied ? "Copied" : "Copy"}
-              </Button>
-            </div>
+                {filteredSparks.map((spark) => (
+                  <div className="break-inside-avoid">
+                    {" "}
+                    <SparkCard
+                      key={spark.id}
+                      spark={{
+                        ...spark,
+                        userId: user.id,
+                      }}
+                    />
+                  </div>
+                ))}
+              </Masonry>
+            )}
           </div>
         </div>
-
-        {/* SPARKS */}
-        <div className="mt-12">
-          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <h2 className="text-2xl font-bold md:text-3xl">Author Sparks</h2>
-
-              <p className="mt-0.5 text-sm text-zinc-200">
-                Explore all public sparks created by this author
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Input
-                size="lg"
-                placeholder="Search sparks..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                inputClassName="w-full sm:w-80"
-                prefixIcon={Search}
-              />
-            </div>
-          </div>
-
-          {filteredSparks.length === 0 ? (
-            <div className="rounded-3xl border-2 border-dashed border-zinc-900 py-20 text-center">
-              <Info size={40} className="mx-auto mb-2 text-zinc-300" />
-
-              <h3 className="text-2xl font-semibold">
-                {search ? "No matching sparks found" : "No Sparks Yet"}
-              </h3>
-
-              <p className="mt-2 text-zinc-400">
-                {search
-                  ? `No sparks match "${search}".`
-                  : "This author hasn’t published any sparks yet."}
-              </p>
-            </div>
-          ) : (
-            <Masonry
-              breakpointCols={breakpointColumnsObj}
-              className="flex gap-6"
-              columnClassName="flex flex-col gap-6"
-            >
-              {filteredSparks.map((spark) => (
-                <div className="break-inside-avoid">
-                  {" "}
-                  <SparkCard
-                    key={spark.id}
-                    spark={{
-                      ...spark,
-                      userId: user.id,
-                    }}
-                  />
-                </div>
-              ))}
-            </Masonry>
-          )}
-        </div>
-      </div>
+      )}
 
       <AvatarUpdateModal
         isOpen={isModalOpen}
