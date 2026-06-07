@@ -164,3 +164,103 @@ export const searchSparks = async (query) => {
     };
   }
 };
+
+/* =========================================================
+   TOGGLE LIKE (Add or Remove)
+========================================================= */
+export const toggleLike = async ({ spark, likedBuyUserId }) => {
+  try {
+    // Check if user already liked this spark
+    const hasLiked = spark.likes?.includes(likedBuyUserId);
+    
+    let updatedLikes;
+    
+    if (hasLiked) {
+      // Remove like (unlike)
+      updatedLikes = spark.likes.filter(id => id !== likedBuyUserId);
+    } else {
+      // Add like
+      updatedLikes = [...(spark.likes || []), likedBuyUserId];
+    }
+    
+    const updatedSpark = {
+      ...spark,
+      likes: updatedLikes,
+    };
+
+    const response = await authix.updateUserData({
+      userId: spark.authorId, // Update the spark owner's data
+      dataId: spark.id,
+      data: updatedSpark,
+    });
+
+    return {
+      success: true,
+      data: response,
+      action: hasLiked ? 'unliked' : 'liked', // Useful for UI feedback
+    };
+  } catch (error) {
+    console.error("Toggle Like Error:", error);
+
+    return {
+      success: false,
+      error,
+    };
+  }
+};
+
+/* =========================================================
+   ADD COMMENT
+========================================================= */
+export const addCommentToSpark = async ({ spark, user, comment }) => {
+  try {
+    const trimmedComment = comment?.trim();
+
+    if (!trimmedComment) {
+      return {
+        success: false,
+        error: "Comment is required",
+      };
+    }
+
+    const newComment = {
+      id: crypto.randomUUID(),
+
+      // User Info
+      userId: user?.id,
+      username: user?.username || "",
+      name: user?.name || "",
+
+      // Comment Info
+      comment: trimmedComment,
+      createdAt: new Date().toISOString(),
+    };
+
+    const updatedComments = [...(spark.comments || []), newComment];
+
+    const updatedSpark = {
+      ...spark,
+      comments: updatedComments,
+    };
+
+    const response = await authix.updateUserData({
+      userId: spark.authorId,
+      dataId: spark.id,
+      data: updatedSpark,
+    });
+
+    return {
+      success: true,
+      data: response,
+      comment: newComment,
+      comments: updatedComments,
+    };
+  } catch (error) {
+    console.error("Add Comment Error:", error);
+
+    return {
+      success: false,
+      error,
+    };
+  }
+};

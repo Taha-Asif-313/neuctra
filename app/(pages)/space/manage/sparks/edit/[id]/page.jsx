@@ -22,6 +22,7 @@ import { createBlock } from "@/app/utils/blocks";
 import { defaultBlogState } from "@/app/states/blog";
 import { useParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
 
 /* =========================================================
    DYNAMIC IMPORTS
@@ -254,13 +255,7 @@ const EditBlogPage = () => {
   //  LOADING STATE
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-
-          <p className="text-white/50">Loading blogs...</p>
-        </div>
-      </div>
+     <LoadingSpinner message="Loading spark..." />
     );
   }
 

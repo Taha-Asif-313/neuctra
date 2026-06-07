@@ -139,10 +139,7 @@ const CreateSparkPage = () => {
     setNewCategory("");
   };
 
-  /* =========================================================
-     SUBMIT
-  ========================================================= */
-
+  //  SUBMIT
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -158,11 +155,16 @@ const CreateSparkPage = () => {
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
-        likes: 0,
         views: 0,
+        likes: [],
         comments: [],
         readTime: `${Math.ceil(wordCount / 200)} min read`,
         createdAt: new Date().toISOString(),
+        authorId: user.id,
+        author: {
+          name: user.name,
+          username: user.username,
+        },
       };
 
       await createSpark(user.id, sparkData);

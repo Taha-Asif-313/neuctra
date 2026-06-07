@@ -33,6 +33,8 @@ import Link from "next/link";
 import { ReactSignedIn } from "@neuctra/authix";
 import { useAdmin } from "@/app/contexts/AdminContext";
 import UserButton from "@/app/components/space/user/UserButton";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
+import SparkCard from "@/app/components/space/spark/SparkCard";
 
 const formatDate = (date) => {
   if (!date) return "";
@@ -71,23 +73,19 @@ const getCoverImage = (spark) => {
 
 const ManageSparksPage = () => {
   const { user } = useAdmin();
-
   const router = useRouter();
-
   const { toast } = useToast();
 
   /* ---------------- STATE ---------------- */
   const [sparks, setSparks] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
   const [searchTerm, setSearchTerm] = useState("");
-
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-
   const [selectedSpark, setSelectedSpark] = useState(null);
-
   const [deleteLoading, setDeleteLoading] = useState(false);
+
+  console.log(selectedSpark);
+  
 
   /* ---------------- FETCH ALL ---------------- */
   useEffect(() => {
@@ -130,11 +128,11 @@ const ManageSparksPage = () => {
       setDeleteLoading(true);
 
       const response = await deleteSpark(
-        selectedSpark.userId,
-        selectedSpark.dataId || selectedSpark.id,
+        user.id,
+        selectedSpark.id
       );
 
-      if (response?.success || response) {
+      if (response?.success) {
         setSparks((prev) =>
           prev.filter(
             (spark) =>
@@ -149,28 +147,17 @@ const ManageSparksPage = () => {
       }
     } catch (error) {
       console.error("Delete Spark Error:", error);
-
       toast.error("Failed to delete spark");
     } finally {
       setDeleteLoading(false);
-
       setDeleteModalOpen(false);
-
       setSelectedSpark(null);
     }
   };
 
   const openDeleteModal = (spark) => {
     setSelectedSpark(spark);
-
     setDeleteModalOpen(true);
-  };
-
-  /* ---------------- LOGOUT ---------------- */
-  const handleLogoutClick = async () => {
-    await authix.logoutUser();
-
-    router.push("/space");
   };
 
   /* ---------------- FILTER ---------------- */
@@ -207,22 +194,14 @@ const ManageSparksPage = () => {
 
   /* ---------------- LOADING ---------------- */
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-
-          <p className="text-white/50">Loading sparks...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading sparks..." />;
   }
 
   return (
     <ReactSignedIn fallback={() => router.push("/space/login")}>
       <div className="min-h-screen text-white">
         {/* HEADER */}
-        <header className="border-b border-white/5 py-5">
+        <header className="py-5">
           <div className="mx-auto max-w-7xl">
             {/* TOP ROW (ALWAYS SINGLE LINE) */}
             <div className="flex h-16 items-center justify-between gap-4">
@@ -373,317 +352,55 @@ const ManageSparksPage = () => {
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              {filteredSparks.map((spark) => {
-                const cover = getCoverImage(spark);
+           {filteredSparks.map((spark) => (
+  <div
+    key={spark.dataId || spark.id}
+    className="relative"
+  >
+    <SparkCard spark={spark} />
 
-                return (
-                  <article
-                    key={spark.dataId || spark.id}
-                    className="
-                      group relative flex flex-col overflow-hidden
-                      rounded-[30px]
-                      border border-white/10
-                      bg-[#050505]
-                      transition-all duration-500
-                      hover:border-primary/40
-                    "
-                  >
-                    {/* COVER */}
-                    <div className="relative h-60 overflow-hidden">
-                      {cover ? (
-                        <>
-                          <div
-                            className="
-                              absolute inset-0 bg-cover bg-center
-                              transition-transform duration-700
-                              group-hover:scale-110
-                            "
-                            style={{
-                              backgroundImage: `url('${cover}')`,
-                            }}
-                          />
-
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
-                        </>
-                      ) : (
-                        <div
-                          className="
-                            absolute inset-0
-                            bg-gradient-to-br from-[#001a0c] via-black to-[#00150a]
-                            flex items-center justify-center
-                          "
-                        >
-                          <div className="relative">
-                            <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl" />
-
-                            <div
-                              className="
-                                relative flex h-20 w-20 items-center justify-center rounded-3xl
-                                border border-primary/20
-                                bg-primary/5
-                              "
-                            >
-                              <Lightbulb
-                                size={36}
-                                className="text-primary/70"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* TOP */}
-                      <div className="absolute left-4 right-4 top-4 z-20 flex items-start justify-between">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span
-                            className="
-                              rounded-full bg-primary
-                              px-3 py-1 text-[11px] font-semibold text-white
-                            "
-                          >
-                            Spark
-                          </span>
-
-                          {spark.category && (
-                            <span
-                              className="
-                                rounded-full border border-white/10 bg-black/40
-                                px-3 py-1 text-[11px] font-semibold text-white backdrop-blur
-                              "
-                            >
-                              {spark.category}
-                            </span>
-                          )}
-
-                          {spark.featured && (
-                            <span
-                              className="
-                                rounded-full bg-yellow-500
-                                px-3 py-1 text-[11px] font-semibold text-black
-                              "
-                            >
-                              Featured
-                            </span>
-                          )}
-                        </div>
-
-                        <Dropdown
-                          align="right"
-                          width={180}
-                          menuClassName="rounded-2xl border border-zinc-800 bg-zinc-950 p-2"
-                          itemClassName="rounded-xl text-sm"
-                          trigger={
-                            <button
-                              className="
-                                flex h-10 w-10 items-center justify-center rounded-2xl
-                                border border-white/10 bg-black/40 backdrop-blur
-                                transition hover:bg-black/60
-                              "
-                            >
-                              <MoreVertical size={16} />
-                            </button>
-                          }
-                          items={[
-                            {
-                              label: "Edit Spark",
-                              icon: <Edit2 size={15} />,
-                              onClick: () =>
-                                router.push(
-                                  `/space/manage/sparks/edit/${
-                                    spark.dataId || spark.id
-                                  }`,
-                                ),
-                            },
-                            { separator: true },
-                            {
-                              label: "Delete Spark",
-                              icon: <Trash2 size={15} />,
-                              danger: true,
-                              onClick: () => openDeleteModal(spark),
-                            },
-                          ]}
-                        />
-                      </div>
-
-                      {/* STATS */}
-                      <div
-                        className="
-                          absolute bottom-4 left-4 z-20
-                          flex flex-wrap items-center gap-2
-                        "
-                      >
-                        <div
-                          className="
-                            flex items-center gap-1.5 rounded-full
-                            border border-white/10 bg-black/45
-                            px-3 py-1.5 text-[11px] text-white backdrop-blur-md
-                          "
-                        >
-                          <Eye size={14} />
-                          {spark.views || 0}
-                        </div>
-
-                        <div
-                          className="
-                            flex items-center gap-1.5 rounded-full
-                            border border-white/10 bg-black/45
-                            px-3 py-1.5 text-[11px] text-white backdrop-blur-md
-                          "
-                        >
-                          <Heart
-                            fill="#fb2c36"
-                            size={14}
-                            className="text-red-500"
-                          />
-                          {spark.likes || 0}
-                        </div>
-
-                        <div
-                          className="
-                            flex items-center gap-1.5 rounded-full
-                            border border-white/10 bg-black/45
-                            px-3 py-1.5 text-[11px] text-white backdrop-blur-md
-                          "
-                        >
-                          <MessageCircle
-                            fill="#3B82F6"
-                            size={14}
-                            className="text-[#3B82F6]"
-                          />
-                          {spark.comments?.length || 0}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className="flex flex-1 flex-col p-5">
-                      {/* META */}
-                      <div
-                        className="
-                          flex items-center gap-4
-                          text-[12px] font-medium text-zinc-400
-                        "
-                      >
-                        <span className="flex items-center gap-1.5">
-                          <CalendarDays size={13} />
-                          {formatDate(spark.createdAt)}
-                        </span>
-
-                        <span className="flex items-center gap-1.5">
-                          <Clock3 size={13} />
-                          {spark.readTime || "1 min read"}
-                        </span>
-                      </div>
-
-                      {/* TITLE */}
-                      <h2
-                        className="
-                          mt-4 line-clamp-2
-                          text-[1.35rem] font-bold leading-[1.4] text-white
-                          transition-colors duration-300
-                          group-hover:text-primary
-                        "
-                      >
-                        {spark.title || "Untitled Spark"}
-                      </h2>
-
-                      {/* EXCERPT */}
-                      <p
-                        className="
-                          mt-3 flex-1
-                          text-sm leading-[1.8] text-zinc-400
-                          line-clamp-3
-                        "
-                      >
-                        {getExcerpt(spark.blocks)}
-                      </p>
-
-                      {/* TAGS */}
-                      {spark.tags?.length > 0 && (
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {spark.tags.slice(0, 3).map((tag, index) => (
-                            <span
-                              key={index}
-                              className="
-                                rounded-full border border-white/[0.06]
-                                bg-white/[0.03]
-                                px-2.5 py-1 text-[11px]
-                                font-medium text-zinc-300
-                              "
-                            >
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* FOOTER */}
-                      <div
-                        className="
-                          mt-5 flex items-center justify-between
-                          border-t border-white/[0.06]
-                          pt-4
-                        "
-                      >
-                        <Link
-                          href={`/space/${spark.userId}/${
-                            spark.dataId || spark.id
-                          }`}
-                          className="group/link flex items-center gap-2"
-                        >
-                          <div>
-                            <p className="text-sm font-semibold text-white">
-                              Open Spark
-                            </p>
-
-                            <p className="text-[11px] text-zinc-500">
-                              Preview spark
-                            </p>
-                          </div>
-                        </Link>
-
-                        <button
-                          onClick={() =>
-                            router.push(
-                              `/space/manage/sparks/edit/${
-                                spark.dataId || spark.id
-                              }`,
-                            )
-                          }
-                          className="
-                            flex h-11 w-11 items-center justify-center rounded-2xl
-                            border border-primary/20
-                            bg-primary/5
-                            transition-all duration-300
-                            group-hover:bg-primary
-                            group-hover:border-primary
-                            group-hover:rotate-45
-                          "
-                        >
-                          <ArrowUpRight
-                            size={18}
-                            className="
-                              text-primary
-                              transition-colors duration-300
-                              group-hover:text-white
-                            "
-                          />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* BOTTOM GLOW */}
-                    <div
-                      className="
-                        absolute bottom-0 left-0 h-[2px] w-0
-                        bg-gradient-to-r from-transparent via-primary to-transparent
-                        transition-all duration-500
-                        group-hover:w-full
-                      "
-                    />
-                  </article>
-                );
-              })}
+    <div className="absolute top-4 right-4 z-50">
+      <Dropdown
+        align="right"
+        width={180}
+        menuClassName="rounded-2xl border border-zinc-800 bg-zinc-950 p-2"
+        itemClassName="rounded-xl text-sm"
+        trigger={
+          <button
+            onClick={(e) => e.preventDefault()}
+            className="
+              flex h-10 w-10 items-center justify-center
+              rounded-2xl border border-white/10
+              bg-black/40 backdrop-blur
+              transition hover:bg-black/60
+            "
+          >
+            <MoreVertical size={16} />
+          </button>
+        }
+        items={[
+          {
+            label: "Edit Spark",
+            icon: <Edit2 size={15} />,
+            onClick: () =>
+              router.push(
+                `/space/manage/sparks/edit/${
+                  spark.dataId || spark.id
+                }`
+              ),
+          },
+          { separator: true },
+          {
+            label: "Delete Spark",
+            icon: <Trash2 size={15} />,
+            danger: true,
+            onClick: () => openDeleteModal(spark),
+          },
+        ]}
+      />
+    </div>
+  </div>
+))}
             </div>
           )}
         </main>

@@ -11,12 +11,32 @@ import {
   Heart,
   MessageCircle,
   Send,
+  Share2,
+  BadgeCheck,
+  MessageCircleQuestion,
+  Hash,
 } from "lucide-react";
 
-import { getSingleSpark } from "@/app/services/spark";
-import { Button } from "@neuctra/ui";
+import {
+  addCommentToSpark,
+  getSingleSpark,
+  toggleLike,
+} from "@/app/services/spark";
+
+import {
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  DrawerFooter,
+} from "@neuctra/ui";
 
 import dynamic from "next/dynamic";
+import { useAdmin } from "@/app/contexts/AdminContext";
+import NeuctraSpaceHeader from "@/app/components/space/NeuctraSpaceHeader";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
+import Link from "next/link";
 
 const NeuctraEditorPreview = dynamic(
   () => import("@neuctra/cms-core").then((mod) => mod.NeuctraEditorPreview),
@@ -29,10 +49,12 @@ const SparkViewPage = () => {
   const router = useRouter();
   const params = useParams();
 
-  const userId = params?.userId;
-  const blogId = params?.blogId;
+  const { user } = useAdmin();
 
-  const [blog, setBlog] = useState(null);
+  const userId = params?.userId;
+  const sparkId = params?.blogId;
+
+  const [spark, setSpark] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // LIKE STATE
@@ -43,18 +65,25 @@ const SparkViewPage = () => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
 
-  // FETCH BLOG
+  // LOADING STATES
+  const [liking, setLiking] = useState(false);
+
+  const [commentDrawerOpen, setCommentDrawerOpen] = useState(false);
+
+  // FETCH SPARK
   useEffect(() => {
-    const fetchBlog = async () => {
+    const fetchSpark = async () => {
       try {
         setLoading(true);
 
-        const response = await getSingleSpark(userId, blogId);
+        const response = await getSingleSpark(userId, sparkId);
 
         if (response.success) {
-          setBlog(response.data);
+          setSpark(response.data);
 
-          setLikes(response.data?.likes || 0);
+          setLikes(response.data?.likes?.length || 0);
+
+          setLiked(response.data?.likes?.includes(user?.id) || false);
           setComments(response.data?.comments || []);
         }
       } catch (error) {
@@ -64,71 +93,114 @@ const SparkViewPage = () => {
       }
     };
 
-    fetchBlog();
-  }, [userId, blogId]);
+    fetchSpark();
+  }, [userId, sparkId]); // Added user?.id to dependencies
 
-  // HANDLE LIKE
-  const handleLike = () => {
-    if (liked) {
-      setLikes((prev) => prev - 1);
-    } else {
-      setLikes((prev) => prev + 1);
+  // Update liked when user changes
+  useEffect(() => {
+    if (!spark) return;
+
+    setLiked(spark?.likes?.includes(user?.id) || false);
+  }, [spark, user?.id]);
+
+  const handleLike = async () => {
+    if (!user?.id || liking) return; // Prevent if no user or already liking
+
+    const wasLiked = liked;
+
+    // Optimistic update
+    setLiked(!wasLiked);
+    setLikes((prev) => (wasLiked ? prev - 1 : prev + 1));
+    setLiking(true);
+
+    try {
+      const result = await toggleLike({
+        spark,
+        likedBuyUserId: user.id,
+      });
+
+      if (result.success) {
+        // Update spark state with the actual data from response
+        if (result.data) {
+          setSpark((prev) => ({
+            ...prev,
+            likes: result.data.likes,
+          }));
+        }
+
+        // Optional: Show success toast/notification
+        console.log(`Successfully ${result.action}`);
+      } else {
+        // Revert on error
+        setLiked(wasLiked);
+        setLikes((prev) => (wasLiked ? prev + 1 : prev - 1));
+        console.error("Failed to toggle like:", result.error);
+      }
+    } catch (error) {
+      // Revert on error
+      setLiked(wasLiked);
+      setLikes((prev) => (wasLiked ? prev + 1 : prev - 1));
+      console.error("Error toggling like:", error);
+    } finally {
+      setLiking(false);
     }
-
-    setLiked(!liked);
-
-    // TODO:
-    // await likeSpark(blogId)
   };
 
-  // HANDLE COMMENT
-  const handleAddComment = () => {
-    if (!comment.trim()) return;
+  const handleAddComment = async () => {
+    if (!comment.trim() || !user) return;
 
-    const newComment = {
-      id: Date.now(),
-      name: "You",
-      text: comment,
-      createdAt: new Date().toISOString(),
-    };
+    const response = await addCommentToSpark({
+      spark,
+      user,
+      comment,
+    });
 
-    setComments((prev) => [newComment, ...prev]);
+    if (response.success) {
+      setComments(response.comments);
+      setComment("");
 
-    setComment("");
+      setSpark((prev) => ({
+        ...prev,
+        comments: response.comments,
+      }));
+    }
+  };
 
-    // TODO:
-    // await addComment(blogId, comment)
+  // Helper function for relative time (e.g., "2h ago", "3d ago")
+  const formatRelativeTime = (date) => {
+    const now = new Date();
+    const diff = Math.floor((now - new Date(date)) / 1000);
+
+    if (diff < 60) return `${diff}s ago`;
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`;
+    return new Date(date).toLocaleDateString();
   };
 
   // LOADING
   if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-          <p className="text-white/50">Loading article...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner message="Loading spark..." />;
   }
 
   // NOT FOUND
-  if (!blog) {
+  if (!spark) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <div className="max-w-md text-center">
-          <h1 className="text-3xl font-semibold mb-3">Post not found</h1>
+      <div className="min-h-screen  flex items-center justify-center">
+        <div className="max-w-sm flex flex-col justify-center items-center text-center">
+          <MessageCircleQuestion size={80} className="mb-6" />
+          <h1 className="text-3xl font-semibold mb-3">Spark not found!</h1>
 
-          <p className="text-zinc-300 mb-6">
-            The article you're looking for doesn't exist or was removed.
+          <p className="text-zinc-300 mb-3">
+            The spark you're looking for doesn't exist or was removed.
           </p>
 
           <button
-            onClick={() => router.push("/blog")}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl border border-zinc-800 bg-zinc-900 hover:bg-zinc-800 transition"
+            onClick={() => router.push("/space")}
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl border border-zinc-900 bg-zinc-950 hover:bg-zinc-800 transition"
           >
             <ArrowLeft size={16} />
-            Back to Blog
+            Back to Space
           </button>
         </div>
       </div>
@@ -141,320 +213,312 @@ const SparkViewPage = () => {
     category,
     tags,
     blocks,
-    featured,
     readTime,
     createdAt,
     publishedAt,
-  } = blog;
-
-  const getCoverImage = (blog) => {
-    if (blog?.coverImage) return blog.coverImage;
-
-    const imageBlock = blog?.blocks?.find((b) => b.type === "image");
-
-    return imageBlock?.url || null;
-  };
+  } = spark;
 
   const displayDate = publishedAt || createdAt;
-  const heroImage = getCoverImage(blog);
 
   return (
     <div className="min-h-screen text-white">
-      {/* HERO */}
-      <section className="relative overflow-hidden rounded-b-4xl">
-        {heroImage && (
-          <div className="absolute inset-0">
-            <img
-              src={heroImage}
-              alt={title}
-              className="h-full w-full object-cover opacity-40 scale-105"
-            />
+      <NeuctraSpaceHeader />
 
-            <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/30" />
-          </div>
-        )}
-
-        <div className="relative max-w-7xl mx-auto px-4 md:px-6 pt-14 pb-12">
-          <div className="mb-6 flex items-center justify-between gap-3">
-            {/* BACK BUTTON */}
-            <Button
-              onClick={() => router.push("/space")}
-              variant="ghost"
-              className="h-12 rounded-2xl border border-zinc-800 bg-zinc-950/70 px-4 hover:bg-zinc-900"
-            >
-              <ArrowLeft size={20} />
-            </Button>
-
-            {/* ACTIONS */}
-            <div className="flex items-center gap-3">
-              {/* LIKE BUTTON */}
-              <button
-                onClick={handleLike}
-                className={`group flex h-12 items-center gap-2 rounded-2xl border px-4 transition-all duration-300 ${
-                  liked
-                    ? "border-red-600/30 bg-red-600/10 text-red-600"
-                    : "border-zinc-800 bg-zinc-950/80 text-zinc-300 hover:border-primary/30 hover:text-cyan-400"
-                }`}
-              >
-                <Heart
-                  size={18}
-                  className={`transition ${liked ? "fill-red-600" : ""}`}
-                />
-              </button>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 mb-2">
-            {category && (
-              <span className="px-4 py-1.5 rounded-full border border-zinc-800 bg-zinc-900/80 backdrop-blur-xl text-xs font-medium text-zinc-300">
-                {category}
-              </span>
-            )}
-
-            {featured && (
-              <span className="px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs font-medium text-primary">
-                Featured Article
-              </span>
-            )}
-          </div>
-
-          <div className="max-w-5xl">
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold leading-[1.05] tracking-[-0.04em] text-white">
-              {title}
-            </h1>
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            {/* LIKE BUTTON */}
-            <button
-              onClick={handleLike}
-              className={`group flex items-center gap-2 rounded-2xl border px-5 py-3 transition-all duration-300 ${
-                liked
-                  ? "border-[#00FF88]/30 bg-[#00FF88]/10 text-[#00FF88]"
-                  : "border-zinc-800 bg-zinc-950/80 text-zinc-300 hover:border-primary/30 hover:text-cyan-400"
-              }`}
-            >
-              <Heart
-                size={18}
-                className={`transition ${liked ? "fill-[#00FF88]" : ""}`}
-              />
-
-              <span className="text-sm font-medium">{likes}</span>
-            </button>
-
-            {/* COMMENTS COUNT */}
-            <div className="flex items-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-950/80 px-5 py-3 text-zinc-300">
-              <MessageCircle size={18} className="text-cyan-400" />
-
-              <span className="text-sm font-medium">
-                {comments.length} Comments
-              </span>
-            </div>
-          </div>
-
-          <div className="mt-4 flex flex-wrap items-center gap-4">
-            {author?.name && (
-              <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl">
-                {author?.avatar ? (
-                  <img
-                    src={author.avatar}
-                    alt={author.name}
-                    className="w-10 h-10 rounded-full object-cover border border-zinc-800"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                    <User size={16} />
-                  </div>
-                )}
-
-                <div>
-                  <p className="text-xs text-zinc-300">Written by</p>
-
-                  <p className="text-sm font-medium text-white">
-                    {author.name}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {displayDate && (
-              <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <Calendar size={16} />
-                </div>
-
-                <div>
-                  <p className="text-xs text-zinc-300">Published</p>
-
-                  <p className="text-sm font-medium text-white">
-                    {new Date(displayDate).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {readTime && (
-              <div className="flex items-center gap-3 px-4 py-3 rounded-2xl border border-zinc-800 bg-zinc-950/80 backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                  <Clock size={16} />
-                </div>
-
-                <div>
-                  <p className="text-xs text-zinc-300">Read Time</p>
-
-                  <p className="text-sm font-medium text-white">{readTime}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* CONTENT */}
+      {/* MAIN GRID */}
       <div className="max-w-7xl mx-auto py-6 grid grid-cols-1 lg:grid-cols-12 gap-10">
-        <main className="lg:col-span-8">
+        {/* LEFT COLUMN (SPARK CONTENT) */}
+        <main className="lg:col-span-8 space-y-6">
+          {/* HERO HEADER */}
+          <section className="relative overflow-hidden rounded-b-4xl">
+            <div className="relative pb-6">
+              {/* BACK BUTTON */}
+              <div className="mb-6 flex items-center justify-between gap-3">
+                <Button onClick={() => router.push("/space")} variant="ghost">
+                  <ArrowLeft size={20} />
+                </Button>
+
+                <div className="flex items-center justify-between gap-3">
+                  {/* LIKE */}
+                  <button
+                    onClick={handleLike}
+                    disabled={liking}
+                    className={`flex flex-1 items-center justify-center gap-1.5 rounded-full border px-3.5 py-1.5 transition-all ${
+                      liked
+                        ? "border-red-600/20 bg-red-600/10 text-red-600"
+                        : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-red-600/20 hover:bg-red-600/10 hover:text-red-500"
+                    } ${liking ? "opacity-50 cursor-not-allowed" : ""}`}
+                  >
+                    <Heart size={15} className={liked ? "fill-red-600" : ""} />
+                    <span className="text-[13px] font-medium text-white">
+                      {likes.toLocaleString()}
+                    </span>
+                  </button>
+
+                  {/* COMMENTS */}
+                  <button
+                    onClick={() =>
+                      document.getElementById("comment-input")?.focus()
+                    }
+                    className="
+                      flex flex-1 items-center justify-center gap-1.5
+                      rounded-full border
+                      px-3.5 py-1.5
+                      transition-all
+                      border-primary/20
+                      bg-primary/10
+                      text-primary"
+                  >
+                    <MessageCircle size={15} />
+                    <span className="text-[13px] text-white font-medium">
+                      {comments.length.toLocaleString()}
+                    </span>
+                  </button>
+
+                  {/* SHARE */}
+                  <button
+                    onClick={() => {
+                      navigator
+                        .share?.({
+                          title: spark.title,
+                          text: `Check out "${spark.title}" on Neuctra`,
+                          url: window.location.href,
+                        })
+                        .catch(() => {
+                          navigator.clipboard.writeText(window.location.href);
+                        });
+                    }}
+                    className="
+                      flex items-center justify-center gap-1.5
+                      rounded-full
+                      px-1.5
+                    text-white transition-all"
+                  >
+                    <Share2 size={18} />
+                  </button>
+                </div>
+              </div>
+
+              {/* CATEGORY */}
+              <div className="flex flex-wrap items-center gap-3 mb-2">
+                {category && (
+                  <span className="px-4 py-1.5 rounded-full bg-primary/90 text-xs font-medium text-white">
+                    {category}
+                  </span>
+                )}
+              </div>
+
+              {/* TITLE */}
+              <div className="max-w-5xl">
+                <h1 className="text-4xl sm:text-6xl font-semibold leading-[1.05] tracking-[-0.04em] text-white">
+                  {title}
+                </h1>
+              </div>
+            </div>
+          </section>
+
+          {/* CONTENT */}
           <article className="min-w-0">
             {blocks?.length > 0 ? (
-              <NeuctraEditorPreview blocks={blocks} className="px-0!" />
+              <NeuctraEditorPreview blocks={blocks} className="px-0! py-0!" />
             ) : (
               <p className="text-zinc-300">No content available.</p>
             )}
           </article>
-
-
         </main>
 
+        {/* RIGHT COLUMN (SOCIAL MEDIA STYLE) */}
         <aside className="lg:col-span-4">
-          <div className="sticky top-24 space-y-6">
+          <div className="sticky top-6 space-y-6">
+            {/* AUTHOR CARD - Instagram Story Style */}
+            <div className="rounded-3xl border border-zinc-900 bg-gradient-to-br from-zinc-950 to-black p-5">
+              <div className="flex items-center gap-4">
+                {/* Story Ring */}
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00FF88] to-cyan-500 animate-pulse" />
+                  <div className="absolute inset-[2px] rounded-full bg-black" />
 
-          {/* COMMENTS SECTION */}
-          <section className="mt-14 border-t border-zinc-900 pt-10">
-            <div className="flex items-center gap-3 mb-6">
-              <MessageCircle size={22} className="text-cyan-400" />
-
-              <h2 className="text-2xl font-semibold">
-                Comments ({comments.length})
-              </h2>
-            </div>
-
-            {/* ADD COMMENT */}
-            <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5 mb-8">
-              <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Share your thoughts..."
-                rows={4}
-                className="w-full rounded-2xl border border-zinc-800 bg-black/40 px-4 py-4 text-sm text-white outline-none placeholder:text-zinc-500 focus:border-primary/40"
-              />
-
-              <div className="mt-4 flex justify-end">
-                <button
-                  onClick={handleAddComment}
-                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-xs font-medium transition hover:scale-[1.02]"
-                >
-                  <Send size={16} />
-                  Post Comment
-                </button>
-              </div>
-            </div>
-
-            {/* COMMENT LIST */}
-            <div className="space-y-4">
-              {comments.length > 0 ? (
-                comments.map((item) => (
-                  <div
-                    key={item.id}
-                    className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5"
-                  >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="w-11 h-11 rounded-full bg-linear-to-br from-primary/20 to-[#00FF88]/20 border border-zinc-800 flex items-center justify-center text-sm font-semibold">
-                        {item.name?.charAt(0)}
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-medium text-white">
-                          {item.name}
-                        </p>
-
-                        <p className="text-xs text-zinc-500">
-                          {new Date(item.createdAt).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-sm leading-7 text-zinc-300">
-                      {item.text}
-                    </p>
+                  <div className="relative h-14 w-14 rounded-full bg-black flex items-center justify-center border-2 border-primary">
+                    <User size={24} className="text-white" />
                   </div>
-                ))
-              ) : (
-                <div className="rounded-3xl border border-dashed border-zinc-800 p-10 text-center">
-                  <MessageCircle
-                    size={40}
-                    className="mx-auto mb-3 text-zinc-700"
-                  />
-
-                  <p className="text-zinc-500">
-                    No comments yet. Start the conversation.
-                  </p>
                 </div>
-              )}
-            </div>
-          </section>
 
-            <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-6">
-              <h3 className="text-sm font-medium text-zinc-300 mb-5">
-                Article Info
-              </h3>
+                <div className="flex-1">
+                  <p className="font-semibold text-white flex items-center gap-1">
+                    {author?.name}{" "}
+                    <BadgeCheck size={16} className="text-primary -mt-0.5" />
+                  </p>
 
-              <div className="space-y-4 text-sm text-zinc-300">
-                {author?.name && (
-                  <div className="flex items-center gap-3">
-                    <User size={15} />
-
-                    <span>{author.name}</span>
+                  <p className="text-xs text-zinc-400">
+                    @{author?.username || "creator"}
+                  </p>
+                  <div className="flex items-center gap-3 mt-1">
+                    <span className="text-[10px] text-zinc-500">
+                      {new Date(displayDate).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                    <span className="text-[10px] text-zinc-500">•</span>
+                    <span className="text-[10px] text-zinc-500">
+                      {readTime}
+                    </span>
                   </div>
-                )}
+                </div>
 
-                {displayDate && (
-                  <div className="flex items-center gap-3">
-                    <Calendar size={15} />
-
-                    <span>{new Date(displayDate).toLocaleDateString()}</span>
-                  </div>
-                )}
-
-                {readTime && (
-                  <div className="flex items-center gap-3">
-                    <Clock size={15} />
-
-                    <span>{readTime}</span>
-                  </div>
-                )}
+                <Link
+                  href={`/space/spark/authors/profile/${author?.id}`}
+                  className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition"
+                >
+                  Visit Profile
+                </Link>
               </div>
             </div>
 
+            {/* TAGS SECTION - Twitter Hashtag Style */}
             {tags?.length > 0 && (
-              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-6">
-                <h3 className="text-sm font-medium text-zinc-300 mb-4">Tags</h3>
-
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950/50 p-5">
+                <h3 className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3">
+                  Trending Topics
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
-                    <span
+                    <button
                       key={index}
-                      className="px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900 text-xs text-zinc-400 flex items-center gap-1.5"
+                      onClick={() => router.push(`/space?tag=${tag}`)}
+                      className="px-3 py-1.5 rounded-full bg-zinc-900/50 hover:bg-zinc-800 text-xs text-zinc-300 hover:text-[#00FF88] transition-all duration-300 flex items-center gap-1.5 group"
                     >
-                      <Tag size={10} />
-
+                      <Hash
+                        size={10}
+                        className="text-zinc-500 group-hover:text-[#00FF88]"
+                      />
                       {tag}
-                    </span>
+                    </button>
                   ))}
                 </div>
               </div>
             )}
+
+            {/* COMMENTS SECTION - Reddit/Discord Style */}
+            <section>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <MessageCircle size={18} className="text-primary" />
+                  <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                    Comments
+                  </h3>
+                </div>
+              </div>
+
+              {/* ADD COMMENT - Social Media Style */}
+              <div className="rounded-2xl border border-zinc-900 bg-zinc-950/40 backdrop-blur-md mb-6 overflow-hidden transition">
+                <div className="flex gap-3 p-4">
+                  {/* INPUT AREA */}
+                  <div className="flex-1">
+                    <textarea
+                      id="comment-input"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                      placeholder="Add to the discussion..."
+                      rows={comment ? 3 : 1}
+                      className="w-full bg-transparent text-[13px] text-white outline-none resize-none placeholder:text-zinc-600 leading-relaxed"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          handleAddComment();
+                        }
+                      }}
+                    />
+
+                    {/* ACTION BAR */}
+                    {comment && (
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-zinc-900">
+                        <p className="text-[11px] text-zinc-500">
+                          Shift + Enter for new line
+                        </p>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => setComment("")}
+                            className="px-3 py-1.5 rounded-lg text-xs text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition"
+                          >
+                            Cancel
+                          </button>
+
+                          <button
+                            onClick={handleAddComment}
+                            className="px-4 py-1.5 rounded-lg bg-primary text-xs font-semibold hover:bg-primary/90 transition active:scale-[0.98]"
+                          >
+                            Post
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* COMMENT LIST - Instagram Style */}
+              <div className="space-y-4 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-track-zinc-900 scrollbar-thumb-zinc-800">
+                {comments.length > 0 ? (
+                  comments.map((item, idx) => (
+                    <div
+                      key={item.id}
+                      className="group animate-fadeInUp"
+                      style={{ animationDelay: `${idx * 50}ms` }}
+                    >
+                      <div className="flex gap-3">
+                        {item.avatar ? (
+                          <img
+                            src={item.avatar}
+                            alt={item.name}
+                            className="h-9 w-9 rounded-full object-cover"
+                          />
+                        ) : (
+                          <div className="h-9 w-9 rounded-full bg-black border-2 border-primary border-dashed flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                            {item.name?.charAt(0)}
+                          </div>
+                        )}
+
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p className="text-sm font-semibold text-white">
+                              {item.name}
+                            </p>
+                            <p className="text-xs text-zinc-500">
+                              @{item.username}
+                            </p>
+                            <span className="text-[10px] text-zinc-600">•</span>
+                            <p className="text-[10px] text-zinc-600">
+                              {formatRelativeTime(item.createdAt)}
+                            </p>
+                          </div>
+
+                          <p className="text-sm text-zinc-300 mt-1 leading-relaxed">
+                            {item.comment}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="inline-flex p-4 rounded-full bg-zinc-900/50 mb-3">
+                      <MessageCircle size={32} className="text-zinc-700" />
+                    </div>
+                    <p className="text-sm text-zinc-500">No comments yet</p>
+                    <p className="text-xs text-zinc-600 mt-1">
+                      Start the conversation!
+                    </p>
+                  </div>
+                )}
+              </div>
+            </section>
           </div>
         </aside>
       </div>
+
+
     </div>
   );
 };

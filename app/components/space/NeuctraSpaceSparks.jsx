@@ -17,13 +17,13 @@ const breakpointColumns = {
 /* =========================
    Spark Item (memoized once)
 ========================= */
-const SparkItem = React.memo(({ spark, isLast, lastItemRef }) => {
+const SparkItem = ({ spark, isLast, lastItemRef }) => {
   return (
     <div ref={isLast ? lastItemRef : null} className="break-inside-avoid">
       <SparkCard spark={spark} />
     </div>
   );
-});
+};
 
 export default function NeuctraSpaceSparks() {
   const [error, setError] = useState(null);
@@ -100,6 +100,10 @@ export default function NeuctraSpaceSparks() {
     }
   }, [searchInput]);
 
+
+  console.log(sparks);
+  
+
   /* =========================
      LOAD MORE
   ========================= */
@@ -175,7 +179,7 @@ export default function NeuctraSpaceSparks() {
 
         <Button
           onClick={handleSearch}
-          className="rounded-xl bg-primary px-4 text-[13px]"
+          className="rounded-xl bg-primary px-4 text-[13px] py-2"
           textClassName="leading-0"
         >
           Search

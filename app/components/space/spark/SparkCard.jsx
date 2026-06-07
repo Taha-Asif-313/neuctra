@@ -56,7 +56,7 @@ const SparkCard = ({ spark }) => {
   const cover = getCoverImage(spark);
 
   return (
-    <Link href={`/space/${spark.userId}/${spark.id}`} className="block h-full">
+    <Link href={`/space/${spark.authorId}/${spark.id}`} className="block h-full">
       <article
         className="
           group relative flex flex-col h-full overflow-hidden
@@ -68,39 +68,38 @@ const SparkCard = ({ spark }) => {
         "
       >
         {/* Cover */}
-        <div className="relative h-60 overflow-hidden">
+        <div className="relative aspect-[16/10] overflow-hidden">
           {cover ? (
             <>
-              <div
+              <img
+                src={cover}
+                alt="cover"
                 className="
-                  absolute inset-0 bg-cover bg-center
-                  transition-transform duration-700
-                "
-                style={{
-                  backgroundImage: `url('${cover}')`,
-                }}
+                  absolute inset-0 w-full h-full
+                  object-cover
+                  transition-transform duration-700"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/10 to-transparent" />
             </>
           ) : (
             <div
               className="
                 absolute inset-0
-                bg-gradient-to-br from-[#001a0c] via-black to-[#00150a]
+                bg-linear-to-br from-[#001a0c] via-black to-[#00150a]
                 flex items-center justify-center
-              "
+      "
             >
               <div className="relative">
                 <div className="absolute inset-0 blur-3xl bg-primary/20 rounded-full" />
 
                 <div
                   className="
-                    relative w-20 h-20 rounded-3xl
-                    border border-primary/20
-                    bg-primary/5
-                    flex items-center justify-center
-                  "
+            relative w-20 h-20 rounded-3xl
+            border border-primary/20
+            bg-primary/5
+            flex items-center justify-center
+          "
                 >
                   <Lightbulb size={36} className="text-primary/70" />
                 </div>
@@ -164,7 +163,7 @@ const SparkCard = ({ spark }) => {
               "
             >
               <Heart fill=" #fb2c36" size={14} className="text-red-500" />
-              {spark.likes || 0}
+              {spark.likes.length || 0}
             </div>
 
             <div
@@ -294,7 +293,7 @@ const SparkCard = ({ spark }) => {
         <div
           className="
             absolute bottom-0 left-0 h-[2px] w-0
-            bg-gradient-to-r from-transparent via-primary to-transparent
+            bg-linear-to-r from-transparent via-primary to-transparent
             transition-all duration-500
             group-hover:w-full
           "

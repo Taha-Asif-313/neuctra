@@ -15,6 +15,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { Avatar } from "@neuctra/ui";
+import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
 
 const SparkAuthers = () => {
   const [authors, setAuthors] = useState([]);
@@ -48,6 +49,10 @@ const SparkAuthers = () => {
       );
     });
   }, [authors, search]);
+
+  if(loading) return <LoadingSpinner message="Loading authors..." />
+
+
 
   return (
     <div className="min-h-screen text-white py-8">
@@ -84,14 +89,6 @@ const SparkAuthers = () => {
           </div>
         </div>
       </div>
-
-      {/* LOADING */}
-      {loading && (
-        <div className="flex items-center gap-3 py-8 text-zinc-400">
-          <div className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-700 border-t-primary" />
-          <span>Loading authors...</span>
-        </div>
-      )}
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {filteredAuthors.map((user) => (
