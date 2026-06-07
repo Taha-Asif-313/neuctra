@@ -5,18 +5,8 @@ import { getUserSparks } from "@/app/services/spark";
 import { useParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import {
-  Mail,
-  Phone,
-  MapPin,
-  ShieldCheck,
   Share2,
   Copy,
-  Sparkles,
-  CalendarDays,
-  ArrowRight,
-  BadgeCheck,
-  Eye,
-  Clock3,
   Info,
   Search,
   Camera,

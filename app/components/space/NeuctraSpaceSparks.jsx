@@ -25,10 +25,10 @@ const SparkItem = ({ spark, isLast, lastItemRef }) => {
   );
 };
 
-export default function NeuctraSpaceSparks() {
+export default function NeuctraSpaceSparks({ tag }) {
   const [error, setError] = useState(null);
   const [loadMoreError, setLoadMoreError] = useState(null);
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(tag || "");
   const [sparks, setSparks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -37,9 +37,8 @@ export default function NeuctraSpaceSparks() {
 
   const observerRef = useRef(null);
 
-  /* =========================
-     INITIAL FETCH
-  ========================= */
+  console.log(sparks);
+
   useEffect(() => {
     fetchInitial();
   }, []);
@@ -55,7 +54,12 @@ export default function NeuctraSpaceSparks() {
         throw new Error(res?.message || "Failed to load sparks");
       }
 
-      setSparks(res.data || []);
+      // ✅ FILTER HERE
+      const publicSparks = (res.data || []).filter(
+        (spark) => spark.visibility === "public",
+      );
+
+      setSparks(publicSparks);
       setCursor(res.nextCursor);
       setHasMore(res.hasMore);
     } catch (err) {
@@ -65,9 +69,6 @@ export default function NeuctraSpaceSparks() {
     }
   };
 
-  /* =========================
-     SEARCH (debounced)
-  ========================= */
   useEffect(() => {
     const delay = setTimeout(() => {
       handleSearch();
@@ -100,13 +101,6 @@ export default function NeuctraSpaceSparks() {
     }
   }, [searchInput]);
 
-
-  console.log(sparks);
-  
-
-  /* =========================
-     LOAD MORE
-  ========================= */
   const loadMore = async () => {
     if (!hasMore || loadingMore) return;
 
@@ -123,7 +117,10 @@ export default function NeuctraSpaceSparks() {
         throw new Error(res?.message || "Failed to load more");
       }
 
-      setSparks((prev) => [...prev, ...(res.data || [])]);
+      setSparks((prev) => [
+        ...prev,
+        ...(res.data || []).filter((spark) => spark.visibility === "public"),
+      ]);
       setCursor(res.nextCursor);
       setHasMore(res.hasMore);
     } catch (err) {
