@@ -87,6 +87,8 @@ const EditBlogPage = () => {
       createdAt: "",
       updatedAt: "",
       publishedAt: "",
+      seoTitle: "",
+      seoDescription: "",
     }),
   );
 
@@ -151,6 +153,8 @@ const EditBlogPage = () => {
               createdAt: blogData.createdAt || "",
               updatedAt: blogData.updatedAt || "",
               publishedAt: blogData.publishedAt || "",
+              seoTitle: blogData.seoTitle || "",
+              seoDescription: blogData.seoDescription || "",
             }),
           );
         }
@@ -234,6 +238,9 @@ const EditBlogPage = () => {
           .filter(Boolean),
         readTime: `${Math.ceil(wordCount / 200)} min read`,
         updatedAt: new Date().toISOString(),
+        // SEO
+        seoTitle: formData.seoTitle,
+        seoDescription: formData.seoDescription,
       };
 
       const response = await updateSpark({
@@ -254,9 +261,7 @@ const EditBlogPage = () => {
 
   //  LOADING STATE
   if (loading) {
-    return (
-     <LoadingSpinner message="Loading spark..." />
-    );
+    return <LoadingSpinner message="Loading spark..." />;
   }
 
   //  NOT FOUND STATE
@@ -462,6 +467,49 @@ const EditBlogPage = () => {
                       <Plus size={16} />
                     </Button>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* SEO SETTINGS */}
+            <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
+              {/* HEADER */}
+              <div className="mb-5 flex items-center gap-2">
+                <Tag size={16} className="text-primary" />
+                <h3 className="font-medium">SEO Settings</h3>
+              </div>
+
+              {/* FIELDS */}
+              <div className="space-y-4">
+                {/* SEO TITLE */}
+                <Input
+                  label="SEO Title"
+                  value={formData.seoTitle}
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      seoTitle: e.target.value,
+                    }))
+                  }
+                  placeholder="Best React UI Components Guide"
+                  inputClassName="bg-zinc-950/50! border-border!"
+                />
+
+                {/* SEO DESCRIPTION */}
+                <div>
+                  <Input
+                    label="SEO Description"
+                    type="textarea"
+                    value={formData.seoDescription}
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        seoDescription: e.target.value,
+                      }))
+                    }
+                    placeholder="Write a short SEO description for search engines..."
+                    textareaClassName="w-full h-24 bg-zinc-950/50!"
+                  />
                 </div>
               </div>
             </div>

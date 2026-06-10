@@ -13,8 +13,9 @@ const LoginPage = () => {
     <div className="relative  text-white w-full overflow-hidden min-h-screen">
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <ReactUserLogin
+        signupUrl="/space/signup"
           logoUrl="/favicon.png"
-          title="Sign in to Neuctra Admin"
+          title="Sign in to Neuctra"
           subtitle="Access your blog dashboard"
           onSuccess={(user) => {
             setUser(user);

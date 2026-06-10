@@ -11,11 +11,11 @@ const SignupPage = () => {
 
   return (
     <div className="relative  text-white w-full overflow-hidden min-h-screen">
-
       <div className="relative z-10 flex items-center justify-center min-h-screen p-4">
         <ReactUserSignUp
+          loginUrl="/space/login"
           logoUrl="/favicon.png"
-          title="Sign up for Neuctra Admin"
+          title="Sign up for Neuctra"
           subtitle="Create your blog account"
           onSuccess={(user) => {
             setUser(user);

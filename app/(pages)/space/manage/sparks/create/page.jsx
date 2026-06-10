@@ -66,10 +66,12 @@ const CreateSparkPage = () => {
         username: user?.username || "",
         avatar: user?.avatar || "",
       },
-
-      // override defaults that differ for this page
       tags: "",
       blocks: [createBlock("text")],
+
+      // SEO FIELDS
+      seoTitle: "",
+      seoDescription: "",
     }),
   );
 
@@ -165,6 +167,9 @@ const CreateSparkPage = () => {
           name: user.name,
           username: user.username,
         },
+        // SEO FIELDS
+        seoTitle: formData.seoTitle,
+        seoDescription: formData.seoDescription,
       };
 
       await createSpark(user.id, sparkData);
@@ -371,6 +376,49 @@ const CreateSparkPage = () => {
                         <Plus size={16} />
                       </Button>
                     </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* SEO SETTINGS */}
+              <div className="rounded-3xl border border-zinc-900 bg-zinc-950 p-5">
+                {/* HEADER */}
+                <div className="mb-5 flex items-center gap-2">
+                  <Tag size={16} className="text-primary" />
+                  <h3 className="font-medium">SEO Settings</h3>
+                </div>
+
+                {/* FIELDS */}
+                <div className="space-y-4">
+                  {/* SEO TITLE */}
+                  <Input
+                    label="SEO Title"
+                    value={formData.seoTitle}
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        seoTitle: e.target.value,
+                      }))
+                    }
+                    placeholder="Best React UI Components Guide"
+                    inputClassName="bg-zinc-950/50! border-border!"
+                  />
+
+                  {/* SEO DESCRIPTION */}
+                  <div>
+                    <Input
+                      label="SEO Description"
+                      type="textarea"
+                      value={formData.seoDescription}
+                      onChange={(e) =>
+                        setFormData((p) => ({
+                          ...p,
+                          seoDescription: e.target.value,
+                        }))
+                      }
+                      placeholder="Write a short SEO description for search engines..."
+                      textareaClassName="w-full h-24 bg-zinc-950/50!"
+                    />
                   </div>
                 </div>
               </div>

@@ -4,10 +4,10 @@ import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
 
 export default function AllSparksPage() {
   return (
-    <div className="min-h-screen text-white">
-      <Suspense fallback={<LoadingSpinner message="Loading sparks..." />}>
+    <Suspense fallback={<LoadingSpinner message="Loading sparks..." />}>
+      <div className="min-h-screen text-white">
         <SpaceContent />
-      </Suspense>
-    </div>
+      </div>
+    </Suspense>
   );
 }
