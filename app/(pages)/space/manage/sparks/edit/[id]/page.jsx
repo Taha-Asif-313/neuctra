@@ -23,6 +23,7 @@ import { defaultBlogState } from "@/app/states/blog";
 import { useParams, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import LoadingSpinner from "@/app/components/utils/LoadingSpinner";
+import ScrollToTopButton from "@/app/components/utils/ScrollToTopButton";
 
 /* =========================================================
    DYNAMIC IMPORTS
@@ -221,7 +222,8 @@ const EditBlogPage = () => {
 
   //  SUBMIT
   const handleSubmit = async () => {
-    if (!user?.id) return;
+    if (!user?.id || !blog) return;
+
     try {
       setSaving(true);
 
@@ -232,13 +234,25 @@ const EditBlogPage = () => {
         visibility: formData.visibility,
         category: formData.category,
         productName: formData.productName,
+
         tags: formData.tags
           .split(",")
           .map((t) => t.trim())
           .filter(Boolean),
+
         readTime: `${Math.ceil(wordCount / 200)} min read`,
         updatedAt: new Date().toISOString(),
-        // SEO
+
+        // ✅ FIXED AUTHOR (safe merge)
+        author: {
+          name: user.name,
+          username: user.username,
+
+          // IMPORTANT:
+          // keep old avatar if user has none OR no change
+          avatarUrl: user.avatarUrl ?? blog?.author?.avatarUrl ?? "",
+        },
+
         seoTitle: formData.seoTitle,
         seoDescription: formData.seoDescription,
       };
@@ -274,7 +288,8 @@ const EditBlogPage = () => {
   }
 
   return (
-    <ReactSignedIn fallback={() => router.push("/space/admin/login")}>
+    <ReactSignedIn fallback={() => router.push("/space/login")}>
+      <ScrollToTopButton />
       <div className="min-h-screen bg-black text-white flex flex-col">
         {/* TOP BAR */}
         <div className="sticky top-0 z-50">

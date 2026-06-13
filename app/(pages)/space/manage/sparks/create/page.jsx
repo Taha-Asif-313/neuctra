@@ -23,6 +23,7 @@ import { ReactSignedIn } from "@neuctra/authix";
 import { createBlock } from "@/app/utils/blocks";
 import { defaultBlogState } from "@/app/states/blog";
 import { useRouter } from "next/navigation";
+import ScrollToTopButton from "@/app/components/utils/ScrollToTopButton";
 
 //  DYNAMIC IMPORTS
 
@@ -166,6 +167,7 @@ const CreateSparkPage = () => {
         author: {
           name: user.name,
           username: user.username,
+          avatar: user.avatarUrl,
         },
         // SEO FIELDS
         seoTitle: formData.seoTitle,
@@ -183,7 +185,8 @@ const CreateSparkPage = () => {
   };
 
   return (
-    <ReactSignedIn fallback={() => router.push("/blog/admin/login")}>
+    <ReactSignedIn fallback={() => router.push("/space/login")}>
+      <ScrollToTopButton />
       <div className="min-h-screen flex flex-col">
         {/* TOP BAR */}
         <div>

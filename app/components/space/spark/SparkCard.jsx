@@ -50,6 +50,8 @@ const getCoverImage = (spark) => {
 };
 
 const SparkCard = ({ spark }) => {
+  console.log(spark);
+
   if (!spark) return null;
 
   const [imageLoading, setImageLoading] = useState(true);
@@ -269,9 +271,29 @@ const SparkCard = ({ spark }) => {
             "
           >
             <div className="flex items-center gap-2">
-              <div>
-                <p className="text-sm font-semibold text-white">Open Spark</p>
-                <p className="text-[11px] text-zinc-500">Explore ideas</p>
+              <div className="flex items-center gap-3">
+                {/* Avatar / Fallback */}
+                <div className="w-9 h-9 rounded-full border border-primary bg-zinc-800 flex items-center justify-center overflow-hidden">
+                  {spark.author?.avatarUrl ? (
+                    <img
+                      src={spark.author.avatarUrl}
+                      alt={spark.author?.name || "Author"}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-white">
+                      {(spark.author?.name || "U").charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+
+                {/* Text */}
+                <div>
+                  <p className="text-sm font-semibold text-white">
+                    {spark.author?.name || "Unknown Author"}
+                  </p>
+                  <p className="text-[11px] text-zinc-500">Explore ideas</p>
+                </div>
               </div>
             </div>
 
