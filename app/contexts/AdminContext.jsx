@@ -17,42 +17,39 @@ export const AdminProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const initUser = async () => {
+      try {
+        setLoading(true);
+        // 1️⃣ Check session
+        const sessionRes = await authix.checkUserSession();
 
-useEffect(() => {
-  const initUser = async () => {
-    try {
-      setLoading(true);
-      // 1️⃣ Check session
-      const sessionRes = await authix.checkUserSession();
+        if (!sessionRes?.user?.id) {
 
-      if (!sessionRes?.user?.id) {
-        await authix.logoutUser();
-        throw new Error("No active session");
+          throw new Error("No active session");
+        }
+
+        const userId = sessionRes.user.id;
+
+        // 2️⃣ Fetch full profile
+        const profileRes = await authix.getUserProfile({ userId });
+
+        if (!profileRes?.user) {
+          throw new Error("User profile not found");
+        }
+
+        // 3️⃣ Save user
+        setUser(profileRes.user);
+      } catch (err) {
+        console.warn("Auth init failed:", err);
+        setUser(null);
+      } finally {
+        setLoading(false);
       }
+    };
 
-      const userId = sessionRes.user.id;
-
-      // 2️⃣ Fetch full profile
-      const profileRes = await authix.getUserProfile({ userId });
-
-      if (!profileRes?.user) {
-
-        await authix.logoutUser();
-        throw new Error("User profile not found");
-      }
-
-      // 3️⃣ Save user
-      setUser(profileRes.user);
-    } catch (err) {
-      console.warn("Auth init failed:", err);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  initUser();
-}, []);
+    initUser();
+  }, []);
 
   const handleLogin = (username, password) => {
     // Simple authentication (in production, use proper auth)
@@ -68,7 +65,6 @@ useEffect(() => {
     setIsAdmin(false);
     await authix.logoutUser();
   };
-
 
   const value = {
     isAdmin,
