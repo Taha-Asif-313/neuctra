@@ -98,20 +98,31 @@ const SparkViewPage = () => {
   useEffect(() => {
     if (!spark) return;
 
-    document.title = spark.title;
+    const coverImage = spark.coverImage; // your cover image URL
 
-    const setMeta = (name, content) => {
-      let tag = document.querySelector(`meta[name="${name}"]`);
+    const setPropertyMeta = (property, content) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+
       if (!tag) {
         tag = document.createElement("meta");
-        tag.setAttribute("name", name);
+        tag.setAttribute("property", property);
         document.head.appendChild(tag);
       }
+
       tag.setAttribute("content", content);
     };
 
-    setMeta("description", spark.seoDescription || "");
-    setMeta("keywords", spark.tags?.join(", "));
+    setPropertyMeta("og:title", spark.title);
+    setPropertyMeta("og:description", spark.seoDescription || "");
+    setPropertyMeta("og:image", coverImage);
+    setPropertyMeta("og:url", window.location.href);
+    setPropertyMeta("og:type", "article");
+    setPropertyMeta("og:site_name", "Neuctra");
+
+    setPropertyMeta("twitter:card", "summary_large_image");
+    setPropertyMeta("twitter:title", spark.title);
+    setPropertyMeta("twitter:description", spark.seoDescription || "");
+    setPropertyMeta("twitter:image", coverImage);
   }, [spark]);
 
   const handleLike = async () => {

@@ -26,8 +26,7 @@ useEffect(() => {
       const sessionRes = await authix.checkUserSession();
 
       if (!sessionRes?.user?.id) {
-        // No active session - cleanup client state
-        await authix.logout();
+        await authix.logoutUser();
         throw new Error("No active session");
       }
 
@@ -37,7 +36,7 @@ useEffect(() => {
       const profileRes = await authix.getUserProfile({ userId });
 
       if (!profileRes?.user) {
-        // Profile not found despite having session - cleanup
+
         await authix.logoutUser();
         throw new Error("User profile not found");
       }

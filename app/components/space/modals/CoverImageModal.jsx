@@ -77,11 +77,10 @@ const CoverImageModal = ({ isOpen, onClose, formData, setFormData }) => {
           <div className="flex gap-2 p-1 rounded-xl bg-zinc-900 border border-zinc-800 w-fit">
             <button
               onClick={() => setMode("direct")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${
-                mode === "direct"
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${mode === "direct"
                   ? "bg-zinc-800 text-white"
                   : "text-zinc-400 hover:text-white"
-              }`}
+                }`}
             >
               <Globe size={14} />
               Direct
@@ -89,11 +88,10 @@ const CoverImageModal = ({ isOpen, onClose, formData, setFormData }) => {
 
             <button
               onClick={() => setMode("drive")}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${
-                mode === "drive"
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition ${mode === "drive"
                   ? "bg-zinc-800 text-white"
                   : "text-zinc-400 hover:text-white"
-              }`}
+                }`}
             >
               <Upload size={14} />
               Drive
@@ -131,7 +129,7 @@ const CoverImageModal = ({ isOpen, onClose, formData, setFormData }) => {
           </div>
 
           {/* PREVIEW (FIXED PROPERLY) */}
-          <div className="rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900 aspect-[16/10]">
+          <div className="rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900 aspect-[4/4]">
             {formData.coverImage ? (
               <img
                 src={formData.coverImage}
@@ -150,9 +148,8 @@ const CoverImageModal = ({ isOpen, onClose, formData, setFormData }) => {
             )}
           </div>
 
-          {/* INFO */}
           <div className="text-xs text-zinc-500 bg-zinc-900 border border-zinc-800 p-3 rounded-lg">
-            Recommended resolution: <b>1600 × 1000 (16:10 ratio)</b> for best Spark Card display.
+            Recommended resolution: <b>1200 × 1200 (1:1 ratio)</b> for best Spark Card display.
           </div>
 
           {/* DRIVE HELP */}

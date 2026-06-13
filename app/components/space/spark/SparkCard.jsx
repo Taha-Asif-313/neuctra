@@ -72,7 +72,7 @@ const SparkCard = ({ spark }) => {
         "
       >
         {/* Cover */}
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[4/4] overflow-hidden">
           {cover ? (
             <>
               {imageLoading && (

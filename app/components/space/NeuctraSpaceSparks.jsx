@@ -184,18 +184,14 @@ export default function NeuctraSpaceSparks({ tag }) {
       </div>
 
       {loading ? (
-        <Masonry
-          breakpointCols={breakpointColumns}
-          className="flex gap-6"
-          columnClassName="flex flex-col gap-6"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <SparkSkeleton
               key={i}
               height={i % 3 === 0 ? "h-48" : i % 3 === 1 ? "h-64" : "h-80"}
             />
           ))}
-        </Masonry>
+        </div>
       ) : (
         <Masonry
           breakpointCols={breakpointColumns}
