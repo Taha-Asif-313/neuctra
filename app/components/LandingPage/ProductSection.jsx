@@ -16,16 +16,6 @@ export default function ProductsSection() {
       featured: true,
     },
     {
-      name: "Neuctra Bynity",
-      image: "/logos/bynity.png",
-      desc: "Powerful multi-vendor marketplace platform designed for seamless selling, management, and growth.",
-      links: {
-        learn: "https://bynity.neuctra.com",
-        start: "https://bynity.neuctra.com/signup",
-      },
-      featured: true,
-    },
-    {
       name: "Neuctra UI",
       image: "/logos/ui.png",
       desc: "A modern UI system with production-ready components and animations.",
@@ -36,31 +26,12 @@ export default function ProductsSection() {
       featured: true,
     },
     {
-      name: "Neuctra Codinel",
-      image: "/logos/codinel.png",
-      desc: "AI-powered productivity engine for planning and optimizing workflows.",
-      links: {
-        learn: "https://codinel.neuctra.com",
-        start: "https://codinel.neuctra.com/signup",
-      },
-      featured: true,
-    },
-    {
       name: "Neuctra Notlix",
       image: "/logos/notlix.png",
       desc: "Collaborative workspace with AI-assisted documentation and real-time sync.",
       links: {
         learn: "https://notlix.neuctra.com",
         start: "https://notlix.neuctra.com/signup",
-      },
-    },
-    {
-      name: "Neuctra LyfeSync",
-      image: "/logos/lyfesync.png",
-      desc: "Smart life management system for habits, goals, and productivity.",
-      links: {
-        learn: "https://lyfesync.neuctra.com",
-        start: "https://lyfesync.neuctra.com/signup",
       },
     },
   ];
