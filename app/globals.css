@@ -5,28 +5,156 @@
 @source "../node_modules/@neuctra/ui";
 @source "../node_modules/@neuctra/cms-core";
 
-/* =============================
-   BASE GLOBAL STYLES
-============================= */
+:root {
+  --primary: #00c214;
+  --primary-foreground: #ffffff;
+
+  --background: #f5f7f3;
+  --foreground: #101410;
+  --secondary: #4a5149;
+  --secondary-foreground: #f5f7f3;
+
+  --muted: #edf2eb;
+  --muted-foreground: #5d665f;
+
+  --accent: #e8efe9;
+  --accent-foreground: #101410;
+
+  --border: rgba(16, 20, 16, 0.1);
+  --input: #f0f5f0;
+  --ring: rgba(0, 194, 20, 0.22);
+
+  --card: rgba(255, 255, 255, 0.8);
+  --card-foreground: #101410;
+
+  --popover: #ffffff;
+  --popover-foreground: #101410;
+
+  --destructive: #d40000;
+  --destructive-foreground: #fafafa;
+
+  --success: #16a34a;
+  --success-foreground: #f0fdf4;
+  --warning: #d97706;
+  --warning-foreground: #fff7ed;
+  --info: #2563eb;
+  --info-foreground: #eff6ff;
+}
+
+.dark {
+  --primary: #00c214;
+  --primary-foreground: #ffffff;
+
+  --background: #09090b;
+  --foreground: #fafafa;
+  --secondary: #d4d4d8;
+  --secondary-foreground: #09090b;
+
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+
+  --accent: #18181b;
+  --accent-foreground: #fafafa;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: #18181b;
+  --ring: #3f3f46;
+
+  --card: rgba(17, 18, 20, 0.82);
+  --card-foreground: #fafafa;
+
+  --popover: #18181b;
+  --popover-foreground: #fafafa;
+
+  --destructive: #d40000;
+  --destructive-foreground: #fafafa;
+
+  --success: #16a34a;
+  --success-foreground: #f0fdf4;
+  --warning: #d97706;
+  --warning-foreground: #fff7ed;
+  --info: #2563eb;
+  --info-foreground: #eff6ff;
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
+}
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(0, 194, 20, 0.08), transparent 30%),
+    var(--background);
   color: var(--foreground);
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 button {
   cursor: pointer;
 }
 
-/* ===== Custom Scrollbar ===== */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(0, 194, 20, 0.25);
+  color: var(--foreground);
+}
+
+section {
+  scroll-margin-top: 6rem;
+}
+
 ::-webkit-scrollbar {
   width: 3px;
   height: 3px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #000;
+  background-color: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -38,57 +166,8 @@ button {
   background-color: var(--primary);
 }
 
-/* =============================
-   THEME SYSTEM
-============================= */
-/* NEUCTRA_THEME_START */
-
-:root {
-  --primary: #00c214;
-  --primary-foreground: #ffffff;
-
-  --background: #000000;
-  --foreground: #fafafa;
-
-  --muted: #27272a;
-  --muted-foreground: #a1a1aa;
-
-  --accent: #18181b;
-  --accent-foreground: #fafafa;
-
-  --border: #27272a;
-  --input: #18181b;
-  --ring: #3f3f46;
-
-  --destructive: #d40000;
-  --destructive-foreground: #fafafa;
-}
-
-
-
-/* NEUCTRA_THEME_END */
-
-/* =============================
-   TAILWIND TOKENS
-============================= */
-@theme {
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-
-  --color-border: var(--border);
-  --color-input: var(--input);
-
-  --color-ring: var(--ring);
-
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+@media (max-width: 640px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
 }

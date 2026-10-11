@@ -5,12 +5,11 @@ import { motion } from "framer-motion";
 export default function MouseGlow({ x, y }) {
   return (
     <motion.div
-      className="absolute w-96 h-96 rounded-full opacity-20"
+      className="absolute h-72 w-72 rounded-full opacity-20"
       style={{
-        background:
-          "radial-gradient(circle, rgba(34, 197, 94, 0.4) 0%, transparent 70%)",
-        left: x - 192,
-        top: y - 192,
+        backgroundColor: "rgba(0, 194, 20, 0.12)",
+        left: x - 144,
+        top: y - 144,
         pointerEvents: "none",
       }}
       animate={{

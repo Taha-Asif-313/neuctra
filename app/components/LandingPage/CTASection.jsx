@@ -3,58 +3,46 @@ import { motion } from "framer-motion";
 
 export default function CTASection() {
   return (
-    <section className="relative py-28 px-6 text-center text-white overflow-hidden">
-      
-      {/* Background Glow */}
-      <div className="absolute inset-0 bg-linear-to-r from-primary/10 via-transparent to-primary/10 blur-3xl opacity-40 pointer-events-none" />
-
-      <motion.h2
-        className="relative text-4xl md:text-6xl font-black mb-3"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        Accelerate Your Growth with{" "}<br/>
-        <span className="text-primary">AI-Powered SaaS</span>
-      </motion.h2>
-
-      <motion.p
-        className="relative text-gray-200 max-w-3xl mx-auto mb-10 text-base md:text-lg"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        Neuctra delivers secure, scalable, and intelligent digital platforms 
-        designed to automate operations, enhance performance, 
-        and future-proof your business in a rapidly evolving world.
-      </motion.p>
-
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <motion.div
-        className="relative flex flex-col sm:flex-row items-center justify-center gap-5"
-        initial={{ opacity: 0, y: 20 }}
+        className="rounded-3xl border border-border bg-card px-6 py-12 text-center sm:px-10 lg:px-16"
+        initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.6 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
       >
-        <motion.a
-          href="/contact"
-          className="px-8 py-4 bg-primary rounded-xl font-semibold hover:shadow-[0_0_25px_#00ff88]/60 transition-all"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
-        >
-          Start Your Project
-        </motion.a>
+        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Ready to build</p>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          Turn your idea into a product that feels clear, useful, and scalable.
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base text-secondary sm:text-lg">
+          Whether you need a custom SaaS experience, a modern website, or a smarter product workflow, Neuctra can help shape the right technical direction.
+        </p>
 
-        <motion.a
-          href="/solutions"
-          className="px-8 py-4 border border-primary text-primary rounded-xl font-semibold hover:bg-primary/10 transition-all"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
+        <motion.div
+          className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
         >
-          Explore Solutions
-        </motion.a>
+          <motion.a
+            href="/contact"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
+          >
+            Start your project
+          </motion.a>
+
+          <motion.a
+            href="/#solutions"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground"
+          >
+            Explore solutions
+          </motion.a>
+        </motion.div>
       </motion.div>
     </section>
   );

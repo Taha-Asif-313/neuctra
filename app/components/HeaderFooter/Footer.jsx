@@ -8,125 +8,88 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-black text-gray-300 border-t border-white/10 ">
-      <div className="max-w-7xl px-6 md:px-12 py-12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Logo & Brand */}
+    <footer className="border-t border-border bg-background text-secondary">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center md:items-start gap-3"
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center gap-3 md:items-start"
         >
-          {/* Logo */}
-          <Link href="/" className="relative group flex items-center">
-            <div className="flex items-center gap-2">
-              {/* Logo Image */}
-              <img
-                src="/logo.png"
-                alt="Neuctra Logo"
-                className="w-6 h-6 object-contain transition-transform duration-300"
-              />
-
-              {/* Brand Text */}
-              <span
-                className=" text-lg font-bold tracking-tight 
-      bg-clip-text text-transparent 
-      bg-linear-to-r from-white to-gray-300"
-              >
-                Neuctra
-              </span>
-            </div>
+          <Link href="/" className="group flex items-center gap-2">
+            <img src="/logo.png" alt="Neuctra Logo" className="h-6 w-6 object-contain" />
+            <span className="text-lg font-semibold text-foreground">Neuctra</span>
           </Link>
-          <p className="text-sm text-gray-200 text-center md:text-left">
-            Empowering businesses with AI-driven, secure, and scalable SaaS
-            solutions.
+          <p className="text-center text-sm text-secondary md:text-left">
+            Software products and custom solutions that help people solve real problems through technology.
           </p>
         </motion.div>
 
-        {/* Navigation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
           className="flex flex-col gap-3 text-sm"
         >
-          <h4 className="text-white font-semibold mb-2">Company</h4>
-          <Link href="/#products" className="hover:text-white transition">
+          <h4 className="mb-2 text-base font-semibold text-foreground">Company</h4>
+          <Link href="/#products" className="transition-colors hover:text-foreground">
             Products
           </Link>
-          <Link href="/#solutions" className="hover:text-white transition">
+          <Link href="/#solutions" className="transition-colors hover:text-foreground">
             Solutions
           </Link>
-          <Link href="/pricing" className="hover:text-white transition">
+          <Link href="/pricing" className="transition-colors hover:text-foreground">
             Pricing
           </Link>
-          <Link href="/#contact" className="hover:text-white transition">
+          <Link href="/#contact" className="transition-colors hover:text-foreground">
             Contact
           </Link>
         </motion.div>
 
-        {/* Legal Links (Important for Paddle) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
           className="flex flex-col gap-3 text-sm"
         >
-          <h4 className="text-white font-semibold mb-2">Legal</h4>
-          <Link href="/terms" className="hover:text-white transition">
+          <h4 className="mb-2 text-base font-semibold text-foreground">Legal</h4>
+          <Link href="/terms" className="transition-colors hover:text-foreground">
             Terms of Service
           </Link>
-          <Link href="/privacy" className="hover:text-white transition">
+          <Link href="/privacy" className="transition-colors hover:text-foreground">
             Privacy Policy
           </Link>
-          <Link href="/refund-policy" className="hover:text-white transition">
+          <Link href="/refund-policy" className="transition-colors hover:text-foreground">
             Refund Policy
           </Link>
         </motion.div>
 
-        {/* Socials */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.22 }}
           className="flex flex-col gap-4"
         >
-          <h4 className="text-white font-semibold mb-2">Connect</h4>
-          <div className="flex gap-6">
-            <a
-              href="https://github.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition"
-            >
+          <h4 className="mb-2 text-base font-semibold text-foreground">Connect</h4>
+          <div className="flex gap-5">
+            <a href="https://github.com/" target="_blank" rel="noreferrer" className="text-secondary transition-colors hover:text-primary">
               <Github size={20} />
             </a>
-            <a
-              href="https://twitter.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition"
-            >
+            <a href="https://twitter.com/" target="_blank" rel="noreferrer" className="text-secondary transition-colors hover:text-primary">
               <Twitter size={20} />
             </a>
-            <a
-              href="https://www.linkedin.com/company/neuctra"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition"
-            >
+            <a href="https://www.linkedin.com/company/neuctra" target="_blank" rel="noreferrer" className="text-secondary transition-colors hover:text-primary">
               <Linkedin size={20} />
             </a>
           </div>
         </motion.div>
       </div>
 
-      {/* Bottom */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-gray-300"
+        transition={{ delay: 0.3 }}
+        className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground"
       >
         © {year} Neuctra. All rights reserved.
       </motion.div>

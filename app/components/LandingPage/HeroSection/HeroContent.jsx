@@ -9,7 +9,6 @@ import {
   Code,
   Rocket,
   TrendingUp,
-  ArrowUp01,
   ArrowUpRight,
   Mail,
 } from "lucide-react";
@@ -17,140 +16,115 @@ import Link from "next/link";
 
 export default function HeroContent() {
   const words = [
-    "AI Driven SaaS Solutions",
-    "Enterprise Grade Security",
-    "Smart Business Automation",
-    "Next Level Digital Innovation",
+    "build software that matters",
+    "design digital systems clearly",
+    "turn ideas into product",
+    "grow with modern tooling",
   ];
 
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // ✅ FIXED typing logic
   useEffect(() => {
     const current = words[index % words.length];
 
-    const timeout = setTimeout(
-      () => {
-        setText((prev) =>
-          isDeleting
-            ? current.substring(0, prev.length - 1)
-            : current.substring(0, prev.length + 1),
-        );
+    const timeout = setTimeout(() => {
+      setText((prev) =>
+        isDeleting
+          ? current.substring(0, prev.length - 1)
+          : current.substring(0, prev.length + 1),
+      );
 
-        if (!isDeleting && text === current) {
-          setIsDeleting(true);
-        } else if (isDeleting && text === "") {
-          setIsDeleting(false);
-          setIndex((prev) => prev + 1);
-        }
-      },
-      isDeleting ? 50 : 90,
-    );
+      if (!isDeleting && text === current) {
+        setIsDeleting(true);
+      } else if (isDeleting && text === "") {
+        setIsDeleting(false);
+        setIndex((prev) => prev + 1);
+      }
+    }, isDeleting ? 45 : 90);
 
     return () => clearTimeout(timeout);
   }, [text, isDeleting, index]);
 
   return (
-    <section className="relative z-10 max-w-7xl flex flex-col items-center justify-center min-h-screen px-6 mx-auto text-center pt-24 pb-16">
-      {/* 🔥 Headline */}
-      <motion.h1
-        className="text-4xl sm:text-6xl font-black leading-tight text-white max-w-5xl"
-        initial={{ opacity: 0, y: 40 }}
+    <section className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-4 pb-16 pt-28 text-center sm:px-6 lg:px-8">
+      <motion.span
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.5 }}
+        className="mb-6 inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-secondary"
       >
-        Transforming Businesses with{" "}
-        <span className="text-primary block mt-2">
-          {text}
-          <motion.span
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          >
-            |
-          </motion.span>
-        </span>
+        Software products + custom solutions
+      </motion.span>
+
+      <motion.h1
+        className="max-w-5xl text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-7xl"
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        Neuctra helps teams
+        <span className="mt-3 block text-primary">{text}</span>
+        <motion.span
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="ml-1 inline-block text-primary"
+        >
+          |
+        </motion.span>
       </motion.h1>
 
-      {/* 🔥 Subtext */}
       <motion.p
-        className="max-w-2xl text-gray-300 text-base sm:text-lg mt-6"
+        className="mt-6 max-w-2xl text-base text-secondary sm:text-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        Neuctra builds scalable, secure, and AI-powered SaaS platforms that
-        streamline operations, boost productivity, and accelerate growth.
+        We build reusable software products and tailor digital solutions for businesses, startups, developers, and individuals who need practical technology that works.
       </motion.p>
 
-      {/* 🔥 CTA */}
       <motion.div
-        className="flex flex-col sm:flex-row justify-center gap-4 mt-8 w-full"
+        className="mt-8 flex w-full max-w-xl flex-col items-center justify-center gap-4 sm:flex-row"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
+        transition={{ delay: 0.45 }}
       >
-        {/* Space CTA */}
         <Link
           href="/space"
-          className="flex w-full sm:w-auto items-center justify-center gap-2 overflow-hidden rounded-full font-semibold bg-primary hover:bg-primary/90 transition-colors duration-300 px-6 sm:px-10 py-2.5 text-sm text-white"
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors duration-200 hover:bg-primary/90 sm:w-auto"
         >
           <span>Go to Neuctra Space</span>
           <ArrowUpRight size={18} />
         </Link>
 
-        {/* Contact CTA */}
         <Link
           href="/contact"
-          className="group flex w-full sm:w-auto items-center justify-center gap-2 overflow-hidden rounded-full border border-white bg-transparent px-6 sm:px-8 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-primary hover:border-primary"
+          className="group flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-primary sm:w-auto"
         >
           <span>Get in touch</span>
-
-          <Mail
-            size={18}
-            className="transition-transform duration-300 group-hover:translate-x-0.5"
-          />
+          <Mail size={18} className="transition-transform duration-200 group-hover:translate-x-0.5" />
         </Link>
       </motion.div>
 
-      {/* 🔥 Features (moved lower + lighter feel) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-24 w-full max-w-5xl px-4">
+      <div className="mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 px-0 sm:grid-cols-2 lg:grid-cols-3">
         {[
-          {
-            icon: <ShieldCheck className="text-primary w-7 h-7" />,
-            title: "Secure Infrastructure",
-          },
-          {
-            icon: <Layers className="text-primary w-7 h-7" />,
-            title: "SaaS Ecosystem",
-          },
-          {
-            icon: <Cloud className="text-primary w-7 h-7" />,
-            title: "Cloud-Native",
-          },
-          {
-            icon: <Code className="text-primary w-7 h-7" />,
-            title: "Custom Development",
-          },
-          {
-            icon: <Rocket className="text-primary w-7 h-7" />,
-            title: "Product Innovation",
-          },
-          {
-            icon: <TrendingUp className="text-primary w-7 h-7" />,
-            title: "Growth Strategy",
-          },
+          { icon: <ShieldCheck className="h-6 w-6 text-primary" />, title: "Secure infrastructure" },
+          { icon: <Layers className="h-6 w-6 text-primary" />, title: "SaaS ecosystem" },
+          { icon: <Cloud className="h-6 w-6 text-primary" />, title: "Cloud-native" },
+          { icon: <Code className="h-6 w-6 text-primary" />, title: "Custom development" },
+          { icon: <Rocket className="h-6 w-6 text-primary" />, title: "Product innovation" },
+          { icon: <TrendingUp className="h-6 w-6 text-primary" />, title: "Growth strategy" },
         ].map((feature, idx) => (
           <motion.div
             key={idx}
-            className="bg-[#0f0f0f]/60 border border-[#1f1f1f] hover:border-primary rounded-xl p-5 transition"
-            initial={{ opacity: 0, y: 20 }}
+            className="rounded-xl border border-border bg-card p-5 text-center"
+            initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
+            transition={{ delay: idx * 0.08 }}
           >
-            <div className="flex justify-center mb-2">{feature.icon}</div>
-            <p className="text-sm text-gray-300">{feature.title}</p>
+            <div className="mb-3 flex justify-center">{feature.icon}</div>
+            <p className="text-sm text-secondary">{feature.title}</p>
           </motion.div>
         ))}
       </div>

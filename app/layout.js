@@ -1,7 +1,7 @@
-// app/layout.js or RootLayout.js
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Poppins } from "next/font/google";
+import { ThemeProvider } from "@/app/contexts/ThemeContext";
 
 export const metadata = {
   title: "Neuctra – Empowering Modern SaaS Innovation",
@@ -9,19 +9,18 @@ export const metadata = {
     "Neuctra builds modern SaaS solutions for authentication, design systems, and AI-powered productivity. Explore Authix, UI, and Notlix.",
 };
 
-// Configure Poppins font
 const poppins = Poppins({
-  subsets: ["latin"],      // Required subset
-  weight: ["400", "500", "600", "700"], // Optional: choose weights you need
-  variable: "--font-poppins", // optional for CSS variable usage
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>
-        {children}
-        <Toaster/>
+        <ThemeProvider>{children}</ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );

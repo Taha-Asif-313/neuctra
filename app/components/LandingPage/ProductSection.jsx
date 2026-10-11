@@ -8,7 +8,8 @@ export default function ProductsSection() {
     {
       name: "Neuctra Authix",
       image: "/logos/authix.png",
-      desc: "Secure, scalable authentication and authorization infrastructure for modern applications and SaaS platforms.",
+      category: "Identity infrastructure",
+      desc: "Secure identity and application data infrastructure for modern products, teams, and SaaS builders.",
       links: {
         learn: "https://authix.neuctra.com",
         start: "https://authix.neuctra.com/signup",
@@ -18,7 +19,8 @@ export default function ProductsSection() {
     {
       name: "Neuctra UI",
       image: "/logos/ui.png",
-      desc: "A modern UI system with production-ready components and animations.",
+      category: "Design system",
+      desc: "Reusable React components and design patterns for consistent dashboards, forms, and product interfaces.",
       links: {
         learn: "https://ui.neuctra.com",
         start: "https://ui.neuctra.com/docs",
@@ -28,90 +30,97 @@ export default function ProductsSection() {
     {
       name: "Neuctra Notlix",
       image: "/logos/notlix.png",
-      desc: "Collaborative workspace with AI-assisted documentation and real-time sync.",
+      category: "Life OS",
+      desc: "Personal planning, note-taking, and life management built to help people remember and organize their work.",
       links: {
         learn: "https://notlix.neuctra.com",
         start: "https://notlix.neuctra.com/signup",
       },
     },
+    {
+      name: "Neuctra Tools",
+      image: null,
+      category: "Utilities",
+      desc: "Practical browser-based tools for everyday work, writing, formatting, and smaller digital tasks that need to feel fast and simple.",
+      links: {
+        learn: "https://tools.neuctra.com",
+        start: "https://tools.neuctra.com",
+      },
+    },
   ];
 
   return (
-    <section id="products" className="relative max-w-7xl mx-auto py-28 px-6">
-      {/* Header */}
+    <section id="products" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <motion.div
-        className="text-center max-w-3xl mx-auto mb-20"
-        initial={{ opacity: 0, y: 40 }}
+        className="mx-auto mb-12 max-w-3xl text-center"
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl md:text-6xl font-bold mb-3">
-          The <span className="text-primary">Neuctra</span> Product Suite
+        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Product ecosystem</p>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          The <span className="text-primary">Neuctra</span> product suite
         </h2>
-        <p className="text-gray-300 text-lg">
-          A unified ecosystem of security, design systems, and AI tools.
+        <p className="mt-4 text-base text-secondary sm:text-lg">
+          A focused set of software products for identity, product interfaces, and everyday digital organization.
         </p>
       </motion.div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {products.map((product, index) => (
           <motion.div
             key={index}
-            className="group relative flex flex-col h-full rounded-2xl overflow-hidden border border-white/10 
-            bg-gradient-to-b from-zinc-900/80 to-zinc-950/90 backdrop-blur-xl
-            transition-all duration-500 hover:-translate-y-2 hover:border-primary/40"
-            initial={{ opacity: 0, y: 40 }}
+            className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary"
+            initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.08 }}
+            transition={{ delay: index * 0.08, duration: 0.5 }}
           >
-
-
-            {/* Image */}
-            <div className="relative h-52 flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-60" />
-
-              <img
-                src={product.image}
-                alt={product.name}
-                className="relative z-10 max-h-36 object-contain transition duration-500 group-hover:scale-110"
-              />
+            <div className="relative flex h-52 items-center justify-center overflow-hidden border-b border-border bg-background/70">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="relative z-10 max-h-32 object-contain transition duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-2xl border border-border bg-card text-2xl font-bold text-primary">
+                  N
+                </div>
+              )}
 
               {product.featured && (
-                <div className="absolute top-4 right-4 bg-primary   text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="absolute right-4 top-4 rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-primary-foreground">
                   Featured
-                </div>
+                </span>
               )}
             </div>
 
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-1">
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition">
-                {product.name}
-              </h3>
+            <div className="flex flex-1 flex-col p-6">
+              <span className="mb-3 inline-flex w-fit rounded-full border border-border bg-background px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                {product.category}
+              </span>
+              <h3 className="mb-3 text-xl font-semibold text-foreground">{product.name}</h3>
+              <p className="mb-6 text-sm text-secondary">{product.desc}</p>
 
-              <p className="text-gray-400 text-sm mb-6">{product.desc}</p>
-
-              {/* CTA */}
-              <div className="flex items-center gap-4 mt-auto">
+              <div className="mt-auto flex items-center justify-between gap-4">
                 <motion.a
                   href={product.links?.learn || "#"}
                   target="_blank"
                   whileHover={{ x: 4 }}
-                  className="text-sm text-gray-300 hover:text-white flex items-center"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-secondary transition-colors hover:text-foreground"
                 >
-                  Learn More
-                  <ArrowRight className="w-4 h-4 ml-1" />
+                  Learn more
+                  <ArrowRight size={16} />
                 </motion.a>
 
                 <motion.a
                   href={product.links?.start || "#"}
                   target="_blank"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="ml-auto bg-primary text-sm font-semibold px-5 py-2 rounded-full 
-                  "
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
                 >
-                  Get Started
+                  Get started
                 </motion.a>
               </div>
             </div>

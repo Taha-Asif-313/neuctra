@@ -5,83 +5,83 @@ import { Code, Cloud, Shield, Layers } from "lucide-react";
 export default function WhyNeuctra() {
   const points = [
     {
-      icon: <Code className="w-8 h-8 text-primary" />,
-      title: "Custom Web Development Solutions",
-      desc: "We design and develop scalable websites, SaaS platforms, e-commerce systems, and admin dashboards tailored for startups, businesses, and growing digital brands.",
+      icon: <Code className="h-8 w-8 text-primary" />,
+      title: "Custom product development",
+      desc: "We design and build web products, SaaS platforms, business systems, and dashboards that solve real operational problems for modern teams.",
     },
     {
-      icon: <Layers className="w-8 h-8 text-primary" />,
-      title: "Integrated SaaS Ecosystem",
-      desc: "Neuctra builds secure, cloud-native SaaS products including authentication systems, UI frameworks, productivity tools, and developer utilities — all engineered for scalability.",
+      icon: <Layers className="h-8 w-8 text-primary" />,
+      title: "Connected software ecosystem",
+      desc: "From identity systems to UI libraries and productivity tools, Neuctra brings together product thinking and practical engineering across the stack.",
     },
     {
-      icon: <Shield className="w-8 h-8 text-primary" />,
-      title: "Enterprise-Grade Security",
-      desc: "Our platforms follow zero-trust architecture, modern authentication standards, and secure API systems to protect data and ensure reliable digital operations.",
+      icon: <Shield className="h-8 w-8 text-primary" />,
+      title: "Security-minded implementation",
+      desc: "Our work is shaped around realistic product needs, secure patterns, and thoughtful architecture that supports reliability and trust.",
     },
     {
-      icon: <Cloud className="w-8 h-8 text-primary" />,
-      title: "Cloud-Native Infrastructure",
-      desc: "Optimized for AWS, Firebase, Supabase, and modern cloud environments, our high-performance infrastructure enables businesses to scale efficiently and securely.",
+      icon: <Cloud className="h-8 w-8 text-primary" />,
+      title: "Built for modern delivery",
+      desc: "We design systems for scalability, maintainability, and a smooth user experience across web apps, internal tools, and digital workflows.",
     },
   ];
 
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto text-white">
-      <div className="text-center mb-16">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-6xl mb-3 font-bold"
-        >
-          Why Choose <span className="text-primary">Neuctra</span>?
-        </motion.h2>
-
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto mb-12 max-w-3xl text-center">
         <motion.p
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false }}
-          transition={{ duration: 0.8 }}
-          className="text-gray-200 mt-4 max-w-3xl mx-auto"
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary"
         >
-          Neuctra is a modern technology company delivering scalable SaaS
-          products and custom web development services. We combine clean UI/UX
-          design, secure cloud-native architecture, and intelligent automation
-          to help businesses build, launch, and scale powerful digital
-          platforms.
+          Why Neuctra
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl"
+        >
+          Built for product clarity and execution
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-4 text-base text-secondary sm:text-lg"
+        >
+          We combine product strategy, clean engineering, and practical design to help businesses and founders solve real problems with software.
         </motion.p>
       </div>
 
       <motion.div
-        className="grid md:grid-cols-2 gap-6 max-w-7xl mx-auto"
+        className="grid gap-6 md:grid-cols-2"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         variants={{
           hidden: {},
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
+          visible: { transition: { staggerChildren: 0.12 } },
         }}
       >
         {points.map((item, i) => (
           <motion.div
             key={i}
             variants={{
-              hidden: { opacity: 0, y: 50 },
+              hidden: { opacity: 0, y: 24 },
               visible: { opacity: 1, y: 0 },
             }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             whileHover={{ y: -6 }}
-            className="bg-[#111]/60 border border-[#1f1f1f] rounded-xl p-6 hover:border-primary transition-all"
+            className="rounded-2xl border border-border bg-card p-6"
           >
             <div className="mb-4">{item.icon}</div>
-            <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-            <p className="text-gray-400 text-sm">{item.desc}</p>
+            <h3 className="mb-3 text-xl font-semibold text-foreground">{item.title}</h3>
+            <p className="text-sm leading-7 text-secondary">{item.desc}</p>
           </motion.div>
         ))}
       </motion.div>

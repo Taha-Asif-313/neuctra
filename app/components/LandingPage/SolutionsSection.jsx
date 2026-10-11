@@ -6,111 +6,93 @@ export default function SolutionsSection() {
   const solutions = [
     {
       icon: ShieldCheck,
-      title: "Authentication & Identity Management",
-      desc: "Secure authentication systems with role-based access control, API security, session management, and enterprise-grade identity protection powered by Neuctra Authix.",
+      title: "Authentication & identity",
+      desc: "Secure identity, session management, and application data systems that support product teams and growing digital businesses.",
       link: "https://authix.neuctra.com",
     },
     {
       icon: Layout,
-      title: "Modern UI & Design Systems",
-      desc: "Scalable UI frameworks and reusable component libraries built for SaaS platforms, admin dashboards, and responsive web applications using modern design standards.",
+      title: "Modern UI systems",
+      desc: "Reusable design patterns, dashboards, and frontend systems that keep interfaces consistent, fast, and familiar for users.",
       link: "https://ui.neuctra.com",
     },
     {
       icon: Brain,
-      title: "Productivity & Collaboration Tools",
-      desc: "Cloud-based productivity platforms with intelligent automation, workflow optimization, and real-time collaboration for modern digital teams.",
+      title: "Productivity & personal organization",
+      desc: "Planning tools and digital workflows that help individuals and teams manage responsibilities, ideas, and information.",
       link: "https://notlix.neuctra.com",
     },
     {
       icon: Cloud,
-      title: "Cloud-Native Architecture",
-      desc: "Scalable cloud infrastructure engineered for AWS, Firebase, Supabase, and custom enterprise environments to ensure performance and reliability.",
+      title: "Cloud-native architecture",
+      desc: "Scalable systems designed for modern deployment patterns, performance, and reliable product operations across environments.",
       link: "#",
     },
     {
       icon: Lock,
-      title: "Secure SaaS Development",
-      desc: "Zero-trust architecture, secure backend systems, and protected APIs designed to safeguard data and maintain compliance across digital platforms.",
+      title: "Secure software delivery",
+      desc: "Practical product security, API protections, and trusted implementation choices that reduce operational risk for real products.",
       link: "#",
     },
     {
       icon: Zap,
-      title: "High-Performance Systems",
-      desc: "Optimized SaaS architecture and web applications built for speed, scalability, and seamless user experience across devices.",
+      title: "High-performance product work",
+      desc: "Streamlined systems and performant interfaces built to support product growth, speed, and better user experience.",
       link: "#",
     },
   ];
 
-  // 🔥 Animation Variants
   const container = {
     hidden: {},
     show: {
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.8, 0.25, 1],
-      },
+      transition: { duration: 0.6, ease: [0.25, 0.8, 0.25, 1] },
     },
   };
 
   const cardVariant = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.8, 0.25, 1],
-      },
+      transition: { duration: 0.5, ease: [0.25, 0.8, 0.25, 1] },
     },
   };
 
   return (
-    <section
-      id="solutions"
-      className="relative py-24 px-6 max-w-7xl mx-auto text-white overflow-hidden"
-    >
-      {/* Section Header */}
+    <section id="solutions" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false }} // 🔹 Repeat animation on scroll
-        className="text-center mb-16"
+        viewport={{ once: true }}
+        className="mx-auto mb-12 max-w-3xl text-center"
       >
-        <motion.h2
-          variants={fadeUp}
-          className="text-4xl md:text-6xl font-bold mb-3"
-        >
-          Discover <span className="text-primary">Neuctra</span> Solutions
+        <motion.p variants={fadeUp} className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          Solution areas
+        </motion.p>
+        <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          Practical solutions for modern teams
         </motion.h2>
-
-        <motion.p variants={fadeUp} className="text-gray-200 max-w-3xl mx-auto">
-          Neuctra delivers scalable SaaS products and custom web development
-          solutions powered by secure cloud-native architecture and
-          high-performance infrastructure.
+        <motion.p variants={fadeUp} className="mt-4 text-base text-secondary sm:text-lg">
+          Neuctra blends product thinking, secure engineering, and product-building expertise for businesses and founders who need software that feels useful from day one.
         </motion.p>
       </motion.div>
 
-      {/* Solutions Grid */}
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: false }} // 🔹 Repeat animation on scroll
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto"
+        viewport={{ once: true }}
+        className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
       >
         {solutions.map((solution, index) => {
           const Icon = solution.icon;
@@ -119,42 +101,27 @@ export default function SolutionsSection() {
             <motion.div
               key={index}
               variants={cardVariant}
-              whileHover={{
-                y: -10,
-                boxShadow: "0px 0px 45px rgba(0,255,136,0.15)",
-              }}
-              transition={{ duration: 0.3 }}
-              className="group bg-[#111]/60 border border-[#1f1f1f] 
-                         rounded-2xl p-8 
-                         hover:border-primary 
-                         hover:bg-[#151515]
-                         transition-all duration-300 
-                         flex flex-col items-start space-y-4"
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="flex h-full flex-col rounded-2xl border border-border bg-card p-6"
             >
-              {/* Icon Animation */}
-              <motion.div
-                whileHover={{ scale: 1.15, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="p-3 bg-primary/10 rounded-xl text-primary"
-              >
-                <Icon className="w-10 h-10" />
-              </motion.div>
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
 
-              <h3 className="text-xl font-semibold">{solution.title}</h3>
-
-              <p className="text-gray-400 text-sm grow leading-relaxed">
-                {solution.desc}
-              </p>
+              <h3 className="mb-3 text-xl font-semibold text-foreground">{solution.title}</h3>
+              <p className="mb-5 grow text-sm leading-7 text-secondary">{solution.desc}</p>
 
               <motion.a
                 href={solution.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ x: 6 }}
+                whileHover={{ x: 4 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="text-primary font-medium flex items-center gap-2"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
               >
-                Learn More →
+                Learn more
+                <span aria-hidden="true">→</span>
               </motion.a>
             </motion.div>
           );

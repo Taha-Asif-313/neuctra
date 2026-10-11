@@ -26,7 +26,7 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (loading) return; // 🚫 Prevent double submit
+    if (loading) return;
 
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill all required fields.");
@@ -35,7 +35,6 @@ export default function ContactSection() {
 
     try {
       setLoading(true);
-
       const toastId = toast.loading("Sending message...");
 
       const payload = new FormData();
@@ -51,18 +50,11 @@ export default function ContactSection() {
       });
 
       const data = await response.json();
-
       toast.dismiss(toastId);
 
       if (data.success) {
         toast.success("Message sent successfully!");
-
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
         toast.error(data.message || "Something went wrong.");
       }
@@ -74,106 +66,74 @@ export default function ContactSection() {
   };
 
   return (
-    <section
-      id="contact"
-      className="relative py-24 px-6 md:px-12 text-white overflow-hidden"
-    >
-      {/* Header */}
+    <section id="contact" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
       <motion.div
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 40 }}
+        className="mx-auto mb-12 max-w-3xl text-center"
+        initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl sm:text-6xl font-extrabold mb-3 tracking-tight">
-          Let’s <span className="text-primary">Connect</span>
+        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Contact</p>
+        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          Let’s build something useful together.
         </h2>
-        <p className="text-gray-200 max-w-md mx-auto">
-          Whether you have a question about our products or need assistance —
-          our team is ready to help.
+        <p className="mt-4 text-base text-secondary sm:text-lg">
+          Share your idea, challenge, or requirement and we will help map the right solution.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 max-w-6xl mx-auto">
-        {/* Contact Info Panel */}
+      <div className="grid gap-8 lg:grid-cols-2">
         <motion.div
-          className="flex flex-col space-y-3"
-          initial={{ opacity: 0, x: -50 }}
+          className="rounded-3xl border border-border bg-card p-8"
+          initial={{ opacity: 0, x: -24 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          {/* Logo */}
-          <Link href="/" className="relative group flex items-center">
-            <div className="flex items-center gap-2">
-              {/* Logo Image */}
-              <img
-                src="/logo.png"
-                alt="Neuctra Logo"
-                className="w-6 h-6 object-contain transition-transform duration-300"
-              />
-
-              {/* Brand Text */}
-              <span
-                className=" text-lg font-bold tracking-tight 
-      bg-clip-text text-transparent 
-      bg-linear-to-r from-white to-gray-300"
-              >
-                Neuctra
-              </span>
-            </div>
+          <Link href="/" className="mb-6 flex items-center gap-2">
+            <img src="/logo.png" alt="Neuctra Logo" className="h-6 w-6 object-contain" />
+            <span className="text-lg font-semibold text-foreground">Neuctra</span>
           </Link>
 
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Reach out for collaborations, inquiries, or project discussions.
+          <p className="mb-8 max-w-md text-sm leading-7 text-secondary">
+            We help founders, businesses, and teams design modern digital products and tailor software that fits the problem they are trying to solve.
           </p>
 
-          <div className="space-y-4 text-gray-300 text-sm">
+          <div className="space-y-5 text-sm">
             <div>
-              <h4 className="text-lg font-semibold text-white flex items-center gap-2">
-                <Mail className="text-primary w-5 h-5" /> Email
+              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
+                <Mail className="h-4 w-4 text-primary" /> Email
               </h4>
-              <p className="ml-7 text-gray-400">
-                <a
-                  href="mailto:support@neuctra.com"
-                  className="hover:text-primary transition"
-                >
-                  support@neuctra.com
-                </a>
-              </p>
+              <a href="mailto:support@neuctra.com" className="ml-6 text-secondary transition-colors hover:text-foreground">
+                support@neuctra.com
+              </a>
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold text-white flex items-center gap-2">
-                <Phone className="text-primary w-5 h-5" /> Phone
+              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
+                <Phone className="h-4 w-4 text-primary" /> Phone
               </h4>
-              <p className="ml-7 text-gray-400">
-                <a
-                  href="tel:+923084615794"
-                  className="hover:text-primary transition"
-                >
-                  +92 308 4615794
-                </a>
-              </p>
+              <a href="tel:+923084615794" className="ml-6 text-secondary transition-colors hover:text-foreground">
+                +92 308 4615794
+              </a>
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold text-white flex items-center gap-2">
-                <Globe className="text-primary w-5 h-5" /> Website
+              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
+                <Globe className="h-4 w-4 text-primary" /> Website
               </h4>
-              <p className="ml-7 text-gray-400">www.neuctra.com</p>
+              <p className="ml-6 text-secondary">www.neuctra.com</p>
             </div>
           </div>
         </motion.div>
 
-        {/* Contact Form */}
         <motion.form
           onSubmit={handleSubmit}
-          className="rounded-2xl p-6 md:p-8 backdrop-blur-lg"
-          initial={{ opacity: 0, x: 50 }}
+          className="rounded-3xl border border-border bg-card p-8"
+          initial={{ opacity: 0, x: 24 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             <input
               type="text"
               name="name"
@@ -182,7 +142,7 @@ export default function ContactSection() {
               value={formData.name}
               onChange={handleChange}
               placeholder="Full Name"
-              className="w-full bg-[#0f0f0f] border border-[#222] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-primary transition-all disabled:opacity-50"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
             />
 
             <input
@@ -193,7 +153,17 @@ export default function ContactSection() {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email Address"
-              className="w-full bg-[#0f0f0f] border border-[#222] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-primary transition-all disabled:opacity-50"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+            />
+
+            <input
+              type="text"
+              name="subject"
+              disabled={loading}
+              value={formData.subject}
+              onChange={handleChange}
+              placeholder="Subject (optional)"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
             />
 
             <textarea
@@ -204,15 +174,15 @@ export default function ContactSection() {
               value={formData.message}
               onChange={handleChange}
               placeholder="Write your message here..."
-              className="w-full bg-[#0f0f0f] border border-[#222] rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:border-primary transition-all disabled:opacity-50"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
             />
 
             <motion.button
               type="submit"
               disabled={loading}
-              className="mt-4 w-full flex items-center justify-center gap-2 bg-primary font-semibold rounded-lg px-6 py-3 shadow-[0_0_25px_var(--primary)]/40 hover:shadow-[0_0_40px_var(--primary)]/60 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-              whileHover={!loading ? { scale: 1.05 } : {}}
-              whileTap={!loading ? { scale: 0.95 } : {}}
+              whileHover={!loading ? { scale: 1.02 } : {}}
+              whileTap={!loading ? { scale: 0.98 } : {}}
+              className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Sending..." : "Send Message"}
               {!loading && <Send size={18} />}

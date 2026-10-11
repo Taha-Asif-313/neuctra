@@ -6,128 +6,93 @@ export default function ServicesSection() {
   const services = [
     {
       icon: Globe,
-      title: "Custom Business Websites",
-      desc: "We design and develop high-performance, SEO-optimized business websites with modern UI/UX, responsive architecture, and scalable backend systems tailored to your brand.",
+      title: "Business websites",
+      desc: "High-performance websites and brand experiences designed for clarity, trust, and conversion across devices and audience segments.",
     },
     {
       icon: ShoppingCart,
-      title: "E-Commerce Development",
-      desc: "Secure and scalable e-commerce platforms with integrated payments, product management systems, admin dashboards, and cloud-based infrastructure for growing online businesses.",
+      title: "E-commerce builds",
+      desc: "Scalable storefronts and digital commerce systems with the structure needed for products, customer journeys, and growth operations.",
     },
     {
       icon: LayoutDashboard,
-      title: "Custom SaaS & Web Applications",
-      desc: "End-to-end SaaS development — from product strategy and system architecture to deployment — built with cloud-native technologies and enterprise-grade security.",
+      title: "Custom SaaS and web apps",
+      desc: "End-to-end product work from product thinking to deployment, built around real workflows, maintainability, and product usability.",
     },
   ];
 
-  // 🔥 Animation Variants
   const container = {
     hidden: {},
     show: {
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.12 },
     },
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 30 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.8, 0.25, 1],
-      },
+      transition: { duration: 0.6, ease: [0.25, 0.8, 0.25, 1] },
     },
   };
 
   const cardVariant = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    hidden: { opacity: 0, y: 24 },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.25, 0.8, 0.25, 1],
-      },
+      transition: { duration: 0.5, ease: [0.25, 0.8, 0.25, 1] },
     },
   };
 
   return (
-    <section className="relative py-16 sm:py-20 lg:py-28 max-w-7xl mx-auto px-6 lg:px-8 bg-black/40 text-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16 lg:mb-20"
-        >
-          <motion.h2
-            variants={fadeUp}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight"
-          >
-            Web <span className="text-primary">Development</span> Services
-          </motion.h2>
+    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="mx-auto mb-12 max-w-3xl text-center"
+      >
+        <motion.p variants={fadeUp} className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
+          Services
+        </motion.p>
+        <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+          Product and web development built for real business goals
+        </motion.h2>
+        <motion.p variants={fadeUp} className="mt-4 text-base text-secondary sm:text-lg">
+          We help businesses turn ideas into clear digital experiences and reliable software systems with a modern, user-first approach.
+        </motion.p>
+      </motion.div>
 
-          <motion.p
-            variants={fadeUp}
-            className="mt-4 text-gray-300 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed"
-          >
-            Neuctra delivers scalable web development solutions and cloud-native
-            SaaS platforms for startups, businesses, and digital brands —
-            combining clean UI/UX design, secure architecture, and
-            high-performance infrastructure.
-          </motion.p>
-        </motion.div>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="grid gap-6 lg:grid-cols-3"
+      >
+        {services.map((service, i) => {
+          const Icon = service.icon;
 
-        {/* Services Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {services.map((service, i) => {
-            const Icon = service.icon;
-
-            return (
-              <motion.div
-                key={i}
-                variants={cardVariant}
-                whileHover={{
-                  y: -8,
-                  boxShadow: "0px 0px 40px rgba(0,255,136,0.15)",
-                }}
-                transition={{ duration: 0.3 }}
-                className="group bg-[#111]/60 border border-[#1f1f1f]
-                           p-6 sm:p-8 rounded-2xl
-                           hover:border-primary
-                           hover:bg-[#141414]
-                           transition-all duration-300"
-              >
-                {/* Icon Animation */}
-                <motion.div className="mb-4 text-primary">
-                  <Icon className="w-8 h-8 sm:w-10 sm:h-10" />
-                </motion.div>
-
-                <h3 className="text-lg sm:text-xl font-semibold mb-3">
-                  {service.title}
-                </h3>
-
-                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-                  {service.desc}
-                </p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
+          return (
+            <motion.div
+              key={i}
+              variants={cardVariant}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="rounded-2xl border border-border bg-card p-6"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className="mb-3 text-xl font-semibold text-foreground">{service.title}</h3>
+              <p className="text-sm leading-7 text-secondary">{service.desc}</p>
+            </motion.div>
+          );
+        })}
+      </motion.div>
     </section>
   );
 }
