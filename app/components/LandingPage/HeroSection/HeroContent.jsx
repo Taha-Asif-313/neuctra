@@ -53,26 +53,26 @@ export default function HeroContent() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-secondary"
+        className="mb-6  inline-flex items-center rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-secondary"
       >
         Software products + custom solutions
       </motion.span>
 
       <motion.h1
-        className="max-w-5xl text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-7xl"
+        className="max-w-5xl capitalize text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl"
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
         Neuctra helps teams
-        <span className="mt-3 block text-primary">{text}</span>
-        <motion.span
+        <span className="mt-3 block text-primary">{text}         <motion.span
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="ml-1 inline-block text-primary"
+          className="ml-1 inline-block text-foreground"
         >
           |
-        </motion.span>
+        </motion.span></span>
+
       </motion.h1>
 
       <motion.p
