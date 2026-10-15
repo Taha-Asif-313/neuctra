@@ -19,8 +19,10 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Home", path: "/" },
-    { name: "Products", path: "/#products" },
-    { name: "Solutions", path: "/#solutions" },
+    { name: "About", path: "/about" },
+    { name: "Neuctra Lab", path: "/neuctra-lab" },
+    { name: "Products", path: "/products" },
+    { name: "Services", path: "/services" },
     { name: "Contact Us", path: "/#contact" },
   ];
 

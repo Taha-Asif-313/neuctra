@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Terms of Service | Neuctra",
   description:
-    "Read the official Terms of Service for Neuctra — covering client services, SaaS products, subscriptions, and usage policies.",
+    "Read the official Terms of Service for Neuctra, covering client services, SaaS products, subscriptions, and usage policies.",
 };
 
 export default function TermsPage() {

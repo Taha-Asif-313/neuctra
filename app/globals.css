@@ -114,6 +114,7 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--background);
+  overflow-x: hidden;
 }
 
 body {
@@ -123,6 +124,7 @@ body {
     var(--background);
   color: var(--foreground);
   line-height: 1.6;
+  overflow-x: hidden;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 

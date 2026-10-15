@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Accordion } from "@neuctra/ui";
 import {
   Code,
   Cloud,
@@ -50,6 +51,29 @@ const fadeUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+const faqItems = [
+  {
+    title: "What is Neuctra?",
+    content:
+      "Neuctra is a software products and technology solutions company. It builds practical digital products and delivers tailored software for businesses, founders, developers, and individuals.",
+  },
+  {
+    title: "How is Neuctra different from Neuctra Lab?",
+    content:
+      "Neuctra is the parent company that builds products and delivers custom technology services. Neuctra Lab is the educational platform that teaches people how to understand, build, and apply technology in real life.",
+  },
+  {
+    title: "What products are part of the ecosystem?",
+    content:
+      "The ecosystem includes Authix, UI, Notlix, Tools, and future product initiatives that support developers, teams, and everyday digital workflows.",
+  },
+  {
+    title: "What services does Neuctra provide?",
+    content:
+      "Neuctra helps clients with custom software, SaaS products, web applications, internal systems, and other technology solutions built around real business problems.",
+  },
+];
+
 const AboutPage = () => {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
@@ -91,6 +115,41 @@ const AboutPage = () => {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="mb-12 rounded-2xl border border-zinc-800 bg-[#111] p-6 sm:p-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-primary" />
+            </div>
+            <h2 className="text-xl font-semibold">The Neuctra ecosystem</h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+              <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Neuctra</p>
+              <h3 className="mb-2 text-xl font-semibold">The parent company</h3>
+              <p className="text-sm leading-7 text-zinc-400">
+                Neuctra builds software products and delivers custom technology solutions for businesses, founders, and teams.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+              <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Neuctra Lab</p>
+              <h3 className="mb-2 text-xl font-semibold">The learning platform</h3>
+              <p className="text-sm leading-7 text-zinc-400">
+                Neuctra Lab teaches technology, practical software development, and business problem-solving through modern education.
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+              <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Products & services</p>
+              <h3 className="mb-2 text-xl font-semibold">Built to solve problems</h3>
+              <p className="text-sm leading-7 text-zinc-400">
+                The ecosystem includes Authix, UI, Notlix, Tools, and future products alongside custom SaaS and web application services.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="grid gap-10 lg:grid-cols-12">
           <motion.div
             variants={fadeUp}
@@ -206,6 +265,19 @@ const AboutPage = () => {
               </motion.div>
             );
           })}
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <div className="mb-8 text-center">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
+            Frequently asked questions
+          </p>
+          <h2 className="text-2xl sm:text-4xl font-bold">What people ask about Neuctra</h2>
+        </div>
+
+        <div className="mx-auto max-w-4xl">
+          <Accordion items={faqItems} allowMultiple={false} />
         </div>
       </section>
 

@@ -111,7 +111,7 @@ export default function RefundPolicyPage() {
                 5. Processing Time
               </h2>
               <p className="text-zinc-400 leading-relaxed">
-                Approved refunds are processed within 7–14 business days
+                Approved refunds are processed within 7 to 14 business days
                 depending on your payment provider or financial institution.
               </p>
             </section>

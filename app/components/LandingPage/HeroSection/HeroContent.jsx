@@ -30,20 +30,23 @@ export default function HeroContent() {
   useEffect(() => {
     const current = words[index % words.length];
 
-    const timeout = setTimeout(() => {
-      setText((prev) =>
-        isDeleting
-          ? current.substring(0, prev.length - 1)
-          : current.substring(0, prev.length + 1),
-      );
+    const timeout = setTimeout(
+      () => {
+        setText((prev) =>
+          isDeleting
+            ? current.substring(0, prev.length - 1)
+            : current.substring(0, prev.length + 1),
+        );
 
-      if (!isDeleting && text === current) {
-        setIsDeleting(true);
-      } else if (isDeleting && text === "") {
-        setIsDeleting(false);
-        setIndex((prev) => prev + 1);
-      }
-    }, isDeleting ? 45 : 90);
+        if (!isDeleting && text === current) {
+          setIsDeleting(true);
+        } else if (isDeleting && text === "") {
+          setIsDeleting(false);
+          setIndex((prev) => prev + 1);
+        }
+      },
+      isDeleting ? 45 : 90,
+    );
 
     return () => clearTimeout(timeout);
   }, [text, isDeleting, index]);
@@ -65,7 +68,7 @@ export default function HeroContent() {
       </motion.div>
 
       <motion.h1
-        className="max-w-5xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl"
+        className="max-w-5xl text-4xl capitalize font-black tracking-tight text-white sm:text-5xl lg:text-6xl"
         initial={{ opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -89,7 +92,10 @@ export default function HeroContent() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        We build software products for developers, teams, and everyday users while helping businesses turn ideas into custom web apps, SaaS platforms, internal systems, and digital experiences that solve real problems.
+        We build software products for developers, teams, and everyday users
+        while helping businesses turn ideas into custom web apps, SaaS
+        platforms, internal systems, and digital experiences that solve real
+        problems.
       </motion.p>
 
       <motion.div
@@ -111,28 +117,49 @@ export default function HeroContent() {
           className="group flex w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors duration-200 hover:border-primary sm:w-auto"
         >
           <span>Discuss your project</span>
-          <Mail size={18} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+          <Mail
+            size={18}
+            className="transition-transform duration-200 group-hover:translate-x-0.5"
+          />
         </Link>
       </motion.div>
 
       <div className="mt-16 grid w-full max-w-5xl grid-cols-1 gap-4 px-0 sm:grid-cols-2 lg:grid-cols-3">
         {[
-          { icon: <ShieldCheck className="h-6 w-6 text-primary" />, title: "Secure infrastructure" },
-          { icon: <Layers className="h-6 w-6 text-primary" />, title: "Product ecosystem" },
-          { icon: <Cloud className="h-6 w-6 text-primary" />, title: "Cloud-native systems" },
-          { icon: <Code className="h-6 w-6 text-primary" />, title: "Custom development" },
-          { icon: <Rocket className="h-6 w-6 text-primary" />, title: "Product innovation" },
-          { icon: <TrendingUp className="h-6 w-6 text-primary" />, title: "Growth strategy" },
+          {
+            icon: <ShieldCheck className="h-6 w-6 text-primary" />,
+            title: "Secure infrastructure",
+          },
+          {
+            icon: <Layers className="h-6 w-6 text-primary" />,
+            title: "Product ecosystem",
+          },
+          {
+            icon: <Cloud className="h-6 w-6 text-primary" />,
+            title: "Cloud-native systems",
+          },
+          {
+            icon: <Code className="h-6 w-6 text-primary" />,
+            title: "Custom development",
+          },
+          {
+            icon: <Rocket className="h-6 w-6 text-primary" />,
+            title: "Product innovation",
+          },
+          {
+            icon: <TrendingUp className="h-6 w-6 text-primary" />,
+            title: "Growth strategy",
+          },
         ].map((feature, idx) => (
           <motion.div
             key={idx}
-            className="rounded-xl border border-border bg-card/80 p-5 text-center backdrop-blur-sm"
+            className="rounded-xl border border-border bg-zinc-950 p-5 text-center"
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.08 }}
           >
             <div className="mb-3 flex justify-center">{feature.icon}</div>
-            <p className="text-sm text-secondary">{feature.title}</p>
+            <p className="text-sm text-gray-100">{feature.title}</p>
           </motion.div>
         ))}
       </div>

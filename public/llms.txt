@@ -1,0 +1,34 @@
+# Neuctra
+
+Neuctra builds software products and delivers custom technology solutions for businesses, founders, developers, and everyday users.
+
+## Company overview
+Neuctra combines product innovation with practical engineering and digital problem-solving. It builds its own software ecosystem and also helps clients create custom SaaS products, web applications, internal systems, and business software.
+
+## Core products
+- Authix: authentication, identity infrastructure, and app data foundations.
+- UI: reusable React components and product design systems.
+- Notlix: personal productivity and digital-life management.
+- Tools: lightweight online utilities for everyday digital work.
+
+## Services
+Neuctra provides custom software development, SaaS platform design, web application development, internal dashboards, business automation, API work, and tailored technology solutions.
+
+## Neuctra Lab
+Neuctra Lab is the educational platform within Neuctra. It teaches technology, practical software development, and business problem-solving through tutorials, explanations, and real-world examples.
+
+## Core URLs
+- https://neuctra.com/
+- https://neuctra.com/about
+- https://neuctra.com/neuctra-lab
+- https://neuctra.com/products
+- https://neuctra.com/services
+- https://neuctra.com/contact
+- https://authix.neuctra.com/
+- https://ui.neuctra.com/
+- https://notlix.neuctra.com/
+- https://tools.neuctra.com/
+
+## Contact
+- Email: support@neuctra.com
+- Website: https://neuctra.com/

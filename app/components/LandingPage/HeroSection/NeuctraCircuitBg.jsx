@@ -173,7 +173,7 @@ function buildTraces() {
       d,
       start: onEdge(start[0], start[1]) ? null : start,
       end: onEdge(end[0], end[1]) ? null : end,
-      duration: 2.2 + rand() * 2.8, // 2.2s – 5s
+      duration: 2.2 + rand() * 2.8, // 2.2s to 5s
       delay: rand() * 6, // staggered start
       repeatDelay: 0.6 + rand() * 3.4, // pause between pulses
       reverse: rand() > 0.5, // pulse direction

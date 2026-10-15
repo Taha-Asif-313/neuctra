@@ -34,9 +34,9 @@ export default function HeroLanding() {
   }, []);
 
   return (
-    <div className="relative isolate min-h-screen bg-background">
+    <div className="relative isolate min-h-screen overflow-hidden bg-background">
       <NeuctraCircuitBg className="absolute inset-0 z-0" />
-      <div className="absolute inset-0 z-0 bg-black/50" />
+      <div className="absolute inset-0 z-0 bg-black/75" />
       <MouseGlow x={mousePosition.x} y={mousePosition.y} />
       <div className="relative z-10">
         <HeroContent />

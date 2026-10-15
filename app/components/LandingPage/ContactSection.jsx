@@ -66,130 +66,284 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+<section
+  id="contact"
+  className="relative overflow-hidden border-y border-border bg-card/20"
+>
+  {/* Ambient background */}
+  <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-primary/10 blur-[130px]" />
+  <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-primary/5 blur-[140px]" />
+
+  <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+    {/* Heading */}
+    <motion.div
+      className="mx-auto mb-16 max-w-3xl text-center"
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
+        <Mail className="h-3.5 w-3.5 text-primary" />
+        <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+          Get in touch
+        </span>
+      </div>
+
+      <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        Have a challenge?
+        <br />
+        <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
+          Let's solve it together.
+        </span>
+      </h2>
+
+      <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-secondary sm:text-lg">
+        Tell us about your idea, business challenge, or project. We'll help
+        you explore the right technology and find a practical way forward.
+      </p>
+    </motion.div>
+
+    <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-8">
+      {/* Contact information */}
       <motion.div
-        className="mx-auto mb-12 max-w-3xl text-center"
-        initial={{ opacity: 0, y: 25 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, x: -24 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6 }}
+        className="group relative"
       >
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Contact</p>
-        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Let’s build something useful together.
-        </h2>
-        <p className="mt-4 text-base text-secondary sm:text-lg">
-          Share your idea, challenge, or project requirement and we’ll help map the best path forward.
-        </p>
-      </motion.div>
+        <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-primary/40 via-border to-transparent opacity-60" />
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <motion.div
-          className="rounded-3xl border border-border bg-card p-8"
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Link href="/" className="mb-6 flex items-center gap-2">
-            <img src="/logo.png" alt="Neuctra Logo" className="h-6 w-6 object-contain" />
-            <span className="text-lg font-semibold text-foreground">Neuctra</span>
-          </Link>
+        <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-background p-7 sm:p-9">
+          <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-[100px]" />
 
-          <p className="mb-8 max-w-md text-sm leading-7 text-secondary">
-            We help founders, businesses, and teams turn ideas into software products, digital experiences, and technology systems that solve real problems.
-          </p>
+          <div className="relative">
+            <Link href="/" className="mb-8 inline-flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card">
+                <img
+                  src="/logo.png"
+                  alt="Neuctra Logo"
+                  className="h-7 w-7 object-contain"
+                />
+              </div>
 
-          <div className="space-y-5 text-sm">
-            <div>
-              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
-                <Mail className="h-4 w-4 text-primary" /> Email
-              </h4>
-              <a href="mailto:support@neuctra.com" className="ml-6 text-secondary transition-colors hover:text-foreground">
-                support@neuctra.com
-              </a>
-            </div>
+              <div>
+                <span className="block text-lg font-semibold text-foreground">
+                  Neuctra
+                </span>
+                <span className="text-xs text-muted-foreground">
+                  Software & Technology
+                </span>
+              </div>
+            </Link>
 
-            <div>
-              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
-                <Phone className="h-4 w-4 text-primary" /> Phone
-              </h4>
-              <a href="tel:+923084615794" className="ml-6 text-secondary transition-colors hover:text-foreground">
-                +92 308 4615794
-              </a>
-            </div>
+            <h3 className="max-w-sm text-2xl font-semibold leading-snug text-foreground sm:text-3xl">
+              Let's turn your next idea into something useful.
+            </h3>
 
-            <div>
-              <h4 className="mb-1 flex items-center gap-2 text-base font-semibold text-foreground">
-                <Globe className="h-4 w-4 text-primary" /> Website
-              </h4>
-              <p className="ml-6 text-secondary">www.neuctra.com</p>
+            <p className="mt-4 max-w-md text-sm leading-7 text-secondary">
+              We work with founders, businesses, and teams to build software
+              products, modern digital experiences, and technology systems
+              designed around real needs.
+            </p>
+          </div>
+
+          <div className="relative my-8 h-px bg-gradient-to-r from-primary/40 via-border to-transparent" />
+
+          <div className="relative space-y-6">
+            <a
+              href="mailto:support@neuctra.com"
+              className="group/item flex items-start gap-4"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-card transition-colors group-hover/item:border-primary/40 group-hover/item:bg-primary/10">
+                <Mail className="h-5 w-5 text-primary" />
+              </div>
+
+              <div className="min-w-0 pt-0.5">
+                <p className="mb-1 text-sm font-medium text-foreground">
+                  Email us
+                </p>
+                <p className="break-all text-sm text-secondary transition-colors group-hover/item:text-primary">
+                  support@neuctra.com
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="tel:+923084615794"
+              className="group/item flex items-start gap-4"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-card transition-colors group-hover/item:border-primary/40 group-hover/item:bg-primary/10">
+                <Phone className="h-5 w-5 text-primary" />
+              </div>
+
+              <div className="pt-0.5">
+                <p className="mb-1 text-sm font-medium text-foreground">
+                  Call us
+                </p>
+                <p className="text-sm text-secondary transition-colors group-hover/item:text-primary">
+                  +92 308 4615794
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://neuctra.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/item flex items-start gap-4"
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-card transition-colors group-hover/item:border-primary/40 group-hover/item:bg-primary/10">
+                <Globe className="h-5 w-5 text-primary" />
+              </div>
+
+              <div className="pt-0.5">
+                <p className="mb-1 text-sm font-medium text-foreground">
+                  Website
+                </p>
+                <p className="text-sm text-secondary transition-colors group-hover/item:text-primary">
+                  www.neuctra.com
+                </p>
+              </div>
+            </a>
+          </div>
+
+          <div className="relative mt-auto pt-9">
+            <div className="rounded-2xl border border-border bg-card/70 p-4">
+              <p className="text-sm font-medium text-foreground">
+                Have a project in mind?
+              </p>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                Share the problem you're trying to solve. We'll take it from
+                there.
+              </p>
             </div>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          className="rounded-3xl border border-border bg-card p-8"
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex flex-col gap-5">
+      {/* Contact form */}
+      <motion.form
+        onSubmit={handleSubmit}
+        initial={{ opacity: 0, x: 24 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative overflow-hidden rounded-3xl border border-border bg-background p-6 sm:p-9 lg:p-10"
+      >
+        <div className="pointer-events-none absolute right-0 top-0 h-48 w-48 rounded-full bg-primary/5 blur-[90px]" />
+
+        <div className="relative mb-8">
+          <h3 className="text-xl font-semibold text-foreground sm:text-2xl">
+            Send us a message
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-secondary">
+            Fill in the details below and tell us how we can help.
+          </p>
+        </div>
+
+        <div className="relative flex flex-col gap-5">
+          <div>
+            <label
+              htmlFor="contact-name"
+              className="mb-2 block text-sm font-medium text-foreground"
+            >
+              Full name <span className="text-primary">*</span>
+            </label>
             <input
+              id="contact-name"
               type="text"
               name="name"
+              autoComplete="name"
               required
               disabled={loading}
               value={formData.name}
               onChange={handleChange}
-              placeholder="Full Name"
-              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+              placeholder="Your name"
+              className="w-full rounded-xl border border-border bg-card/50 px-4 py-3.5 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary/60 focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
             />
+          </div>
 
+          <div>
+            <label
+              htmlFor="contact-email"
+              className="mb-2 block text-sm font-medium text-foreground"
+            >
+              Email address <span className="text-primary">*</span>
+            </label>
             <input
+              id="contact-email"
               type="email"
               name="email"
+              autoComplete="email"
               required
               disabled={loading}
               value={formData.email}
               onChange={handleChange}
-              placeholder="Email Address"
-              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+              placeholder="you@example.com"
+              className="w-full rounded-xl border border-border bg-card/50 px-4 py-3.5 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary/60 focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
             />
+          </div>
 
+          <div>
+            <label
+              htmlFor="contact-subject"
+              className="mb-2 block text-sm font-medium text-foreground"
+            >
+              Subject <span className="text-muted-foreground">(optional)</span>
+            </label>
             <input
+              id="contact-subject"
               type="text"
               name="subject"
               disabled={loading}
               value={formData.subject}
               onChange={handleChange}
-              placeholder="Subject (optional)"
-              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+              placeholder="What would you like to discuss?"
+              className="w-full rounded-xl border border-border bg-card/50 px-4 py-3.5 text-sm text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary/60 focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
             />
+          </div>
 
+          <div>
+            <label
+              htmlFor="contact-message"
+              className="mb-2 block text-sm font-medium text-foreground"
+            >
+              Your message <span className="text-primary">*</span>
+            </label>
             <textarea
+              id="contact-message"
               name="message"
-              rows="5"
+              rows={5}
               required
               disabled={loading}
               value={formData.message}
               onChange={handleChange}
-              placeholder="Write your message here..."
-              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-60"
+              placeholder="Tell us about your idea, project, or challenge..."
+              className="w-full resize-y rounded-xl border border-border bg-card/50 px-4 py-3.5 text-sm leading-6 text-foreground outline-none transition-all placeholder:text-muted-foreground focus:border-primary/60 focus:ring-2 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
             />
-
-            <motion.button
-              type="submit"
-              disabled={loading}
-              whileHover={!loading ? { scale: 1.02 } : {}}
-              whileTap={!loading ? { scale: 0.98 } : {}}
-              className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {loading ? "Sending..." : "Send Message"}
-              {!loading && <Send size={18} />}
-            </motion.button>
           </div>
-        </motion.form>
-      </div>
-    </section>
+
+          <motion.button
+            type="submit"
+            disabled={loading}
+            whileHover={!loading ? { scale: 1.01 } : {}}
+            whileTap={!loading ? { scale: 0.98 } : {}}
+            className="mt-1 flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/15 transition-shadow hover:shadow-primary/30 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {loading ? "Sending..." : "Send message"}
+            {!loading && <Send size={17} />}
+          </motion.button>
+
+          <p className="text-center text-xs leading-5 text-muted-foreground">
+            By submitting this form, you're contacting Neuctra about your
+            inquiry.
+          </p>
+        </div>
+      </motion.form>
+    </div>
+  </div>
+</section>
   );
 }

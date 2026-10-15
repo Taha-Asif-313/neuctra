@@ -21,7 +21,7 @@ export default function Footer() {
             <span className="text-lg font-semibold text-foreground">Neuctra</span>
           </Link>
           <p className="text-center text-sm text-secondary md:text-left">
-            Software products and custom solutions that help people solve real problems through technology.
+            Software products, custom solutions, and educational technology experiences that help people solve real problems through technology.
           </p>
         </motion.div>
 
@@ -32,16 +32,22 @@ export default function Footer() {
           className="flex flex-col gap-3 text-sm"
         >
           <h4 className="mb-2 text-base font-semibold text-foreground">Company</h4>
-          <Link href="/#products" className="transition-colors hover:text-foreground">
+          <Link href="/about" className="transition-colors hover:text-foreground">
+            About
+          </Link>
+          <Link href="/neuctra-lab" className="transition-colors hover:text-foreground">
+            Neuctra Lab
+          </Link>
+          <Link href="/products" className="transition-colors hover:text-foreground">
             Products
           </Link>
-          <Link href="/#solutions" className="transition-colors hover:text-foreground">
-            Solutions
+          <Link href="/services" className="transition-colors hover:text-foreground">
+            Services
           </Link>
           <Link href="/pricing" className="transition-colors hover:text-foreground">
             Pricing
           </Link>
-          <Link href="/#contact" className="transition-colors hover:text-foreground">
+          <Link href="/contact" className="transition-colors hover:text-foreground">
             Contact
           </Link>
         </motion.div>
