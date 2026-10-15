@@ -9,7 +9,7 @@ export default function ProductsSection() {
       name: "Neuctra Authix",
       image: "/logos/authix.png",
       category: "Identity infrastructure",
-      desc: "Secure identity and application data infrastructure for modern products, teams, and SaaS builders.",
+      desc: "A practical foundation for authentication, user identity, and application data so teams can build products without repeating the same backend setup.",
       links: {
         learn: "https://authix.neuctra.com",
         start: "https://authix.neuctra.com/signup",
@@ -20,7 +20,7 @@ export default function ProductsSection() {
       name: "Neuctra UI",
       image: "/logos/ui.png",
       category: "Design system",
-      desc: "Reusable React components and design patterns for consistent dashboards, forms, and product interfaces.",
+      desc: "Reusable interface components and design patterns for dashboards, forms, product screens, and modern web applications.",
       links: {
         learn: "https://ui.neuctra.com",
         start: "https://ui.neuctra.com/docs",
@@ -30,8 +30,8 @@ export default function ProductsSection() {
     {
       name: "Neuctra Notlix",
       image: "/logos/notlix.png",
-      category: "Life OS",
-      desc: "Personal planning, note-taking, and life management built to help people remember and organize their work.",
+      category: "Productivity & life OS",
+      desc: "A personal productivity and digital-life platform for planning, notes, memory, and organization without relying on disconnected tools.",
       links: {
         learn: "https://notlix.neuctra.com",
         start: "https://notlix.neuctra.com/signup",
@@ -40,8 +40,8 @@ export default function ProductsSection() {
     {
       name: "Neuctra Tools",
       image: null,
-      category: "Utilities",
-      desc: "Practical browser-based tools for everyday work, writing, formatting, and smaller digital tasks that need to feel fast and simple.",
+      category: "Useful utilities",
+      desc: "Fast, accessible browser-based tools for tasks like formatting, conversion, and lightweight digital work that need to feel simple and quick.",
       links: {
         learn: "https://tools.neuctra.com",
         start: "https://tools.neuctra.com",
@@ -59,10 +59,10 @@ export default function ProductsSection() {
       >
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Product ecosystem</p>
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          The <span className="text-primary">Neuctra</span> product suite
+          The <span className="text-primary">Neuctra</span> product ecosystem
         </h2>
         <p className="mt-4 text-base text-secondary sm:text-lg">
-          A focused set of software products for identity, product interfaces, and everyday digital organization.
+          Neuctra builds useful software across developer infrastructure, product interfaces, personal productivity, and everyday utilities.
         </p>
       </motion.div>
 

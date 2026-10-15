@@ -1,23 +1,28 @@
 "use client";
 import { motion } from "framer-motion";
-import { Globe, ShoppingCart, LayoutDashboard } from "lucide-react";
+import { Globe, ShoppingCart, LayoutDashboard, BrainCircuit } from "lucide-react";
 
 export default function ServicesSection() {
   const services = [
     {
       icon: Globe,
-      title: "Business websites",
-      desc: "High-performance websites and brand experiences designed for clarity, trust, and conversion across devices and audience segments.",
+      title: "Business websites & digital presence",
+      desc: "Modern business websites, landing pages, and digital experiences designed to clarify your message and turn interest into trust and action.",
     },
     {
       icon: ShoppingCart,
-      title: "E-commerce builds",
-      desc: "Scalable storefronts and digital commerce systems with the structure needed for products, customer journeys, and growth operations.",
+      title: "Custom SaaS & web apps",
+      desc: "From MVPs to full product experiences, we design and build software that supports real workflows, user journeys, and business operations.",
     },
     {
       icon: LayoutDashboard,
-      title: "Custom SaaS and web apps",
-      desc: "End-to-end product work from product thinking to deployment, built around real workflows, maintainability, and product usability.",
+      title: "Frontend systems & product UX",
+      desc: "Reusable interfaces, design patterns, and product experiences built to feel clear, scalable, and easy for users to understand.",
+    },
+    {
+      icon: BrainCircuit,
+      title: "AI, automation & workflow tooling",
+      desc: "Practical AI and automation solutions that reduce repetitive work and help teams move faster without unnecessary complexity.",
     },
   ];
 
@@ -59,10 +64,10 @@ export default function ServicesSection() {
           Services
         </motion.p>
         <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Product and web development built for real business goals
+          Custom software solutions for real business problems
         </motion.h2>
         <motion.p variants={fadeUp} className="mt-4 text-base text-secondary sm:text-lg">
-          We help businesses turn ideas into clear digital experiences and reliable software systems with a modern, user-first approach.
+          We help founders, teams, and businesses turn ideas into software, experiences, and digital systems that are useful, scalable, and aligned with the work they actually do.
         </motion.p>
       </motion.div>
 
@@ -71,7 +76,7 @@ export default function ServicesSection() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="grid gap-6 lg:grid-cols-3"
+        className="grid gap-6 md:grid-cols-2 xl:grid-cols-4"
       >
         {services.map((service, i) => {
           const Icon = service.icon;

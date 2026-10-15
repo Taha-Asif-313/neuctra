@@ -4,9 +4,12 @@ import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import NeuctraCircuitBg from "./HeroSection/NeuctraCircuitBg";
 
-const BackgroundCircuit = dynamic(() => import("./HeroSection/BackgroundCircuit"), {
-  ssr: false,
-});
+const BackgroundCircuit = dynamic(
+  () => import("./HeroSection/BackgroundCircuit"),
+  {
+    ssr: false,
+  },
+);
 
 const MouseGlow = dynamic(() => import("./HeroSection/MouseGlow"), {
   ssr: false,
@@ -31,11 +34,13 @@ export default function HeroLanding() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
-       <NeuctraCircuitBg className="absolute inset-0 z-0" />
+    <div className="relative isolate min-h-screen bg-background">
+      <NeuctraCircuitBg className="absolute inset-0 z-0" />
+      <div className="absolute inset-0 z-0 bg-black/50" />
       <MouseGlow x={mousePosition.x} y={mousePosition.y} />
-      <HeroContent />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-background" />
+      <div className="relative z-10">
+        <HeroContent />
+      </div>
     </div>
   );
 }

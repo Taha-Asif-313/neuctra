@@ -7,19 +7,19 @@ export default function TestimonialsSection() {
   const reviews = [
     {
       quote:
-        "Neuctra blends product thinking and technical execution in a way that feels both practical and strategic.",
+        "Neuctra understands the difference between building something flashy and building something genuinely useful for real people and businesses.",
       author: "Product founder",
-      role: "SaaS builder",
+      role: "Startup builder",
     },
     {
       quote:
-        "The ecosystem feels cohesive. It gives a business the tools to launch, manage, and evolve digital products without unnecessary complexity.",
+        "The ecosystem feels cohesive. It gives a business the tools and product thinking needed to turn an idea into a clear digital system without unnecessary friction.",
       author: "Startup operator",
       role: "Early-stage team",
     },
     {
       quote:
-        "From identity to UI and day-to-day productivity, the platform has a clear focus on useful software instead of just surface-level features.",
+        "From identity and interfaces to productivity and utilities, the work always looks grounded in solving actual problems instead of just adding features.",
       author: "Design-led team",
       role: "Product studio",
     },

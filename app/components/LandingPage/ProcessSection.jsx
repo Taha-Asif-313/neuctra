@@ -7,17 +7,17 @@ export default function ProcessSection() {
     {
       number: "01",
       title: "Discover",
-      desc: "We map the problem, the audience, and the product goals before choosing the right technical path.",
+      desc: "We start by understanding the problem, audience, business goals, and technical constraints before choosing the right path forward.",
     },
     {
       number: "02",
-      title: "Design & build",
-      desc: "We turn the idea into clear UI, practical architecture, and efficient implementation with real product thinking.",
+      title: "Plan & build",
+      desc: "We turn the idea into a clear product direction, interface flow, architecture, and implementation grounded in real-world use.",
     },
     {
       number: "03",
       title: "Launch & improve",
-      desc: "We help ship the product, refine the experience, and keep improving it based on usage and feedback.",
+      desc: "We ship what matters, refine based on feedback, and keep improving the product as needs grow and evolve.",
     },
   ];
 
@@ -32,7 +32,7 @@ export default function ProcessSection() {
       >
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">How we work</p>
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          A simple path from idea to working software
+          A simple path from idea to useful software
         </h2>
       </motion.div>
 

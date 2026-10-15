@@ -7,37 +7,37 @@ export default function SolutionsSection() {
     {
       icon: ShieldCheck,
       title: "Authentication & identity",
-      desc: "Secure identity, session management, and application data systems that support product teams and growing digital businesses.",
+      desc: "Build secure identity flows and user data systems that support modern products, startups, and SaaS experiences from day one.",
       link: "https://authix.neuctra.com",
     },
     {
       icon: Layout,
       title: "Modern UI systems",
-      desc: "Reusable design patterns, dashboards, and frontend systems that keep interfaces consistent, fast, and familiar for users.",
+      desc: "Create consistent dashboards, product interfaces, and digital experiences with reusable patterns and clean frontend architecture.",
       link: "https://ui.neuctra.com",
     },
     {
       icon: Brain,
-      title: "Productivity & personal organization",
-      desc: "Planning tools and digital workflows that help individuals and teams manage responsibilities, ideas, and information.",
+      title: "Productivity & digital life",
+      desc: "Help individuals and teams organize work, information, and decisions with practical tools designed for clarity and routine.",
       link: "https://notlix.neuctra.com",
     },
     {
       icon: Cloud,
-      title: "Cloud-native architecture",
-      desc: "Scalable systems designed for modern deployment patterns, performance, and reliable product operations across environments.",
+      title: "Cloud-native delivery",
+      desc: "Design systems for modern deployment, performance, and reliability without overcomplicating the technical foundation.",
       link: "#",
     },
     {
       icon: Lock,
       title: "Secure software delivery",
-      desc: "Practical product security, API protections, and trusted implementation choices that reduce operational risk for real products.",
+      desc: "Approach product development with realistic security, thoughtful architecture, and dependable implementation choices.",
       link: "#",
     },
     {
       icon: Zap,
-      title: "High-performance product work",
-      desc: "Streamlined systems and performant interfaces built to support product growth, speed, and better user experience.",
+      title: "Product acceleration",
+      desc: "Turn rough ideas into clearer products, business systems, and workflows that are easier to use and easier to scale.",
       link: "#",
     },
   ];
@@ -77,13 +77,13 @@ export default function SolutionsSection() {
         className="mx-auto mb-12 max-w-3xl text-center"
       >
         <motion.p variants={fadeUp} className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
-          Solution areas
+          Where Neuctra creates value
         </motion.p>
         <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Practical solutions for modern teams
+          Solutions designed for meaningful software work
         </motion.h2>
         <motion.p variants={fadeUp} className="mt-4 text-base text-secondary sm:text-lg">
-          Neuctra blends product thinking, secure engineering, and product-building expertise for businesses and founders who need software that feels useful from day one.
+          Neuctra connects product strategy, custom development, and useful digital tools so businesses and founders can solve real problems with software that is practical, secure, and easy to grow.
         </motion.p>
       </motion.div>
 

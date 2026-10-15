@@ -7,22 +7,22 @@ export default function WhyNeuctra() {
     {
       icon: <Code className="h-8 w-8 text-primary" />,
       title: "Custom product development",
-      desc: "We design and build web products, SaaS platforms, business systems, and dashboards that solve real operational problems for modern teams.",
+      desc: "We design and build web products, SaaS platforms, internal systems, and digital tools around the real problems businesses and founders need to solve.",
     },
     {
       icon: <Layers className="h-8 w-8 text-primary" />,
-      title: "Connected software ecosystem",
-      desc: "From identity systems to UI libraries and productivity tools, Neuctra brings together product thinking and practical engineering across the stack.",
+      title: "A connected product ecosystem",
+      desc: "Neuctra brings together identity infrastructure, interface systems, productivity tools, and practical software so products and workflows feel more cohesive.",
     },
     {
       icon: <Shield className="h-8 w-8 text-primary" />,
       title: "Security-minded implementation",
-      desc: "Our work is shaped around realistic product needs, secure patterns, and thoughtful architecture that supports reliability and trust.",
+      desc: "Our work balances real product needs with secure architecture, smarter planning, and thoughtful delivery choices that support trust and reliability.",
     },
     {
       icon: <Cloud className="h-8 w-8 text-primary" />,
       title: "Built for modern delivery",
-      desc: "We design systems for scalability, maintainability, and a smooth user experience across web apps, internal tools, and digital workflows.",
+      desc: "We design for maintainability, performance, and clarity so digital products can scale without becoming harder to manage or understand.",
     },
   ];
 
@@ -45,7 +45,7 @@ export default function WhyNeuctra() {
           transition={{ duration: 0.6 }}
           className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl"
         >
-          Built for product clarity and execution
+          A company built around useful software and practical execution
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 25 }}
@@ -54,7 +54,7 @@ export default function WhyNeuctra() {
           transition={{ duration: 0.7 }}
           className="mt-4 text-base text-secondary sm:text-lg"
         >
-          We combine product strategy, clean engineering, and practical design to help businesses and founders solve real problems with software.
+          We combine product strategy, engineering, and design to help people and businesses build software that feels clear, useful, and ready for real-world use.
         </motion.p>
       </div>
 

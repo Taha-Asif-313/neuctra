@@ -5,12 +5,12 @@ import { ArrowUpRight, Code2, ShieldCheck, Sparkles } from "lucide-react";
 
 export default function BrandMetricsSection() {
   const highlights = [
-    { value: "4+", label: "Product lines", icon: Sparkles },
+    { value: "4+", label: "Product lines in the ecosystem", icon: Sparkles },
     { value: "100%", label: "Product-first thinking", icon: Code2 },
-    { value: "24/7", label: "Modern delivery mindset", icon: ShieldCheck },
+    { value: "24/7", label: "Modern execution mindset", icon: ShieldCheck },
   ];
 
-  const brands = ["Authix", "Neuctra UI", "Notlix", "Tools", "SaaS", "Product teams"];
+  const brands = ["Authix", "Neuctra UI", "Notlix", "Tools", "SaaS", "Custom products"];
 
   return (
     <section className="border-y border-border bg-card/60">
@@ -22,9 +22,9 @@ export default function BrandMetricsSection() {
           transition={{ duration: 0.6 }}
           className="mx-auto mb-10 max-w-3xl text-center"
         >
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Built for momentum</p>
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Built for real software work</p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-            A product ecosystem designed to scale with real-world needs
+            A product ecosystem designed for real problems, not just surface-level features
           </h2>
         </motion.div>
 

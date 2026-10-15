@@ -7,23 +7,23 @@ export default function FeatureShowcaseSection() {
   const features = [
     {
       icon: Shield,
-      title: "Identity infrastructure",
-      text: "Authentication, access patterns, and user data systems built to help products launch faster without starting from scratch.",
+      title: "Identity foundations",
+      text: "Authentication, user identity, and access patterns that help startups and product teams build secure digital experiences faster.",
     },
     {
       icon: LayoutTemplate,
       title: "Modern interfaces",
-      text: "Reusable UI blocks and product patterns that keep design systems consistent across dashboards, forms, and web apps.",
+      text: "Reusable UI patterns and design systems that keep dashboards, forms, and web apps consistent without reinventing the wheel.",
     },
     {
       icon: Workflow,
-      title: "Operational clarity",
-      text: "Tools and workflows that help teams manage tasks, data, notes, and product operations in one place.",
+      title: "Workflow clarity",
+      text: "Practical product and business workflows that connect planning, operations, and information management in manageable systems.",
     },
     {
       icon: Sparkles,
-      title: "Useful daily utilities",
-      text: "Quick, practical online tools that help people work smarter without adding friction or unnecessary complexity.",
+      title: "Helpful digital tools",
+      text: "Small but useful applications and utilities that solve everyday tasks with less friction, less clutter, and more speed.",
     },
   ];
 
@@ -36,12 +36,12 @@ export default function FeatureShowcaseSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Platform approach</p>
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">One ecosystem, many solutions</p>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-            One ecosystem. Multiple tools for real work.
+            Neuctra powers products, systems, and workflows across the digital stack.
           </h2>
           <p className="mt-5 max-w-xl text-base leading-7 text-secondary sm:text-lg">
-            Neuctra brings product infrastructure, user experience patterns, and practical digital tools together under one vision so products and teams can move faster with less friction.
+            From developer infrastructure and reusable UI to personal productivity tools and custom business software, Neuctra combines product thinking with practical engineering to solve real problems in a clearer, more useful way.
           </p>
 
           <motion.a

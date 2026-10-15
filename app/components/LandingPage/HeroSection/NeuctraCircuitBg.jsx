@@ -190,7 +190,7 @@ export default function NeuctraCircuitBg({ className = "" }) {
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black ${className}`}
+      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden bg-black ${className}`}
     >
       <svg
         className="h-full w-full"

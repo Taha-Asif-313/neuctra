@@ -13,10 +13,10 @@ export default function CTASection() {
       >
         <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">Ready to build</p>
         <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Turn your idea into a product that feels clear, useful, and scalable.
+          Turn your idea into software that solves a real problem.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base text-secondary sm:text-lg">
-          Whether you need a custom SaaS experience, a modern website, or a smarter product workflow, Neuctra can help shape the right technical direction.
+          Whether you need a custom SaaS product, a modern business website, a smarter internal workflow, or a reusable product foundation, Neuctra can help shape the right solution.
         </p>
 
         <motion.div
@@ -31,16 +31,16 @@ export default function CTASection() {
             whileTap={{ scale: 0.98 }}
             className="rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground"
           >
-            Start your project
+            Discuss your project
           </motion.a>
 
           <motion.a
-            href="/#solutions"
+            href="/#products"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground"
           >
-            Explore solutions
+            Explore products
           </motion.a>
         </motion.div>
       </motion.div>

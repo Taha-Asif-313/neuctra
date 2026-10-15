@@ -78,7 +78,7 @@ export default function ContactSection() {
           Let’s build something useful together.
         </h2>
         <p className="mt-4 text-base text-secondary sm:text-lg">
-          Share your idea, challenge, or requirement and we will help map the right solution.
+          Share your idea, challenge, or project requirement and we’ll help map the best path forward.
         </p>
       </motion.div>
 
@@ -95,7 +95,7 @@ export default function ContactSection() {
           </Link>
 
           <p className="mb-8 max-w-md text-sm leading-7 text-secondary">
-            We help founders, businesses, and teams design modern digital products and tailor software that fits the problem they are trying to solve.
+            We help founders, businesses, and teams turn ideas into software products, digital experiences, and technology systems that solve real problems.
           </p>
 
           <div className="space-y-5 text-sm">
