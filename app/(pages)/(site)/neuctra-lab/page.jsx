@@ -1,12 +1,18 @@
+
 import Link from "next/link";
 import { Accordion } from "@neuctra/ui";
 import {
   ArrowRight,
+  ArrowUpRight,
   BookOpenText,
   BrainCircuit,
   Code2,
   Rocket,
-  Sparkles,
+  Lightbulb,
+  Play,
+  Terminal,
+  Compass,
+  BadgeCheck,
 } from "lucide-react";
 
 const faqSchema = {
@@ -143,117 +149,344 @@ const learningTracks = [
   },
 ];
 
+
 export default function NeuctraLabPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <main className="relative isolate overflow-hidden">
+      {/* Background */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-32 left-1/2 h-[480px] w-[760px] -translate-x-1/2 rounded-full bg-primary/[0.08] blur-[140px]" />
+        <div className="absolute right-[-160px] top-[35%] h-80 w-80 rounded-full bg-primary/[0.05] blur-[120px]" />
+      </div>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <section className="mb-14">
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
-          Neuctra Lab
-        </p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-          A learning platform for{" "}
-          <span className="text-primary">
-            technology, builders, and problem solvers
-          </span>
-        </h1>
-        <p className="mt-5 max-w-3xl text-base leading-7 text-secondary sm:text-lg">
-          Neuctra Lab is the educational side of the Neuctra ecosystem. It helps
-          people understand technology, develop practical technical skills, and
-          learn how to apply software to real-world problems.
-        </p>
+
+      {/* Hero */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-32 lg:px-12">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div>
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2">
+              <Compass className="h-4 w-4 text-primary" />
+              <span className="text-xs font-medium tracking-wide text-secondary">
+                Neuctra's learning platform
+              </span>
+            </div>
+
+            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              Understand technology.
+              <span className="mt-2 block text-primary">
+                Build something real.
+              </span>
+            </h1>
+
+            <p className="mt-7 max-w-2xl text-base text-secondary sm:text-lg">
+              Learn software development, explore modern technologies, and
+              discover how to solve real-world business problems through
+              practical, hands-on learning.
+            </p>
+
+            <div className="mt-9 flex flex-wrap gap-3">
+              <a
+                href="https://www.youtube.com/@NeuctraLab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5"
+              >
+                <Play className="h-4 w-4" />
+                Explore tutorials
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
+              >
+                About Neuctra
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-secondary">
+              <span className="flex items-center gap-2">
+                <Code2 className="h-4 w-4 text-primary" />
+                Practical coding
+              </span>
+              <span className="flex items-center gap-2">
+                <Lightbulb className="h-4 w-4 text-primary" />
+                Problem solving
+              </span>
+              <span className="flex items-center gap-2">
+                <Rocket className="h-4 w-4 text-primary" />
+                Product building
+              </span>
+            </div>
+          </div>
+
+          {/* Hero visual */}
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="absolute inset-8 rounded-full bg-primary/[0.10] blur-[80px]" />
+
+            <div className="relative overflow-hidden rounded-3xl border border-border bg-card/80 p-5 shadow-2xl shadow-primary/[0.04] sm:p-7">
+              <div className="flex items-center justify-between border-b border-border pb-5">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <BookOpenText className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Neuctra Lab
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Learn by understanding and building
+                    </p>
+                  </div>
+                </div>
+                <BadgeCheck className="h-5 w-5 text-primary" />
+              </div>
+
+              <div className="space-y-3 py-6">
+                {[
+                  {
+                    icon: Terminal,
+                    number: "01",
+                    title: "Understand the fundamentals",
+                    description: "Learn how technology works.",
+                  },
+                  {
+                    icon: Code2,
+                    number: "02",
+                    title: "Build practical solutions",
+                    description: "Turn concepts into working software.",
+                  },
+                  {
+                    icon: BrainCircuit,
+                    number: "03",
+                    title: "Solve real problems",
+                    description: "Apply technology where it matters.",
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <div
+                      key={item.number}
+                      className="flex items-start gap-4 rounded-2xl border border-border bg-background/70 p-4 transition-colors hover:border-primary/30"
+                    >
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <Icon className="h-5 w-5" />
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex items-center gap-2">
+                          <span className="font-mono text-[10px] text-primary">
+                            {item.number}
+                          </span>
+                          <h3 className="text-sm font-semibold text-foreground">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <p className="text-xs text-secondary sm:text-sm">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-2xl border border-primary/15 bg-primary/[0.05] p-4">
+                <p className="text-sm font-medium text-foreground">
+                  The goal isn't just to learn code.
+                </p>
+                <p className="mt-1 text-sm text-secondary">
+                  It's to understand problems and build useful solutions.
+                </p>
+              </div>
+            </div>
+
+            <div className="absolute -bottom-5 -left-3 hidden rounded-2xl border border-border bg-card px-4 py-3 shadow-xl sm:block">
+              <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <Lightbulb className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-foreground">
+                    Learn. Build. Solve.
+                  </p>
+                  <p className="text-[11px] text-muted-foreground">
+                    Practical technology education
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {pillars.map(({ icon: Icon, title, description }) => (
-          <div
-            key={title}
-            className="rounded-2xl border border-border bg-card p-6"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-background text-primary">
-              <Icon className="h-5 w-5" />
-            </div>
-            <h2 className="mb-3 text-2xl font-semibold text-foreground">
-              {title}
-            </h2>
-            <p className="text-sm leading-7 text-secondary">{description}</p>
-          </div>
-        ))}
-      </div>
-
-      <section className="mt-16 rounded-2xl border border-border bg-card p-8">
-        <div className="mb-6 flex items-center gap-3">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
-            Learning tracks
+      {/* Learning pillars */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-12">
+        <div className="mb-10 max-w-2xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            What we teach
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Technology is a tool.
+            <span className="block text-secondary">
+              Learn how to use it.
+            </span>
+          </h2>
+          <p className="mt-5 text-sm text-secondary sm:text-base">
+            Explore the concepts, practical skills, and problem-solving
+            approaches needed to build software and make better use of technology.
           </p>
         </div>
 
-        <h2 className="mb-6 text-2xl font-semibold text-foreground sm:text-4xl">
-          What you can learn here
-        </h2>
-
-        <div className="grid gap-5 md:grid-cols-2">
-          {learningTracks.map((track) => (
-            <div
-              key={track.title}
-              className="rounded-xl border border-border bg-background p-5"
+        <div className="grid gap-5 sm:grid-cols-2">
+          {pillars.map(({ icon: Icon, title, description }, index) => (
+            <article
+              key={title}
+              className="group rounded-3xl border border-border bg-card/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 sm:p-8"
             >
-              <h3 className="mb-3 text-lg font-semibold text-foreground">
-                {track.title}
+              <div className="mb-8 flex items-center justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-background text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/10">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <span className="font-mono text-xs text-muted-foreground/60">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </div>
+
+              <h3 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                {title}
               </h3>
-              <p className="text-sm leading-7 text-secondary">
-                {track.description}
+
+              <p className="mt-3 text-sm text-secondary">
+                {description}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </section>
 
-      <section className="mt-16 rounded-2xl border border-border bg-card p-8">
-        <h2 className="mb-4 text-2xl font-semibold text-foreground">
-          Learning philosophy
-        </h2>
-        <p className="max-w-4xl text-secondary leading-7">
-          Neuctra Lab focuses on understanding, experimenting, building, and
-          solving problems. The goal is not only to teach code, but also to help
-          people understand when to use technology, how to choose the right
-          tools, and how to create value with software.
-        </p>
+      {/* Learning tracks */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-12">
+        <div className="relative overflow-hidden rounded-3xl border border-border bg-card/70 p-6 sm:p-10 lg:p-12">
+          <div className="pointer-events-none absolute -right-20 -top-32 h-72 w-72 rounded-full bg-primary/[0.07] blur-[100px]" />
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
-          >
-            Learn about Neuctra
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <Link
-            href="/products"
-            className="rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground"
-          >
-            See products
-          </Link>
+          <div className="relative mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div className="max-w-2xl">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                Your learning journey
+              </p>
+              <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                Learn what you need to build.
+              </h2>
+              <p className="mt-4 text-sm text-secondary sm:text-base">
+                From understanding the basics to developing products and
+                solving business challenges with technology.
+              </p>
+            </div>
+
+            <Compass className="hidden h-8 w-8 shrink-0 text-primary sm:block" />
+          </div>
+
+          <div className="relative grid gap-4 sm:grid-cols-2">
+            {learningTracks.map((track, index) => (
+              <article
+                key={track.title}
+                className="rounded-2xl border border-border bg-background/70 p-5 transition-colors hover:border-primary/30 sm:p-6"
+              >
+                <div className="mb-5 flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 font-mono text-xs font-semibold text-primary">
+                  0{index + 1}
+                </div>
+
+                <h3 className="text-lg font-semibold text-foreground">
+                  {track.title}
+                </h3>
+
+                <p className="mt-3 text-sm text-secondary">
+                  {track.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mt-16">
-        <div className="mb-8 text-center">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
-            FAQ
-          </p>
-          <h2 className="text-2xl font-semibold text-foreground sm:text-4xl">
-            Common questions
-          </h2>
+      {/* Learning philosophy */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-12">
+        <div className="grid gap-10 rounded-3xl border border-border bg-card/60 p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:p-12">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              Our philosophy
+            </p>
+
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              Don't just memorize.
+              <span className="block text-secondary">
+                Understand. Experiment. Build.
+              </span>
+            </h2>
+          </div>
+
+          <div>
+            <p className="text-sm text-secondary sm:text-base">
+              At Neuctra Lab, learning goes beyond writing code. We focus on
+              understanding how things work, choosing the right tools, and
+              applying technology to meaningful problems. Whether you're
+              learning software development or exploring how businesses can
+              work better with technology, the goal is to turn knowledge into
+              practical skills.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                About Neuctra
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
+              >
+                Explore products
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
         </div>
-        <div className="mx-auto max-w-4xl">
-          <Accordion items={faqItems} allowMultiple={false} />
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-12">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
+          <div>
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              FAQ
+            </p>
+
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+              Got questions?
+            </h2>
+
+            <p className="mt-5 max-w-md text-sm text-secondary sm:text-base">
+              Learn more about Neuctra Lab, what we teach, and how our
+              educational platform fits into the wider Neuctra ecosystem.
+            </p>
+          </div>
+
+          <div className="min-w-0">
+            <Accordion items={faqItems} allowMultiple={false} />
+          </div>
         </div>
       </section>
     </main>
   );
 }
+
