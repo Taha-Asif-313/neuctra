@@ -41,14 +41,14 @@ export default function WhyNeuctra() {
         transition={{ duration: 0.6 }}
         className="mb-16 max-w-3xl"
       >
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
+        <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-background/80 px-4 py-2">
           <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px] shadow-primary/70" />
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+          <span className="text-xs font-medium capitalize text-secondary">
             Why Neuctra
           </span>
         </div>
 
-        <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Thoughtful engineering.
           <br />
           <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
@@ -56,10 +56,10 @@ export default function WhyNeuctra() {
           </span>
         </h2>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
+        <p className="mt-6 max-w-2xl text-base text-secondary">
           We combine product thinking, engineering, and design to turn
           complex challenges into software that is useful, maintainable,
-          and ready for real-world work.
+          and ready for real world work.
         </p>
       </motion.div>
 
@@ -112,7 +112,7 @@ export default function WhyNeuctra() {
                     {item.title}
                   </h3>
 
-                  <p className="text-sm leading-7 text-secondary sm:text-base">
+                  <p className="text-sm text-secondary sm:text-base">
                     {item.desc}
                   </p>
                 </div>

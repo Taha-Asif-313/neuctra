@@ -41,7 +41,7 @@ return (
         {/* Column 1: Logo */}
         <Link
           href="/"
-          className="group flex w-fit items-center gap-2"
+          className="group flex w-fit items-center gap-1"
           onClick={() => setMenuOpen(false)}
         >
           <img
@@ -50,7 +50,7 @@ return (
             className="h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-110 sm:h-10 sm:w-10"
           />
 
-          <span className="text-lg font-black uppercase tracking-wide text-foreground">
+          <span className="text-xl font-black capitalize text-foreground">
             Neuctra
           </span>
         </Link>

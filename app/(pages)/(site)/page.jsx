@@ -130,7 +130,7 @@ const LandingPage = () => {
         </div>
 
         <div className="mx-auto max-w-4xl">
-          <Accordion items={faqItems} allowMultiple={false} />
+          <Accordion itemClassName="bg-card!" items={faqItems} allowMultiple={false} />
         </div>
       </section>
       <ContactSection />

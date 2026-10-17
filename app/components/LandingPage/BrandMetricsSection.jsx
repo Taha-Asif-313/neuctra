@@ -1,14 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Code2, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  Code2,
+  LineChart,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 
 export default function BrandMetricsSection() {
   const highlights = [
     {
       value: "4+",
       label: "Product lines in the ecosystem",
-      icon: Sparkles,
+      icon: LineChart,
       detail: "A growing portfolio",
     },
     {
@@ -49,14 +55,14 @@ export default function BrandMetricsSection() {
           transition={{ duration: 0.6 }}
           className="mb-16 max-w-3xl"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
             <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px] shadow-primary/70" />
-            <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+            <span className="text-xs font-medium capitalize text-secondary">
               Built with purpose
             </span>
           </div>
 
-          <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             More than products.
             <br />
             <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
@@ -65,9 +71,9 @@ export default function BrandMetricsSection() {
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
-            From developer infrastructure to everyday utilities, Neuctra
-            brings together practical software products and technology
-            solutions designed to solve meaningful problems.
+            From developer infrastructure to everyday utilities, Neuctra brings
+            together practical software products and technology solutions
+            designed to solve meaningful problems.
           </p>
         </motion.div>
 
@@ -83,14 +89,13 @@ export default function BrandMetricsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -5 }}
                 className="group relative"
               >
                 <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-primary/30 via-border to-transparent opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="relative flex h-full flex-col rounded-3xl border border-border bg-background p-7 sm:p-8">
                   <div className="mb-10 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
                       <Icon className="h-5 w-5" />
                     </div>
 
@@ -131,10 +136,10 @@ export default function BrandMetricsSection() {
 
           <div className="relative flex flex-col gap-5 border-b border-border p-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
+              <p className="text-xs font-medium capitalize tracking-[0.18em] text-primary">
                 The ecosystem
               </p>
-              <h3 className="mt-2 text-xl font-semibold tracking-tight text-foreground">
+              <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
                 Different products. One vision.
               </h3>
               <p className="mt-2 text-sm leading-6 text-secondary">

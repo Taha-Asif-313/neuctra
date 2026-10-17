@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, LayoutGrid, Sparkles } from "lucide-react";
 
 export default function ProductsSection() {
   const products = [
@@ -67,13 +67,13 @@ export default function ProductsSection() {
         className="mb-16 max-w-3xl"
       >
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
-          <Sparkles className="h-3.5 w-3.5 text-primary" />
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+          <LayoutGrid className="h-3.5 w-3.5 text-primary" />
+          <span className="text-xs font-medium capitalize text-secondary">
             The Neuctra ecosystem
           </span>
         </div>
 
-        <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Software for building,
           <br />
           <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
@@ -81,15 +81,15 @@ export default function ProductsSection() {
           </span>
         </h2>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
-          Explore a growing collection of software products designed to
-          simplify development, improve productivity, and make everyday
-          digital work more useful.
+        <p className="mt-6 max-w-2xl text-base text-secondary sm:text-lg">
+          Explore a growing collection of software products designed to simplify
+          development, improve productivity, and make everyday digital work more
+          useful.
         </p>
       </motion.div>
 
       {/* Products grid */}
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product, index) => (
           <motion.div
             key={product.name}
@@ -123,8 +123,7 @@ export default function ProductsSection() {
                 </span>
 
                 {product.featured && (
-                  <span className="absolute right-5 top-5 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">
-                    <Sparkles className="h-3 w-3" />
+                  <span className="absolute right-5 top-5 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-semibold capitalize text-primary">
                     Featured
                   </span>
                 )}
@@ -161,9 +160,7 @@ export default function ProductsSection() {
                   {product.name}
                 </h3>
 
-                <p className="mb-8 text-sm leading-7 text-secondary sm:text-base">
-                  {product.desc}
-                </p>
+                <p className="mb-8 text-sm text-secondary">{product.desc}</p>
 
                 <div className="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
                   <motion.a
@@ -187,7 +184,9 @@ export default function ProductsSection() {
                     whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(0,0,0,0.12)]"
                   >
-                    {product.name === "Neuctra UI" ? "View docs" : "Get started"}
+                    {product.name === "Neuctra UI"
+                      ? "View docs"
+                      : "Get started"}
                     <ArrowUpRight className="h-4 w-4" />
                   </motion.a>
                 </div>

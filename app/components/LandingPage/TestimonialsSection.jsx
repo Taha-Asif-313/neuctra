@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, Sparkles } from "lucide-react";
+import { Book, Quote, Sparkles } from "lucide-react";
 
 export default function TestimonialsSection() {
   const reviews = [
@@ -43,14 +43,14 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="mb-16 max-w-3xl"
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
-            <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-background/80 px-4 py-2">
+            <Book className="h-3.5 w-3.5 text-primary" />
+            <span className="text-xs font-medium capitalize text-secondary">
               Our philosophy
             </span>
           </div>
 
-          <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Technology should
             <br />
             <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
@@ -58,7 +58,7 @@ export default function TestimonialsSection() {
             </span>
           </h2>
 
-          <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
+          <p className="mt-6 max-w-2xl text-base text-secondary">
             Good software is more than features and interfaces. It is about
             making complex things simpler, helping people work better, and
             turning ideas into practical solutions.

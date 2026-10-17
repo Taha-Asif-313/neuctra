@@ -42,14 +42,14 @@ export default function ProcessSection() {
         transition={{ duration: 0.6 }}
         className="mb-16 max-w-3xl"
       >
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2">
+        <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-border bg-background/80 px-4 py-2">
           <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_12px] shadow-primary/70" />
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-secondary">
+          <span className="text-xs font-medium text-secondary">
             How we work
           </span>
         </div>
 
-        <h2 className="text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           From the first idea
           <br />
           <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
@@ -57,7 +57,7 @@ export default function ProcessSection() {
           </span>
         </h2>
 
-        <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
+        <p className="mt-6 max-w-2xl text-base text-secondary">
           A practical, collaborative process that takes your idea from
           understanding the problem to building, launching, and improving
           software that makes a difference.
@@ -80,7 +80,6 @@ export default function ProcessSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.12, duration: 0.5 }}
-                whileHover={{ y: -5 }}
                 className="group relative"
               >
                 {/* Gradient border */}
@@ -102,7 +101,7 @@ export default function ProcessSection() {
 
                   <div className="relative mb-3 flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    <p className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
+                    <p className="text-xs font-medium capitalize tracking-[0.16em] text-primary">
                       {step.subtitle}
                     </p>
                   </div>
@@ -111,7 +110,7 @@ export default function ProcessSection() {
                     {step.title}
                   </h3>
 
-                  <p className="relative grow text-sm leading-7 text-secondary sm:text-base">
+                  <p className="relative grow text-sm text-secondary sm:text-base">
                     {step.desc}
                   </p>
 
