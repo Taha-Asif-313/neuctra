@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { Accordion } from "@neuctra/ui";
 import {
@@ -149,7 +148,6 @@ const learningTracks = [
   },
 ];
 
-
 export default function NeuctraLabPage() {
   return (
     <main className="relative isolate overflow-hidden">
@@ -236,9 +234,7 @@ export default function NeuctraLabPage() {
                     <BookOpenText className="h-5 w-5" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">
-                      Neuctra Lab
-                    </p>
+                    <p className="font-semibold text-foreground">Neuctra Lab</p>
                     <p className="text-xs text-muted-foreground">
                       Learn by understanding and building
                     </p>
@@ -334,13 +330,12 @@ export default function NeuctraLabPage() {
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Technology is a tool.
-            <span className="block text-secondary">
-              Learn how to use it.
-            </span>
+            <span className="block text-secondary">Learn how to use it.</span>
           </h2>
           <p className="mt-5 text-sm text-secondary sm:text-base">
             Explore the concepts, practical skills, and problem-solving
-            approaches needed to build software and make better use of technology.
+            approaches needed to build software and make better use of
+            technology.
           </p>
         </div>
 
@@ -348,10 +343,10 @@ export default function NeuctraLabPage() {
           {pillars.map(({ icon: Icon, title, description }, index) => (
             <article
               key={title}
-              className="group rounded-3xl border border-border bg-card/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 sm:p-8"
+              className="group rounded-3xl border border-border bg-card/70 p-6 transition-all duration-300 sm:p-8"
             >
               <div className="mb-8 flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-background text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/10">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/10">
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className="font-mono text-xs text-muted-foreground/60">
@@ -363,9 +358,7 @@ export default function NeuctraLabPage() {
                 {title}
               </h3>
 
-              <p className="mt-3 text-sm text-secondary">
-                {description}
-              </p>
+              <p className="mt-3 text-sm text-secondary">{description}</p>
             </article>
           ))}
         </div>
@@ -378,15 +371,15 @@ export default function NeuctraLabPage() {
 
           <div className="relative mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div className="max-w-2xl">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              <p className="mb-3 text-xs font-semibold capitalize tracking-[0.2em] text-primary">
                 Your learning journey
               </p>
               <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 Learn what you need to build.
               </h2>
               <p className="mt-4 text-sm text-secondary sm:text-base">
-                From understanding the basics to developing products and
-                solving business challenges with technology.
+                From understanding the basics to developing products and solving
+                business challenges with technology.
               </p>
             </div>
 
@@ -397,7 +390,7 @@ export default function NeuctraLabPage() {
             {learningTracks.map((track, index) => (
               <article
                 key={track.title}
-                className="rounded-2xl border border-border bg-background/70 p-5 transition-colors hover:border-primary/30 sm:p-6"
+                className="rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/30 sm:p-6"
               >
                 <div className="mb-5 flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 font-mono text-xs font-semibold text-primary">
                   0{index + 1}
@@ -437,8 +430,8 @@ export default function NeuctraLabPage() {
               At Neuctra Lab, learning goes beyond writing code. We focus on
               understanding how things work, choosing the right tools, and
               applying technology to meaningful problems. Whether you're
-              learning software development or exploring how businesses can
-              work better with technology, the goal is to turn knowledge into
+              learning software development or exploring how businesses can work
+              better with technology, the goal is to turn knowledge into
               practical skills.
             </p>
 
@@ -482,11 +475,10 @@ export default function NeuctraLabPage() {
           </div>
 
           <div className="min-w-0">
-            <Accordion items={faqItems} allowMultiple={false} />
+            <Accordion itemClassName="bg-card!" items={faqItems} allowMultiple={false} />
           </div>
         </div>
       </section>
     </main>
   );
 }
-

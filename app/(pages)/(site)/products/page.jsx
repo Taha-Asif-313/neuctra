@@ -104,7 +104,7 @@ export default function ProductsPage() {
         </div>
 
         <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-border pt-6">
-          <span className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
+          <span className="text-xs font-medium capitalize tracking-[0.16em] text-muted-foreground">
             One ecosystem
           </span>
           <span className="h-1 w-1 rounded-full bg-primary" />
@@ -123,25 +123,24 @@ export default function ProductsPage() {
       >
         <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+            <p className="mb-2 text-xs font-semibold capitalize tracking-[0.2em] text-primary">
               What we're building
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Products with a purpose.
             </h2>
+            <p className="max-w-lg mt-3 text-sm text-secondary">
+              Independent products, connected by one idea: make technology more
+              useful and accessible.
+            </p>
           </div>
-
-          <p className="max-w-md text-sm text-secondary">
-            Independent products, connected by one idea: make technology more
-            useful and accessible.
-          </p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
           {products.map((product, index) => (
             <article
               key={product.name}
-              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-card/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40"
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-border bg-background transition-all duration-300 hover:-translate-y-1 hover:border-primary/40"
             >
               {/* Top accent */}
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
@@ -149,7 +148,7 @@ export default function ProductsPage() {
               <div className="flex flex-1 flex-col p-6 sm:p-8">
                 {/* Category */}
                 <div className="mb-8 flex items-center justify-between gap-3">
-                  <span className="text-xs font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                  <span className="text-xs font-medium capitalize tracking-[0.15em] text-secondary">
                     {product.category}
                   </span>
 
@@ -166,7 +165,7 @@ export default function ProductsPage() {
 
                 {/* Product identity */}
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-2xl border border-border bg-accent p-3 transition-colors group-hover:border-primary/20">
+                  <div className="flex h-[68px] w-[68px] shrink-0 items-center justify-center transition-colors">
                     {product.image ? (
                       <img
                         src={product.image}
@@ -190,18 +189,16 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Description */}
-                <p className="max-w-lg text-sm text-secondary sm:text-base">
+                <p className="max-w-lg text-sm text-secondary">
                   {product.description}
                 </p>
 
                 {/* Focus */}
-                <div className="mt-7 rounded-2xl border border-border/80 bg-accent/60 p-4">
-                  <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                <div className="mt-7">
+                  <p className="mb-1 text-sm font-semibold capitalize text-accent-foreground">
                     Product focus
                   </p>
-                  <p className="text-sm text-foreground">
-                    {product.focus}
-                  </p>
+                  <p className="text-sm text-foreground">{product.focus}</p>
                 </div>
 
                 {/* Actions */}
@@ -246,12 +243,12 @@ export default function ProductsPage() {
 
       {/* Philosophy */}
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-12">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-card/70">
-<div className="pointer-events-none absolute -right-20 -top-32 h-72 w-72 rounded-full bg-primary/[0.04] blur-[90px]" />
+        <div className="relative overflow-hidden rounded-3xl border border-border">
+          <div className="pointer-events-none absolute -right-20 -top-32 h-72 w-72 rounded-full bg-primary/[0.04] blur-[90px]" />
 
           <div className="relative p-6 sm:p-10 lg:p-14">
             <div className="max-w-2xl">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              <p className="mb-4 text-xs font-semibold capitalize tracking-[0.2em] text-primary">
                 Our approach
               </p>
 
@@ -289,7 +286,7 @@ export default function ProductsPage() {
               ].map((item) => (
                 <div
                   key={item.number}
-                  className="rounded-2xl border border-border bg-background/60 p-5 sm:p-6"
+                  className="rounded-2xl border border-border bg-card p-5 sm:p-6"
                 >
                   <span className="font-mono text-xs text-primary">
                     {item.number}
@@ -299,9 +296,7 @@ export default function ProductsPage() {
                     {item.title}
                   </h3>
 
-                  <p className="mt-3 text-sm text-secondary">
-                    {item.text}
-                  </p>
+                  <p className="mt-3 text-sm text-secondary">{item.text}</p>
                 </div>
               ))}
             </div>
