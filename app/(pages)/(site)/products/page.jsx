@@ -1,6 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
+export const metadata = {
+  title: "Neuctra Products | Authix, UI, Notlix & Productivity Tools",
+  description:
+    "Discover Neuctra products for identity, design systems, productivity, and workflow automation. Build faster with secure tools designed for modern teams.",
+  alternates: {
+    canonical: "/products",
+  },
+};
+
 const products = [
   {
     name: "Neuctra Authix",
@@ -124,7 +133,7 @@ export default function ProductsPage() {
         <div className="mb-9 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <p className="mb-2 text-xs font-semibold capitalize tracking-[0.2em] text-primary">
-              What we're building
+              What we&apos;re building
             </p>
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Products with a purpose.
@@ -260,7 +269,7 @@ export default function ProductsPage() {
               </h2>
 
               <p className="mt-5 max-w-xl text-sm text-secondary sm:text-base">
-                Good software doesn't need to make things complicated. We focus
+                Good software doesn&apos;t need to make things complicated. We focus
                 on solving real problems with practical tools, thoughtful
                 experiences, and dependable technology.
               </p>
@@ -308,7 +317,7 @@ export default function ProductsPage() {
                   Have something worth building?
                 </h3>
                 <p className="mt-1 text-sm text-secondary">
-                  Let's turn your idea into a useful digital product.
+                  Let&apos;s turn your idea into a useful digital product.
                 </p>
               </div>
 
@@ -324,7 +333,7 @@ export default function ProductsPage() {
                   href="/contact"
                   className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
-                  Let's talk
+                  Let&apos;s talk
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>

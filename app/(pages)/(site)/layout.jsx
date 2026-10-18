@@ -1,6 +1,7 @@
 import SiteLayoutClient from "./SiteLayoutClient";
 
 export const metadata = {
+  metadataBase: new URL("https://neuctra.com"),
   title: "Neuctra | Product company and learning platform",
   description:
     "Neuctra builds software products and custom technology solutions while Neuctra Lab teaches practical technology, development, and business problem-solving.",

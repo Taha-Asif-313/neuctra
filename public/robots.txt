@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.neuctra.com
+Host: https://neuctra.com
 
 # Sitemaps
-Sitemap: https://www.neuctra.com/sitemap.xml
+Sitemap: https://neuctra.com/sitemap.xml

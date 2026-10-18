@@ -2,6 +2,9 @@ export const metadata = {
   title: "Privacy Policy | Neuctra",
   description:
     "Learn how Neuctra collects, uses, and protects your data across our SaaS products and digital services.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {

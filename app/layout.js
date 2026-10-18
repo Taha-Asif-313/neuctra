@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/app/contexts/ThemeContext";
 
 export const metadata = {
+  metadataBase: new URL("https://neuctra.com"),
   title: "Neuctra | Software Products and Technology Solutions",
   description:
     "Neuctra builds practical software products and custom technology solutions for businesses, founders, developers, and everyday users.",

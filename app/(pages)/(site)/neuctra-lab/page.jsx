@@ -14,6 +14,15 @@ import {
   BadgeCheck,
 } from "lucide-react";
 
+export const metadata = {
+  title: "Neuctra Lab | Learn Practical Tech, Product & Development",
+  description:
+    "Neuctra Lab teaches practical technology, product thinking, software development, and business problem-solving through real-world learning and examples.",
+  alternates: {
+    canonical: "/neuctra-lab",
+  },
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -169,7 +178,7 @@ export default function NeuctraLabPage() {
             <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card/70 px-4 py-2">
               <Compass className="h-4 w-4 text-primary" />
               <span className="text-xs font-medium tracking-wide text-secondary">
-                Neuctra's learning platform
+                Neuctra&apos;s learning platform
               </span>
             </div>
 
@@ -295,10 +304,10 @@ export default function NeuctraLabPage() {
 
               <div className="rounded-2xl border border-primary/15 bg-primary/[0.05] p-4">
                 <p className="text-sm font-medium text-foreground">
-                  The goal isn't just to learn code.
+                  The goal isn&apos;t just to learn code.
                 </p>
                 <p className="mt-1 text-sm text-secondary">
-                  It's to understand problems and build useful solutions.
+                  It&apos;s to understand problems and build useful solutions.
                 </p>
               </div>
             </div>
@@ -418,7 +427,7 @@ export default function NeuctraLabPage() {
             </p>
 
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-              Don't just memorize.
+              Don&apos;t just memorize.
               <span className="block text-secondary">
                 Understand. Experiment. Build.
               </span>
@@ -429,7 +438,7 @@ export default function NeuctraLabPage() {
             <p className="text-sm text-secondary sm:text-base">
               At Neuctra Lab, learning goes beyond writing code. We focus on
               understanding how things work, choosing the right tools, and
-              applying technology to meaningful problems. Whether you're
+              applying technology to meaningful problems. Whether you&apos;re
               learning software development or exploring how businesses can work
               better with technology, the goal is to turn knowledge into
               practical skills.

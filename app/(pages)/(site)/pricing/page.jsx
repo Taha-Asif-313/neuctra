@@ -4,6 +4,9 @@ export const metadata = {
   title: "Pricing | Neuctra",
   description:
     "Explore Neuctra product-wise pricing plans for startups, teams, and enterprises.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 export default function PricingPage() {

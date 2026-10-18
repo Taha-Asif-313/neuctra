@@ -2,6 +2,9 @@ export const metadata = {
   title: "Refund Policy | Neuctra",
   description:
     "Review Neuctra's official refund and subscription policy covering SaaS products, client services, and billing terms.",
+  alternates: {
+    canonical: "/refund-policy",
+  },
 };
 
 export default function RefundPolicyPage() {

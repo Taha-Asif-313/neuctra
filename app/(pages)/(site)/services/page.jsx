@@ -14,6 +14,15 @@ import {
   Workflow,
 } from "lucide-react";
 
+export const metadata = {
+  title: "Neuctra Services | SaaS, Web Apps & Digital Product Development",
+  description:
+    "Neuctra builds websites, SaaS platforms, internal systems, and workflow tools for businesses that want practical digital solutions and sustainable growth.",
+  alternates: {
+    canonical: "/services",
+  },
+};
+
 const serviceCards = [
   {
     icon: Globe,

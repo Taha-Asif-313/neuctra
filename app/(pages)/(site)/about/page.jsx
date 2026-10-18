@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Accordion } from "@neuctra/ui";
 import {
   Code,
@@ -10,6 +7,15 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+
+export const metadata = {
+  title: "About Neuctra | SaaS Products & Custom Tech Solutions",
+  description:
+    "Learn how Neuctra builds SaaS products, custom software, and digital systems for startups, founders, and businesses that want stronger operations and better customer experiences.",
+  alternates: {
+    canonical: "/about",
+  },
+};
 
 const strengths = [
   {
@@ -46,11 +52,6 @@ const principles = [
   "Fast execution without losing sight of long-term maintainability.",
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
-
 const faqItems = [
   {
     title: "What is Neuctra?",
@@ -79,38 +80,20 @@ const AboutPage = () => {
     <main className="min-h-screen bg-[#0a0a0a] text-white">
       <section className="border-b border-zinc-800 bg-black/60 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 text-center md:text-left">
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.5 }}
-            className="text-primary text-sm font-semibold uppercase tracking-[0.18em] mb-4"
-          >
+          <p className="text-primary text-sm font-semibold uppercase tracking-[0.18em] mb-4">
             About Neuctra
-          </motion.p>
+          </p>
 
-          <motion.h1
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 max-w-4xl"
-          >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 max-w-4xl">
             Building secure SaaS products and custom digital platforms for
             modern businesses.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            transition={{ duration: 0.6, delay: 0.12 }}
-            className="text-zinc-400 max-w-3xl text-sm sm:text-base leading-relaxed mx-auto md:mx-0"
-          >
+          <p className="text-zinc-400 max-w-3xl text-sm sm:text-base leading-relaxed mx-auto md:mx-0">
             Neuctra combines product innovation, custom web development, and
             cloud-native engineering to help startups, businesses, and digital
             brands launch reliable software with a polished user experience.
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -151,14 +134,7 @@ const AboutPage = () => {
         </div>
 
         <div className="grid gap-10 lg:grid-cols-12">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7"
-          >
+          <div className="lg:col-span-7">
             <h2 className="text-2xl sm:text-3xl font-semibold mb-5">
               A technology company with a product-builder mindset.
             </h2>
@@ -179,16 +155,9 @@ const AboutPage = () => {
                 that are practical, reliable, and ready for real users.
               </p>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.08 }}
-            className="lg:col-span-5 bg-[#111] border border-zinc-800 rounded-2xl p-6"
-          >
+          <div className="lg:col-span-5 bg-[#111] border border-zinc-800 rounded-2xl p-6 transition-all duration-300 hover:border-primary/40">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-primary" />
@@ -208,25 +177,20 @@ const AboutPage = () => {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-3 mt-10">
-          {stats.map((stat, index) => (
-            <motion.div
+          {stats.map((stat) => (
+            <div
               key={stat.label}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.06 }}
-              className="bg-[#111]/70 border border-zinc-800 rounded-2xl p-5"
+              className="bg-[#111]/70 border border-zinc-800 rounded-2xl p-5 transition-all duration-300 hover:border-primary/30"
             >
               <p className="text-3xl font-bold text-primary mb-2">
                 {stat.value}
               </p>
               <p className="text-sm text-zinc-400">{stat.label}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -243,26 +207,20 @@ const AboutPage = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {strengths.map((item, index) => {
+          {strengths.map((item) => {
             const Icon = item.icon;
 
             return (
-              <motion.div
+              <div
                 key={item.title}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: index * 0.07 }}
-                whileHover={{ y: -6 }}
-                className="bg-[#111]/60 border border-[#1f1f1f] rounded-2xl p-6 hover:border-primary transition-all"
+                className="bg-[#111]/60 border border-[#1f1f1f] rounded-2xl p-6 hover:border-primary transition-all duration-300"
               >
                 <Icon className="w-8 h-8 text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   {item.desc}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
