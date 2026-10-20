@@ -7,7 +7,7 @@ export default function ProductsSection() {
   const products = [
     {
       name: "Neuctra Authix",
-      image: "/logos/authix.png",
+      image: "/logos/authix.svg",
       category: "Identity infrastructure",
       desc: "A practical foundation for authentication, user identity, and application data so teams can build products without repeating the same backend setup.",
       links: {
@@ -18,7 +18,7 @@ export default function ProductsSection() {
     },
     {
       name: "Neuctra UI",
-      image: "/logos/ui.png",
+      image: "/logos/ui.svg",
       category: "Design system",
       desc: "Reusable interface components and design patterns for dashboards, forms, product screens, and modern web applications.",
       links: {
@@ -39,7 +39,7 @@ export default function ProductsSection() {
     },
     {
       name: "Neuctra Tools",
-      image: null,
+      image: "/logos/tools.png",
       category: "Useful utilities",
       desc: "Fast, accessible browser-based tools for formatting, conversion, and everyday digital tasks that need to feel simple and quick.",
       links: {
@@ -133,7 +133,7 @@ export default function ProductsSection() {
                     src={product.image}
                     alt={`${product.name} logo`}
                     loading="lazy"
-                    className="relative z-10 max-h-28 max-w-[65%] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-h-32"
+                    className="relative rounded-2xl z-10 max-h-28 max-w-[65%] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-h-32"
                   />
                 ) : (
                   <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-3xl border border-primary/20 bg-primary/10 text-4xl font-semibold text-primary shadow-[0_0_60px_rgba(0,0,0,0.12)] transition-transform duration-500 group-hover:scale-110">
