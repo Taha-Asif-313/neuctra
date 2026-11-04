@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import {
   AnimatePresence,
@@ -25,7 +25,8 @@ import { Badge } from "@neuctra/ui";
 import {
   useMotionPreference,
   useMotionStill,
-} from "../motion/MotionPreference";
+} from "@/app/components/patterns/MotionPreference";
+import { useLoopingStages } from "@/app/components/patterns/useLoopingStages";
 
 const STAGE_MS = 3400;
 const LAST_STAGE_HOLD_MS = 1800;
@@ -83,23 +84,17 @@ const BURST = Array.from({ length: 14 }, (_, i) => (i / 14) * Math.PI * 2);
 export default function HeroContent() {
   const sectionRef = useRef(null);
   const panelRef = useRef(null);
-  const [chosenStage, setStage] = useState(null);
   const { reduced } = useMotionPreference();
-  // Reduced motion opens on the finished product rather than an empty one.
-  const stage = chosenStage ?? (reduced ? STAGES.length - 1 : 0);
   const still = useMotionStill();
   const inView = useInView(panelRef, { amount: 0.25 });
-
-  useEffect(() => {
-    if (still || !inView) return undefined;
-
-    const isLast = stage === STAGES.length - 1;
-    const timer = setTimeout(
-      () => setStage((stage + 1) % STAGES.length),
-      isLast ? STAGE_MS + LAST_STAGE_HOLD_MS : STAGE_MS,
-    );
-    return () => clearTimeout(timer);
-  }, [stage, still, inView]);
+  const { stage, select } = useLoopingStages({
+    count: STAGES.length,
+    durationMs: STAGE_MS,
+    lastHoldMs: LAST_STAGE_HOLD_MS,
+    inView,
+    // Reduced motion opens on the finished product rather than an empty one.
+    reducedStage: STAGES.length - 1,
+  });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -249,7 +244,7 @@ export default function HeroContent() {
           </div>
 
           <div className="grid lg:grid-cols-[220px_minmax(0,1fr)_250px]">
-            <StageRail stage={stage} onSelect={setStage} />
+            <StageRail stage={stage} onSelect={select} />
             <div className="border-border p-3 sm:p-4 lg:border-x">
               <AssemblingApp stage={stage} />
             </div>

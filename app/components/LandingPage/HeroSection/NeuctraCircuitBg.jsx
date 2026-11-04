@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { motion } from "framer-motion";
-import { useMotionStill } from "../motion/MotionPreference";
+import { useMotionStill } from "@/app/components/patterns/MotionPreference";
 
 /**
  * NeuctraCircuitBg

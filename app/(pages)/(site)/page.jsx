@@ -13,8 +13,8 @@ import ServicesSection from "@/app/components/LandingPage/ServicesSection";
 import ProcessSection from "@/app/components/LandingPage/ProcessSection";
 import TestimonialsSection from "@/app/components/LandingPage/TestimonialsSection";
 import CTASection from "@/app/components/LandingPage/CTASection";
-import ScrollStatement from "@/app/components/LandingPage/ScrollStatement";
-import { MotionPreferenceProvider } from "@/app/components/LandingPage/motion/MotionPreference";
+import ScrollReveal from "@/app/components/patterns/ScrollReveal";
+import { MotionPreferenceProvider } from "@/app/components/patterns/MotionPreference";
 
 const faqItems = [
   {
@@ -112,7 +112,10 @@ const LandingPage = () => {
       />
       <MotionPreferenceProvider>
         <HeroLanding />
-        <ScrollStatement />
+        <ScrollReveal
+          text="We build useful software, solve real-world problems, and share the knowledge that helps people turn technology into something meaningful."
+          highlight={["useful", "software,", "real-world", "problems,"]}
+        />
         <EcosystemOverviewSection />
         <ProductsSection />
         <BrandMetricsSection />
