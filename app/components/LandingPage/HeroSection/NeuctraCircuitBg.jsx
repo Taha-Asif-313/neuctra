@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useMemo } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useMotionStill } from "../motion/MotionPreference";
 
 /**
  * NeuctraCircuitBg
@@ -184,13 +187,13 @@ function buildTraces() {
 const PULSE = 0.16; // visible pulse length (fraction of the trace)
 
 export default function NeuctraCircuitBg({ className = "" }) {
-  const reduceMotion = useReducedMotion();
+  const still = useMotionStill();
   const traces = useMemo(buildTraces, []);
 
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden bg-black ${className}`}
+      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden ${className}`}
     >
       <svg
         className="h-full w-full"
@@ -222,7 +225,7 @@ export default function NeuctraCircuitBg({ className = "" }) {
         </g>
 
         {/* ───────── animated electricity layer ───────── */}
-        {!reduceMotion &&
+        {!still &&
           traces.map((t) => {
             const transition = {
               duration: t.duration,

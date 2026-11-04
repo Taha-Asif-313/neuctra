@@ -13,6 +13,8 @@ import ServicesSection from "@/app/components/LandingPage/ServicesSection";
 import ProcessSection from "@/app/components/LandingPage/ProcessSection";
 import TestimonialsSection from "@/app/components/LandingPage/TestimonialsSection";
 import CTASection from "@/app/components/LandingPage/CTASection";
+import ScrollStatement from "@/app/components/LandingPage/ScrollStatement";
+import { MotionPreferenceProvider } from "@/app/components/LandingPage/motion/MotionPreference";
 
 const faqItems = [
   {
@@ -108,32 +110,35 @@ const LandingPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <HeroLanding />
-      <EcosystemOverviewSection />
-      <ProductsSection />
-      <BrandMetricsSection />
-      <FeatureShowcaseSection />
-      <SolutionsSection />
-      <WhyNeuctra />
-      <ServicesSection />
-      <ProcessSection />
-      <TestimonialsSection />
-      <CTASection />
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
-            FAQs
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Frequently asked questions
-          </h2>
-        </div>
-
-        <div className="mx-auto max-w-4xl">
-          <Accordion itemClassName="bg-card!" items={faqItems} allowMultiple={false} />
-        </div>
-      </section>
-      <ContactSection />
+      <MotionPreferenceProvider>
+        <HeroLanding />
+        <ScrollStatement />
+        <EcosystemOverviewSection />
+        <ProductsSection />
+        <BrandMetricsSection />
+        <FeatureShowcaseSection />
+        <SolutionsSection />
+        <WhyNeuctra />
+        <ServicesSection />
+        <ProcessSection />
+        <TestimonialsSection />
+        <CTASection />
+        <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-primary">
+              FAQs
+            </p>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+              Frequently asked questions
+            </h2>
+          </div>
+  
+          <div className="mx-auto max-w-4xl">
+            <Accordion itemClassName="bg-card!" items={faqItems} allowMultiple={false} />
+          </div>
+        </section>
+        <ContactSection />
+      </MotionPreferenceProvider>
     </>
   );
 };

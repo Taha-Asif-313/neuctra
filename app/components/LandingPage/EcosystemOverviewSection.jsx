@@ -1,7 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { BookOpenText, Boxes, BriefcaseBusiness, Code2 } from "lucide-react";
+import { useMotionStill } from "./motion/MotionPreference";
+
+const CYCLE_MS = 4200;
 
 const pillars = [
   {
@@ -10,6 +14,8 @@ const pillars = [
     subtitle: "The parent company",
     description:
       "A software products and technology solutions company building digital products and helping businesses turn ideas into practical software solutions.",
+    position: { left: "16%", top: "16%" },
+    path: "M240 240 C 240 150, 160 77, 77 77",
   },
   {
     icon: BookOpenText,
@@ -17,6 +23,8 @@ const pillars = [
     subtitle: "Learning & education",
     description:
       "An educational platform that teaches technology, practical software development, and business problem-solving through tutorials and real-world examples.",
+    position: { left: "84%", top: "16%" },
+    path: "M240 240 C 330 240, 403 160, 403 77",
   },
   {
     icon: Boxes,
@@ -24,6 +32,8 @@ const pillars = [
     subtitle: "Software built for real use",
     description:
       "A growing ecosystem of digital products, including Authix, UI, Notlix, Tools, Bynity, and Space, designed for developers, businesses, and everyday users.",
+    position: { left: "84%", top: "84%" },
+    path: "M240 240 C 240 330, 320 403, 403 403",
   },
   {
     icon: Code2,
@@ -31,15 +41,35 @@ const pillars = [
     subtitle: "Custom technology solutions",
     description:
       "We help startups, founders, and businesses plan, design, develop, and launch websites, SaaS platforms, web applications, dashboards, and custom digital systems.",
+    position: { left: "16%", top: "84%" },
+    path: "M240 240 C 150 240, 77 320, 77 403",
   },
 ];
 
 export default function EcosystemOverviewSection() {
-  return (
-    <section className="relative mx-auto max-w-7xl overflow-hidden px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-      {/* Background decoration */}
-      <div className="pointer-events-none absolute left-1/2 top-20 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+  const ref = useRef(null);
+  const inView = useInView(ref, { amount: 0.35 });
+  const still = useMotionStill();
+  const [active, setActive] = useState(0);
+  const [userChose, setUserChose] = useState(false);
 
+  useEffect(() => {
+    if (still || !inView || userChose) return undefined;
+
+    const timer = setTimeout(
+      () => setActive((current) => (current + 1) % pillars.length),
+      CYCLE_MS,
+    );
+    return () => clearTimeout(timer);
+  }, [active, still, inView, userChose]);
+
+  const choose = (index) => {
+    setActive(index);
+    setUserChose(true);
+  };
+
+  return (
+    <section className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -61,59 +91,134 @@ export default function EcosystemOverviewSection() {
             builds and empowers.
           </span>
         </h2>
-
-        <p className="mx-auto mt-6 max-w-2xl text-base text-secondary sm:text-lg">
-          We build useful software, solve real-world problems, and share the
-          knowledge that helps people turn technology into something meaningful.
-        </p>
       </motion.div>
 
-      <div className="grid gap-5 md:grid-cols-3">
-        {pillars.map((pillar, index) => {
-          const Icon = pillar.icon;
+      <div
+        ref={ref}
+        className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16"
+      >
+        <div className="relative mx-auto aspect-square w-full max-w-md lg:max-w-lg">
+          <svg
+            viewBox="0 0 480 480"
+            fill="none"
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full"
+          >
+            <circle
+              className="nx-orbit"
+              cx="240"
+              cy="240"
+              r="222"
+              stroke="var(--border)"
+              strokeWidth="1"
+              strokeDasharray="3 9"
+            />
+            <circle cx="240" cy="240" r="120" stroke="var(--border)" />
+            {pillars.map((pillar, index) => (
+              <g key={pillar.title}>
+                <path
+                  d={pillar.path}
+                  stroke={index === active ? "var(--primary)" : "var(--border)"}
+                  strokeOpacity={index === active ? 0.35 : 1}
+                  strokeWidth="1.5"
+                  className="transition-all duration-500"
+                />
+                {index === active && (
+                  <path
+                    key={active}
+                    d={pillar.path}
+                    pathLength={1}
+                    stroke="var(--primary)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    className="nx-comet"
+                  />
+                )}
+              </g>
+            ))}
+          </svg>
 
-          return (
-            <motion.div
-              key={pillar.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.12, duration: 0.5 }}
-              className="group relative"
-            >
-              <div className="absolute -inset-px rounded-3xl bg-gradient-to-b from-primary/30 via-border to-transparent opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
+          <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center sm:h-28 sm:w-28">
+            <span className="nx-pulse absolute inset-0 rounded-full border border-primary/50" />
+            <img
+              src="/logo.png"
+              alt=""
+              className="relative h-full w-full rounded-full border border-primary/30 object-cover shadow-[0_0_60px_-10px] shadow-primary/50"
+            />
+          </div>
 
-              <div className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card p-7 transition-all duration-300 sm:p-8">
-                <div className="mb-10 flex items-start justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary transition-all duration-300">
-                    <Icon className="h-6 w-6" />
-                  </div>
+          {pillars.map((pillar, index) => {
+            const Icon = pillar.icon;
+            const isActive = index === active;
 
-                  <span className="font-mono text-sm text-secondary">
-                    0{index + 1}
-                  </span>
-                </div>
+            return (
+              <button
+                key={pillar.title}
+                type="button"
+                onClick={() => choose(index)}
+                aria-label={`Show ${pillar.title}`}
+                aria-pressed={isActive}
+                style={pillar.position}
+                className={`absolute flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-2xl border bg-card transition-all duration-300 sm:h-16 sm:w-16 ${
+                  isActive
+                    ? "scale-110 border-primary text-primary shadow-[0_0_40px_-8px] shadow-primary/60"
+                    : "border-border text-secondary hover:border-primary/50"
+                }`}
+              >
+                <Icon className="h-6 w-6" />
+              </button>
+            );
+          })}
+        </div>
 
-                <p className="mb-1 text-xs font-semibold capitalize text-primary">
-                  {pillar.subtitle}
-                </p>
+        <div>
+          <p className="mb-6 text-base text-secondary sm:text-lg">
+            Four connected parts, one shared purpose. Pick one to see how it
+            fits.
+          </p>
+          <ul className="flex flex-col gap-2">
+            {pillars.map((pillar, index) => {
+              const isActive = index === active;
 
-                <h3 className="mb-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-                  {pillar.title}
-                </h3>
-
-                <p className="text-sm text-secondary">{pillar.description}</p>
-
-                <div className="mt-8 h-px w-full bg-gradient-to-r from-primary/40 via-border to-transparent" />
-
-                <div className="mt-5 flex items-center gap-2 text-xs font-medium text-secondary transition-colors group-hover:text-primary">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary/70" />
-                  Part of the Neuctra ecosystem
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+              return (
+                <li key={pillar.title}>
+                  <button
+                    type="button"
+                    onClick={() => choose(index)}
+                    aria-expanded={isActive}
+                    className={`w-full rounded-2xl border p-5 text-left transition-colors duration-300 ${
+                      isActive
+                        ? "border-primary/40 bg-primary/5"
+                        : "border-border hover:border-primary/30"
+                    }`}
+                  >
+                    <span className="flex items-baseline justify-between gap-4">
+                      <span className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                        {pillar.title}
+                      </span>
+                      <span className="text-xs font-semibold text-primary">
+                        {pillar.subtitle}
+                      </span>
+                    </span>
+                    <span
+                      className={`grid transition-[grid-template-rows,opacity] duration-400 ${
+                        isActive
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
+                      }`}
+                    >
+                      <span className="overflow-hidden">
+                        <span className="block pt-3 text-sm text-secondary">
+                          {pillar.description}
+                        </span>
+                      </span>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, LayoutGrid, Sparkles } from "lucide-react";
+import { ArrowUpRight, LayoutGrid } from "lucide-react";
+import ProductDemo from "./ProductDemo";
 
 export default function ProductsSection() {
   const products = [
@@ -89,7 +90,7 @@ export default function ProductsSection() {
       </motion.div>
 
       {/* Products grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2">
         {products.map((product, index) => (
           <motion.div
             key={product.name}
@@ -128,18 +129,7 @@ export default function ProductsSection() {
                   </span>
                 )}
 
-                {product.image ? (
-                  <img
-                    src={product.image}
-                    alt={`${product.name} logo`}
-                    loading="lazy"
-                    className="relative rounded-2xl z-10 max-h-28 max-w-[65%] object-contain transition-transform duration-500 group-hover:scale-110 sm:max-h-32"
-                  />
-                ) : (
-                  <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-3xl border border-primary/20 bg-primary/10 text-4xl font-semibold text-primary shadow-[0_0_60px_rgba(0,0,0,0.12)] transition-transform duration-500 group-hover:scale-110">
-                    N
-                  </div>
-                )}
+                <ProductDemo name={product.name} />
 
                 <div className="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
               </div>
@@ -156,7 +146,13 @@ export default function ProductsSection() {
                   </span>
                 </div>
 
-                <h3 className="mb-3 text-2xl font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
+                <h3 className="mb-3 flex items-center gap-3 text-2xl font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
+                  <img
+                    src={product.image}
+                    alt=""
+                    loading="lazy"
+                    className="h-8 w-8 rounded-lg object-contain"
+                  />
                   {product.name}
                 </h3>
 

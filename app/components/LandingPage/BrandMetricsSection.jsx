@@ -1,13 +1,34 @@
 "use client";
 
-import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  Code2,
-  LineChart,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
+import { useEffect, useRef } from "react";
+import { animate, motion, useInView, useReducedMotion } from "framer-motion";
+import { ArrowUpRight, Code2, LineChart, ShieldCheck } from "lucide-react";
+
+/** Counts up to values like "4+" or "100%"; others such as "24/7" stay as is. */
+function CountUp({ value }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+  const reduced = useReducedMotion();
+  const [, digits, suffix] = value.match(/^(\d+)([+%])$/) ?? [];
+  const target = Number(digits);
+
+  useEffect(() => {
+    if (!inView || !digits || reduced) return undefined;
+
+    const controls = animate(0, target, {
+      duration: 1.4,
+      ease: "easeOut",
+      onUpdate: (latest) => {
+        if (ref.current) {
+          ref.current.textContent = `${Math.round(latest)}${suffix}`;
+        }
+      },
+    });
+    return () => controls.stop();
+  }, [inView, reduced, digits, target, suffix]);
+
+  return <span ref={ref}>{value}</span>;
+}
 
 export default function BrandMetricsSection() {
   const highlights = [
@@ -105,7 +126,7 @@ export default function BrandMetricsSection() {
                   </div>
 
                   <div className="mb-3 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-                    {item.value}
+                    <CountUp value={item.value} />
                   </div>
 
                   <p className="text-sm leading-6 text-secondary">
@@ -152,22 +173,28 @@ export default function BrandMetricsSection() {
             </div>
           </div>
 
-          <div className="relative flex flex-wrap gap-3 p-6 sm:p-8">
-            {brands.map((brand, index) => (
-              <motion.div
-                key={brand}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.06, duration: 0.35 }}
-                className="group flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 transition-all duration-300 hover:border-primary/40 hover:bg-primary/5"
-              >
-                <span className="h-2 w-2 rounded-full bg-primary/60 transition-colors group-hover:bg-primary" />
-                <span className="text-sm font-medium text-secondary transition-colors group-hover:text-foreground">
-                  {brand}
-                </span>
-              </motion.div>
-            ))}
+          <div className="nx-marquee-wrap relative overflow-hidden py-6 [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)] sm:py-8">
+            <div className="nx-marquee flex w-max">
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  aria-hidden={copy === 1 ? "true" : undefined}
+                  className="flex shrink-0 gap-3 pr-3"
+                >
+                  {brands.map((brand) => (
+                    <li
+                      key={brand}
+                      className="flex items-center gap-3 whitespace-nowrap rounded-xl border border-border bg-card/60 px-4 py-3"
+                    >
+                      <span className="h-2 w-2 rounded-full bg-primary" />
+                      <span className="text-sm font-medium text-secondary">
+                        {brand}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

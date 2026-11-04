@@ -124,7 +124,8 @@ body {
     var(--background);
   color: var(--foreground);
   line-height: 1.6;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes body a scroll container and breaks sticky. */
+  overflow-x: clip;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -171,5 +172,250 @@ section {
 @media (max-width: 640px) {
   html {
     scroll-padding-top: 5rem;
+  }
+}
+
+/* ── Landing page motion ──────────────────────────────────────────────
+   Every loop is CSS so it costs no React renders and pauses from one
+   attribute. Base styles are the finished state, which is what visitors
+   see when reduced motion removes the animation. */
+
+@property --nx-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+html[data-motion="paused"] *,
+html[data-motion="paused"] *::before,
+html[data-motion="paused"] *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [class*="nx-"],
+  [class*="nx-"]::before {
+    animation: none !important;
+  }
+}
+
+/* Comet travelling along an SVG path that has pathLength="1". */
+.nx-comet {
+  stroke-dasharray: 0.1 1;
+  animation: nx-comet 2.6s linear infinite;
+}
+
+@keyframes nx-comet {
+  from {
+    stroke-dashoffset: 1.1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Dot moving along a straight track. */
+.nx-travel {
+  transform: translateX(150%);
+  animation: nx-travel 2.4s linear infinite;
+}
+
+@keyframes nx-travel {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+/* Light that runs around a rounded frame. */
+.nx-frame {
+  position: relative;
+}
+
+.nx-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--nx-angle),
+    transparent 62%,
+    var(--primary) 84%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+  animation: nx-frame-spin 7s linear infinite;
+}
+
+@keyframes nx-frame-spin {
+  to {
+    --nx-angle: 360deg;
+  }
+}
+
+.nx-marquee {
+  animation: nx-marquee 32s linear infinite;
+}
+
+.nx-marquee-wrap:hover .nx-marquee {
+  animation-play-state: paused;
+}
+
+@keyframes nx-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.nx-orbit {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: nx-orbit 40s linear infinite;
+}
+
+@keyframes nx-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.nx-pulse {
+  animation: nx-pulse 2.4s ease-out infinite;
+}
+
+@keyframes nx-pulse {
+  from {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.nx-stage-fill {
+  transform-origin: left;
+  animation: nx-stage-fill linear both;
+}
+
+@keyframes nx-stage-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Product card demos */
+.nx-task-strike {
+  transform-origin: left;
+  animation: nx-task-strike 7s ease-in-out infinite both;
+}
+
+.nx-task-tick {
+  animation: nx-task-tick 7s ease-in-out infinite both;
+}
+
+@keyframes nx-task-strike {
+  0%,
+  12% {
+    transform: scaleX(0);
+  }
+  22%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes nx-task-tick {
+  0%,
+  12% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  20%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nx-toggle-track {
+  animation: nx-toggle-track 4s ease-in-out infinite both;
+  background: var(--primary);
+}
+
+.nx-toggle-knob {
+  transform: translateX(14px);
+  animation: nx-toggle-knob 4s ease-in-out infinite both;
+}
+
+@keyframes nx-toggle-track {
+  0%,
+  40%,
+  100% {
+    background: var(--muted);
+  }
+  50%,
+  90% {
+    background: var(--primary);
+  }
+}
+
+@keyframes nx-toggle-knob {
+  0%,
+  40%,
+  100% {
+    transform: translateX(0);
+  }
+  50%,
+  90% {
+    transform: translateX(14px);
+  }
+}
+
+.nx-swap-before {
+  opacity: 0;
+  animation: nx-swap-before 6s ease-in-out infinite both;
+}
+
+.nx-swap-after {
+  animation: nx-swap-after 6s ease-in-out infinite both;
+}
+
+@keyframes nx-swap-before {
+  0%,
+  40%,
+  100% {
+    opacity: 1;
+  }
+  48%,
+  92% {
+    opacity: 0;
+  }
+}
+
+@keyframes nx-swap-after {
+  0%,
+  40%,
+  100% {
+    opacity: 0;
+  }
+  48%,
+  92% {
+    opacity: 1;
   }
 }
