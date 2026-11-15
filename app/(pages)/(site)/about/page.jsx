@@ -77,8 +77,8 @@ const faqItems = [
 
 const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white">
-      <section className="border-b border-zinc-800 bg-black/60 backdrop-blur">
+    <main className="min-h-screen bg-background text-foreground">
+      <section className="border-b border-border bg-background/80 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 text-center md:text-left">
           <p className="text-primary text-sm font-semibold uppercase tracking-[0.18em] mb-4">
             About Neuctra
@@ -89,7 +89,7 @@ const AboutPage = () => {
             modern businesses.
           </h1>
 
-          <p className="text-zinc-400 max-w-3xl text-sm sm:text-base leading-relaxed mx-auto md:mx-0">
+          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-secondary sm:text-base md:mx-0">
             Neuctra combines product innovation, custom web development, and
             cloud-native engineering to help startups, businesses, and digital
             brands launch reliable software with a polished user experience.
@@ -98,7 +98,7 @@ const AboutPage = () => {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="mb-12 rounded-2xl border border-zinc-800 bg-[#111] p-6 sm:p-8">
+        <div className="mb-12 rounded-2xl border border-border bg-card p-6 sm:p-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-primary" />
@@ -107,26 +107,26 @@ const AboutPage = () => {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+            <div className="rounded-xl border border-border bg-background/70 p-5">
               <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Neuctra</p>
               <h3 className="mb-2 text-xl font-semibold">The parent company</h3>
-              <p className="text-sm leading-7 text-zinc-400">
+              <p className="text-sm leading-7 text-secondary">
                 Neuctra builds software products and delivers custom technology solutions for businesses, founders, and teams.
               </p>
             </div>
 
-            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+            <div className="rounded-xl border border-border bg-background/70 p-5">
               <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Neuctra Lab</p>
               <h3 className="mb-2 text-xl font-semibold">The learning platform</h3>
-              <p className="text-sm leading-7 text-zinc-400">
+              <p className="text-sm leading-7 text-secondary">
                 Neuctra Lab teaches technology, practical software development, and business problem-solving through modern education.
               </p>
             </div>
 
-            <div className="rounded-xl border border-zinc-800 bg-black/40 p-5">
+            <div className="rounded-xl border border-border bg-background/70 p-5">
               <p className="mb-2 text-xs uppercase tracking-[0.18em] text-primary">Products & services</p>
               <h3 className="mb-2 text-xl font-semibold">Built to solve problems</h3>
-              <p className="text-sm leading-7 text-zinc-400">
+              <p className="text-sm leading-7 text-secondary">
                 The ecosystem includes Authix, UI, Notlix, Tools, and future products alongside custom SaaS and web application services.
               </p>
             </div>
@@ -139,7 +139,7 @@ const AboutPage = () => {
               A technology company with a product-builder mindset.
             </h2>
 
-            <div className="space-y-5 text-zinc-400 text-sm sm:text-base leading-relaxed">
+            <div className="space-y-5 text-sm leading-relaxed text-secondary sm:text-base">
               <p>
                 Neuctra operates at the intersection of client services and
                 proprietary SaaS products. That means every website, dashboard,
@@ -157,7 +157,7 @@ const AboutPage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-[#111] border border-zinc-800 rounded-2xl p-6 transition-all duration-300 hover:border-primary/40">
+          <div className="rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/40 lg:col-span-5">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-primary" />
@@ -171,7 +171,7 @@ const AboutPage = () => {
               {principles.map((item) => (
                 <div key={item} className="flex gap-3">
                   <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
-                  <p className="text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed text-secondary">
                     {item}
                   </p>
                 </div>
@@ -184,12 +184,12 @@ const AboutPage = () => {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-[#111]/70 border border-zinc-800 rounded-2xl p-5 transition-all duration-300 hover:border-primary/30"
+              className="rounded-2xl border border-border bg-card/70 p-5 transition-all duration-300 hover:border-primary/30"
             >
               <p className="text-3xl font-bold text-primary mb-2">
                 {stat.value}
               </p>
-              <p className="text-sm text-zinc-400">{stat.label}</p>
+              <p className="text-sm text-secondary">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -200,7 +200,7 @@ const AboutPage = () => {
           <h2 className="text-2xl sm:text-4xl font-bold mb-4">
             Why Businesses Choose <span className="text-primary">Neuctra</span>
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto">
+          <p className="mx-auto max-w-3xl text-sm leading-relaxed text-secondary sm:text-base">
             We bring together the speed of a focused development team and the
             discipline of a SaaS company building for long-term product quality.
           </p>
@@ -213,11 +213,11 @@ const AboutPage = () => {
             return (
               <div
                 key={item.title}
-                className="bg-[#111]/60 border border-[#1f1f1f] rounded-2xl p-6 hover:border-primary transition-all duration-300"
+                className="rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:border-primary"
               >
                 <Icon className="w-8 h-8 text-primary mb-4" />
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
+                <p className="text-sm leading-relaxed text-secondary">
                   {item.desc}
                 </p>
               </div>
@@ -239,7 +239,7 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="border-t border-zinc-800 bg-black/50">
+      <section className="border-t border-border bg-background/50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
           <div className="grid gap-8 lg:grid-cols-12 items-center">
             <div className="lg:col-span-8">
@@ -252,7 +252,7 @@ const AboutPage = () => {
               <h2 className="text-2xl sm:text-4xl font-bold mb-4">
                 Have an idea, product, or platform to launch?
               </h2>
-              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-3xl">
+              <p className="max-w-3xl text-sm leading-relaxed text-secondary sm:text-base">
                 From strategy and UI design to full-stack development and
                 deployment, Neuctra helps turn digital plans into production
                 software.

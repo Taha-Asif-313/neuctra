@@ -1,69 +1,15 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import products from "@/app/data/products";
 
 export const metadata = {
-  title: "Neuctra Products | Authix, UI, Notlix & Productivity Tools",
+  title: "Neuctra Products | Identity, Productivity, Email & Finance",
   description:
-    "Discover Neuctra products for identity, design systems, productivity, and workflow automation. Build faster with secure tools designed for modern teams.",
+    "Discover Neuctra products for identity, design systems, productivity, email, and business finance. Build and work with practical software for modern teams.",
   alternates: {
     canonical: "/products",
   },
 };
-
-const products = [
-  {
-    name: "Neuctra Authix",
-    category: "Identity infrastructure",
-    description:
-      "Authentication, user identity, and secure app foundations that let teams build trusted products with less repeated backend work.",
-    focus: "Secure access, identity flows, and better product infrastructure.",
-    image: "/logos/authix.png",
-    href: "https://authix.neuctra.com",
-    cta: "Get started",
-    featured: true,
-  },
-  {
-    name: "Neuctra UI",
-    category: "Design system",
-    description:
-      "Reusable interface components and patterns for modern dashboards, workflows, and product experiences that are clear and scalable.",
-    focus: "Consistent interfaces and faster product iteration.",
-    image: "/logos/ui.png",
-    href: "https://ui.neuctra.com",
-    cta: "View docs",
-    featured: true,
-  },
-  {
-    name: "Neuctra Notlix",
-    category: "Productivity & life OS",
-    description:
-      "A practical platform for notes, planning, memory, and daily organization that helps people stay focused without the clutter.",
-    focus: "Focus, planning, and everyday productivity in one place.",
-    image: "/logos/notlix.png",
-    href: "https://notlix.neuctra.com",
-    cta: "Explore",
-  },
-  {
-    name: "Neuctra Tools",
-    category: "Utilities",
-    description:
-      "Useful, fast browser tools for everyday digital tasks that need to feel simple, quick, and genuinely helpful.",
-    focus: "Lightweight workflows and time-saving utility products.",
-    image: null,
-    href: "https://tools.neuctra.com",
-    cta: "Open tools",
-  },
-  {
-    name: "Future products",
-    category: "Emerging ideas",
-    description:
-      "Neuctra continues building new products that support developers, teams, and everyday users with software that stays practical and thoughtfully designed.",
-    focus: "New tools shaped by real customer problems and product insight.",
-    image: null,
-    href: "/contact",
-    cta: "Talk to us",
-  },
-];
 
 export default function ProductsPage() {
   return (
@@ -179,7 +125,7 @@ export default function ProductsPage() {
                       <img
                         src={product.image}
                         alt={`${product.name} logo`}
-                        className="max-h-full max-w-full object-contain"
+                        className="max-h-full max-w-full rounded-lg object-contain"
                         loading="lazy"
                       />
                     ) : (
@@ -229,18 +175,20 @@ export default function ProductsPage() {
                   </a>
 
                   <a
-                    href={product.href}
+                    href={product.actionHref}
                     target={
-                      product.href.startsWith("http") ? "_blank" : undefined
+                      product.actionHref.startsWith("http")
+                        ? "_blank"
+                        : undefined
                     }
                     rel={
-                      product.href.startsWith("http")
+                      product.actionHref.startsWith("http")
                         ? "noopener noreferrer"
                         : undefined
                     }
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
                   >
-                    {product.cta}
+                    {product.ctaLabel}
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </div>

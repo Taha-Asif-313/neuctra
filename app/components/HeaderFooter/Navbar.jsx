@@ -41,17 +41,22 @@ return (
         {/* Column 1: Logo */}
         <Link
           href="/"
-          className="group flex w-fit items-center gap-1"
+          className="group flex w-fit items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
           <img
             src="/logo.png"
-            alt="Neuctra Logo"
-            className="h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-110 sm:h-10 sm:w-10"
+            alt=""
+            className="h-6 w-6 shrink-0 scale-[1.3] object-contain"
           />
 
-          <span className="text-xl font-black capitalize text-foreground">
-            Neuctra
+          <span className="flex flex-col gap-0.5 leading-none">
+            <span className="text-lg font-black capitalize leading-none text-foreground">
+              Neuctra
+            </span>
+            <span className="text-[9px] font-medium leading-none tracking-wide text-muted-foreground">
+              Products &amp; solutions
+            </span>
           </span>
         </Link>
 
@@ -144,16 +149,16 @@ return (
             <div className="flex shrink-0 items-center justify-between border-b border-border p-5">
               <Link
                 href="/"
-                className="flex items-center gap-2"
+                className="flex items-center gap-0"
                 onClick={() => setMenuOpen(false)}
               >
                 <img
                   src="/logo.png"
-                  alt="Neuctra Logo"
-                  className="h-7 w-7 object-contain"
+                  alt=""
+                  className="h-8 w-8 shrink-0 scale-[1.3] object-contain"
                 />
 
-                <span className="text-base font-bold text-foreground">
+                <span className="text-base font-bold leading-none text-foreground">
                   Neuctra
                 </span>
               </Link>

@@ -9,18 +9,18 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-background text-foreground">
       
       {/* Top Banner */}
-      <div className="border-b border-zinc-800 bg-black/60 backdrop-blur">
+      <div className="border-b border-border bg-background/80 backdrop-blur">
         <div className="max-w-6xl mx-auto px-6 py-8 md:py-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Privacy Policy
           </h1>
-          <p className="text-zinc-400 text-sm">
+          <p className="text-secondary text-sm">
             Last Updated: January 2026
           </p>
-          <p className="text-zinc-500 mt-6 max-w-3xl leading-relaxed">
+          <p className="mt-6 max-w-3xl leading-relaxed text-muted-foreground">
             At Neuctra, we are committed to protecting your privacy. This
             Privacy Policy explains how we collect, use, store, and safeguard
             personal information across our SaaS platforms, client services,
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 1. About Neuctra
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 Neuctra is a technology company providing custom web
                 development services and operating scalable SaaS products
                 including authentication systems, UI frameworks,
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 2. Information We Collect
               </h2>
-              <ul className="space-y-3 text-zinc-400 leading-relaxed">
+              <ul className="space-y-3 leading-relaxed text-secondary">
                 <li>• Account details (name, email, company)</li>
                 <li>• Subscription and billing information</li>
                 <li>• Product usage and analytics data</li>
@@ -67,7 +67,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 3. How We Use Information
               </h2>
-              <ul className="space-y-3 text-zinc-400 leading-relaxed">
+              <ul className="space-y-3 leading-relaxed text-secondary">
                 <li>• Deliver and maintain SaaS services</li>
                 <li>• Process payments and subscriptions</li>
                 <li>• Improve platform performance</li>
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 4. Data Sharing
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 We do not sell personal data. Information may be shared with
                 trusted third-party service providers for hosting,
                 payment processing, analytics, or security monitoring.
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 5. Security Measures
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 Neuctra applies encryption, role-based access control,
                 secure authentication mechanisms, and modern cloud
                 infrastructure standards to protect your data.
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 6. Data Retention
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 Personal data is retained only as long as necessary
                 to provide services, comply with legal requirements,
                 and enforce agreements.
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 7. Your Rights
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 Depending on your jurisdiction, you may request access,
                 correction, deletion, or portability of your personal data.
                 To exercise your rights, contact support@neuctra.com.
@@ -126,7 +126,7 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-semibold mb-4">
                 8. Updates to This Policy
               </h2>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-secondary leading-relaxed">
                 We may update this Privacy Policy periodically.
                 Continued use of our services constitutes acceptance
                 of the revised policy.
@@ -137,16 +137,16 @@ export default function PrivacyPage() {
 
           {/* Right Column (Info Panel like LinkedIn) */}
           <div className="md:col-span-4">
-            <div className="bg-[#111] border border-zinc-800 rounded-xl p-6 sticky top-28">
-              <h3 className="font-semibold mb-4 text-white">
+            <div className="sticky top-28 rounded-xl border border-border bg-card p-6">
+              <h3 className="mb-4 font-semibold text-foreground">
                 Contact Information
               </h3>
-              <div className="text-zinc-400 space-y-2 text-sm">
+              <div className="space-y-2 text-sm text-secondary">
                 <p>support@neuctra.com</p>
                 <p>www.neuctra.com</p>
               </div>
 
-              <div className="mt-6 border-t border-zinc-800 pt-6 text-sm text-zinc-500">
+              <div className="mt-6 border-t border-border pt-6 text-sm text-muted-foreground">
                 Neuctra operates under a hybrid model:
                 custom client services and proprietary SaaS platforms.
               </div>

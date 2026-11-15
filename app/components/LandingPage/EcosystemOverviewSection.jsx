@@ -1,8 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BookOpenText, Boxes, BriefcaseBusiness, Code2 } from "lucide-react";
+import {
+  BookOpenText,
+  Boxes,
+  BriefcaseBusiness,
+  Code2,
+  Mail,
+  Wallet,
+} from "lucide-react";
 import HubDiagram from "@/app/components/patterns/HubDiagram";
+import products from "@/app/data/products";
+
+const productNames = products
+  .map(({ name }) => name.replace(/^Neuctra /, ""))
+  .join(", ");
 
 const pillars = [
   {
@@ -24,7 +36,21 @@ const pillars = [
     title: "Neuctra Products",
     subtitle: "Software built for real use",
     description:
-      "A growing ecosystem of digital products, including Authix, UI, Notlix, Tools, Bynity, and Space, designed for developers, businesses, and everyday users.",
+      `A growing ecosystem of digital products, including ${productNames}, designed for developers, businesses, and everyday users.`,
+  },
+  {
+    icon: Mail,
+    title: "Neuctra Mailer",
+    subtitle: "Email delivery & marketing",
+    description:
+      "Send transactional email through your own SMTP account, manage subscriber lists, and welcome new subscribers from one dashboard.",
+  },
+  {
+    icon: Wallet,
+    title: "Neuctra Finance",
+    subtitle: "Business finance",
+    description:
+      "Manage business accounts, budgets, and approvals with a permanent ledger that gives teams and investors a clear view of spending.",
   },
   {
     icon: Code2,
@@ -63,7 +89,7 @@ export default function EcosystemOverviewSection() {
 
       <HubDiagram
         items={pillars}
-        intro="Four connected parts, one shared purpose. Pick one to see how it fits."
+        intro="Explore the products, people, and services that make up the Neuctra ecosystem."
         center={
           <img
             src="/logo.png"

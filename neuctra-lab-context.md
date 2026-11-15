@@ -1,4 +1,4 @@
-## Neuctra Lab — Learning and Educational Platform
+## Neuctra Lab: Learning and Educational Platform
 
 **Category:** Technology Education, Practical Software Development, and Technology-Driven Problem Solving.
 

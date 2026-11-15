@@ -1,6 +1,16 @@
 "use client";
 import { motion } from "framer-motion";
-import { ShieldCheck, Layout, Brain, Cloud, Lock, Zap, ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Brain,
+  Cloud,
+  Layout,
+  Lock,
+  Mail,
+  ShieldCheck,
+  Wallet,
+  Zap,
+} from "lucide-react";
 
 export default function SolutionsSection() {
   const solutions = [
@@ -21,6 +31,18 @@ export default function SolutionsSection() {
       title: "Productivity & digital life",
       desc: "Help individuals and teams organize work, information, and decisions with practical tools designed for clarity and routine.",
       link: "https://notlix.neuctra.com",
+    },
+    {
+      icon: Mail,
+      title: "Email delivery & marketing",
+      desc: "Send transactional email through your own SMTP account, manage subscriber lists, and welcome new subscribers from one dashboard.",
+      link: "https://mailer.neuctra.com",
+    },
+    {
+      icon: Wallet,
+      title: "Business finance",
+      desc: "Manage business accounts, budgets, and approvals with a permanent ledger that gives teams and investors a clear view of spending.",
+      link: "https://finance.neuctra.com",
     },
     {
       icon: Cloud,

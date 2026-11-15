@@ -11,13 +11,15 @@ import {
   Search,
   ShoppingCart,
   Sparkles,
+  Store,
+  UsersRound,
   Workflow,
 } from "lucide-react";
 
 export const metadata = {
-  title: "Neuctra Services | SaaS, Web Apps & Digital Product Development",
+  title: "Neuctra Services | Websites, CRM, POS & E-commerce",
   description:
-    "Neuctra builds websites, SaaS platforms, internal systems, and workflow tools for businesses that want practical digital solutions and sustainable growth.",
+    "Neuctra builds CMS-managed business websites, tailored CRM and POS systems, and custom hosted e-commerce stores with management.",
   alternates: {
     canonical: "/services",
   },
@@ -26,15 +28,33 @@ export const metadata = {
 const serviceCards = [
   {
     icon: Globe,
-    title: "Business websites & digital presence",
+    title: "Business websites with full CMS control",
     description:
-      "Modern business websites, landing pages, and digital experiences designed to clarify your message and turn interest into trust and action.",
+      "We build your business website and provide an admin panel to manage pages, posts, images, and other content yourself, similar to the content control WordPress provides.",
+  },
+  {
+    icon: UsersRound,
+    title: "CRM solutions",
+    description:
+      "Centralize customer records, leads, follow-ups, and sales workflows in a CRM tailored to how your business manages relationships.",
   },
   {
     icon: ShoppingCart,
     title: "Custom SaaS & web apps",
     description:
       "From MVPs to full product experiences, we design and build software that supports real workflows, user journeys, and business operations.",
+  },
+  {
+    icon: Store,
+    title: "POS systems for every kind of store",
+    description:
+      "Point-of-sale setups tailored to restaurants, online sellers, cash-and-carry shops, and small stalls, with workflows shaped around how you sell.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "Hosted e-commerce stores & management",
+    description:
+      "Custom-designed online stores built, hosted, and managed by Neuctra in one package, without a separate Shopify subscription or paid custom theme.",
   },
   {
     icon: LayoutDashboard,
@@ -53,7 +73,8 @@ const serviceCards = [
 const coreCapabilities = [
   "Custom software development",
   "SaaS products and platforms",
-  "Web and internal systems",
+  "CMS-managed business websites",
+  "CRM systems and workflows",
   "Tailored technology solutions",
 ];
 
@@ -71,11 +92,10 @@ export default function ServicesPage() {
             <span className="text-primary">real business needs</span>
           </h1>
           <p className="mt-5 max-w-3xl text-base text-secondary">
-            Neuctra helps businesses, founders, and teams build websites,
-            products, workflows, and digital experiences that are useful from
-            day one and ready to scale. We combine product thinking, technical
-            execution, and a clear understanding of real-world operations to
-            turn complex problems into practical technology systems.
+            Neuctra helps businesses build and manage their digital operations:
+            custom websites with an admin panel for content updates, CRM
+            workflows, tailored POS systems, and fully hosted e-commerce
+            stores, all shaped around real-world operations.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

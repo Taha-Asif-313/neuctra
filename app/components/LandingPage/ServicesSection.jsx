@@ -5,19 +5,36 @@ import {
   ShoppingCart,
   LayoutDashboard,
   BrainCircuit,
+  Store,
+  UsersRound,
 } from "lucide-react";
 
 export default function ServicesSection() {
   const services = [
     {
       icon: Globe,
-      title: "Business websites & digital presence",
-      desc: "Modern business websites, landing pages, and digital experiences designed to clarify your message and turn interest into trust and action.",
+      title: "Business websites with full CMS control",
+      desc: "We build your business website and give you an admin panel to manage pages, posts, images, and other content yourself, similar to the control WordPress provides.",
+    },
+    {
+      icon: UsersRound,
+      title: "CRM solutions",
+      desc: "Centralize customer records, leads, follow-ups, and sales workflows in a CRM tailored to how your business manages relationships.",
     },
     {
       icon: ShoppingCart,
       title: "Custom SaaS & web apps",
       desc: "From MVPs to full product experiences, we design and build software that supports real workflows, user journeys, and business operations.",
+    },
+    {
+      icon: Store,
+      title: "POS systems for every kind of store",
+      desc: "Point-of-sale setups tailored to restaurants, online sellers, cash-and-carry shops, and small stalls, with workflows shaped around how you sell.",
+    },
+    {
+      icon: ShoppingCart,
+      title: "Hosted e-commerce stores & management",
+      desc: "Custom-designed online stores built, hosted, and managed by Neuctra in one package, without a separate Shopify subscription or paid custom theme.",
     },
     {
       icon: LayoutDashboard,
@@ -95,9 +112,9 @@ export default function ServicesSection() {
           variants={fadeUp}
           className="mt-6 max-w-2xl text-base text-secondary"
         >
-          From the first idea to a production-ready product, we help founders,
-          teams, and businesses turn complex challenges into practical digital
-          solutions.
+          From CMS-managed websites and CRM systems to POS and fully hosted
+          online stores, we help businesses bring their digital operations
+          together.
         </motion.p>
       </motion.div>
 

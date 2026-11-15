@@ -1,4 +1,4 @@
-# Neuctra — Complete Company Master Context
+# Neuctra: Complete Company Master Context
 
 ## 1. Company Overview
 
@@ -208,7 +208,7 @@ It combines productivity tools and personal information storage within a unified
 
 #### Main Product Areas
 
-**Workspace — Plan and reflect**
+**Workspace: Plan and reflect**
 
 The Workspace focuses on personal productivity and organization.
 
@@ -220,7 +220,7 @@ Its modules include:
 - Journal.
 - Finance.
 
-**Vault — Private vault**
+**Vault: Private vault**
 
 The Vault focuses on managing personal digital information.
 

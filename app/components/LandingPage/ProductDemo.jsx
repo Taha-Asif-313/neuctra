@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Mail, Wallet } from "lucide-react";
 
 /** Small looping scene per product. Purely decorative, driven by CSS. */
 export default function ProductDemo({ name }) {
@@ -103,9 +103,57 @@ function ToolsDemo() {
   );
 }
 
+function MailerDemo() {
+  return (
+    <div className="w-full max-w-xs rounded-xl border border-border bg-background p-4 shadow-lg">
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <Mail size={18} />
+        </span>
+        <div>
+          <p className="text-xs font-semibold text-foreground">Welcome email</p>
+          <p className="text-[10px] text-muted-foreground">Sent with your SMTP</p>
+        </div>
+        <span className="ml-auto rounded-full bg-primary/10 px-2 py-1 text-[10px] font-medium text-primary">
+          Delivered
+        </span>
+      </div>
+      <div className="flex items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-[10px]">
+        <span className="text-secondary">New subscribers</span>
+        <span className="font-semibold text-foreground">+128</span>
+      </div>
+    </div>
+  );
+}
+
+function FinanceDemo() {
+  return (
+    <div className="w-full max-w-xs rounded-xl border border-border bg-background p-4 shadow-lg">
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <Wallet size={18} />
+        </span>
+        <div>
+          <p className="text-xs font-semibold text-foreground">Team account</p>
+          <p className="text-[10px] text-muted-foreground">Available balance</p>
+        </div>
+        <span className="ml-auto text-sm font-semibold text-foreground">
+          $18,500
+        </span>
+      </div>
+      <div className="flex items-center justify-between rounded-lg border border-border bg-card px-3 py-2 text-[10px]">
+        <span className="text-secondary">Software budget</span>
+        <span className="font-medium text-primary">Approval required</span>
+      </div>
+    </div>
+  );
+}
+
 const DEMOS = {
   "Neuctra Authix": AuthixDemo,
   "Neuctra UI": UiDemo,
   "Neuctra Notlix": NotlixDemo,
   "Neuctra Tools": ToolsDemo,
+  "Neuctra Mailer": MailerDemo,
+  "Neuctra Finance": FinanceDemo,
 };

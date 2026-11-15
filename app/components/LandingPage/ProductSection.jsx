@@ -3,53 +3,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, LayoutGrid } from "lucide-react";
 import ProductDemo from "./ProductDemo";
+import products from "@/app/data/products";
 
 export default function ProductsSection() {
-  const products = [
-    {
-      name: "Neuctra Authix",
-      image: "/logos/authix.svg",
-      category: "Identity infrastructure",
-      desc: "A practical foundation for authentication, user identity, and application data so teams can build products without repeating the same backend setup.",
-      links: {
-        learn: "https://authix.neuctra.com",
-        start: "https://authix.neuctra.com/signup",
-      },
-      featured: true,
-    },
-    {
-      name: "Neuctra UI",
-      image: "/logos/ui.svg",
-      category: "Design system",
-      desc: "Reusable interface components and design patterns for dashboards, forms, product screens, and modern web applications.",
-      links: {
-        learn: "https://ui.neuctra.com",
-        start: "https://ui.neuctra.com/docs",
-      },
-      featured: true,
-    },
-    {
-      name: "Neuctra Notlix",
-      image: "/logos/notlix.png",
-      category: "Productivity & life OS",
-      desc: "A personal productivity and digital-life platform for planning, notes, memory, and organization without relying on disconnected tools.",
-      links: {
-        learn: "https://notlix.neuctra.com",
-        start: "https://notlix.neuctra.com/signup",
-      },
-    },
-    {
-      name: "Neuctra Tools",
-      image: "/logos/tools.png",
-      category: "Useful utilities",
-      desc: "Fast, accessible browser-based tools for formatting, conversion, and everyday digital tasks that need to feel simple and quick.",
-      links: {
-        learn: "https://tools.neuctra.com",
-        start: "https://tools.neuctra.com",
-      },
-    },
-  ];
-
   return (
     <section
       id="products"
@@ -147,20 +103,28 @@ export default function ProductsSection() {
                 </div>
 
                 <h3 className="mb-3 flex items-center gap-3 text-2xl font-semibold tracking-tight text-foreground transition-colors duration-300 group-hover:text-primary">
-                  <img
-                    src={product.image}
-                    alt=""
-                    loading="lazy"
-                    className="h-8 w-8 rounded-lg object-contain"
-                  />
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt=""
+                      loading="lazy"
+                      className="h-8 w-8 rounded-lg object-contain"
+                    />
+                  ) : (
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-sm font-bold text-primary">
+                      N
+                    </span>
+                  )}
                   {product.name}
                 </h3>
 
-                <p className="mb-8 text-sm text-secondary">{product.desc}</p>
+                <p className="mb-8 text-sm text-secondary">
+                  {product.description}
+                </p>
 
                 <div className="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-border pt-5">
                   <motion.a
-                    href={product.links.learn}
+                    href={product.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 3 }}
@@ -173,16 +137,14 @@ export default function ProductsSection() {
                   </motion.a>
 
                   <motion.a
-                    href={product.links.start}
+                    href={product.actionHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(0,0,0,0.12)]"
                   >
-                    {product.name === "Neuctra UI"
-                      ? "View docs"
-                      : "Get started"}
+                    {product.ctaLabel}
                     <ArrowUpRight className="h-4 w-4" />
                   </motion.a>
                 </div>

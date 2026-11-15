@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Code2, LineChart, ShieldCheck } from "lucide-react";
+import products from "@/app/data/products";
 
 /** Counts up to values like "4+" or "100%"; others such as "24/7" stay as is. */
 function CountUp({ value }) {
@@ -33,7 +34,7 @@ function CountUp({ value }) {
 export default function BrandMetricsSection() {
   const highlights = [
     {
-      value: "4+",
+      value: `${products.length}+`,
       label: "Product lines in the ecosystem",
       icon: LineChart,
       detail: "A growing portfolio",
@@ -53,10 +54,7 @@ export default function BrandMetricsSection() {
   ];
 
   const brands = [
-    "Neuctra Authix",
-    "Neuctra UI",
-    "Neuctra Notlix",
-    "Neuctra Tools",
+    ...products.map(({ name }) => name),
     "SaaS Solutions",
     "Custom Products",
   ];
@@ -92,9 +90,10 @@ export default function BrandMetricsSection() {
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">
-            From developer infrastructure to everyday utilities, Neuctra brings
-            together practical software products and technology solutions
-            designed to solve meaningful problems.
+            From developer infrastructure and email delivery to productivity
+            and business finance, Neuctra brings together practical software
+            products and technology solutions designed to solve meaningful
+            problems.
           </p>
         </motion.div>
 

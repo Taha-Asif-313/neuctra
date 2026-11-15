@@ -15,7 +15,12 @@ import TestimonialsSection from "@/app/components/LandingPage/TestimonialsSectio
 import CTASection from "@/app/components/LandingPage/CTASection";
 import ScrollReveal from "@/app/components/patterns/ScrollReveal";
 import { MotionPreferenceProvider } from "@/app/components/patterns/MotionPreference";
+import products from "@/app/data/products";
 
+const productNames = products
+  .map(({ name }) => name.replace(/^Neuctra /, ""))
+  .join(", ");
+const productFaqAnswer = `The Neuctra product ecosystem includes ${productNames}, and continues to grow with new products and digital services.`;
 const faqItems = [
   {
     title: "What is Neuctra?",
@@ -29,8 +34,7 @@ const faqItems = [
   },
   {
     title: "What products does Neuctra offer?",
-    content:
-      "Neuctra offers Authix, UI, Notlix, Tools, and a growing ecosystem of future products and digital services.",
+    content: productFaqAnswer,
   },
   {
     title: "What kinds of services does Neuctra provide?",
@@ -95,7 +99,7 @@ const faqSchema = {
           name: "What products does Neuctra offer?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Neuctra offers Authix, UI, Notlix, Tools, and a growing ecosystem of future products and digital services.",
+            text: productFaqAnswer,
           },
         },
       ],

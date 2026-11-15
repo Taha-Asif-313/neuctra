@@ -51,15 +51,15 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       {/* Hero Section */}
-      <div className="border-b border-zinc-800 bg-black/60 backdrop-blur">
+      <div className="border-b border-border bg-background/80 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
             Contact Neuctra
           </h1>
 
-          <p className="text-zinc-400 max-w-3xl text-sm sm:text-base leading-relaxed mx-auto md:mx-0">
+          <p className="text-secondary max-w-3xl text-sm sm:text-base leading-relaxed mx-auto md:mx-0">
             Neuctra is a modern technology company delivering custom web
             development services and building scalable SaaS products. Let’s
             build something powerful together.
@@ -84,7 +84,7 @@ export default function ContactPage() {
                   required
                   placeholder="Full Name"
                   disabled={loading}
-                  className="bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary w-full disabled:opacity-50"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-50"
                 />
 
                 <input
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   required
                   placeholder="Email Address"
                   disabled={loading}
-                  className="bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary w-full disabled:opacity-50"
+                  className="w-full rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-50"
                 />
               </div>
 
@@ -103,13 +103,13 @@ export default function ContactPage() {
                 required
                 placeholder="Tell us about your project or inquiry..."
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary resize-none disabled:opacity-50"
+                className="w-full resize-none rounded-lg border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none disabled:opacity-50"
               />
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-primary font-semibold py-3 rounded-lg hover:opacity-90 transition text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-primary py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
               >
                 {loading ? "Sending..." : "Submit Inquiry"}
               </button>
@@ -118,22 +118,22 @@ export default function ContactPage() {
 
           {/* Right Column */}
           <div className="lg:col-span-5 flex flex-col gap-6 lg:gap-8 w-full">
-            <div className="bg-[#111] border border-zinc-800 rounded-2xl p-6 flex-1">
+            <div className="flex-1 rounded-2xl border border-border bg-card p-6">
               <h3 className="text-lg sm:text-xl font-semibold mb-4">
                 Company Overview
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-secondary text-sm leading-relaxed">
                 Neuctra operates under a hybrid model combining professional
                 client services and proprietary SaaS platforms. We build secure,
                 scalable digital infrastructure for modern businesses.
               </p>
             </div>
 
-            <div className="bg-[#111] border border-zinc-800 rounded-2xl p-6 flex-1">
+            <div className="flex-1 rounded-2xl border border-border bg-card p-6">
               <h3 className="text-lg sm:text-xl font-semibold mb-4">
                 Contact Information
               </h3>
-              <div className="text-zinc-400 text-sm space-y-2 break-words">
+              <div className="space-y-2 break-words text-sm text-secondary">
                 <p>support@neuctra.com</p>
                 <p>www.neuctra.com</p>
               </div>
