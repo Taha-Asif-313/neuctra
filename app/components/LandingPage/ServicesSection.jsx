@@ -103,9 +103,7 @@ export default function ServicesSection() {
         >
           Technology built around
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-            your real-world needs.
-          </span>
+          your real-world <span className="text-primary">needs.</span>
         </motion.h2>
 
         <motion.p

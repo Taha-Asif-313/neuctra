@@ -14,6 +14,7 @@ const companyLinks = [
   { label: "About Neuctra", href: "/about" },
   { label: "Products", href: "/products" },
   { label: "Services", href: "/services" },
+  { label: "Insights & guides", href: "/insights" },
   { label: "Neuctra Lab", href: "/neuctra-lab" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
@@ -86,7 +87,7 @@ export default function Footer() {
               href="/contact"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-2.5 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:bg-accent"
             >
-              Let's work together
+              Let&apos;s work together
               <ArrowUpRight className="h-4 w-4 text-primary" />
             </Link>
           </motion.div>
@@ -150,7 +151,7 @@ export default function Footer() {
             </h3>
 
             <p className="max-w-xs text-sm leading-6 text-secondary">
-              Follow our work, explore our products, and see what we're building.
+              Follow our work, explore our products, and see what we&apos;re building.
             </p>
 
             <div className="mt-5 flex items-center gap-3">

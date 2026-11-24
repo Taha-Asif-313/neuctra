@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "About Neuctra | SaaS Products & Custom Tech Solutions",
+  title: "About Neuctra: Products & Custom Tech Solutions",
   description:
     "Learn how Neuctra builds SaaS products, custom software, and digital systems for startups, founders, and businesses that want stronger operations and better customer experiences.",
   alternates: {
@@ -41,9 +41,9 @@ const strengths = [
 ];
 
 const stats = [
-  { value: "2", label: "Core business tracks" },
-  { value: "6+", label: "Product ideas in motion" },
-  { value: "24/7", label: "Digital-first availability" },
+  { value: "3", label: "Connected areas: products, services, and Lab" },
+  { value: "6", label: "Products in the current catalog" },
+  { value: "1", label: "Parent company bringing the ecosystem together" },
 ];
 
 const principles = [
@@ -66,7 +66,7 @@ const faqItems = [
   {
     title: "What products are part of the ecosystem?",
     content:
-      "The ecosystem includes Authix, UI, Notlix, Tools, and future product initiatives that support developers, teams, and everyday digital workflows.",
+      "The current catalog includes Authix, UI, Notlix, Tools, Mailer, and Finance, each serving a distinct software or business need.",
   },
   {
     title: "What services does Neuctra provide?",

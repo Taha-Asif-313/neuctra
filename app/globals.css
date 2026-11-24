@@ -45,36 +45,36 @@
   --primary: #00c214;
   --primary-foreground: #ffffff;
 
-  --background: #000000;
-  --foreground: #fafafa;
-  --secondary: #d4d4d8;
-  --secondary-foreground: #09090b;
+  --background: #0b0e0c;
+  --foreground: #f4f7f4;
+  --secondary: #adb7b0;
+  --secondary-foreground: #0b0e0c;
 
-  --muted: #18181b;
-  --muted-foreground: #a1a1aa;
+  --muted: #151a17;
+  --muted-foreground: #89958d;
 
-  --accent: #18181b;
-  --accent-foreground: #fafafa;
+  --accent: #1a221d;
+  --accent-foreground: #edf4ee;
 
-  --border: rgba(255, 255, 255, 0.08);
-  --input: #18181b;
-  --ring: #3f3f46;
+  --border: rgba(222, 235, 225, 0.1);
+  --input: #151a17;
+  --ring: rgba(74, 222, 128, 0.34);
 
-  --card: #09090b;
-  --card-foreground: #fafafa;
+  --card: #111613;
+  --card-foreground: #f4f7f4;
 
-  --popover: #18181b;
-  --popover-foreground: #fafafa;
+  --popover: #171d19;
+  --popover-foreground: #f4f7f4;
 
-  --destructive: #d40000;
-  --destructive-foreground: #fafafa;
+  --destructive: #f87171;
+  --destructive-foreground: #1f0909;
 
-  --success: #16a34a;
-  --success-foreground: #f0fdf4;
-  --warning: #d97706;
-  --warning-foreground: #fff7ed;
-  --info: #2563eb;
-  --info-foreground: #eff6ff;
+  --success: #4ade80;
+  --success-foreground: #07130a;
+  --warning: #fbbf24;
+  --warning-foreground: #1c1405;
+  --info: #60a5fa;
+  --info-foreground: #07111f;
 }
 
 @theme {
@@ -127,6 +127,12 @@ body {
   /* clip, not hidden: hidden makes body a scroll container and breaks sticky. */
   overflow-x: clip;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at 50% -18rem, rgba(74, 222, 128, 0.075), transparent 42rem),
+    var(--background);
 }
 
 * {

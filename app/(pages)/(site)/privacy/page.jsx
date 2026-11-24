@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Privacy Policy | Neuctra",
+  title: "Privacy Policy",
   description:
     "Learn how Neuctra collects, uses, and protects your data across our SaaS products and digital services.",
   alternates: {

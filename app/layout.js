@@ -5,9 +5,31 @@ import { ThemeProvider } from "@/app/contexts/ThemeContext";
 
 export const metadata = {
   metadataBase: new URL("https://neuctra.com"),
-  title: "Neuctra | Software Products and Technology Solutions",
+  title: {
+    default: "Neuctra | Software Products & Custom Solutions",
+    template: "%s | Neuctra",
+  },
   description:
-    "Neuctra builds practical software products and custom technology solutions for businesses, founders, developers, and everyday users.",
+    "Neuctra builds software products and custom websites, SaaS, CRM, POS, e-commerce, and workflow solutions for businesses and product teams.",
+  applicationName: "Neuctra",
+  openGraph: {
+    type: "website",
+    siteName: "Neuctra",
+    locale: "en_US",
+    url: "https://neuctra.com/",
+    title: "Neuctra | Software Products & Custom Solutions",
+    description:
+      "Software products and practical custom technology solutions for businesses, founders, developers, and everyday users.",
+    images: [{ url: "/logo.png", width: 512, height: 512, alt: "Neuctra" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Neuctra | Software Products & Custom Solutions",
+    description:
+      "Software products and practical custom technology solutions for businesses, founders, developers, and everyday users.",
+    images: ["/logo.png"],
+  },
+  robots: { index: true, follow: true },
 };
 
 const poppins = Poppins({

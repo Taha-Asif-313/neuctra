@@ -466,6 +466,16 @@ export default function NeuctraLabPage() {
       </section>
 
       {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-5 pb-20 sm:px-8 lg:px-12">
+        <div className="rounded-3xl border border-primary/20 bg-primary/[0.05] p-6 sm:p-9">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">Practical guides</p>
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Explore answers to common business technology questions</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-secondary">Read decision guides about custom software costs, CRM options, POS systems, and e-commerce approaches.</p>
+          <Link href="/insights" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">Browse Neuctra insights <ArrowRight className="h-4 w-4" /></Link>
+        </div>
+      </section>
+
+      {/* FAQ */}
       <section className="mx-auto max-w-7xl px-5 pb-24 sm:px-8 lg:px-12">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16">
           <div>

@@ -81,9 +81,7 @@ export default function EcosystemOverviewSection() {
         <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Technology that
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-            builds and empowers.
-          </span>
+          builds and <span className="text-primary">empowers.</span>
         </h2>
       </motion.div>
 

@@ -17,6 +17,19 @@ import ScrollReveal from "@/app/components/patterns/ScrollReveal";
 import { MotionPreferenceProvider } from "@/app/components/patterns/MotionPreference";
 import products from "@/app/data/products";
 
+export const metadata = {
+  title: "Custom Software, SaaS & Business Solutions",
+  description:
+    "Neuctra builds software products and custom SaaS, websites, CRM, POS, e-commerce, and automation solutions for businesses and founders.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Custom Software, SaaS & Business Solutions | Neuctra",
+    description:
+      "Build useful software products and solve business problems with custom technology from Neuctra.",
+    url: "https://neuctra.com/",
+  },
+};
+
 const productNames = products
   .map(({ name }) => name.replace(/^Neuctra /, ""))
   .join(", ");
@@ -46,22 +59,6 @@ const faqItems = [
 const faqSchema = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://neuctra.com/#organization",
-      name: "Neuctra",
-      url: "https://neuctra.com/",
-      logo: "https://neuctra.com/logo.png",
-      sameAs: ["https://www.linkedin.com/company/neuctra", "https://github.com/neuctra"],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://neuctra.com/#website",
-      url: "https://neuctra.com/",
-      name: "Neuctra",
-      publisher: { "@id": "https://neuctra.com/#organization" },
-      inLanguage: "en",
-    },
     {
       "@type": "WebPage",
       "@id": "https://neuctra.com/#webpage",

@@ -1,10 +1,7 @@
 import SiteLayoutClient from "./SiteLayoutClient";
 
 export const metadata = {
-  metadataBase: new URL("https://neuctra.com"),
-  title: "Neuctra | Product company and learning platform",
-  description:
-    "Neuctra builds software products and custom technology solutions while Neuctra Lab teaches practical technology, development, and business problem-solving.",
+  title: "Neuctra",
 };
 
 const jsonLd = {
@@ -16,6 +13,7 @@ const jsonLd = {
       name: "Neuctra",
       url: "https://neuctra.com/",
       logo: "https://neuctra.com/logo.png",
+      email: "support@neuctra.com",
       sameAs: ["https://www.linkedin.com/company/neuctra", "https://github.com/neuctra"],
     },
     {

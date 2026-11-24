@@ -60,9 +60,7 @@ export default function FeatureShowcaseSection() {
             <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Technology for
               <br />
-              <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-                every layer of work.
-              </span>
+              every layer of <span className="text-primary">work.</span>
             </h2>
 
             <p className="mt-4 max-w-xl text-base text-secondary">

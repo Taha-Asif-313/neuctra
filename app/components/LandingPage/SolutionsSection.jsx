@@ -122,9 +122,7 @@ export default function SolutionsSection() {
         >
           Real challenges.
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-            Thoughtful solutions.
-          </span>
+          <span>Thoughtful <span className="text-primary">solutions.</span></span>
         </motion.h2>
 
         <motion.p

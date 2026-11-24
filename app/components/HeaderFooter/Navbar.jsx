@@ -23,6 +23,7 @@ export default function Navbar() {
     { name: "Neuctra Lab", path: "/neuctra-lab" },
     { name: "Products", path: "/products" },
     { name: "Services", path: "/services" },
+    { name: "Insights", path: "/insights" },
     { name: "Contact Us", path: "/#contact" },
   ];
 

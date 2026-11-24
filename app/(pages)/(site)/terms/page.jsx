@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Terms of Service | Neuctra",
+  title: "Terms of Service",
   description:
     "Read the official Terms of Service for Neuctra, covering client services, SaaS products, subscriptions, and usage policies.",
   alternates: {

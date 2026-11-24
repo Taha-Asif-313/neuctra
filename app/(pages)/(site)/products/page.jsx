@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import products from "@/app/data/products";
 
 export const metadata = {
-  title: "Neuctra Products | Identity, Productivity, Email & Finance",
+  title: "Software Products: Identity, Productivity & Business Tools",
   description:
     "Discover Neuctra products for identity, design systems, productivity, email, and business finance. Build and work with practical software for modern teams.",
   alternates: {
@@ -12,8 +12,33 @@ export const metadata = {
 };
 
 export default function ProductsPage() {
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://neuctra.com/products#webpage",
+    name: "Neuctra Software Products",
+    url: "https://neuctra.com/products",
+    isPartOf: { "@id": "https://neuctra.com/#website" },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: products.map((product, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "SoftwareApplication",
+          name: product.name,
+          description: product.description,
+          url: product.href,
+          applicationCategory: product.category,
+          publisher: { "@id": "https://neuctra.com/#organization" },
+        },
+      })),
+    },
+  };
+
   return (
     <main className="relative isolate overflow-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-0 h-[420px] w-[700px] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-[140px]" />

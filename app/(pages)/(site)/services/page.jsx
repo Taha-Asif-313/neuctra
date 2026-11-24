@@ -15,11 +15,12 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
+import seoServices from "@/app/data/seoServices";
 
 export const metadata = {
-  title: "Neuctra Services | Websites, CRM, POS & E-commerce",
+  title: "Custom Software & Business Technology Services",
   description:
-    "Neuctra builds CMS-managed business websites, tailored CRM and POS systems, and custom hosted e-commerce stores with management.",
+    "Build a custom SaaS, CRM, POS, CMS website, e-commerce store, or workflow solution with Neuctra. Explore services shaped around business needs.",
   alternates: {
     canonical: "/services",
   },
@@ -113,6 +114,23 @@ export default function ServicesPage() {
               About Neuctra
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="mt-16" aria-labelledby="service-pages-heading">
+        <div className="mb-8 max-w-3xl">
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-primary">Explore service areas</p>
+          <h2 id="service-pages-heading" className="text-3xl font-semibold tracking-[-0.03em] text-foreground sm:text-4xl">Find a solution for the problem you need to solve</h2>
+          <p className="mt-4 text-base leading-7 text-secondary">Each project starts with your users, workflow, and constraints. Explore a service area, then contact Neuctra to discuss the right scope.</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {seoServices.map((service) => (
+            <Link key={service.slug} href={`/services/${service.slug}`} className="group rounded-2xl border border-border bg-card/70 p-5 transition-colors hover:border-primary/40">
+              <h3 className="font-semibold text-foreground group-hover:text-primary">{service.h1}</h3>
+              <p className="mt-2 text-sm leading-6 text-secondary">{service.description}</p>
+              <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary">Explore service <ArrowRight className="h-4 w-4" /></span>
+            </Link>
+          ))}
         </div>
       </section>
 

@@ -33,9 +33,7 @@ export default function ProductsSection() {
         <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Software for building,
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-            working, and living.
-          </span>
+          working, and <span className="text-primary">living.</span>
         </h2>
 
         <p className="mt-6 max-w-2xl text-base text-secondary sm:text-lg">

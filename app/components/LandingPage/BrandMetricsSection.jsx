@@ -34,22 +34,22 @@ function CountUp({ value }) {
 export default function BrandMetricsSection() {
   const highlights = [
     {
-      value: `${products.length}+`,
-      label: "Product lines in the ecosystem",
+      value: `${products.length}`,
+      label: "Products in the current catalog",
       icon: LineChart,
-      detail: "A growing portfolio",
+      detail: "Authix, UI, Notlix, Tools, Mailer, and Finance",
     },
     {
-      value: "100%",
-      label: "Product-first thinking",
+      value: "3",
+      label: "Connected areas of Neuctra",
       icon: Code2,
-      detail: "Built around real needs",
+      detail: "Products, custom services, and Neuctra Lab",
     },
     {
-      value: "24/7",
-      label: "Modern execution mindset",
+      value: "1",
+      label: "Parent company",
       icon: ShieldCheck,
-      detail: "Designed for modern workflows",
+      detail: "A shared home for products and solutions",
     },
   ];
 
@@ -84,9 +84,7 @@ export default function BrandMetricsSection() {
           <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             More than products.
             <br />
-            <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-              An ecosystem of solutions.
-            </span>
+            An ecosystem of <span className="text-primary">solutions.</span>
           </h2>
 
           <p className="mt-6 max-w-2xl text-base leading-7 text-secondary sm:text-lg">

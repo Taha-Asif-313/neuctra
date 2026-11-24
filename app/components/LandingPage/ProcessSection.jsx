@@ -46,9 +46,7 @@ function ProcessHeading() {
       <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
         From the first idea
         <br />
-        <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-          to real-world impact.
-        </span>
+        to real-world <span className="text-primary">impact.</span>
       </h2>
 
       <p className="mt-4 max-w-xl text-base text-secondary">

@@ -51,9 +51,7 @@ export default function WhyNeuctra() {
         <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Thoughtful engineering.
           <br />
-          <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-            Practical outcomes.
-          </span>
+          Practical <span className="text-primary">outcomes.</span>
         </h2>
 
         <p className="mt-6 max-w-2xl text-base text-secondary">

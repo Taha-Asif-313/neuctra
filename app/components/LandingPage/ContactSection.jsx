@@ -93,13 +93,11 @@ export default function ContactSection() {
           <h2 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Have a challenge?
             <br />
-            <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-              Let's solve it together.
-            </span>
+            Let&apos;s solve it <span className="text-primary">together.</span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base text-secondary sm:text-lg">
-            Tell us about your idea, business challenge, or project. We'll help
+            Tell us about your idea, business challenge, or project. We&apos;ll help
             you explore the right technology and find a practical way forward.
           </p>
         </motion.div>
@@ -142,7 +140,7 @@ export default function ContactSection() {
                 </Link>
 
                 <h3 className="max-w-sm text-2xl font-semibold text-foreground sm:text-3xl">
-                  Let's turn your next idea into something useful.
+                  Let&apos;s turn your next idea into something useful.
                 </h3>
 
                 <p className="mt-4 max-w-md text-sm text-secondary">
@@ -218,7 +216,7 @@ export default function ContactSection() {
                     Have a project in mind?
                   </p>
                   <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                    Share the problem you're trying to solve. We'll take it from
+                    Share the problem you&apos;re trying to solve. We&apos;ll take it from
                     there.
                   </p>
                 </div>
@@ -339,7 +337,7 @@ export default function ContactSection() {
               </motion.button>
 
               <p className="text-center text-xs leading-5 text-muted-foreground">
-                By submitting this form, you're contacting Neuctra about your
+                By submitting this form, you&apos;re contacting Neuctra about your
                 inquiry.
               </p>
             </div>

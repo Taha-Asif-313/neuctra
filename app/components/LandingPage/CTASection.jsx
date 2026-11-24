@@ -38,9 +38,7 @@ export default function CTASection() {
             <h2 className="mx-auto max-w-4xl text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Have an idea?
               <br />
-              <span className="bg-gradient-to-r from-primary via-primary to-foreground bg-clip-text text-transparent">
-                Let's make it real.
-              </span>
+              <span>Let&apos;s make it <span className="text-primary">real.</span></span>
             </h2>
 
             <p className="mx-auto mt-4 max-w-2xl text-base text-secondary">

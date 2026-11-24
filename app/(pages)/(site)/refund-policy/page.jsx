@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Refund Policy | Neuctra",
+  title: "Refund Policy",
   description:
     "Review Neuctra's official refund and subscription policy covering SaaS products, client services, and billing terms.",
   alternates: {
